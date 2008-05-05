@@ -1,0 +1,15 @@
+citEntry(entry = "Book",
+         title = "Applied Econometrics with {R}",
+         author = personList(as.person("Christian Kleiber"), 
+	                     as.person("Achim Zeileis")),
+         year         = "2008",
+         publisher    = "Springer-Verlag",
+	 address      = "New York",
+	 note         = "Forthcoming",
+         
+         textVersion = 
+         paste("Christian Kleiber and Achim Zeileis (2008).", 
+               "Applied Econometrics with R.",
+               "New York: Springer-Verlag. Forthcoming."),
+	 header = "To cite AER, please use:"
+)

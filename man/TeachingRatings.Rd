@@ -1,0 +1,77 @@
+\name{TeachingRatings}
+\alias{TeachingRatings}
+
+\title{Impact of Beauty on Instructor's Teaching Ratings}
+
+\description{
+Data on course evaluations, course characteristics, and professor
+characteristics for 463 courses for the academic years 2000--2002 at the
+University of Texas at Austin.
+}
+\usage{data("TeachingRatings")}
+
+\format{
+A data frame containing 463 observations on 13 variables.
+\describe{
+  \item{minority}{factor. Does the instructor belong to a minority (non-Caucasian)?}
+  \item{age}{the professor's age.}
+  \item{gender}{factor indicating instructor's gender.}
+  \item{credits}{factor. Is the course a single-credit elective (e.g., yoga, aerobics, dance)?}
+  \item{beauty}{rating of the instructor's physical appearance by a panel of six students,
+    averaged across the six panelists, shifted to have a mean of zero.}
+  \item{eval}{course overall teaching evaluation score, on
+    a scale of 1 (very unsatisfactory) to 5 (excellent).}
+  \item{division}{factor. Is the course an upper or lower division course? (Lower division
+    courses are mainly large freshman and sophomore courses)?}
+  \item{native}{factor. Is the instructor a native English speaker?}
+  \item{tenure}{factor. Is the instructor on tenure track?}
+  \item{students}{number of students that participated in the evaluation.}
+  \item{allstudents}{number of students enrolled in the course.}
+  \item{prof}{factor indicating instructor identifier.}
+}
+}
+
+\details{
+A sample of student instructional ratings for a group of university teachers along with
+beauty rating (average from six independent judges)  and a number of other characteristics.
+}
+
+\source{
+The data were provided by Prof. Hamermesh. The first 8 variables are also available in the
+online complements to Stock and Watson (2007) at
+
+\url{http://wps.aw.com/aw_stock_ie_2/}
+}
+
+\references{
+Hamermesh, D.S., and Parker, A. (2005). Beauty in the Classroom: Instructors'
+  Pulchritude and Putative Pedagogical Productivity.
+  \emph{Economics of Education Review}, \bold(24), 369--376.
+
+Stock, J.H. and Watson, M.W. (2007). \emph{Introduction to Econometrics}, 2nd ed. Boston: Addison Wesley.
+}
+
+\seealso{\code{\link{StockWatson2007}}}
+
+\examples{
+data("TeachingRatings")
+
+## evaluation score vs. beauty
+plot(eval ~ beauty, data = TeachingRatings)
+fm <- lm(eval ~ beauty, data = TeachingRatings)
+abline(fm)
+summary(fm)
+
+## prediction of Stock & Watson's evaluation score
+sw <- with(TeachingRatings, mean(beauty) + c(0, 1) * sd(beauty))
+names(sw) <- c("Watson", "Stock")
+predict(fm, newdata = data.frame(beauty = sw))
+
+## Hamermesh and Parker, 2005, Table 3
+fmw <- lm(eval ~ beauty + gender + minority + native + tenure + division + credits,
+  weights = students, data = TeachingRatings)
+coeftest(fmw, vcov = sandwich)
+## (same coefficients but with different covariances)
+}
+
+\keyword{datasets}

@@ -1,0 +1,71 @@
+\name{Electricity1955}
+\alias{Electricity1955}
+
+\title{Cost Function of Electricity Producers (1955, Nerlove Data)}
+
+\description{
+Cost function data for 145 (+14) US electricity producers in 1955.
+}
+
+\usage{data("Electricity1955")}
+
+\format{
+A data frame containing 159 observations on 8 variables.
+\describe{
+  \item{cost}{total cost.}
+  \item{output}{total output.}
+  \item{labor}{wage rate.}
+  \item{laborshare}{cost share for labor.}
+  \item{capital}{capital price index.}
+  \item{capitalshare}{cost share for capital.}
+  \item{fuel}{fuel price.}
+  \item{fuelshare}{cost share for fuel.}
+}
+}
+
+\details{
+The data contains several extra observations that are aggregates
+of commonly owned firms. Only the first 145 observations should be used for analysis.
+}
+
+\source{
+Online complements to Greene (2003). Table F14.2.
+
+\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+}
+
+\references{
+Greene, W.H. (2003). \emph{Econometric Analysis}, 5th edition. Upper Saddle River, NJ: Prentice Hall.
+
+Nerlove, M. (1963) \dQuote{Returns to Scale in Electricity Supply.}
+In C. Christ (ed.), \emph{Measurement in Economics: Studies in Mathematical Economics
+and Econometrics in Memory of Yehuda Grunfeld}. Stanford University Press, 1963.
+}
+
+\seealso{\code{\link{Greene2003}}, \code{\link{Electricity1970}}}
+
+\examples{
+data("Electricity1955")
+Electricity <- Electricity1955[1:145,]
+
+## Greene (2003)
+## Example 7.3
+## Cobb-Douglas cost function
+fm_all <- lm(log(cost/fuel) ~ log(output) + log(labor/fuel) + log(capital/fuel),
+  data = Electricity)
+summary(fm_all)
+
+## hypothesis of constant returns to scale
+linear.hypothesis(fm_all, "log(output) = 1")
+
+## Table 7.4
+## log quadratic cost function
+fm_all2 <- lm(log(cost/fuel) ~ log(output) + I(log(output)^2) + log(labor/fuel) + log(capital/fuel),
+  data = Electricity)
+summary(fm_all2)
+
+## More examples can be found in:
+## help("Greene2003")
+}
+
+\keyword{datasets}
