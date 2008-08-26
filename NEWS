@@ -1,0 +1,20 @@
+Changes in Version 1.0-0
+
+  o official version accompanying the release of the
+    book (contains all code from the book in demos
+    and tests)
+
+  o See the new
+      vignette("AER", package = "AER")
+    for an overview of the package and a list of errata.
+
+
+Changes in Version 0.9-0
+
+  o release of the version used for compiling the final
+    version of the book for Springer
+
+
+Changes in Version 0.2-0
+
+  o first CRAN release of the AER package

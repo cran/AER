@@ -4,7 +4,7 @@
 \title{USMoney}
 
 \description{
-Money, output and price deflator time-series data, 1950--1983.  
+Money, output and price deflator time series data, 1950--1983.  
 }
 
 \usage{data("USMoney")}

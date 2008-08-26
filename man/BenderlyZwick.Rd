@@ -4,11 +4,11 @@
 \title{Benderly and Zwick Data: Inflation, Growth and Stock Returns}
 
 \description{
-Time-series data, 1952--1982.  
+Time series data, 1952--1982.  
 }
 \usage{data("BenderlyZwick")}
 \format{
-An annual multiple time series from 1952 to 1982 with 3 variables.
+An annual multiple time series from 1952 to 1982 with 5 variables.
 \describe{
   \item{returns}{real annual returns on stocks, measured using
     the Ibbotson-Sinquefeld data base.}
@@ -22,7 +22,7 @@ An annual multiple time series from 1952 to 1982 with 3 variables.
 }
 
 \source{
-The first three columns of the data is from Table 1 in Benderly and Zwick (1985).
+The first three columns of the data are from Table 1 in Benderly and Zwick (1985).
 The remaining columns are taken from the online complements of Baltagi (2002).
 The first column is identical in both sources, the other two variables differ
 in their numeric values and additionally the growth series seems to be lagged

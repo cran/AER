@@ -4,7 +4,7 @@
 \title{Orange County Employment}
 
 \description{
-Quarterly time-series data on employment in Orange county, 1965--1983.
+Quarterly time series data on employment in Orange county, 1965--1983.
 }
 
 \usage{data("OrangeCounty")}

@@ -3,7 +3,7 @@
 \title{US Macroeconomic Data (1959--1995, Baltagi)}
 
 \description{
-Time-series data on 3 US macroeconomic variables for 1959--1995,
+Time series data on 3 US macroeconomic variables for 1959--1995,
 extracted from the Citibank data base.
 }
 

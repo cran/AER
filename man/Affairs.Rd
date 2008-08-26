@@ -22,7 +22,7 @@ A data frame containing 601 observations on 9 variables.
     \code{0.417} = 4--6 months, \code{0.75} = 6 months--1 year, \code{1.5} = 1--2 years,
     \code{4} = 3--5 years, \code{7} = 6--8 years, \code{10} = 9--11 years, \code{15} = 12 or more years.}
   \item{children}{factor. Are there children in the marriage?}
-  \item{religiousness}{numeric variable coding religousness: \code{1} = anti, \code{2} = not at all,
+  \item{religiousness}{numeric variable coding religiousness: \code{1} = anti, \code{2} = not at all,
     \code{3} = slightly, \code{4} = somewhat, \code{5} = very.}
   \item{education}{numeric variable coding level of education: \code{9} = grade school,
     \code{12} = high school graduate, \code{14} = some college, \code{16} = college graduate,

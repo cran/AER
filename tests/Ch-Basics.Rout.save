@@ -1,0 +1,983 @@
+
+R version 2.7.1 (2008-06-23)
+Copyright (C) 2008 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ###################################################
+> ### chunk number 1: setup
+> ###################################################
+> options(prompt = "R> ", continue = "+  ", width = 64,
++   digits = 4, show.signif.stars = FALSE, useFancyQuotes = FALSE)
+R> 
+R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
++                             twofig =   function() {par(mfrow = c(1,2))},                           
++                             threefig = function() {par(mfrow = c(1,3))},
++                             fourfig =  function() {par(mfrow = c(2,2))},
++                             sixfig =   function() {par(mfrow = c(3,2))}))
+R> 
+R> library("AER")
+Loading required package: car
+Loading required package: lmtest
+Loading required package: zoo
+Loading required package: sandwich
+Loading required package: strucchange
+Loading required package: survival
+Loading required package: splines
+R> 
+R> set.seed(1071)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 2: calc1
+R> ###################################################
+R> 1 + 1
+[1] 2
+R> 2^3
+[1] 8
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 3: calc2
+R> ###################################################
+R> log(exp(sin(pi/4)^2) * exp(cos(pi/4)^2))
+[1] 1
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 4: vec1
+R> ###################################################
+R> x <- c(1.8, 3.14, 4, 88.169, 13)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 5: length
+R> ###################################################
+R> length(x)
+[1] 5
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 6: vec2
+R> ###################################################
+R> 2 * x + 3
+[1]   6.60   9.28  11.00 179.34  29.00
+R> 5:1 * x + 1:5
+[1]  10.00  14.56  15.00 180.34  18.00
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 7: vec3
+R> ###################################################
+R> log(x)
+[1] 0.5878 1.1442 1.3863 4.4793 2.5649
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 8: subset1
+R> ###################################################
+R> x[c(1, 4)]
+[1]  1.80 88.17
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 9: subset2
+R> ###################################################
+R> x[-c(2, 3, 5)]
+[1]  1.80 88.17
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 10: pattern1
+R> ###################################################
+R> ones <- rep(1, 10)
+R> even <- seq(from = 2, to = 20, by = 2)
+R> trend <- 1981:2005
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 11: pattern2
+R> ###################################################
+R> c(ones, even)
+ [1]  1  1  1  1  1  1  1  1  1  1  2  4  6  8 10 12 14 16 18 20
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 12: matrix1
+R> ###################################################
+R> A <- matrix(1:6, nrow = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 13: matrix2
+R> ###################################################
+R> t(A)
+     [,1] [,2]
+[1,]    1    2
+[2,]    3    4
+[3,]    5    6
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 14: matrix3
+R> ###################################################
+R> dim(A)
+[1] 2 3
+R> nrow(A)
+[1] 2
+R> ncol(A)
+[1] 3
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 15: matrix-subset
+R> ###################################################
+R> A1 <- A[1:2, c(1, 3)]
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 16: matrix4
+R> ###################################################
+R> solve(A1)
+     [,1]  [,2]
+[1,] -1.5  1.25
+[2,]  0.5 -0.25
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 17: matrix-solve
+R> ###################################################
+R> A1 %*% solve(A1)
+     [,1] [,2]
+[1,]    1    0
+[2,]    0    1
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 18: diag
+R> ###################################################
+R> diag(4)
+     [,1] [,2] [,3] [,4]
+[1,]    1    0    0    0
+[2,]    0    1    0    0
+[3,]    0    0    1    0
+[4,]    0    0    0    1
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 19: matrix-combine1
+R> ###################################################
+R> cbind(1, A1)
+     [,1] [,2] [,3]
+[1,]    1    1    5
+[2,]    1    2    6
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 20: matrix-combine2
+R> ###################################################
+R> rbind(A1, diag(4, 2))
+     [,1] [,2]
+[1,]    1    5
+[2,]    2    6
+[3,]    4    0
+[4,]    0    4
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 21: vector-mode
+R> ###################################################
+R> x <- c(1.8, 3.14, 4, 88.169, 13)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 22: logical
+R> ###################################################
+R> x > 3.5
+[1] FALSE FALSE  TRUE  TRUE  TRUE
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 23: names
+R> ###################################################
+R> names(x) <- c("a", "b", "c", "d", "e")
+R> x
+    a     b     c     d     e 
+ 1.80  3.14  4.00 88.17 13.00 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 24: subset-more
+R> ###################################################
+R> x[3:5]
+    c     d     e 
+ 4.00 88.17 13.00 
+R> x[c("c", "d", "e")]
+    c     d     e 
+ 4.00 88.17 13.00 
+R> x[x > 3.5]
+    c     d     e 
+ 4.00 88.17 13.00 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 25: list1
+R> ###################################################
+R> mylist <- list(sample = rnorm(5),
++    family = "normal distribution",
++    parameters = list(mean = 0, sd = 1))
+R> mylist
+$sample
+[1]  0.3771 -0.9346  2.4302  1.3195  0.4503
+
+$family
+[1] "normal distribution"
+
+$parameters
+$parameters$mean
+[1] 0
+
+$parameters$sd
+[1] 1
+
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 26: list2
+R> ###################################################
+R> mylist[[1]]
+[1]  0.3771 -0.9346  2.4302  1.3195  0.4503
+R> mylist[["sample"]]
+[1]  0.3771 -0.9346  2.4302  1.3195  0.4503
+R> mylist$sample
+[1]  0.3771 -0.9346  2.4302  1.3195  0.4503
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 27: list3
+R> ###################################################
+R> mylist[[3]]$sd
+[1] 1
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 28: logical2
+R> ###################################################
+R> x <- c(1.8, 3.14, 4, 88.169, 13)
+R> x > 3 & x <= 4
+[1] FALSE  TRUE  TRUE FALSE FALSE
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 29: logical3
+R> ###################################################
+R> which(x > 3 & x <= 4)
+[1] 2 3
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 30: logical4
+R> ###################################################
+R> all(x > 3)
+[1] FALSE
+R> any(x > 3)
+[1] TRUE
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 31: logical5
+R> ###################################################
+R> (1.5 - 0.5) == 1
+[1] TRUE
+R> (1.9 - 0.9) == 1
+[1] FALSE
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 32: logical6
+R> ###################################################
+R> all.equal(1.9 - 0.9, 1)
+[1] TRUE
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 33: logical7
+R> ###################################################
+R> 7 + TRUE
+[1] 8
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 34: coercion1
+R> ###################################################
+R> is.numeric(x)
+[1] TRUE
+R> is.character(x)
+[1] FALSE
+R> as.character(x)
+[1] "1.8"    "3.14"   "4"      "88.169" "13"    
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 35: coercion2
+R> ###################################################
+R> c(1, "a")
+[1] "1" "a"
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 36: rng1
+R> ###################################################
+R> set.seed(123)
+R> rnorm(2)
+[1] -0.5605 -0.2302
+R> rnorm(2)
+[1] 1.55871 0.07051
+R> set.seed(123)
+R> rnorm(2)
+[1] -0.5605 -0.2302
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 37: rng2
+R> ###################################################
+R> sample(1:5)
+[1] 5 1 2 3 4
+R> sample(c("male", "female"), size = 5, replace = TRUE,
++    prob = c(0.2, 0.8))
+[1] "female" "male"   "female" "female" "female"
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 38: flow1
+R> ###################################################
+R> x <- c(1.8, 3.14, 4, 88.169, 13)
+R> if(rnorm(1) > 0) sum(x) else mean(x)
+[1] 22.02
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 39: flow2
+R> ###################################################
+R> ifelse(x > 4, sqrt(x), x^2)
+[1]  3.240  9.860 16.000  9.390  3.606
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 40: flow3
+R> ###################################################
+R> for(i in 2:5) {
++    x[i] <- x[i] - x[i-1]
++  }
+R> x[-1]
+[1]   1.34   2.66  85.51 -72.51
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 41: flow4
+R> ###################################################
+R> while(sum(x) < 100) {
++    x <- 2 * x
++  }
+R> x
+[1]   14.40   10.72   21.28  684.07 -580.07
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 42: cmeans
+R> ###################################################
+R> cmeans <- function(X) { 
++    rval <- rep(0, ncol(X))
++    for(j in 1:ncol(X)) {
++      mysum <- 0
++      for(i in 1:nrow(X)) mysum <- mysum + X[i,j]
++      rval[j] <- mysum/nrow(X)
++    }
++    return(rval)
++  }
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 43: colmeans1
+R> ###################################################
+R> X <- matrix(1:20, ncol = 2)
+R> cmeans(X)
+[1]  5.5 15.5
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 44: colmeans2
+R> ###################################################
+R> colMeans(X)
+[1]  5.5 15.5
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 45: colmeans3 eval=FALSE
+R> ###################################################
+R> ## X <- matrix(rnorm(2*10^6), ncol = 2)
+R> ## system.time(colMeans(X))
+R> ## system.time(cmeans(X))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 46: colmeans4
+R> ###################################################
+R> cmeans2 <- function(X) {
++    rval <- rep(0, ncol(X))
++    for(j in 1:ncol(X)) rval[j] <- mean(X[,j])
++    return(rval)
++  }
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 47: colmeans5 eval=FALSE
+R> ###################################################
+R> ## system.time(cmeans2(X))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 48: colmeans6 eval=FALSE
+R> ###################################################
+R> ## apply(X, 2, mean)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 49: colmeans7 eval=FALSE
+R> ###################################################
+R> ## system.time(apply(X, 2, mean))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 50: formula1
+R> ###################################################
+R> f <- y ~ x
+R> class(f)
+[1] "formula"
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 51: formula2
+R> ###################################################
+R> x <- seq(from = 0, to = 10, by = 0.5)
+R> y <- 2 + 3 * x + rnorm(21)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 52: formula3 eval=FALSE
+R> ###################################################
+R> ## plot(y ~ x)
+R> ## lm(y ~ x)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 53: formula3a
+R> ###################################################
+R> print(lm(y ~ x))
+
+Call:
+lm(formula = y ~ x)
+
+Coefficients:
+(Intercept)            x  
+       2.26         2.91  
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 54: formula3b
+R> ###################################################
+R> plot(y ~ x)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 55: formula3c
+R> ###################################################
+R> fm <- lm(y ~ x)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 56: mydata1
+R> ###################################################
+R> mydata <- data.frame(one = 1:10, two = 11:20, three = 21:30)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 57: mydata1a
+R> ###################################################
+R> mydata <- as.data.frame(matrix(1:30, ncol = 3))
+R> names(mydata) <- c("one", "two", "three")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 58: mydata2
+R> ###################################################
+R> mydata$two
+ [1] 11 12 13 14 15 16 17 18 19 20
+R> mydata[, "two"]
+ [1] 11 12 13 14 15 16 17 18 19 20
+R> mydata[, 2]
+ [1] 11 12 13 14 15 16 17 18 19 20
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 59: attach
+R> ###################################################
+R> attach(mydata)
+R> mean(two)
+[1] 15.5
+R> detach(mydata)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 60: with
+R> ###################################################
+R> with(mydata, mean(two))
+[1] 15.5
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 61: mydata-subset
+R> ###################################################
+R> mydata.sub <- subset(mydata, two <= 16, select = -two)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 62: write-table
+R> ###################################################
+R> write.table(mydata, file = "mydata.txt", col.names = TRUE)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 63: read-table
+R> ###################################################
+R> newdata <- read.table("mydata.txt", header = TRUE)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 64: save
+R> ###################################################
+R> save(mydata, file = "mydata.rda")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 65: load
+R> ###################################################
+R> load("mydata.rda")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 66: file-remove
+R> ###################################################
+R> file.remove("mydata.rda")
+[1] TRUE
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 67: data
+R> ###################################################
+R> data("Journals", package = "AER")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 68: foreign
+R> ###################################################
+R> library("foreign")
+R> write.dta(mydata, file = "mydata.dta")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 69: read-dta
+R> ###################################################
+R> mydata <- read.dta("mydata.dta")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 70: cleanup
+R> ###################################################
+R> file.remove("mydata.dta")
+[1] TRUE
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 71: factor
+R> ###################################################
+R> g <- rep(0:1, c(2, 4))
+R> g <- factor(g, levels = 0:1, labels = c("male", "female"))
+R> g
+[1] male   male   female female female female
+Levels: male female
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 72: na1
+R> ###################################################
+R> newdata <- read.table("mydata.txt", na.strings = "-999")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 73: na2
+R> ###################################################
+R> file.remove("mydata.txt")
+[1] TRUE
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 74: oop1
+R> ###################################################
+R> x <- c(1.8, 3.14, 4, 88.169, 13)
+R> g <- factor(rep(c(0, 1), c(2, 4)), levels = c(0, 1),
++    labels = c("male", "female"))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 75: oop2
+R> ###################################################
+R> summary(x)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   1.80    3.14    4.00   22.00   13.00   88.20 
+R> summary(g)
+  male female 
+     2      4 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 76: oop3
+R> ###################################################
+R> class(x)
+[1] "numeric"
+R> class(g)
+[1] "factor"
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 77: oop4
+R> ###################################################
+R> summary
+function (object, ...) 
+UseMethod("summary")
+<environment: namespace:base>
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 78: oop5
+R> ###################################################
+R> normsample <- function(n, ...) {
++    rval <- rnorm(n, ...)
++    class(rval) <- "normsample"
++    return(rval)
++  }
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 79: oop6
+R> ###################################################
+R> set.seed(123)
+R> x <- normsample(10, mean = 5)
+R> class(x)
+[1] "normsample"
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 80: oop7
+R> ###################################################
+R> summary.normsample <- function(object, ...) {
++    rval <- c(length(object), mean(object), sd(object))
++    names(rval) <- c("sample size","mean","standard deviation")
++    return(rval)
++  }
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 81: oop8
+R> ###################################################
+R> summary(x)
+       sample size               mean standard deviation 
+           10.0000             5.0746             0.9538 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 82: journals-data eval=FALSE
+R> ###################################################
+R> ## data("Journals")
+R> ## Journals$citeprice <- Journals$price/Journals$citations
+R> ## attach(Journals)
+R> ## plot(log(subs), log(citeprice))
+R> ## rug(log(subs))
+R> ## rug(log(citeprice), side = 2)
+R> ## detach(Journals)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 83: journals-data1
+R> ###################################################
+R> data("Journals")
+R> Journals$citeprice <- Journals$price/Journals$citations
+R> attach(Journals)
+R> plot(log(subs), log(citeprice))
+R> rug(log(subs))
+R> rug(log(citeprice), side = 2)
+R> detach(Journals)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 84: plot-formula
+R> ###################################################
+R> plot(log(subs) ~ log(citeprice), data = Journals)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 85: graphics1
+R> ###################################################
+R> plot(log(subs) ~ log(citeprice), data = Journals, pch = 20,
++    col = "blue", ylim = c(0, 8), xlim = c(-7, 4),
++    main = "Library subscriptions")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 86: graphics2
+R> ###################################################
+R> pdf("myfile.pdf", height = 5, width = 6)
+R> plot(1:20, pch = 1:20, col = 1:20, cex = 2)
+R> dev.off()
+pdf 
+  2 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 87: dnorm-annotate eval=FALSE
+R> ###################################################
+R> ## curve(dnorm, from = -5, to = 5, col = "slategray", lwd = 3,
+R> ##   main = "Density of the standard normal distribution")
+R> ## text(-5, 0.3, expression(f(x) == frac(1, sigma ~~
+R> ##   sqrt(2*pi)) ~~ e^{-frac((x - mu)^2, 2*sigma^2)}), adj = 0)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 88: dnorm-annotate1
+R> ###################################################
+R> curve(dnorm, from = -5, to = 5, col = "slategray", lwd = 3,
++    main = "Density of the standard normal distribution")
+R> text(-5, 0.3, expression(f(x) == frac(1, sigma ~~
++    sqrt(2*pi)) ~~ e^{-frac((x - mu)^2, 2*sigma^2)}), adj = 0)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 89: eda1
+R> ###################################################
+R> data("CPS1985")
+R> str(CPS1985)
+'data.frame':	533 obs. of  11 variables:
+ $ wage      : num   4.95  6.67  4.00  7.50 13.07 ...
+ $ education : int  9 12 12 12 13 10 12 16 12 12 ...
+ $ experience: int  42 1 4 17 9 27 9 11 9 17 ...
+ $ age       : int  57 19 22 35 28 43 27 33 27 35 ...
+ $ ethnicity : Factor w/ 3 levels "cauc","hispanic",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ region    : Factor w/ 2 levels "south","other": 2 2 2 2 2 1 2 2 2 2 ...
+ $ gender    : Factor w/ 2 levels "male","female": 2 1 1 1 1 1 1 1 1 1 ...
+ $ occupation: Factor w/ 6 levels "worker","technical",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ sector    : Factor w/ 3 levels "manufacturing",..: 1 1 3 3 3 3 3 1 3 3 ...
+ $ union     : Factor w/ 2 levels "no","yes": 1 1 1 1 2 1 1 1 1 2 ...
+ $ married   : Factor w/ 2 levels "no","yes": 2 1 1 2 1 1 1 2 1 2 ...
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 90: eda2
+R> ###################################################
+R> head(CPS1985)
+   wage education experience age ethnicity region gender
+1  4.95         9         42  57      cauc  other female
+2  6.67        12          1  19      cauc  other   male
+3  4.00        12          4  22      cauc  other   male
+4  7.50        12         17  35      cauc  other   male
+5 13.07        13          9  28      cauc  other   male
+6  4.45        10         27  43      cauc  south   male
+  occupation        sector union married
+1     worker manufacturing    no     yes
+2     worker manufacturing    no      no
+3     worker         other    no      no
+4     worker         other    no     yes
+5     worker         other   yes      no
+6     worker         other    no      no
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 91: eda3
+R> ###################################################
+R> levels(CPS1985$occupation)[c(2, 6)] <- c("techn", "mgmt")
+R> attach(CPS1985)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 92: eda4
+R> ###################################################
+R> summary(wage)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   1.00    5.25    7.78    9.03   11.20   44.50 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 93: eda5
+R> ###################################################
+R> mean(wage)
+[1] 9.031
+R> median(wage)
+[1] 7.78
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 94: eda6
+R> ###################################################
+R> var(wage)
+[1] 26.43
+R> sd(wage)
+[1] 5.141
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 95: wage-hist
+R> ###################################################
+R> hist(wage, freq = FALSE)
+R> hist(log(wage), freq = FALSE)
+R> lines(density(log(wage)), col = 4)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 96: wage-hist1
+R> ###################################################
+R> hist(wage, freq = FALSE)
+R> hist(log(wage), freq = FALSE)
+R> lines(density(log(wage)), col = 4)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 97: occ-table
+R> ###################################################
+R> summary(occupation)
+  worker    techn services   office    sales     mgmt 
+     155      105       83       97       38       55 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 98: occ-table
+R> ###################################################
+R> tab <- table(occupation)
+R> prop.table(tab)
+occupation
+  worker    techn services   office    sales     mgmt 
+  0.2908   0.1970   0.1557   0.1820   0.0713   0.1032 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 99: occ-barpie
+R> ###################################################
+R> barplot(tab)
+R> pie(tab)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 100: occ-barpie
+R> ###################################################
+R> par(mar = c(4, 3, 1, 1))
+R> barplot(tab, las = 3)
+R> par(mar = c(2, 3, 1, 3))
+R> pie(tab, radius = 1)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 101: xtabs
+R> ###################################################
+R> xtabs(~ gender + occupation, data = CPS1985)
+        occupation
+gender   worker techn services office sales mgmt
+  male      126    53       34     21    21   34
+  female     29    52       49     76    17   21
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 102: spine eval=FALSE
+R> ###################################################
+R> ## plot(gender ~ occupation, data = CPS1985)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 103: spine1
+R> ###################################################
+R> plot(gender ~ occupation, data = CPS1985)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 104: wageeduc-cor
+R> ###################################################
+R> cor(log(wage), education)
+[1] 0.379
+R> cor(log(wage), education, method = "spearman")
+[1] 0.3798
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 105: wageeduc-scatter eval=FALSE
+R> ###################################################
+R> ## plot(log(wage) ~ education)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 106: wageeduc-scatter1
+R> ###################################################
+R> plot(log(wage) ~ education)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 107: tapply
+R> ###################################################
+R> tapply(log(wage), gender, mean)
+  male female 
+ 2.165  1.935 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 108: boxqq1 eval=FALSE
+R> ###################################################
+R> ## plot(log(wage) ~ gender)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 109: boxqq2 eval=FALSE
+R> ###################################################
+R> ## mwage <- subset(CPS1985, gender == "male")$wage
+R> ## fwage <- subset(CPS1985, gender == "female")$wage
+R> ## qqplot(mwage, fwage, xlim = range(wage), ylim = range(wage),
+R> ##   xaxs = "i", yaxs = "i", xlab = "male", ylab = "female")
+R> ## abline(0, 1)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 110: qq
+R> ###################################################
+R> plot(log(wage) ~ gender)
+R> mwage <- subset(CPS1985, gender == "male")$wage
+R> fwage <- subset(CPS1985, gender == "female")$wage
+R> qqplot(mwage, fwage, xlim = range(wage), ylim = range(wage),
++    xaxs = "i", yaxs = "i", xlab = "male", ylab = "female")
+R> abline(0, 1)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 111: detach
+R> ###################################################
+R> detach(CPS1985)
+R> 
+R> 
+R> 

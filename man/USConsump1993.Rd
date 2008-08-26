@@ -2,7 +2,7 @@
 \alias{USConsump1993}
 \title{US Consumption Data (1950--1993)}
 \description{
-Time-series data on US income and consumption expenditure, 1950--1993.
+Time series data on US income and consumption expenditure, 1950--1993.
 }
 \usage{data("USConsump1993")}
 

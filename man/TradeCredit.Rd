@@ -3,7 +3,7 @@
 \title{Trade Credit Data}
 
 \description{
-Macroeconomic time-series data from 1946 to 1966 on trade credit and the money market.
+Macroeconomic time series data from 1946 to 1966 on trade credit and the money market.
 }
 
 \usage{data("TradeCredit")}

@@ -3,7 +3,7 @@
 \title{US Investment Data}
 
 \description{
-Time-series data on investments in the US, 1968--1982.
+Time series data on investments in the US, 1968--1982.
 }
 
 \usage{data("USInvest")}

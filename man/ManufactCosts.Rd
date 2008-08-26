@@ -2,7 +2,7 @@
 \alias{ManufactCosts}
 \title{Manufacturing Costs Data}
 \description{
-US time-series data on prices and cost shares in manufacturing, 1947--1971.
+US time series data on prices and cost shares in manufacturing, 1947--1971.
 }
 \usage{data("ManufactCosts")}
 \format{

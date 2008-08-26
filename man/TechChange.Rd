@@ -3,7 +3,7 @@
 \title{Technological Change Data}
 
 \description{
-US time-series data, 1909--1949.  
+US time series data, 1909--1949.  
 }
 
 \usage{data("TechChange")}

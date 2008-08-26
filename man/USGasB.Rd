@@ -2,7 +2,7 @@
 \alias{USGasB}
 \title{US Gasoline Market Data (1950--1987, Baltagi)}
 \description{
-Time-series data on the US gasoline market.
+Time series data on the US gasoline market.
 }
 \usage{data("USGasB")}
 \format{

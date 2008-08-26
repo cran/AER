@@ -11,7 +11,7 @@
 \alias{model.matrix.ivreg}
 
 
-\title{Methods for Intrumental-Variable Regression}
+\title{Methods for Instrumental-Variable Regression}
 \description{
   Methods to standard generics for instrumental-variable regressions
   fitted by \code{\link{ivreg}}.

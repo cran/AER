@@ -3,7 +3,7 @@
 \title{US Macroeconomic Data (1957--2005, Stock \& Watson)}
 
 \description{
-Time-series data on 12 US macroeconomic variables for 1957--2005.
+Time series data on 12 US macroeconomic variables for 1957--2005.
 }
 
 \usage{data("USMacroSW")

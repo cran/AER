@@ -1,0 +1,339 @@
+
+R version 2.7.1 (2008-06-23)
+Copyright (C) 2008 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ###################################################
+> ### chunk number 1: setup
+> ###################################################
+> options(prompt = "R> ", continue = "+  ", width = 64,
++   digits = 4, show.signif.stars = FALSE, useFancyQuotes = FALSE)
+R> 
+R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
++                             twofig =   function() {par(mfrow = c(1,2))},                           
++                             threefig = function() {par(mfrow = c(1,3))},
++                             fourfig =  function() {par(mfrow = c(2,2))},
++                             sixfig =   function() {par(mfrow = c(3,2))}))
+R> 
+R> library("AER")
+Loading required package: car
+Loading required package: lmtest
+Loading required package: zoo
+Loading required package: sandwich
+Loading required package: strucchange
+Loading required package: survival
+Loading required package: splines
+R> 
+R> set.seed(1071)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 2: DGP
+R> ###################################################
+R> dgp <- function(nobs = 15, model = c("trend", "dynamic"),
++    corr = 0, coef = c(0.25, -0.75), sd = 1)
++  {
++    model <- match.arg(model)
++    coef <- rep(coef, length.out = 2)
++  
++    err <- as.vector(filter(rnorm(nobs, sd = sd), corr,
++      method = "recursive"))
++    if(model == "trend") {
++      x <- 1:nobs
++      y <- coef[1] + coef[2] * x + err
++    } else {
++      y <- rep(NA, nobs)
++      y[1] <- coef[1] + err[1]
++      for(i in 2:nobs)
++        y[i] <- coef[1] + coef[2] * y[i-1] + err[i]
++      x <- c(0, y[1:(nobs-1)])
++    }
++    return(data.frame(y = y, x = x))
++  }
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 3: simpower
+R> ###################################################
+R> simpower <- function(nrep = 100, size = 0.05, ...)
++  {
++    pval <- matrix(rep(NA, 2 * nrep), ncol = 2)
++    colnames(pval) <- c("dwtest", "bgtest")
++    for(i in 1:nrep) {
++      dat <- dgp(...)
++      pval[i,1] <- dwtest(y ~ x, data = dat,
++        alternative = "two.sided")$p.value
++      pval[i,2] <- bgtest(y ~ x, data = dat)$p.value
++    }
++    return(colMeans(pval < size))
++  }
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 4: simulation-function
+R> ###################################################
+R> simulation <- function(corr = c(0, 0.2, 0.4, 0.6, 0.8,
++    0.9, 0.95, 0.99), nobs = c(15, 30, 50),
++    model = c("trend", "dynamic"), ...)
++  {
++    prs <- expand.grid(corr = corr, nobs = nobs, model = model)
++    nprs <- nrow(prs)
++  
++    pow <- matrix(rep(NA, 2 * nprs), ncol = 2)
++    for(i in 1:nprs) pow[i,] <- simpower(corr = prs[i,1],
++      nobs = prs[i,2], model = as.character(prs[i,3]), ...)
++  
++    rval <- rbind(prs, prs)
++    rval$test <- factor(rep(1:2, c(nprs, nprs)),
++      labels = c("dwtest", "bgtest"))
++    rval$power <- c(pow[,1], pow[,2])
++    rval$nobs <- factor(rval$nobs)
++    return(rval)
++  }
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 5: simulation
+R> ###################################################
+R> set.seed(123)
+R> psim <- simulation()
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 6: simulation-table
+R> ###################################################
+R> tab <- xtabs(power ~ corr + test + model + nobs, data = psim)
+R> ftable(tab, row.vars = c("model", "nobs", "test"),
++    col.vars = "corr")
+                    corr    0  0.2  0.4  0.6  0.8  0.9 0.95 0.99
+model   nobs test                                               
+trend   15   dwtest      0.05 0.10 0.21 0.36 0.55 0.65 0.66 0.62
+             bgtest      0.07 0.05 0.05 0.10 0.30 0.40 0.41 0.31
+        30   dwtest      0.09 0.20 0.57 0.80 0.96 1.00 0.96 0.98
+             bgtest      0.09 0.09 0.37 0.69 0.93 0.99 0.94 0.93
+        50   dwtest      0.03 0.31 0.76 0.99 1.00 1.00 1.00 1.00
+             bgtest      0.05 0.23 0.63 0.95 1.00 1.00 1.00 1.00
+dynamic 15   dwtest      0.02 0.01 0.00 0.00 0.01 0.03 0.01 0.00
+             bgtest      0.07 0.04 0.01 0.09 0.14 0.21 0.17 0.26
+        30   dwtest      0.00 0.01 0.01 0.06 0.00 0.03 0.03 0.19
+             bgtest      0.05 0.05 0.18 0.39 0.52 0.63 0.64 0.74
+        50   dwtest      0.02 0.02 0.01 0.03 0.03 0.15 0.39 0.56
+             bgtest      0.05 0.10 0.36 0.72 0.91 0.90 0.93 0.91
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 7: simulation-visualization
+R> ###################################################
+R> library("lattice")
+R> xyplot(power ~ corr | model + nobs, groups = ~ test,
++    data = psim, type = "b")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 8: simulation-visualization1
+R> ###################################################
+R> library("lattice")
+R> trellis.par.set(theme = canonical.theme(color = FALSE))
+R> print(xyplot(power ~ corr | model + nobs, groups = ~ test, data = psim, type = "b"))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 9: journals-lm
+R> ###################################################
+R> data("Journals")
+R> journals <- Journals[, c("subs", "price")]
+R> journals$citeprice <- Journals$price/Journals$citations
+R> jour_lm <- lm(log(subs) ~ log(citeprice), data = journals)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 10: journals-residuals-based-resampling-unused eval=FALSE
+R> ###################################################
+R> ## refit <- function(data, i) {
+R> ##   d <- data
+R> ##   d$subs <- exp(d$fitted + d$res[i])
+R> ##   coef(lm(log(subs) ~ log(citeprice), data = d))
+R> ## }
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 11: journals-case-based-resampling
+R> ###################################################
+R> refit <- function(data, i)
++    coef(lm(log(subs) ~ log(citeprice), data = data[i,]))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 12: journals-boot
+R> ###################################################
+R> library("boot")
+
+Attaching package: 'boot'
+
+
+	The following object(s) are masked from package:lattice :
+
+	 melanoma 
+
+
+	The following object(s) are masked from package:survival :
+
+	 aml 
+
+
+	The following object(s) are masked from package:car :
+
+	 logit 
+
+R> set.seed(123)
+R> jour_boot <- boot(journals, refit, R = 999)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 13: journals-boot-print
+R> ###################################################
+R> jour_boot
+
+ORDINARY NONPARAMETRIC BOOTSTRAP
+
+
+Call:
+boot(data = journals, statistic = refit, R = 999)
+
+
+Bootstrap Statistics :
+    original     bias    std. error
+t1*   4.7662 -0.0010560     0.05545
+t2*  -0.5331 -0.0001606     0.03304
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 14: journals-lm-coeftest
+R> ###################################################
+R> coeftest(jour_lm)
+
+t test of coefficients:
+
+               Estimate Std. Error t value Pr(>|t|)
+(Intercept)      4.7662     0.0559    85.2   <2e-16
+log(citeprice)  -0.5331     0.0356   -15.0   <2e-16
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 15: journals-boot-ci
+R> ###################################################
+R> boot.ci(jour_boot, index = 2, type = "basic")
+BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
+Based on 999 bootstrap replicates
+
+CALL : 
+boot.ci(boot.out = jour_boot, type = "basic", index = 2)
+
+Intervals : 
+Level      Basic         
+95%   (-0.5952, -0.4665 )  
+Calculations and Intervals on Original Scale
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 16: journals-lm-ci
+R> ###################################################
+R> confint(jour_lm,  parm = 2)
+                 2.5 %  97.5 %
+log(citeprice) -0.6033 -0.4628
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 17: ml-loglik
+R> ###################################################
+R> data("Equipment", package = "AER")
+R> 
+R> nlogL <- function(par) {
++    beta <- par[1:3]
++    theta <- par[4]
++    sigma2 <- par[5]
++  
++    Y <- with(Equipment, valueadded/firms)
++    K <- with(Equipment, capital/firms)
++    L <- with(Equipment, labor/firms)
++  
++    rhs <- beta[1] + beta[2] * log(K) + beta[3] * log(L)
++    lhs <- log(Y) + theta * Y
++  
++    rval <- sum(log(1 + theta * Y) - log(Y) +
++      dnorm(lhs, mean = rhs, sd = sqrt(sigma2), log = TRUE))
++    return(-rval)
++  }
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 18: ml-0
+R> ###################################################
+R> fm0 <- lm(log(valueadded/firms) ~ log(capital/firms) +
++    log(labor/firms), data = Equipment)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 19: ml-0-coef
+R> ###################################################
+R> par0 <- as.vector(c(coef(fm0), 0, mean(residuals(fm0)^2)))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 20: ml-optim
+R> ###################################################
+R> opt <- optim(par0, nlogL, hessian = TRUE)
+Warning messages:
+1: In log(1 + theta * Y) : NaNs produced
+2: In sqrt(sigma2) : NaNs produced
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 21: ml-optim-output
+R> ###################################################
+R> opt$par
+[1] 2.91469 0.34998 1.09232 0.10666 0.04275
+R> sqrt(diag(solve(opt$hessian)))[1:4]
+[1] 0.36055 0.09671 0.14079 0.05850
+R> -opt$value
+[1] -8.939
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 22: Sweave eval=FALSE
+R> ###################################################
+R> ## Sweave("Sweave-journals.Rnw")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 23: Stangle eval=FALSE
+R> ###################################################
+R> ## Stangle("Sweave-journals.Rnw")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 24: texi2dvi eval=FALSE
+R> ###################################################
+R> ## texi2dvi("Sweave-journals.tex", pdf = TRUE)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 25: vignette eval=FALSE
+R> ###################################################
+R> ## vignette("Sweave-journals", package = "AER")
+R> 
+R> 
+R> 

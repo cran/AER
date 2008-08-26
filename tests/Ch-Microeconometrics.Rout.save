@@ -1,0 +1,748 @@
+
+R version 2.7.1 (2008-06-23)
+Copyright (C) 2008 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ###################################################
+> ### chunk number 1: setup
+> ###################################################
+> options(prompt = "R> ", continue = "+  ", width = 64,
++   digits = 4, show.signif.stars = FALSE, useFancyQuotes = FALSE)
+R> 
+R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
++                             twofig =   function() {par(mfrow = c(1,2))},                           
++                             threefig = function() {par(mfrow = c(1,3))},
++                             fourfig =  function() {par(mfrow = c(2,2))},
++                             sixfig =   function() {par(mfrow = c(3,2))}))
+R> 
+R> library("AER")
+Loading required package: car
+Loading required package: lmtest
+Loading required package: zoo
+Loading required package: sandwich
+Loading required package: strucchange
+Loading required package: survival
+Loading required package: splines
+R> 
+R> set.seed(1071)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 2: swisslabor-data
+R> ###################################################
+R> data("SwissLabor")
+R> swiss_probit <- glm(participation ~ . + I(age^2),
++    data = SwissLabor, family = binomial(link = "probit"))
+R> summary(swiss_probit)
+
+Call:
+glm(formula = participation ~ . + I(age^2), family = binomial(link = "probit"), 
+    data = SwissLabor)
+
+Deviance Residuals: 
+   Min      1Q  Median      3Q     Max  
+-1.919  -0.969  -0.479   1.021   2.480  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)   3.7491     1.4069    2.66   0.0077
+income       -0.6669     0.1320   -5.05  4.3e-07
+age           2.0753     0.4054    5.12  3.1e-07
+education     0.0192     0.0179    1.07   0.2843
+youngkids    -0.7145     0.1004   -7.12  1.1e-12
+oldkids      -0.1470     0.0509   -2.89   0.0039
+foreignyes    0.7144     0.1213    5.89  3.9e-09
+I(age^2)     -0.2943     0.0499   -5.89  3.8e-09
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1203.2  on 871  degrees of freedom
+Residual deviance: 1017.2  on 864  degrees of freedom
+AIC: 1033
+
+Number of Fisher Scoring iterations: 4
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 3: swisslabor-plot eval=FALSE
+R> ###################################################
+R> ## plot(participation ~ age, data = SwissLabor, ylevels = 2:1)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 4: swisslabor-plot-refined
+R> ###################################################
+R> plot(participation ~ education, data = SwissLabor, ylevels = 2:1)
+R> fm <- glm(participation ~ education + I(education^2), data = SwissLabor, family = binomial)
+R> edu <- sort(unique(SwissLabor$education))
+R> prop <- sapply(edu, function(x) mean(SwissLabor$education <= x))
+R> lines(predict(fm, newdata = data.frame(education = edu), type = "response") ~ prop, col = 2)
+R> 
+R> plot(participation ~ age, data = SwissLabor, ylevels = 2:1)
+R> fm <- glm(participation ~ age + I(age^2), data = SwissLabor, family = binomial)
+R> ag <- sort(unique(SwissLabor$age))
+R> prop <- sapply(ag, function(x) mean(SwissLabor$age <= x))
+R> lines(predict(fm, newdata = data.frame(age = ag), type = "response") ~ prop, col = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 5: effects1
+R> ###################################################
+R> fav <- mean(dnorm(predict(swiss_probit, type = "link")))
+R> fav * coef(swiss_probit)
+(Intercept)      income         age   education   youngkids 
+   1.241930   -0.220932    0.687466    0.006359   -0.236682 
+    oldkids  foreignyes    I(age^2) 
+  -0.048690    0.236644   -0.097505 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 6: effects2
+R> ###################################################
+R> av <- colMeans(SwissLabor[, -c(1, 7)])
+R> av <- data.frame(rbind(swiss = av, foreign = av),
++    foreign = factor(c("no", "yes")))
+R> av <- predict(swiss_probit, newdata = av, type = "link")
+R> av <- dnorm(av)
+R> av["swiss"] * coef(swiss_probit)[-7]
+(Intercept)      income         age   education   youngkids 
+   1.495137   -0.265976    0.827628    0.007655   -0.284938 
+    oldkids    I(age^2) 
+  -0.058617   -0.117384 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 7: effects3
+R> ###################################################
+R> av["foreign"] * coef(swiss_probit)[-7]
+(Intercept)      income         age   education   youngkids 
+   1.136517   -0.202180    0.629115    0.005819   -0.216593 
+    oldkids    I(age^2) 
+  -0.044557   -0.089229 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 8: mcfadden
+R> ###################################################
+R> swiss_probit0 <- update(swiss_probit, formula = . ~ 1)
+R> 1 - as.vector(logLik(swiss_probit)/logLik(swiss_probit0))
+[1] 0.1546
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 9: confusion-matrix
+R> ###################################################
+R> table(true = SwissLabor$participation,
++    pred = round(fitted(swiss_probit)))
+     pred
+true    0   1
+  no  337 134
+  yes 146 255
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 10: confusion-matrix1
+R> ###################################################
+R> tab <- table(true = SwissLabor$participation,
++    pred = round(fitted(swiss_probit)))
+R> tabp <- round(100 * c(tab[1,1] + tab[2,2], tab[2,1] + tab[1,2])/sum(tab), digits = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 11: roc-plot eval=FALSE
+R> ###################################################
+R> ## library("ROCR")
+R> ## pred <- prediction(fitted(swiss_probit),
+R> ##   SwissLabor$participation)
+R> ## plot(performance(pred, "acc"))
+R> ## plot(performance(pred, "tpr", "fpr"))
+R> ## abline(0, 1, lty = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 12: roc-plot1
+R> ###################################################
+R> library("ROCR")
+Loading required package: gplots
+Loading required package: gtools
+
+Attaching package: 'gtools'
+
+
+	The following object(s) are masked from package:car :
+
+	 logit 
+
+Loading required package: gdata
+
+Attaching package: 'gplots'
+
+
+	The following object(s) are masked from package:stats :
+
+	 lowess 
+
+R> pred <- prediction(fitted(swiss_probit),
++    SwissLabor$participation)
+R> plot(performance(pred, "acc"))
+R> plot(performance(pred, "tpr", "fpr"))
+R> abline(0, 1, lty = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 13: rss
+R> ###################################################
+R> deviance(swiss_probit)
+[1] 1017
+R> sum(residuals(swiss_probit, type = "deviance")^2)
+[1] 1017
+R> sum(residuals(swiss_probit, type = "pearson")^2)
+[1] 866.5
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 14: coeftest eval=FALSE
+R> ###################################################
+R> ## coeftest(swiss_probit, vcov = sandwich)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 15: murder
+R> ###################################################
+R> data("MurderRates")
+R> murder_logit <- glm(I(executions > 0) ~ time + income +
++    noncauc + lfp + southern, data = MurderRates,
++    family = binomial)
+Warning message:
+In glm.fit(x = X, y = Y, weights = weights, start = start, etastart = etastart,  :
+  fitted probabilities numerically 0 or 1 occurred
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 16: murder-coeftest
+R> ###################################################
+R> coeftest(murder_logit)
+
+z test of coefficients:
+
+             Estimate Std. Error z value Pr(>|z|)
+(Intercept)   10.9933    20.7734    0.53    0.597
+time           0.0194     0.0104    1.87    0.062
+income        10.6101     5.6541    1.88    0.061
+noncauc       70.9879    36.4118    1.95    0.051
+lfp           -0.6676     0.4767   -1.40    0.161
+southernyes   17.3313  2872.1707    0.01    0.995
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 17: murder2
+R> ###################################################
+R> murder_logit2 <- glm(I(executions > 0) ~ time + income +
++    noncauc + lfp + southern, data = MurderRates,
++    family = binomial, control = list(epsilon = 1e-15,
++    maxit = 50, trace = FALSE))
+Warning message:
+In glm.fit(x = X, y = Y, weights = weights, start = start, etastart = etastart,  :
+  fitted probabilities numerically 0 or 1 occurred
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 18: murder2-coeftest
+R> ###################################################
+R> coeftest(murder_logit2)
+
+z test of coefficients:
+
+             Estimate Std. Error z value Pr(>|z|)
+(Intercept)  1.10e+01   2.08e+01    0.53    0.597
+time         1.94e-02   1.04e-02    1.87    0.062
+income       1.06e+01   5.65e+00    1.88    0.061
+noncauc      7.10e+01   3.64e+01    1.95    0.051
+lfp         -6.68e-01   4.77e-01   -1.40    0.161
+southernyes  3.13e+01   1.73e+07 1.8e-06    1.000
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 19: separation
+R> ###################################################
+R> table(I(MurderRates$executions > 0), MurderRates$southern)
+       
+        no yes
+  FALSE  9   0
+  TRUE  20  15
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 20: countreg-pois
+R> ###################################################
+R> data("RecreationDemand")
+R> rd_pois <- glm(trips ~ ., data = RecreationDemand,
++    family = poisson)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 21: countreg-pois-coeftest
+R> ###################################################
+R> coeftest(rd_pois)
+
+z test of coefficients:
+
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)  0.26499    0.09372    2.83   0.0047
+quality      0.47173    0.01709   27.60  < 2e-16
+skiyes       0.41821    0.05719    7.31  2.6e-13
+income      -0.11132    0.01959   -5.68  1.3e-08
+userfeeyes   0.89817    0.07899   11.37  < 2e-16
+costC       -0.00343    0.00312   -1.10   0.2713
+costS       -0.04254    0.00167  -25.47  < 2e-16
+costH        0.03613    0.00271   13.34  < 2e-16
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 22: countreg-pois-logLik
+R> ###################################################
+R> logLik(rd_pois)
+'log Lik.' -1529 (df=8)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 23: countreg-odtest1
+R> ###################################################
+R> dispersiontest(rd_pois)
+
+	Overdispersion test
+
+data:  rd_pois 
+z = 2.412, p-value = 0.007941
+alternative hypothesis: true dispersion is greater than 1 
+sample estimates:
+dispersion 
+     6.566 
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 24: countreg-odtest2
+R> ###################################################
+R> dispersiontest(rd_pois, trafo = 2)
+
+	Overdispersion test
+
+data:  rd_pois 
+z = 2.938, p-value = 0.001651
+alternative hypothesis: true alpha is greater than 0 
+sample estimates:
+alpha 
+1.316 
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 25: countreg-nbin
+R> ###################################################
+R> library("MASS")
+R> rd_nb <- glm.nb(trips ~ ., data = RecreationDemand)
+R> coeftest(rd_nb)
+
+z test of coefficients:
+
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept) -1.12194    0.21430   -5.24  1.6e-07
+quality      0.72200    0.04012   18.00  < 2e-16
+skiyes       0.61214    0.15030    4.07  4.6e-05
+income      -0.02606    0.04245   -0.61    0.539
+userfeeyes   0.66917    0.35302    1.90    0.058
+costC        0.04801    0.00918    5.23  1.7e-07
+costS       -0.09269    0.00665  -13.93  < 2e-16
+costH        0.03884    0.00775    5.01  5.4e-07
+
+R> logLik(rd_nb)
+'log Lik.' -825.6 (df=9)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 26: countreg-se
+R> ###################################################
+R> round(sqrt(rbind(diag(vcov(rd_pois)),
++    diag(sandwich(rd_pois)))), digits = 3)
+     (Intercept) quality skiyes income userfeeyes costC costS
+[1,]       0.094   0.017  0.057   0.02      0.079 0.003 0.002
+[2,]       0.432   0.049  0.194   0.05      0.247 0.015 0.012
+     costH
+[1,] 0.003
+[2,] 0.009
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 27: countreg-sandwich
+R> ###################################################
+R> coeftest(rd_pois, vcov = sandwich)
+
+z test of coefficients:
+
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)  0.26499    0.43248    0.61  0.54006
+quality      0.47173    0.04885    9.66  < 2e-16
+skiyes       0.41821    0.19387    2.16  0.03099
+income      -0.11132    0.05031   -2.21  0.02691
+userfeeyes   0.89817    0.24691    3.64  0.00028
+costC       -0.00343    0.01470   -0.23  0.81549
+costS       -0.04254    0.01173   -3.62  0.00029
+costH        0.03613    0.00939    3.85  0.00012
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 28: countreg-OPG
+R> ###################################################
+R> round(sqrt(diag(vcovOPG(rd_pois))), 3)
+(Intercept)     quality      skiyes      income  userfeeyes 
+      0.025       0.007       0.020       0.010       0.033 
+      costC       costS       costH 
+      0.001       0.000       0.001 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 29: countreg-plot
+R> ###################################################
+R> plot(table(RecreationDemand$trips), ylab = "")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 30: countreg-zeros
+R> ###################################################
+R> rbind(obs = table(RecreationDemand$trips)[1:10], exp = round(
++    sapply(0:9, function(x) sum(dpois(x, fitted(rd_pois))))))
+      0   1  2  3  4  5  6  7  8 9
+obs 417  68 38 34 17 13 11  2  8 1
+exp 277 146 68 41 30 23 17 13 10 7
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 31: countreg-pscl
+R> ###################################################
+R> library("pscl")
+Loading required package: mvtnorm
+Loading required package: coda
+Loading required package: lattice
+pscl 1.00 	 2008-08-17 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 32: countreg-zinb
+R> ###################################################
+R> rd_zinb <- zeroinfl(trips ~ . | quality + income,
++    data = RecreationDemand, dist = "negbin")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 33: countreg-zinb-summary
+R> ###################################################
+R> summary(rd_zinb)
+
+Call:
+zeroinfl(formula = trips ~ . | quality + income, data = RecreationDemand, 
+    dist = "negbin")
+
+
+Count model coefficients (negbin with log link):
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)  1.09663    0.25668    4.27  1.9e-05
+quality      0.16891    0.05303    3.19  0.00145
+skiyes       0.50069    0.13449    3.72  0.00020
+income      -0.06927    0.04380   -1.58  0.11378
+userfeeyes   0.54279    0.28280    1.92  0.05494
+costC        0.04044    0.01452    2.79  0.00534
+costS       -0.06621    0.00775   -8.55  < 2e-16
+costH        0.02060    0.01023    2.01  0.04415
+Log(theta)   0.19017    0.11299    1.68  0.09235
+
+Zero-inflation model coefficients (binomial with logit link):
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)    5.743      1.556    3.69  0.00022
+quality       -8.307      3.682   -2.26  0.02404
+income        -0.258      0.282   -0.92  0.35950
+
+Theta = 1.209 
+Number of iterations in BFGS optimization: 26 
+Log-likelihood: -722 on 12 Df
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 34: countreg-zinb-expected
+R> ###################################################
+R> round(colSums(predict(rd_zinb, type = "prob")[,1:10]))
+  0   1   2   3   4   5   6   7   8   9 
+433  47  35  27  20  16  12  10   8   7 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 35: countreg-hurdle
+R> ###################################################
+R> rd_hurdle <- hurdle(trips ~ . | quality + income,
++    data = RecreationDemand, dist = "negbin")
+R> summary(rd_hurdle)
+
+Call:
+hurdle(formula = trips ~ . | quality + income, data = RecreationDemand, 
+    dist = "negbin")
+
+
+Count model coefficients (truncated negbin with log link):
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)   0.8419     0.3828    2.20   0.0278
+quality       0.1717     0.0723    2.37   0.0176
+skiyes        0.6224     0.1901    3.27   0.0011
+income       -0.0571     0.0645   -0.88   0.3763
+userfeeyes    0.5763     0.3851    1.50   0.1345
+costC         0.0571     0.0217    2.63   0.0085
+costS        -0.0775     0.0115   -6.71  1.9e-11
+costH         0.0124     0.0149    0.83   0.4064
+Log(theta)   -0.5303     0.2611   -2.03   0.0423
+Zero hurdle model coefficients (binomial with logit link):
+            Estimate Std. Error z value Pr(>|z|)
+(Intercept)  -2.7663     0.3623   -7.64  2.3e-14
+quality       1.5029     0.1003   14.98  < 2e-16
+income       -0.0447     0.0785   -0.57     0.57
+
+Theta: count = 0.588
+Number of iterations in BFGS optimization: 18 
+Log-likelihood: -765 on 12 Df
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 36: countreg-hurdle-expected
+R> ###################################################
+R> round(colSums(predict(rd_hurdle, type = "prob")[,1:10]))
+  0   1   2   3   4   5   6   7   8   9 
+417  74  42  27  19  14  10   8   6   5 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 37: tobit1
+R> ###################################################
+R> data("Affairs")
+R> aff_tob <- tobit(affairs ~ age + yearsmarried +
++    religiousness + occupation + rating, data = Affairs)
+R> summary(aff_tob)
+
+Call:
+tobit(formula = affairs ~ age + yearsmarried + religiousness + 
+    occupation + rating, data = Affairs)
+
+Observations:
+         Total  Left-censored     Uncensored Right-censored 
+           601            451            150              0 
+
+Coefficients:
+              Estimate Std. Error z value Pr(>|z|)
+(Intercept)     8.1742     2.7414    2.98   0.0029
+age            -0.1793     0.0791   -2.27   0.0234
+yearsmarried    0.5541     0.1345    4.12  3.8e-05
+religiousness  -1.6862     0.4038   -4.18  3.0e-05
+occupation      0.3261     0.2544    1.28   0.2000
+rating         -2.2850     0.4078   -5.60  2.1e-08
+Log(scale)      2.1099     0.0671   31.44  < 2e-16
+
+Scale: 8.25 
+
+Gaussian distribution
+Number of Newton-Raphson Iterations: 4 
+Log-likelihood: -706 on 7 Df
+Wald-statistic: 67.7 on 5 Df, p-value: 3.1e-13 
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 38: tobit2
+R> ###################################################
+R> aff_tob2 <- update(aff_tob, right = 4)
+R> summary(aff_tob2)
+
+Call:
+tobit(formula = affairs ~ age + yearsmarried + religiousness + 
+    occupation + rating, right = 4, data = Affairs)
+
+Observations:
+         Total  Left-censored     Uncensored Right-censored 
+           601            451             70             80 
+
+Coefficients:
+              Estimate Std. Error z value Pr(>|z|)
+(Intercept)     7.9010     2.8039    2.82  0.00483
+age            -0.1776     0.0799   -2.22  0.02624
+yearsmarried    0.5323     0.1412    3.77  0.00016
+religiousness  -1.6163     0.4244   -3.81  0.00014
+occupation      0.3242     0.2539    1.28  0.20162
+rating         -2.2070     0.4498   -4.91  9.3e-07
+Log(scale)      2.0723     0.1104   18.77  < 2e-16
+
+Scale: 7.94 
+
+Gaussian distribution
+Number of Newton-Raphson Iterations: 4 
+Log-likelihood: -500 on 7 Df
+Wald-statistic: 42.6 on 5 Df, p-value: 4.5e-08 
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 39: tobit3
+R> ###################################################
+R> linear.hypothesis(aff_tob, c("age = 0", "occupation = 0"),
++    vcov = sandwich)
+Linear hypothesis test
+
+Hypothesis:
+age = 0
+occupation = 0
+
+Model 1: affairs ~ age + yearsmarried + religiousness + occupation + rating
+Model 2: restricted model
+
+Note: Coefficient covariance matrix supplied.
+
+  Res.Df  Df Chisq Pr(>Chisq)
+1    594                     
+2    596  -2  4.91      0.086
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 40: numeric-response
+R> ###################################################
+R> SwissLabor$partnum <- as.numeric(SwissLabor$participation) - 1
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 41: kleinspady eval=FALSE
+R> ###################################################
+R> ## library("np")
+R> ## swiss_bw <- npindexbw(partnum ~ income + age + education +
+R> ##   youngkids + oldkids + foreign + I(age^2), data = SwissLabor,
+R> ##   method = "kleinspady", nmulti = 5)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 42: kleinspady-bw eval=FALSE
+R> ###################################################
+R> ## summary(swiss_bw)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 43: kleinspady-summary eval=FALSE
+R> ###################################################
+R> ## swiss_ks <- npindex(bws = swiss_bw, gradients = TRUE)
+R> ## summary(swiss_ks)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 44: probit-confusion
+R> ###################################################
+R> table(Actual = SwissLabor$participation, Predicted = 
++    round(predict(swiss_probit, type = "response")))
+      Predicted
+Actual   0   1
+   no  337 134
+   yes 146 255
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 45: bw-tab
+R> ###################################################
+R> data("BankWages")
+R> edcat <- factor(BankWages$education)
+R> levels(edcat)[3:10] <- rep(c("14-15", "16-18", "19-21"),
++    c(2, 3, 3))
+R> tab <- xtabs(~ edcat + job, data = BankWages)
+R> prop.table(tab, 1)
+       job
+edcat   custodial    admin   manage
+  8      0.245283 0.754717 0.000000
+  12     0.068421 0.926316 0.005263
+  14-15  0.008197 0.959016 0.032787
+  16-18  0.000000 0.367089 0.632911
+  19-21  0.000000 0.033333 0.966667
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 46: bw-plot eval=FALSE
+R> ###################################################
+R> ## plot(job ~ edcat, data = BankWages, off = 0)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 47: bw-plot1
+R> ###################################################
+R> plot(job ~ edcat, data = BankWages, off = 0)
+R> box()
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 48: bw-multinom
+R> ###################################################
+R> library("nnet")
+R> bank_mnl <- multinom(job ~ education + minority,
++    data = BankWages, subset = gender == "male", trace = FALSE)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 49: bw-multinom-coeftest
+R> ###################################################
+R> coeftest(bank_mnl)
+
+z test of coefficients:
+
+                   Estimate Std. Error z value Pr(>|z|)
+admin:(Intercept)    -4.761      1.173   -4.06  4.9e-05
+admin:education       0.553      0.099    5.59  2.3e-08
+admin:minorityyes    -0.427      0.503   -0.85   0.3957
+manage:(Intercept)  -30.775      4.479   -6.87  6.4e-12
+manage:education      2.187      0.295    7.42  1.2e-13
+manage:minorityyes   -2.536      0.934   -2.71   0.0066
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 50: bw-polr
+R> ###################################################
+R> library("MASS")
+R> bank_polr <- polr(job ~ education + minority, 
++    data = BankWages, subset = gender == "male", Hess = TRUE)
+R> coeftest(bank_polr)
+
+z test of coefficients:
+
+                Estimate Std. Error z value Pr(>|z|)
+education         0.8700     0.0931    9.35  < 2e-16
+minorityyes      -1.0564     0.4120   -2.56    0.010
+custodial|admin   7.9514     1.0769    7.38  1.5e-13
+admin|manage     14.1721     0.0941  150.65  < 2e-16
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 51: bw-AIC
+R> ###################################################
+R> AIC(bank_mnl)
+[1] 249.5
+R> AIC(bank_polr) 
+[1] 268.6
+R> 
+R> 
+R> 

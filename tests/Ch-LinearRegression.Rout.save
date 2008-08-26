@@ -1,0 +1,970 @@
+
+R version 2.7.1 (2008-06-23)
+Copyright (C) 2008 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ###################################################
+> ### chunk number 1: setup
+> ###################################################
+> options(prompt = "R> ", continue = "+  ", width = 64,
++   digits = 4, show.signif.stars = FALSE, useFancyQuotes = FALSE)
+R> 
+R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
++                             twofig =   function() {par(mfrow = c(1,2))},                           
++                             threefig = function() {par(mfrow = c(1,3))},
++                             fourfig =  function() {par(mfrow = c(2,2))},
++                             sixfig =   function() {par(mfrow = c(3,2))}))
+R> 
+R> library("AER")
+Loading required package: car
+Loading required package: lmtest
+Loading required package: zoo
+Loading required package: sandwich
+Loading required package: strucchange
+Loading required package: survival
+Loading required package: splines
+R> 
+R> set.seed(1071)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 2: data-journals
+R> ###################################################
+R> data("Journals")
+R> journals <- Journals[, c("subs", "price")]
+R> journals$citeprice <- Journals$price/Journals$citations
+R> summary(journals)
+      subs          price        citeprice       
+ Min.   :   2   Min.   :  20   Min.   : 0.00522  
+ 1st Qu.:  52   1st Qu.: 134   1st Qu.: 0.46450  
+ Median : 122   Median : 282   Median : 1.32051  
+ Mean   : 197   Mean   : 418   Mean   : 2.54845  
+ 3rd Qu.: 268   3rd Qu.: 541   3rd Qu.: 3.44017  
+ Max.   :1098   Max.   :2120   Max.   :24.45946  
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 3: linreg-plot eval=FALSE
+R> ###################################################
+R> ## plot(log(subs) ~ log(citeprice), data = journals)
+R> ## jour_lm <- lm(log(subs) ~ log(citeprice), data = journals)
+R> ## abline(jour_lm)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 4: linreg-plot1
+R> ###################################################
+R> plot(log(subs) ~ log(citeprice), data = journals)
+R> jour_lm <- lm(log(subs) ~ log(citeprice), data = journals)
+R> abline(jour_lm)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 5: linreg-class
+R> ###################################################
+R> class(jour_lm)
+[1] "lm"
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 6: linreg-names
+R> ###################################################
+R> names(jour_lm)
+ [1] "coefficients"  "residuals"     "effects"      
+ [4] "rank"          "fitted.values" "assign"       
+ [7] "qr"            "df.residual"   "xlevels"      
+[10] "call"          "terms"         "model"        
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 7: linreg-summary
+R> ###################################################
+R> summary(jour_lm)
+
+Call:
+lm(formula = log(subs) ~ log(citeprice), data = journals)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.7248 -0.5361  0.0372  0.4662  1.8481 
+
+Coefficients:
+               Estimate Std. Error t value Pr(>|t|)
+(Intercept)      4.7662     0.0559    85.2   <2e-16
+log(citeprice)  -0.5331     0.0356   -15.0   <2e-16
+
+Residual standard error: 0.75 on 178 degrees of freedom
+Multiple R-squared: 0.557,	Adjusted R-squared: 0.555 
+F-statistic:  224 on 1 and 178 DF,  p-value: <2e-16 
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 8: linreg-summary
+R> ###################################################
+R> jour_slm <- summary(jour_lm)
+R> class(jour_slm)
+[1] "summary.lm"
+R> names(jour_slm)
+ [1] "call"          "terms"         "residuals"    
+ [4] "coefficients"  "aliased"       "sigma"        
+ [7] "df"            "r.squared"     "adj.r.squared"
+[10] "fstatistic"    "cov.unscaled" 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 9: linreg-coef
+R> ###################################################
+R> jour_slm$coefficients
+               Estimate Std. Error t value   Pr(>|t|)
+(Intercept)      4.7662    0.05591   85.25 2.954e-146
+log(citeprice)  -0.5331    0.03561  -14.97  2.564e-33
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 10: linreg-anova
+R> ###################################################
+R> anova(jour_lm)
+Analysis of Variance Table
+
+Response: log(subs)
+                Df Sum Sq Mean Sq F value Pr(>F)
+log(citeprice)   1  125.9   125.9     224 <2e-16
+Residuals      178  100.1     0.6               
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 11: journals-coef
+R> ###################################################
+R> coef(jour_lm)
+   (Intercept) log(citeprice) 
+        4.7662        -0.5331 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 12: journals-confint
+R> ###################################################
+R> confint(jour_lm, level = 0.95)
+                 2.5 %  97.5 %
+(Intercept)     4.6559  4.8765
+log(citeprice) -0.6033 -0.4628
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 13: journals-predict
+R> ###################################################
+R> predict(jour_lm, newdata = data.frame(citeprice = 2.11),
++    interval = "confidence")
+    fit   lwr   upr
+1 4.368 4.247 4.489
+R> predict(jour_lm, newdata = data.frame(citeprice = 2.11), 
++    interval = "prediction")
+    fit   lwr   upr
+1 4.368 2.884 5.853
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 14: predict-plot eval=FALSE
+R> ###################################################
+R> ## lciteprice <- seq(from = -6, to = 4, by = 0.25)
+R> ## jour_pred <- predict(jour_lm, interval = "prediction",
+R> ##   newdata = data.frame(citeprice = exp(lciteprice)))  
+R> ## plot(log(subs) ~ log(citeprice), data = journals)
+R> ## lines(jour_pred[, 1] ~ lciteprice, col = 1)    
+R> ## lines(jour_pred[, 2] ~ lciteprice, col = 1, lty = 2)
+R> ## lines(jour_pred[, 3] ~ lciteprice, col = 1, lty = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 15: predict-plot1
+R> ###################################################
+R> lciteprice <- seq(from = -6, to = 4, by = 0.25)
+R> jour_pred <- predict(jour_lm, interval = "prediction",
++    newdata = data.frame(citeprice = exp(lciteprice)))  
+R> plot(log(subs) ~ log(citeprice), data = journals)
+R> lines(jour_pred[, 1] ~ lciteprice, col = 1)    
+R> lines(jour_pred[, 2] ~ lciteprice, col = 1, lty = 2)
+R> lines(jour_pred[, 3] ~ lciteprice, col = 1, lty = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 16: journals-plot eval=FALSE
+R> ###################################################
+R> ## par(mfrow = c(2, 2))
+R> ## plot(jour_lm)
+R> ## par(mfrow = c(1, 1))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 17: journals-plot1
+R> ###################################################
+R> par(mfrow = c(2, 2))
+R> plot(jour_lm)
+R> par(mfrow = c(1, 1))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 18: journal-lht
+R> ###################################################
+R> linear.hypothesis(jour_lm, "log(citeprice) = -0.5")
+Linear hypothesis test
+
+Hypothesis:
+log(citeprice) = -0.5
+
+Model 1: log(subs) ~ log(citeprice)
+Model 2: restricted model
+
+  Res.Df   RSS  Df Sum of Sq    F Pr(>F)
+1    178 100.1                          
+2    179 100.5  -1      -0.5 0.86   0.35
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 19: CPS-data
+R> ###################################################
+R> data("CPS1988")
+R> summary(CPS1988)
+      wage         education      experience   ethnicity   
+ Min.   :   50   Min.   : 0.0   Min.   :-4.0   cauc:25923  
+ 1st Qu.:  309   1st Qu.:12.0   1st Qu.: 8.0   afam: 2232  
+ Median :  522   Median :12.0   Median :16.0               
+ Mean   :  604   Mean   :13.1   Mean   :18.2               
+ 3rd Qu.:  783   3rd Qu.:15.0   3rd Qu.:27.0               
+ Max.   :18777   Max.   :18.0   Max.   :63.0               
+  smsa             region     parttime   
+ no : 7223   northeast:6441   no :25631  
+ yes:20932   midwest  :6863   yes: 2524  
+             south    :8760              
+             west     :6091              
+                                         
+                                         
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 20: CPS-base
+R> ###################################################
+R> cps_lm <- lm(log(wage) ~ experience + I(experience^2) +
++    education + ethnicity, data = CPS1988)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 21: CPS-visualization-unused eval=FALSE
+R> ###################################################
+R> ## ex <- 0:56
+R> ## ed <- with(CPS1988, tapply(education, 
+R> ##   list(ethnicity, experience), mean))[, as.character(ex)]
+R> ## fm <- cps_lm
+R> ## wago <- predict(fm, newdata = data.frame(experience = ex, 
+R> ##   ethnicity = "cauc", education = as.numeric(ed["cauc",])))
+R> ## wagb <- predict(fm, newdata = data.frame(experience = ex, 
+R> ##   ethnicity = "afam", education = as.numeric(ed["afam",])))
+R> ## plot(log(wage) ~ experience, data = CPS1988, pch = ".", 
+R> ##   col = as.numeric(ethnicity))
+R> ## lines(ex, wago)
+R> ## lines(ex, wagb, col = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 22: CPS-summary
+R> ###################################################
+R> summary(cps_lm)
+
+Call:
+lm(formula = log(wage) ~ experience + I(experience^2) + education + 
+    ethnicity, data = CPS1988)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-2.943 -0.316  0.058  0.376  4.383 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(>|t|)
+(Intercept)      4.321395   0.019174   225.4   <2e-16
+experience       0.077473   0.000880    88.0   <2e-16
+I(experience^2) -0.001316   0.000019   -69.3   <2e-16
+education        0.085673   0.001272    67.3   <2e-16
+ethnicityafam   -0.243364   0.012918   -18.8   <2e-16
+
+Residual standard error: 0.584 on 28150 degrees of freedom
+Multiple R-squared: 0.335,	Adjusted R-squared: 0.335 
+F-statistic: 3.54e+03 on 4 and 28150 DF,  p-value: <2e-16 
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 23: CPS-noeth
+R> ###################################################
+R> cps_noeth <- lm(log(wage) ~ experience + I(experience^2) +
++    education, data = CPS1988)
+R> anova(cps_noeth, cps_lm)
+Analysis of Variance Table
+
+Model 1: log(wage) ~ experience + I(experience^2) + education
+Model 2: log(wage) ~ experience + I(experience^2) + education + ethnicity
+  Res.Df  RSS    Df Sum of Sq   F Pr(>F)
+1  28151 9720                           
+2  28150 9599     1       121 355 <2e-16
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 24: CPS-anova
+R> ###################################################
+R> anova(cps_lm)
+Analysis of Variance Table
+
+Response: log(wage)
+                   Df Sum Sq Mean Sq F value Pr(>F)
+experience          1    840     840    2462 <2e-16
+I(experience^2)     1   2249    2249    6597 <2e-16
+education           1   1620    1620    4750 <2e-16
+ethnicity           1    121     121     355 <2e-16
+Residuals       28150   9599    0.34               
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 25: CPS-noeth2 eval=FALSE
+R> ###################################################
+R> ## cps_noeth <- update(cps_lm, formula = . ~ . - ethnicity)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 26: CPS-waldtest
+R> ###################################################
+R> waldtest(cps_lm, . ~ . - ethnicity)
+Wald test
+
+Model 1: log(wage) ~ experience + I(experience^2) + education + ethnicity
+Model 2: log(wage) ~ experience + I(experience^2) + education
+  Res.Df    Df   F Pr(>F)
+1  28150                 
+2  28151    -1 355 <2e-16
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 27: CPS-spline
+R> ###################################################
+R> cps_plm <- lm(log(wage) ~ bs(experience, df = 5) +
++    education + ethnicity, data = CPS1988)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 28: CPS-spline-summary eval=FALSE
+R> ###################################################
+R> ## summary(cps_plm)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 29: CPS-BIC
+R> ###################################################
+R> cps_bs <- lapply(3:10, function(i) lm(log(wage) ~
++    bs(experience, df = i) + education + ethnicity,
++    data = CPS1988))
+R> structure(sapply(cps_bs, AIC, k = log(nrow(CPS1988))),
++    .Names = 3:10)
+    3     4     5     6     7     8     9    10 
+49205 48836 48794 48795 48801 48797 48799 48802 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 30: plm-plot eval=FALSE
+R> ###################################################
+R> ## cps <- data.frame(experience = -2:60, education =
+R> ##   with(CPS1988, mean(education[ethnicity == "cauc"])),
+R> ##   ethnicity = "cauc")
+R> ## cps$yhat1 <- predict(cps_lm, newdata = cps)
+R> ## cps$yhat2 <- predict(cps_plm, newdata = cps)
+R> ## 
+R> ## plot(log(wage) ~ jitter(experience, factor = 3), pch = 19,
+R> ##   col = rgb(0.5, 0.5, 0.5, alpha = 0.02), data = CPS1988)
+R> ## lines(yhat1 ~ experience, data = cps, lty = 2)
+R> ## lines(yhat2 ~ experience, data = cps)
+R> ## legend("topleft", c("quadratic", "spline"), lty = c(2,1),
+R> ##   bty = "n")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 31: plm-plot1
+R> ###################################################
+R> cps <- data.frame(experience = -2:60, education =
++    with(CPS1988, mean(education[ethnicity == "cauc"])),
++    ethnicity = "cauc")
+R> cps$yhat1 <- predict(cps_lm, newdata = cps)
+R> cps$yhat2 <- predict(cps_plm, newdata = cps)
+R> 
+R> plot(log(wage) ~ jitter(experience, factor = 3), pch = 19,
++    col = rgb(0.5, 0.5, 0.5, alpha = 0.02), data = CPS1988)
+Warning message:
+In plot.xy(xy, type, ...) : increasing the PDF version to 1.4
+R> lines(yhat1 ~ experience, data = cps, lty = 2)
+R> lines(yhat2 ~ experience, data = cps)
+R> legend("topleft", c("quadratic", "spline"), lty = c(2,1),
++    bty = "n")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 32: CPS-int
+R> ###################################################
+R> cps_int <- lm(log(wage) ~ experience + I(experience^2) +
++    education * ethnicity, data = CPS1988)
+R> coeftest(cps_int)
+
+t test of coefficients:
+
+                         Estimate Std. Error t value Pr(>|t|)
+(Intercept)              4.313059   0.019590  220.17   <2e-16
+experience               0.077520   0.000880   88.06   <2e-16
+I(experience^2)         -0.001318   0.000019  -69.34   <2e-16
+education                0.086312   0.001309   65.94   <2e-16
+ethnicityafam           -0.123887   0.059026   -2.10    0.036
+education:ethnicityafam -0.009648   0.004651   -2.07    0.038
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 33: CPS-int2 eval=FALSE
+R> ###################################################
+R> ## cps_int <- lm(log(wage) ~ experience + I(experience^2) +
+R> ##   education + ethnicity + education:ethnicity,
+R> ##   data = CPS1988)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 34: CPS-sep
+R> ###################################################
+R> cps_sep <- lm(log(wage) ~ ethnicity /
++    (experience + I(experience^2) + education) - 1,
++    data = CPS1988)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 35: CPS-sep-coef
+R> ###################################################
+R> cps_sep_cf <- matrix(coef(cps_sep), nrow = 2)
+R> rownames(cps_sep_cf) <- levels(CPS1988$ethnicity)
+R> colnames(cps_sep_cf) <- names(coef(cps_lm))[1:4]
+R> cps_sep_cf
+     (Intercept) experience I(experience^2) education
+cauc       4.310    0.07923      -0.0013597   0.08575
+afam       4.159    0.06190      -0.0009415   0.08654
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 36: CPS-sep-anova
+R> ###################################################
+R> anova(cps_sep, cps_lm)
+Analysis of Variance Table
+
+Model 1: log(wage) ~ ethnicity/(experience + I(experience^2) + education) - 
+    1
+Model 2: log(wage) ~ experience + I(experience^2) + education + ethnicity
+  Res.Df  RSS    Df Sum of Sq    F  Pr(>F)
+1  28147 9582                             
+2  28150 9599    -3       -17 16.5 1.1e-10
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 37: CPS-sep-visualization-unused eval=FALSE
+R> ###################################################
+R> ## ex <- 0:56
+R> ## ed <- with(CPS1988, tapply(education, list(ethnicity, 
+R> ##   experience), mean))[, as.character(ex)]
+R> ## fm <- cps_lm
+R> ## wago <- predict(fm, newdata = data.frame(experience = ex, 
+R> ##   ethnicity = "cauc", education = as.numeric(ed["cauc",])))
+R> ## wagb <- predict(fm, newdata = data.frame(experience = ex, 
+R> ##   ethnicity = "afam", education = as.numeric(ed["afam",])))
+R> ## plot(log(wage) ~ jitter(experience, factor = 2), 
+R> ##   data = CPS1988, pch = ".", col = as.numeric(ethnicity))
+R> ## 
+R> ## 
+R> ## plot(log(wage) ~ as.factor(experience), data = CPS1988, 
+R> ##   pch = ".")
+R> ## lines(ex, wago, lwd = 2)
+R> ## lines(ex, wagb, col = 2, lwd = 2)
+R> ## fm <- cps_sep
+R> ## wago <- predict(fm, newdata = data.frame(experience = ex, 
+R> ##   ethnicity = "cauc", education = as.numeric(ed["cauc",])))
+R> ## wagb <- predict(fm, newdata = data.frame(experience = ex, 
+R> ##   ethnicity = "afam", education = as.numeric(ed["afam",])))
+R> ## lines(ex, wago, lty = 2, lwd = 2)
+R> ## lines(ex, wagb, col = 2, lty = 2, lwd = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 38: CPS-region
+R> ###################################################
+R> CPS1988$region <- relevel(CPS1988$region, ref = "south")
+R> cps_region <- lm(log(wage) ~ ethnicity + education +
++    experience + I(experience^2) + region, data = CPS1988)
+R> coef(cps_region)
+    (Intercept)   ethnicityafam       education      experience 
+       4.283606       -0.225679        0.084672        0.077656 
+I(experience^2) regionnortheast   regionmidwest      regionwest 
+      -0.001323        0.131920        0.043789        0.040327 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 39: wls1
+R> ###################################################
+R> jour_wls1 <- lm(log(subs) ~ log(citeprice), data = journals,
++    weights = 1/citeprice^2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 40: wls2
+R> ###################################################
+R> jour_wls2 <- lm(log(subs) ~ log(citeprice), data = journals,
++    weights = 1/citeprice)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 41: journals-wls1 eval=FALSE
+R> ###################################################
+R> ## plot(log(subs) ~ log(citeprice), data = journals)
+R> ## abline(jour_lm)
+R> ## abline(jour_wls1, lwd = 2, lty = 2)
+R> ## abline(jour_wls2, lwd = 2, lty = 3)
+R> ## legend("bottomleft", c("OLS", "WLS1", "WLS2"),
+R> ##   lty = 1:3, lwd = 2, bty = "n")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 42: journals-wls11
+R> ###################################################
+R> plot(log(subs) ~ log(citeprice), data = journals)
+R> abline(jour_lm)
+R> abline(jour_wls1, lwd = 2, lty = 2)
+R> abline(jour_wls2, lwd = 2, lty = 3)
+R> legend("bottomleft", c("OLS", "WLS1", "WLS2"),
++    lty = 1:3, lwd = 2, bty = "n")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 43: fgls1
+R> ###################################################
+R> auxreg <- lm(log(residuals(jour_lm)^2) ~ log(citeprice),
++    data = journals)
+R> jour_fgls1 <- lm(log(subs) ~ log(citeprice), 
++    weights = 1/exp(fitted(auxreg)), data = journals)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 44: fgls2
+R> ###################################################
+R> gamma2i <- coef(auxreg)[2]
+R> gamma2 <- 0
+R> while(abs((gamma2i - gamma2)/gamma2) > 1e-7) {
++    gamma2 <- gamma2i
++    fglsi <- lm(log(subs) ~ log(citeprice), data = journals, 
++      weights = 1/citeprice^gamma2)
++    gamma2i <- coef(lm(log(residuals(fglsi)^2) ~
++      log(citeprice), data = journals))[2]
++  }
+R> jour_fgls2 <- lm(log(subs) ~ log(citeprice), data = journals,
++    weights = 1/citeprice^gamma2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 45: fgls2-coef
+R> ###################################################
+R> coef(jour_fgls2)
+   (Intercept) log(citeprice) 
+        4.7758        -0.5008 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 46: journals-fgls
+R> ###################################################
+R> plot(log(subs) ~ log(citeprice), data = journals)
+R> abline(jour_lm)
+R> abline(jour_fgls2, lty = 2, lwd = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 47: usmacro-plot eval=FALSE
+R> ###################################################
+R> ## data("USMacroG")
+R> ## plot(USMacroG[, c("dpi", "consumption")], lty = c(3, 1),
+R> ##   plot.type = "single", ylab = "")
+R> ## legend("topleft", legend = c("income", "consumption"),
+R> ##   lty = c(3, 1), bty = "n")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 48: usmacro-plot1
+R> ###################################################
+R> data("USMacroG")
+R> plot(USMacroG[, c("dpi", "consumption")], lty = c(3, 1),
++    plot.type = "single", ylab = "")
+R> legend("topleft", legend = c("income", "consumption"),
++    lty = c(3, 1), bty = "n")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 49: usmacro-fit
+R> ###################################################
+R> library("dynlm")
+R> cons_lm1 <- dynlm(consumption ~ dpi + L(dpi), data = USMacroG)
+R> cons_lm2 <- dynlm(consumption ~ dpi + L(consumption), 
++    data = USMacroG)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 50: usmacro-summary1
+R> ###################################################
+R> summary(cons_lm1)
+
+Time series regression with "ts" data:
+Start = 1950(2), End = 2000(4)
+
+Call:
+dynlm(formula = consumption ~ dpi + L(dpi), data = USMacroG)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-190.02  -56.68    1.58   49.91  323.94 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)
+(Intercept) -81.0796    14.5081   -5.59  7.4e-08
+dpi           0.8912     0.2063    4.32  2.4e-05
+L(dpi)        0.0309     0.2075    0.15     0.88
+
+Residual standard error: 87.6 on 200 degrees of freedom
+Multiple R-squared: 0.996,	Adjusted R-squared: 0.996 
+F-statistic: 2.79e+04 on 2 and 200 DF,  p-value: <2e-16 
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 51: usmacro-summary2
+R> ###################################################
+R> summary(cons_lm2)
+
+Time series regression with "ts" data:
+Start = 1950(2), End = 2000(4)
+
+Call:
+dynlm(formula = consumption ~ dpi + L(consumption), data = USMacroG)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-101.30   -9.67    1.14   12.69   45.32 
+
+Coefficients:
+               Estimate Std. Error t value Pr(>|t|)
+(Intercept)     0.53522    3.84517    0.14     0.89
+dpi            -0.00406    0.01663   -0.24     0.81
+L(consumption)  1.01311    0.01816   55.79   <2e-16
+
+Residual standard error: 21.5 on 200 degrees of freedom
+Multiple R-squared:    1,	Adjusted R-squared:    1 
+F-statistic: 4.63e+05 on 2 and 200 DF,  p-value: <2e-16 
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 52: dynlm-plot eval=FALSE
+R> ###################################################
+R> ## plot(merge(as.zoo(USMacroG[,"consumption"]), fitted(cons_lm1),
+R> ##   fitted(cons_lm2), 0, residuals(cons_lm1),
+R> ##   residuals(cons_lm2)), screens = rep(1:2, c(3, 3)),
+R> ##   lty = rep(1:3, 2), ylab = c("Fitted values", "Residuals"),
+R> ##   xlab = "Time", main = "")
+R> ## legend(0.05, 0.95, c("observed", "cons_lm1", "cons_lm2"), 
+R> ##   lty = 1:3, bty = "n")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 53: dynlm-plot1
+R> ###################################################
+R> plot(merge(as.zoo(USMacroG[,"consumption"]), fitted(cons_lm1),
++    fitted(cons_lm2), 0, residuals(cons_lm1),
++    residuals(cons_lm2)), screens = rep(1:2, c(3, 3)),
++    lty = rep(1:3, 2), ylab = c("Fitted values", "Residuals"),
++    xlab = "Time", main = "")
+R> legend(0.05, 0.95, c("observed", "cons_lm1", "cons_lm2"), 
++    lty = 1:3, bty = "n")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 54: encompassing1
+R> ###################################################
+R> cons_lmE <- dynlm(consumption ~ dpi + L(dpi) +
++    L(consumption), data = USMacroG)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 55: encompassing2
+R> ###################################################
+R> anova(cons_lm1, cons_lmE, cons_lm2)
+Analysis of Variance Table
+
+Model 1: consumption ~ dpi + L(dpi)
+Model 2: consumption ~ dpi + L(dpi) + L(consumption)
+Model 3: consumption ~ dpi + L(consumption)
+  Res.Df     RSS  Df Sum of Sq      F  Pr(>F)
+1    200 1534001                             
+2    199   73550   1   1460451 3951.4 < 2e-16
+3    200   92644  -1    -19094   51.7 1.3e-11
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 56: encompassing3
+R> ###################################################
+R> encomptest(cons_lm1, cons_lm2)
+Encompassing test
+
+Model 1: consumption ~ dpi + L(dpi)
+Model 2: consumption ~ dpi + L(consumption)
+Model E: consumption ~ dpi + L(dpi) + L(consumption)
+          Res.Df  Df      F  Pr(>F)
+M1 vs. ME    199  -1 3951.4 < 2e-16
+M2 vs. ME    199  -1   51.7 1.3e-11
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 57: plm-data
+R> ###################################################
+R> data("Grunfeld", package = "AER")
+R> library("plm")
+Loading required package: kinship
+Loading required package: nlme
+Loading required package: lattice
+[1] "kinship is loaded"
+R> gr <- subset(Grunfeld, firm %in% c("General Electric",
++    "General Motors", "IBM"))
+R> pgr <- plm.data(gr, index = c("firm", "year"))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 58: plm-pool
+R> ###################################################
+R> gr_pool <- plm(invest ~ value + capital, data = pgr, 
++    model = "pooling")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 59: plm-FE
+R> ###################################################
+R> gr_fe <- plm(invest ~ value + capital, data = pgr, 
++    model = "within")
+R> summary(gr_fe)
+Oneway (individual) effect Within Model
+
+Call:
+plm(formula = invest ~ value + capital, data = pgr, model = "within")
+
+Balanced Panel: n=3, T=20, N=60
+
+Residuals :
+   Min. 1st Qu.  Median 3rd Qu.    Max. 
+-167.00  -26.10    2.09   26.80  202.00 
+
+Coefficients :
+        Estimate Std. Error t-value Pr(>|t|)
+value     0.1049     0.0163    6.42  1.3e-10
+capital   0.3453     0.0244   14.16  < 2e-16
+
+Total Sum of Squares: 1890000
+Residual Sum of Squares: 244000
+Multiple R-Squared: 0.871
+F-statistic: 185.407 on 55 and 2 DF, p-value: 0.00538
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 60: plm-pFtest
+R> ###################################################
+R> pFtest(gr_fe, gr_pool)
+
+	F test for effects
+
+data:  invest ~ value + capital 
+F = 56.82, df1 = 2, df2 = 55, p-value = 4.148e-14
+alternative hypothesis: significant effects 
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 61: plm-RE
+R> ###################################################
+R> gr_re <- plm(invest ~ value + capital, data = pgr, 
++    model = "random", random.method = "walhus")
+R> summary(gr_re)
+Oneway (individual) effect Random Effect Model (Wallace-Hussain's transformation)
+
+Call:
+plm(formula = invest ~ value + capital, data = pgr, model = "random", 
+    random.method = "walhus")
+
+Balanced Panel: n=3, T=20, N=60
+
+Effects:
+                 var std.dev share
+idiosyncratic 4389.3    66.3  0.35
+individual    8079.7    89.9  0.65
+theta:  0.837  
+
+Residuals :
+   Min. 1st Qu.  Median 3rd Qu.    Max. 
+-187.00  -32.90    6.96   31.40  210.00 
+
+Coefficients :
+             Estimate Std. Error t-value Pr(>|t|)
+(intercept) -109.9766    61.7014   -1.78    0.075
+value          0.1043     0.0150    6.95  3.6e-12
+capital        0.3448     0.0245   14.06  < 2e-16
+
+Total Sum of Squares: 1990000
+Residual Sum of Squares: 258000
+Multiple R-Squared: 0.87
+F-statistic: 191.545 on 57 and 2 DF, p-value: 0.00521
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 62: plm-plmtest
+R> ###################################################
+R> plmtest(gr_pool)
+
+	Lagrange Multiplier Test - (Honda)
+
+data:  invest ~ value + capital 
+normal = 15.47, p-value < 2.2e-16
+alternative hypothesis: significant effects 
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 63: plm-phtest
+R> ###################################################
+R> phtest(gr_re, gr_fe)
+
+	Hausman Test
+
+data:  invest ~ value + capital 
+chisq = 0.0404, df = 2, p-value = 0.98
+alternative hypothesis: one model is inconsistent 
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 64: EmplUK-data
+R> ###################################################
+R> data("EmplUK", package = "plm")
+R> form <- log(emp) ~ log(wage) + log(capital) + log(output)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 65: plm-AB
+R> ###################################################
+R> empl_ab <- pgmm(dynformula(form, list(2, 1, 0, 1)),
++    data = EmplUK, index = c("firm", "year"),
++    effect = "twoways", model = "twosteps",
++    gmm.inst = ~ log(emp), lag.gmm = list(c(2, 99)))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 66: plm-AB-summary
+R> ###################################################
+R> summary(empl_ab)     
+Twoways effects Two steps model
+
+Call:
+pgmm(formula = log(emp) ~ lag(log(emp), 1) + lag(log(emp), 2) + 
+    log(wage) + lag(log(wage), 1) + log(capital) + log(output) + 
+    lag(log(output), 1), data = EmplUK, effect = "twoways", model = "twosteps", 
+    gmm.inst = ~log(emp), lag.gmm = list(c(2, 99)), index = c("firm", 
+        "year"))
+
+Unbalanced Panel: n=140, T=7-9, N=1031
+
+Number of Observations Used:  611 
+
+Residuals
+     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+-0.619000 -0.049500 -0.000457 -0.000184  0.053400  0.641000 
+
+Coefficients
+                    Estimate Std. Error z-value Pr(>|z|)
+lag(log(emp), 1)      0.4742     0.0853    5.56  2.7e-08
+lag(log(emp), 2)     -0.0530     0.0273   -1.94  0.05222
+log(wage)            -0.5132     0.0493  -10.40  < 2e-16
+lag(log(wage), 1)     0.2246     0.0801    2.81  0.00502
+log(capital)          0.2927     0.0395    7.42  1.2e-13
+log(output)           0.6098     0.1085    5.62  1.9e-08
+lag(log(output), 1)  -0.4464     0.1248   -3.58  0.00035
+
+Sargan Test: chisq(25) = 30.11 (p.value=0.22)
+Autocorrelation test (1): normal = -2.428 (p.value=0.0076)
+Autocorrelation test (2): normal = -0.3325 (p.value=0.37)
+Wald test for coefficients: chisq(7) = 372 (p.value=<2e-16)
+Wald test for time dummies: chisq(6) = 26.90 (p.value=0.000151)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 67: systemfit
+R> ###################################################
+R> library("systemfit")
+Loading required package: Matrix
+
+Attaching package: 'Matrix'
+
+
+	The following object(s) are masked from package:stats :
+
+	 xtabs 
+
+R> gr2 <- subset(Grunfeld, firm %in% c("Chrysler", "IBM"))
+R> pgr2 <- plm.data(gr2, c("firm", "year"))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 68: SUR
+R> ###################################################
+R> gr_sur <- systemfit(invest ~ value + capital,
++    method = "SUR", data = pgr2)
+R> summary(gr_sur, residCov = FALSE, equations = FALSE)
+
+systemfit results 
+method: SUR 
+
+        N DF  SSR detRCov OLS-R2 McElroy-R2
+system 40 34 4114   11022  0.929      0.927
+
+          N DF  SSR   MSE  RMSE    R2 Adj R2
+Chrysler 20 17 3002 176.6 13.29 0.913  0.903
+IBM      20 17 1112  65.4  8.09 0.952  0.946
+
+
+Coefficients:
+                     Estimate Std. Error t value Pr(>|t|)
+Chrysler_(Intercept)  -5.7031    13.2774   -0.43  0.67293
+Chrysler_value         0.0780     0.0196    3.98  0.00096
+Chrysler_capital       0.3115     0.0287   10.85  4.6e-09
+IBM_(Intercept)       -8.0908     4.5216   -1.79  0.09139
+IBM_value              0.1272     0.0306    4.16  0.00066
+IBM_capital            0.0966     0.0983    0.98  0.33951
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 69: nlme eval=FALSE
+R> ###################################################
+R> ## library("nlme")
+R> ## g1 <- subset(Grunfeld, firm == "Westinghouse")
+R> ## gls(invest ~ value + capital, data = g1, correlation = corAR1())
+R> 
+R> 
+R> 

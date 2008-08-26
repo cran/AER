@@ -1,7 +1,7 @@
 \name{ivreg.fit}
 \alias{ivreg.fit}
 
-\title{Fitting Intrumental-Variable Regressions}
+\title{Fitting Instrumental-Variable Regressions}
 \description{
   Fit instrumental-variable regression by two-stage least squares. This
   is equivalent to direct instrumental-variables estimation when the number of

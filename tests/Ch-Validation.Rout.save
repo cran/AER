@@ -1,0 +1,599 @@
+
+R version 2.7.1 (2008-06-23)
+Copyright (C) 2008 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ###################################################
+> ### chunk number 1: setup
+> ###################################################
+> options(prompt = "R> ", continue = "+  ", width = 64,
++   digits = 4, show.signif.stars = FALSE, useFancyQuotes = FALSE)
+R> 
+R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
++                             twofig =   function() {par(mfrow = c(1,2))},                           
++                             threefig = function() {par(mfrow = c(1,3))},
++                             fourfig =  function() {par(mfrow = c(2,2))},
++                             sixfig =   function() {par(mfrow = c(3,2))}))
+R> 
+R> library("AER")
+Loading required package: car
+Loading required package: lmtest
+Loading required package: zoo
+Loading required package: sandwich
+Loading required package: strucchange
+Loading required package: survival
+Loading required package: splines
+R> 
+R> set.seed(1071)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 2: ps-summary
+R> ###################################################
+R> data("PublicSchools")
+R> summary(PublicSchools)
+  Expenditure      Income     
+ Min.   :259   Min.   : 5736  
+ 1st Qu.:315   1st Qu.: 6670  
+ Median :354   Median : 7597  
+ Mean   :373   Mean   : 7608  
+ 3rd Qu.:426   3rd Qu.: 8286  
+ Max.   :821   Max.   :10851  
+ NA's   :  1                  
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 3: ps-plot eval=FALSE
+R> ###################################################
+R> ## ps <- na.omit(PublicSchools)
+R> ## ps$Income <- ps$Income / 10000
+R> ## plot(Expenditure ~ Income, data = ps, ylim = c(230, 830))
+R> ## ps_lm <- lm(Expenditure ~ Income, data = ps)
+R> ## abline(ps_lm)
+R> ## id <- c(2, 24, 48)
+R> ## text(ps[id, 2:1], rownames(ps)[id], pos = 1, xpd = TRUE)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 4: ps-plot1
+R> ###################################################
+R> ps <- na.omit(PublicSchools)
+R> ps$Income <- ps$Income / 10000
+R> plot(Expenditure ~ Income, data = ps, ylim = c(230, 830))
+R> ps_lm <- lm(Expenditure ~ Income, data = ps)
+R> abline(ps_lm)
+R> id <- c(2, 24, 48)
+R> text(ps[id, 2:1], rownames(ps)[id], pos = 1, xpd = TRUE)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 5: ps-lmplot eval=FALSE
+R> ###################################################
+R> ## plot(ps_lm, which = 1:6)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 6: ps-lmplot1
+R> ###################################################
+R> plot(ps_lm, which = 1:6)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 7: ps-hatvalues eval=FALSE
+R> ###################################################
+R> ## ps_hat <- hatvalues(ps_lm)
+R> ## plot(ps_hat)
+R> ## abline(h = c(1, 3) * mean(ps_hat), col = 2)
+R> ## id <- which(ps_hat > 3 * mean(ps_hat))
+R> ## text(id, ps_hat[id], rownames(ps)[id], pos = 1, xpd = TRUE)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 8: ps-hatvalues1
+R> ###################################################
+R> ps_hat <- hatvalues(ps_lm)
+R> plot(ps_hat)
+R> abline(h = c(1, 3) * mean(ps_hat), col = 2)
+R> id <- which(ps_hat > 3 * mean(ps_hat))
+R> text(id, ps_hat[id], rownames(ps)[id], pos = 1, xpd = TRUE)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 9: influence-measures1 eval=FALSE
+R> ###################################################
+R> ## influence.measures(ps_lm)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 10: which-hatvalues
+R> ###################################################
+R> which(ps_hat > 3 * mean(ps_hat))
+       Alaska Washington DC 
+            2            48 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 11: influence-measures2
+R> ###################################################
+R> summary(influence.measures(ps_lm))
+Potentially influential observations of
+	 lm(formula = Expenditure ~ Income, data = ps) :
+
+              dfb.1_  dfb.Incm dffit   cov.r   cook.d  hat    
+Alaska        -2.39_*  2.52_*   2.65_*  0.55_*  2.31_*  0.21_*
+Mississippi    0.07   -0.07     0.08    1.14_*  0.00    0.08  
+Washington DC  0.66   -0.71    -0.77_*  1.01    0.28    0.13_*
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 12: ps-noinf eval=FALSE
+R> ###################################################
+R> ## plot(Expenditure ~ Income, data = ps, ylim = c(230, 830))
+R> ## abline(ps_lm)
+R> ## id <- which(apply(influence.measures(ps_lm)$is.inf, 1, any))
+R> ## text(ps[id, 2:1], rownames(ps)[id], pos = 1, xpd = TRUE)
+R> ## ps_noinf <- lm(Expenditure ~ Income, data = ps[-id,])
+R> ## abline(ps_noinf, lty = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 13: ps-noinf1
+R> ###################################################
+R> plot(Expenditure ~ Income, data = ps, ylim = c(230, 830))
+R> abline(ps_lm)
+R> id <- which(apply(influence.measures(ps_lm)$is.inf, 1, any))
+R> text(ps[id, 2:1], rownames(ps)[id], pos = 1, xpd = TRUE)
+R> ps_noinf <- lm(Expenditure ~ Income, data = ps[-id,])
+R> abline(ps_noinf, lty = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 14: journals-age
+R> ###################################################
+R> data("Journals")
+R> journals <- Journals[, c("subs", "price")]
+R> journals$citeprice <- Journals$price/Journals$citations
+R> journals$age <- 2000 - Journals$foundingyear
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 15: journals-lm
+R> ###################################################
+R> jour_lm <- lm(log(subs) ~ log(citeprice), data = journals)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 16: bptest1
+R> ###################################################
+R> bptest(jour_lm)
+
+	studentized Breusch-Pagan test
+
+data:  jour_lm 
+BP = 9.803, df = 1, p-value = 0.001742
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 17: bptest2
+R> ###################################################
+R> bptest(jour_lm, ~ log(citeprice) + I(log(citeprice)^2),
++    data = journals)
+
+	studentized Breusch-Pagan test
+
+data:  jour_lm 
+BP = 10.91, df = 2, p-value = 0.004271
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 18: gqtest
+R> ###################################################
+R> gqtest(jour_lm, order.by = ~ citeprice, data = journals)
+
+	Goldfeld-Quandt test
+
+data:  jour_lm 
+GQ = 1.703, df1 = 88, df2 = 88, p-value = 0.00665
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 19: resettest
+R> ###################################################
+R> resettest(jour_lm)
+
+	RESET test
+
+data:  jour_lm 
+RESET = 1.441, df1 = 2, df2 = 176, p-value = 0.2395
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 20: raintest
+R> ###################################################
+R> raintest(jour_lm, order.by = ~ age, data = journals)
+
+	Rainbow test
+
+data:  jour_lm 
+Rain = 1.774, df1 = 90, df2 = 88, p-value = 0.003741
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 21: harvtest
+R> ###################################################
+R> harvtest(jour_lm, order.by = ~ age, data = journals)
+
+	Harvey-Collier test
+
+data:  jour_lm 
+HC = 5.081, df = 177, p-value = 9.464e-07
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 22: 
+R> ###################################################
+R> library("dynlm")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 23: usmacro-dynlm
+R> ###################################################
+R> data("USMacroG")
+R> consump1 <- dynlm(consumption ~ dpi + L(dpi),
++    data = USMacroG)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 24: dwtest
+R> ###################################################
+R> dwtest(consump1)
+
+	Durbin-Watson test
+
+data:  consump1 
+DW = 0.0866, p-value < 2.2e-16
+alternative hypothesis: true autocorrelation is greater than 0 
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 25: Box-test
+R> ###################################################
+R> Box.test(residuals(consump1), type = "Ljung-Box")
+
+	Box-Ljung test
+
+data:  residuals(consump1) 
+X-squared = 176.1, df = 1, p-value < 2.2e-16
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 26: bgtest
+R> ###################################################
+R> bgtest(consump1)
+
+	Breusch-Godfrey test for serial correlation of order 1
+
+data:  consump1 
+LM test = 193.0, df = 1, p-value < 2.2e-16
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 27: vcov
+R> ###################################################
+R> vcov(jour_lm)
+               (Intercept) log(citeprice)
+(Intercept)      3.126e-03     -6.144e-05
+log(citeprice)  -6.144e-05      1.268e-03
+R> vcovHC(jour_lm)
+               (Intercept) log(citeprice)
+(Intercept)       0.003085       0.000693
+log(citeprice)    0.000693       0.001188
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 28: coeftest
+R> ###################################################
+R> coeftest(jour_lm, vcov = vcovHC)
+
+t test of coefficients:
+
+               Estimate Std. Error t value Pr(>|t|)
+(Intercept)      4.7662     0.0555    85.8   <2e-16
+log(citeprice)  -0.5331     0.0345   -15.5   <2e-16
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 29: sandwiches
+R> ###################################################
+R> t(sapply(c("const", "HC0", "HC1", "HC2", "HC3", "HC4"),
++    function(x) sqrt(diag(vcovHC(jour_lm, type = x)))))
+      (Intercept) log(citeprice)
+const     0.05591        0.03561
+HC0       0.05495        0.03377
+HC1       0.05526        0.03396
+HC2       0.05525        0.03412
+HC3       0.05555        0.03447
+HC4       0.05536        0.03459
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 30: ps-anova
+R> ###################################################
+R> ps_lm <- lm(Expenditure ~ Income, data = ps)
+R> ps_lm2 <- lm(Expenditure ~ Income + I(Income^2), data = ps)
+R> anova(ps_lm, ps_lm2)
+Analysis of Variance Table
+
+Model 1: Expenditure ~ Income
+Model 2: Expenditure ~ Income + I(Income^2)
+  Res.Df    RSS Df Sum of Sq    F Pr(>F)
+1     48 181015                         
+2     47 150986  1     30030 9.35 0.0037
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 31: ps-waldtest
+R> ###################################################
+R> waldtest(ps_lm, ps_lm2, vcov = vcovHC(ps_lm2, type = "HC4"))
+Wald test
+
+Model 1: Expenditure ~ Income
+Model 2: Expenditure ~ Income + I(Income^2)
+  Res.Df Df    F Pr(>F)
+1     48               
+2     47  1 0.08   0.77
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 32: vcovHAC
+R> ###################################################
+R> rbind(SE = sqrt(diag(vcov(consump1))),
++    QS = sqrt(diag(kernHAC(consump1))),
++    NW = sqrt(diag(NeweyWest(consump1))))
+   (Intercept)    dpi L(dpi)
+SE       14.51 0.2063 0.2075
+QS       94.11 0.3893 0.3669
+NW      100.83 0.4230 0.3989
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 33: solow-lm
+R> ###################################################
+R> data("OECDGrowth")
+R> solow_lm <- lm(log(gdp85/gdp60) ~ log(gdp60) +
++    log(invest) + log(popgrowth + .05), data = OECDGrowth)
+R> summary(solow_lm)
+
+Call:
+lm(formula = log(gdp85/gdp60) ~ log(gdp60) + log(invest) + log(popgrowth + 
+    0.05), data = OECDGrowth)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.18400 -0.03989 -0.00785  0.04506  0.31879 
+
+Coefficients:
+                      Estimate Std. Error t value Pr(>|t|)
+(Intercept)             2.9759     1.0216    2.91   0.0093
+log(gdp60)             -0.3429     0.0565   -6.07  9.8e-06
+log(invest)             0.6501     0.2020    3.22   0.0048
+log(popgrowth + 0.05)  -0.5730     0.2904   -1.97   0.0640
+
+Residual standard error: 0.133 on 18 degrees of freedom
+Multiple R-squared: 0.746,	Adjusted R-squared: 0.704 
+F-statistic: 17.7 on 3 and 18 DF,  p-value: 1.34e-05 
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 34: solow-plot eval=FALSE
+R> ###################################################
+R> ## plot(solow_lm)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 35: solow-lts
+R> ###################################################
+R> library("MASS")
+R> solow_lts <- lqs(log(gdp85/gdp60) ~ log(gdp60) +
++    log(invest) + log(popgrowth + .05), data = OECDGrowth,
++    psamp = 13, nsamp = "exact")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 36: solow-smallresid
+R> ###################################################
+R> smallresid <- which(
++    abs(residuals(solow_lts)/solow_lts$scale[2]) <= 2.5)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 37: solow-nohighlev
+R> ###################################################
+R> X <- model.matrix(solow_lm)[,-1]
+R> Xcv <- cov.rob(X, nsamp = "exact")
+R> nohighlev <- which(
++    sqrt(mahalanobis(X, Xcv$center, Xcv$cov)) <= 2.5)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 38: solow-goodobs
+R> ###################################################
+R> goodobs <- unique(c(smallresid, nohighlev))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 39: solow-badobs
+R> ###################################################
+R> rownames(OECDGrowth)[-goodobs]
+[1] "Canada"    "USA"       "Turkey"    "Australia"
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 40: solow-rob
+R> ###################################################
+R> solow_rob <- update(solow_lm, subset = goodobs)
+R> summary(solow_rob)
+
+Call:
+lm(formula = log(gdp85/gdp60) ~ log(gdp60) + log(invest) + log(popgrowth + 
+    0.05), data = OECDGrowth, subset = goodobs)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.1545 -0.0555 -0.0065  0.0316  0.2677 
+
+Coefficients:
+                      Estimate Std. Error t value Pr(>|t|)
+(Intercept)             3.7764     1.2816    2.95   0.0106
+log(gdp60)             -0.4507     0.0569   -7.93  1.5e-06
+log(invest)             0.7033     0.1906    3.69   0.0024
+log(popgrowth + 0.05)  -0.6504     0.4190   -1.55   0.1429
+
+Residual standard error: 0.107 on 14 degrees of freedom
+Multiple R-squared: 0.853,	Adjusted R-squared: 0.822 
+F-statistic: 27.1 on 3 and 14 DF,  p-value: 4.3e-06 
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 41: quantreg
+R> ###################################################
+R> library("quantreg")
+Loading required package: SparseM
+Package SparseM (0.78) loaded.  To cite, see citation("SparseM")
+
+Attaching package: 'quantreg'
+
+
+	The following object(s) are masked from package:survival :
+
+	 untangle.specials 
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 42: cps-lad
+R> ###################################################
+R> library("quantreg")
+R> data("CPS1988")
+R> cps_f <- log(wage) ~ experience + I(experience^2) + education
+R> cps_lad <- rq(cps_f, data = CPS1988)
+R> summary(cps_lad)
+
+Call: rq(formula = cps_f, data = CPS1988)
+
+tau: [1] 0.5
+
+Coefficients:
+                Value     Std. Error t value   Pr(>|t|) 
+(Intercept)       4.24088   0.02190  193.67801   0.00000
+experience        0.07744   0.00115   67.50040   0.00000
+I(experience^2)  -0.00130   0.00003  -49.97890   0.00000
+education         0.09429   0.00140   67.57170   0.00000
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 43: cps-rq
+R> ###################################################
+R> cps_rq <- rq(cps_f, tau = c(0.25, 0.75), data = CPS1988)
+R> summary(cps_rq)
+
+Call: rq(formula = cps_f, tau = c(0.25, 0.75), data = CPS1988)
+
+tau: [1] 0.25
+
+Coefficients:
+                Value     Std. Error t value   Pr(>|t|) 
+(Intercept)       3.78227   0.02866  131.95187   0.00000
+experience        0.09156   0.00152   60.26473   0.00000
+I(experience^2)  -0.00164   0.00004  -45.39064   0.00000
+education         0.09321   0.00185   50.32519   0.00000
+
+Call: rq(formula = cps_f, tau = c(0.25, 0.75), data = CPS1988)
+
+tau: [1] 0.75
+
+Coefficients:
+                Value     Std. Error t value   Pr(>|t|) 
+(Intercept)       4.66005   0.02023  230.39729   0.00000
+experience        0.06377   0.00097   65.41363   0.00000
+I(experience^2)  -0.00099   0.00002  -44.15591   0.00000
+education         0.09434   0.00134   70.65853   0.00000
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 44: cps-rqs
+R> ###################################################
+R> cps_rq25 <- rq(cps_f, tau = 0.25, data = CPS1988)
+R> cps_rq75 <- rq(cps_f, tau = 0.75, data = CPS1988)
+R> anova(cps_rq25, cps_rq75)
+Quantile Regression Analysis of Variance Table
+
+Model: log(wage) ~ experience + I(experience^2) + education
+Joint Test of Equality of Slopes: tau in {  0.25 0.75  }
+
+     Df Resid Df F value Pr(>F)
+1     3    56307     115 <2e-16
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 45: cps-rq-anova
+R> ###################################################
+R> anova(cps_rq25, cps_rq75, joint = FALSE)
+Quantile Regression Analysis of Variance Table
+
+Model: log(wage) ~ experience + I(experience^2) + education
+Tests of Equality of Distinct Slopes: tau in {  0.25 0.75  }
+
+                   Df Resid Df F value Pr(>F)
+experience          1    56309  339.41 <2e-16
+I(experience^2)     1    56309  329.74 <2e-16
+education           1    56309    0.35   0.55
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 46: rqbig
+R> ###################################################
+R> cps_rqbig <- rq(cps_f, tau = seq(0.05, 0.95, by = 0.05),
++    data = CPS1988)
+R> cps_rqbigs <- summary(cps_rqbig)
+Warning message:
+In summary.rq(xi, ...) : 18 non-positive fis
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 47: rqbig-plot eval=FALSE
+R> ###################################################
+R> ## plot(cps_rqbigs)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 48: rqbig-plot1
+R> ###################################################
+R> plot(cps_rqbigs)
+R> 
+R> 
+R> 

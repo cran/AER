@@ -3,7 +3,7 @@
 \title{US Consumption Data (1940--1950)}
 
 \description{
-Time-series data on US income and consumption expenditure, 1940--1950.
+Time series data on US income and consumption expenditure, 1940--1950.
 }
 
 \usage{data("USConsump1950")}

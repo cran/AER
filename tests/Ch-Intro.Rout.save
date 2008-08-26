@@ -1,0 +1,288 @@
+
+R version 2.7.1 (2008-06-23)
+Copyright (C) 2008 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ###################################################
+> ### chunk number 1: setup
+> ###################################################
+> options(prompt = "R> ", continue = "+  ", width = 64,
++   digits = 4, show.signif.stars = FALSE, useFancyQuotes = FALSE)
+R> 
+R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
++                             twofig =   function() {par(mfrow = c(1,2))},                           
++                             threefig = function() {par(mfrow = c(1,3))},
++                             fourfig =  function() {par(mfrow = c(2,2))},
++                             sixfig =   function() {par(mfrow = c(3,2))}))
+R> 
+R> library("AER")
+Loading required package: car
+Loading required package: lmtest
+Loading required package: zoo
+Loading required package: sandwich
+Loading required package: strucchange
+Loading required package: survival
+Loading required package: splines
+R> 
+R> set.seed(1071)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 2: journals-data
+R> ###################################################
+R> data("Journals", package = "AER")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 3: journals-dim
+R> ###################################################
+R> dim(Journals)
+[1] 180  10
+R> names(Journals)
+ [1] "title"        "publisher"    "society"      "price"       
+ [5] "pages"        "charpp"       "citations"    "foundingyear"
+ [9] "subs"         "field"       
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 4: journals-plot eval=FALSE
+R> ###################################################
+R> ## plot(log(subs) ~ log(price/citations), data = Journals)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 5: journals-lm eval=FALSE
+R> ###################################################
+R> ## j_lm <- lm(log(subs) ~ log(price/citations), data = Journals)
+R> ## abline(j_lm)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 6: journals-lmplot
+R> ###################################################
+R> plot(log(subs) ~ log(price/citations), data = Journals)
+R> j_lm <- lm(log(subs) ~ log(price/citations), data = Journals)
+R> abline(j_lm)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 7: journals-lm-summary
+R> ###################################################
+R> summary(j_lm)
+
+Call:
+lm(formula = log(subs) ~ log(price/citations), data = Journals)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-2.7248 -0.5361  0.0372  0.4662  1.8481 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(>|t|)
+(Intercept)            4.7662     0.0559    85.2   <2e-16
+log(price/citations)  -0.5331     0.0356   -15.0   <2e-16
+
+Residual standard error: 0.75 on 178 degrees of freedom
+Multiple R-squared: 0.557,	Adjusted R-squared: 0.555 
+F-statistic:  224 on 1 and 178 DF,  p-value: <2e-16 
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 8: cps-data
+R> ###################################################
+R> data("CPS1985", package = "AER")
+R> cps <- CPS1985
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 9: cps-data1 eval=FALSE
+R> ###################################################
+R> ## data("CPS1985", package = "AER")
+R> ## cps <- CPS1985
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 10: cps-reg
+R> ###################################################
+R> library("quantreg")
+Loading required package: SparseM
+Package SparseM (0.78) loaded.  To cite, see citation("SparseM")
+
+Attaching package: 'quantreg'
+
+
+	The following object(s) are masked from package:survival :
+
+	 untangle.specials 
+
+R> cps_lm <- lm(log(wage) ~ experience + I(experience^2) +
++    education, data = cps)
+R> cps_rq <- rq(log(wage) ~ experience + I(experience^2) +
++    education, data = cps, tau = seq(0.2, 0.8, by = 0.15))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 11: cps-predict
+R> ###################################################
+R> cps2 <- data.frame(education = mean(cps$education),
++    experience = min(cps$experience):max(cps$experience))
+R> cps2 <- cbind(cps2, predict(cps_lm, newdata = cps2,
++    interval = "prediction"))
+R> cps2 <- cbind(cps2,
++    predict(cps_rq, newdata = cps2, type = ""))  
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 12: rq-plot eval=FALSE
+R> ###################################################
+R> ## plot(log(wage) ~ experience, data = cps)
+R> ## for(i in 6:10) lines(cps2[,i] ~ experience,
+R> ##   data = cps2, col = "red")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 13: rq-plot1
+R> ###################################################
+R> plot(log(wage) ~ experience, data = cps)
+R> for(i in 6:10) lines(cps2[,i] ~ experience,
++    data = cps2, col = "red")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 14: srq-plot eval=FALSE
+R> ###################################################
+R> ## plot(summary(cps_rq))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 15: srq-plot1
+R> ###################################################
+R> plot(summary(cps_rq))
+Warning message:
+In rq.fit.br(x, y, tau = tau, ci = TRUE, ...) : Solution may be nonunique
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 16: bkde-fit
+R> ###################################################
+R> library("KernSmooth")
+KernSmooth 2.22 installed
+Copyright M. P. Wand 1997
+R> cps_bkde <- bkde2D(cbind(cps$experience, log(cps$wage)),
++    bandwidth = c(3.5, 0.5), gridsize = c(200, 200))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 17: bkde-plot eval=FALSE
+R> ###################################################
+R> ## image(cps_bkde$x1, cps_bkde$x2, cps_bkde$fhat, 
+R> ##   col = rev(gray.colors(10, gamma = 1)),
+R> ##   xlab = "experience", ylab = "log(wage)")
+R> ## box()
+R> ## lines(fit ~ experience, data = cps2)
+R> ## lines(lwr ~ experience, data = cps2, lty = 2)
+R> ## lines(upr ~ experience, data = cps2, lty = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 18: bkde-plot1
+R> ###################################################
+R> image(cps_bkde$x1, cps_bkde$x2, cps_bkde$fhat, 
++    col = rev(gray.colors(10, gamma = 1)),
++    xlab = "experience", ylab = "log(wage)")
+R> box()
+R> lines(fit ~ experience, data = cps2)
+R> lines(lwr ~ experience, data = cps2, lty = 2)
+R> lines(upr ~ experience, data = cps2, lty = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 19: install eval=FALSE
+R> ###################################################
+R> ## install.packages("AER")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 20: library
+R> ###################################################
+R> library("AER")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 21: objects
+R> ###################################################
+R> objects()
+[1] "CPS1985"  "Journals" "cps"      "cps2"     "cps_bkde"
+[6] "cps_lm"   "cps_rq"   "i"        "j_lm"    
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 22: search
+R> ###################################################
+R> search()
+ [1] ".GlobalEnv"          "package:KernSmooth" 
+ [3] "package:quantreg"    "package:SparseM"    
+ [5] "package:AER"         "package:survival"   
+ [7] "package:splines"     "package:strucchange"
+ [9] "package:sandwich"    "package:lmtest"     
+[11] "package:zoo"         "package:car"        
+[13] "package:stats"       "package:graphics"   
+[15] "package:grDevices"   "package:utils"      
+[17] "package:datasets"    "package:methods"    
+[19] "Autoloads"           "package:base"       
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 23: assignment
+R> ###################################################
+R> x <- 2
+R> objects()
+ [1] "CPS1985"  "Journals" "cps"      "cps2"     "cps_bkde"
+ [6] "cps_lm"   "cps_rq"   "i"        "j_lm"     "x"       
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 24: remove
+R> ###################################################
+R> remove(x)
+R> objects()
+[1] "CPS1985"  "Journals" "cps"      "cps2"     "cps_bkde"
+[6] "cps_lm"   "cps_rq"   "i"        "j_lm"    
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 25: log eval=FALSE
+R> ###################################################
+R> ## log(16, 2)
+R> ## log(x = 16, 2)
+R> ## log(16, base = 2)
+R> ## log(base = 2, x = 16)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 26: q eval=FALSE
+R> ###################################################
+R> ## q()
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 27: apropos
+R> ###################################################
+R> apropos("help")
+[1] "help"        "help.search" "help.start" 
+R> 
+R> 
+R> 

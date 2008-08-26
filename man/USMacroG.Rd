@@ -3,7 +3,7 @@
 \title{US Macroeconomic Data (1950--2000, Greene)}
 
 \description{
-Time-series data on 12 US macroeconomic variables for 1950--2000.
+Time series data on 12 US macroeconomic variables for 1950--2000.
 }
 
 \usage{data("USMacroG")}

@@ -4,7 +4,7 @@
 \title{Monthly US Macroeconomic Data (1947--2004, Stock \& Watson)}
 
 \description{
-Time-series data on 4 US macroeconomic variables for 1947--2004.
+Time series data on 4 US macroeconomic variables for 1947--2004.
 }
 \usage{data("USMacroSWM")}
 

@@ -1,0 +1,631 @@
+
+R version 2.7.1 (2008-06-23)
+Copyright (C) 2008 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ###################################################
+> ### chunk number 1: setup
+> ###################################################
+> options(prompt = "R> ", continue = "+  ", width = 64,
++   digits = 4, show.signif.stars = FALSE, useFancyQuotes = FALSE)
+R> 
+R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
++                             twofig =   function() {par(mfrow = c(1,2))},                           
++                             threefig = function() {par(mfrow = c(1,3))},
++                             fourfig =  function() {par(mfrow = c(2,2))},
++                             sixfig =   function() {par(mfrow = c(3,2))}))
+R> 
+R> library("AER")
+Loading required package: car
+Loading required package: lmtest
+Loading required package: zoo
+Loading required package: sandwich
+Loading required package: strucchange
+Loading required package: survival
+Loading required package: splines
+R> 
+R> set.seed(1071)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 2: options
+R> ###################################################
+R> options(digits = 6)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 3: ts-plot eval=FALSE
+R> ###################################################
+R> ## data("UKNonDurables")
+R> ## plot(UKNonDurables)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 4: UKNonDurables-data
+R> ###################################################
+R> data("UKNonDurables")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 5: tsp
+R> ###################################################
+R> tsp(UKNonDurables)
+[1] 1955.00 1988.75    4.00
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 6: window
+R> ###################################################
+R> window(UKNonDurables, end = c(1956, 4))
+      Qtr1  Qtr2  Qtr3  Qtr4
+1955 24030 25620 26209 27167
+1956 24620 25972 26285 27659
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 7: filter eval=FALSE
+R> ###################################################
+R> ## data("UKDriverDeaths")
+R> ## plot(UKDriverDeaths)
+R> ## lines(filter(UKDriverDeaths, c(1/2, rep(1, 11), 1/2)/12),
+R> ##   col = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 8: ts-plot1
+R> ###################################################
+R> data("UKNonDurables")
+R> plot(UKNonDurables)
+R> data("UKDriverDeaths")
+R> plot(UKDriverDeaths)
+R> lines(filter(UKDriverDeaths, c(1/2, rep(1, 11), 1/2)/12),
++    col = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 9: filter1 eval=FALSE
+R> ###################################################
+R> ## data("UKDriverDeaths")
+R> ## plot(UKDriverDeaths)
+R> ## lines(filter(UKDriverDeaths, c(1/2, rep(1, 11), 1/2)/12),
+R> ##   col = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 10: rollapply
+R> ###################################################
+R> plot(rollapply(UKDriverDeaths, 12, sd))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 11: ar-sim
+R> ###################################################
+R> set.seed(1234)
+R> x <- filter(rnorm(100), 0.9, method = "recursive")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 12: decompose
+R> ###################################################
+R> dd_dec <- decompose(log(UKDriverDeaths))
+R> dd_stl <- stl(log(UKDriverDeaths), s.window = 13)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 13: decompose-components
+R> ###################################################
+R> plot(dd_dec$trend, ylab = "trend")
+R> lines(dd_stl$time.series[,"trend"], lty = 2, lwd = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 14: seat-mean-sd
+R> ###################################################
+R> plot(dd_dec$trend, ylab = "trend")
+R> lines(dd_stl$time.series[,"trend"], lty = 2, lwd = 2)
+R> plot(rollapply(UKDriverDeaths, 12, sd))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 15: stl
+R> ###################################################
+R> plot(dd_stl)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 16: Holt-Winters
+R> ###################################################
+R> dd_past <- window(UKDriverDeaths, end = c(1982, 12))
+R> dd_hw <- HoltWinters(dd_past)
+R> dd_pred <- predict(dd_hw, n.ahead = 24)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 17: Holt-Winters-plot
+R> ###################################################
+R> plot(dd_hw, dd_pred, ylim = range(UKDriverDeaths))
+R> lines(UKDriverDeaths)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 18: Holt-Winters-plot1
+R> ###################################################
+R> plot(dd_hw, dd_pred, ylim = range(UKDriverDeaths))
+R> lines(UKDriverDeaths)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 19: acf eval=FALSE
+R> ###################################################
+R> ## acf(x)
+R> ## pacf(x)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 20: acf1
+R> ###################################################
+R> acf(x, ylim = c(-0.2, 1))
+R> pacf(x, ylim = c(-0.2, 1))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 21: ar
+R> ###################################################
+R> ar(x)
+
+Call:
+ar(x = x)
+
+Coefficients:
+    1  
+0.928  
+
+Order selected 1  sigma^2 estimated as  1.29 
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 22: window-non-durab
+R> ###################################################
+R> nd <- window(log(UKNonDurables), end = c(1970, 4))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 23: non-durab-acf
+R> ###################################################
+R> acf(diff(nd), ylim = c(-1, 1))
+R> pacf(diff(nd), ylim = c(-1, 1))
+R> acf(diff(diff(nd, 4)), ylim = c(-1, 1))
+R> pacf(diff(diff(nd, 4)), ylim = c(-1, 1))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 24: non-durab-acf1
+R> ###################################################
+R> acf(diff(nd), ylim = c(-1, 1))
+R> pacf(diff(nd), ylim = c(-1, 1))
+R> acf(diff(diff(nd, 4)), ylim = c(-1, 1))
+R> pacf(diff(diff(nd, 4)), ylim = c(-1, 1))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 25: arima-setup
+R> ###################################################
+R> nd_pars <- expand.grid(ar = 0:2, diff = 1, ma = 0:2,
++    sar = 0:1, sdiff = 1, sma = 0:1)
+R> nd_aic <- rep(0, nrow(nd_pars))
+R> for(i in seq(along = nd_aic)) nd_aic[i] <- AIC(arima(nd,
++    unlist(nd_pars[i, 1:3]), unlist(nd_pars[i, 4:6])),
++    k = log(length(nd)))
+R> nd_pars[which.min(nd_aic),]
+   ar diff ma sar sdiff sma
+22  0    1  1   0     1   1
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 26: arima
+R> ###################################################
+R> nd_arima <- arima(nd, order = c(0,1,1), seasonal = c(0,1,1))
+R> nd_arima
+
+Call:
+arima(x = nd, order = c(0, 1, 1), seasonal = c(0, 1, 1))
+
+Coefficients:
+         ma1    sma1
+      -0.353  -0.583
+s.e.   0.143   0.138
+
+sigma^2 estimated as 9.65e-05:  log likelihood = 188.14,  aic = -370.27
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 27: tsdiag
+R> ###################################################
+R> tsdiag(nd_arima)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 28: tsdiag1
+R> ###################################################
+R> tsdiag(nd_arima)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 29: arima-predict
+R> ###################################################
+R> nd_pred <- predict(nd_arima, n.ahead = 18 * 4)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 30: arima-compare
+R> ###################################################
+R> plot(log(UKNonDurables))
+R> lines(nd_pred$pred, col = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 31: arima-compare1
+R> ###################################################
+R> plot(log(UKNonDurables))
+R> lines(nd_pred$pred, col = 2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 32: pepper
+R> ###################################################
+R> data("PepperPrice")
+R> plot(PepperPrice, plot.type = "single", col = 1:2)
+R> legend("topleft", c("black", "white"), bty = "n", 
++  col = 1:2, lty = rep(1,2))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 33: pepper1
+R> ###################################################
+R> data("PepperPrice")
+R> plot(PepperPrice, plot.type = "single", col = 1:2)
+R> legend("topleft", c("black", "white"), bty = "n", 
++  col = 1:2, lty = rep(1,2))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 34: adf1
+R> ###################################################
+R> library("tseries")
+Loading required package: quadprog
+R> adf.test(log(PepperPrice[, "white"]))
+
+	Augmented Dickey-Fuller Test
+
+data:  log(PepperPrice[, "white"]) 
+Dickey-Fuller = -1.744, Lag order = 6, p-value = 0.6838
+alternative hypothesis: stationary 
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 35: adf1
+R> ###################################################
+R> adf.test(diff(log(PepperPrice[, "white"])))
+
+	Augmented Dickey-Fuller Test
+
+data:  diff(log(PepperPrice[, "white"])) 
+Dickey-Fuller = -5.336, Lag order = 6, p-value = 0.01
+alternative hypothesis: stationary 
+
+Warning message:
+In adf.test(diff(log(PepperPrice[, "white"]))) :
+  p-value smaller than printed p-value
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 36: pp
+R> ###################################################
+R> pp.test(log(PepperPrice[, "white"]), type = "Z(t_alpha)")
+
+	Phillips-Perron Unit Root Test
+
+data:  log(PepperPrice[, "white"]) 
+Dickey-Fuller Z(t_alpha) = -1.6439, Truncation lag
+parameter = 5, p-value = 0.726
+alternative hypothesis: stationary 
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 37: urca eval=FALSE
+R> ###################################################
+R> ## library("urca")
+R> ## pepper_ers <- ur.ers(log(PepperPrice[, "white"]),
+R> ##   type = "DF-GLS", model = "const", lag.max = 4)
+R> ## summary(pepper_ers)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 38: kpss
+R> ###################################################
+R> kpss.test(log(PepperPrice[, "white"]))
+
+	KPSS Test for Level Stationarity
+
+data:  log(PepperPrice[, "white"]) 
+KPSS Level = 0.9129, Truncation lag parameter = 3,
+p-value = 0.01
+
+Warning message:
+In kpss.test(log(PepperPrice[, "white"])) :
+  p-value smaller than printed p-value
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 39: po
+R> ###################################################
+R> po.test(log(PepperPrice))
+
+	Phillips-Ouliaris Cointegration Test
+
+data:  log(PepperPrice) 
+Phillips-Ouliaris demeaned = -24.0987, Truncation lag
+parameter = 2, p-value = 0.02404
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 40: joh-trace
+R> ###################################################
+R> library("urca")
+R> pepper_jo <- ca.jo(log(PepperPrice), ecdet = "const",
++    type = "trace")
+R> summary(pepper_jo)
+
+###################### 
+# Johansen-Procedure # 
+###################### 
+
+Test type: trace statistic , without linear trend and constant in cointegration 
+
+Eigenvalues (lambda):
+[1] 4.93195e-02 1.35081e-02 2.08167e-17
+
+Values of teststatistic and critical values of test:
+
+          test 10pct  5pct  1pct
+r <= 1 |  3.66  7.52  9.24 12.97
+r = 0  | 17.26 17.85 19.96 24.60
+
+Eigenvectors, normalised to first column:
+(These are the cointegration relations)
+
+          black.l2 white.l2  constant
+black.l2  1.000000  1.00000   1.00000
+white.l2 -0.889231 -5.09942   2.28091
+constant -0.556994 33.02742 -20.03244
+
+Weights W:
+(This is the loading matrix)
+
+          black.l2   white.l2     constant
+black.d -0.0747230 0.00245321 -1.81566e-17
+white.d  0.0201561 0.00353701  5.60071e-18
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 41: joh-lmax eval=FALSE
+R> ###################################################
+R> ## pepper_jo2 <- ca.jo(log(PepperPrice), ecdet = "const", type = "eigen")
+R> ## summary(pepper_jo2)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 42: dynlm-by-hand
+R> ###################################################
+R> dd <- log(UKDriverDeaths)
+R> dd_dat <- ts.intersect(dd, dd1 = lag(dd, k = -1),
++    dd12 = lag(dd, k = -12))
+R> lm(dd ~ dd1 + dd12, data = dd_dat)
+
+Call:
+lm(formula = dd ~ dd1 + dd12, data = dd_dat)
+
+Coefficients:
+(Intercept)          dd1         dd12  
+      0.421        0.431        0.511  
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 43: dynlm
+R> ###################################################
+R> library("dynlm")
+R> dynlm(dd ~ L(dd) + L(dd, 12))
+
+Time series regression with "ts" data:
+Start = 1970(1), End = 1984(12)
+
+Call:
+dynlm(formula = dd ~ L(dd) + L(dd, 12))
+
+Coefficients:
+(Intercept)        L(dd)    L(dd, 12)  
+      0.421        0.431        0.511  
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 44: efp
+R> ###################################################
+R> dd_ocus <- efp(dd ~ dd1 + dd12, data = dd_dat,
++    type = "OLS-CUSUM")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 45: efp-test
+R> ###################################################
+R> sctest(dd_ocus)
+
+	OLS-based CUSUM test
+
+data:  dd_ocus 
+S0 = 1.4866, p-value = 0.02407
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 46: efp-plot eval=FALSE
+R> ###################################################
+R> ## plot(dd_ocus)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 47: Fstats
+R> ###################################################
+R> dd_fs <- Fstats(dd ~ dd1 + dd12, data = dd_dat, from = 0.1)
+R> plot(dd_fs)
+R> sctest(dd_fs)
+
+	supF test
+
+data:  dd_fs 
+sup.F = 19.3331, p-value = 0.006721
+
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 48: ocus-supF
+R> ###################################################
+R> plot(dd_ocus)
+R> plot(dd_fs, main = "supF test")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 49: GermanM1
+R> ###################################################
+R> data("GermanM1")
+R> LTW <- dm ~ dy2 + dR + dR1 + dp + m1 + y1 + R1 + season
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 50: re eval=FALSE
+R> ###################################################
+R> ## m1_re <- efp(LTW, data = GermanM1, type = "RE")
+R> ## plot(m1_re)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 51: re1
+R> ###################################################
+R> m1_re <- efp(LTW, data = GermanM1, type = "RE")
+R> plot(m1_re)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 52: dating
+R> ###################################################
+R> dd_bp <- breakpoints(dd ~ dd1 + dd12, data = dd_dat, h = 0.1)
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 53: dating-coef
+R> ###################################################
+R> coef(dd_bp, breaks = 2)
+                   (Intercept)      dd1     dd12
+1970(1) - 1973(10)     1.45776 0.117323 0.694480
+1973(11) - 1983(1)     1.53421 0.218214 0.572330
+1983(2) - 1984(12)     1.68690 0.548609 0.214166
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 54: dating-plot eval=FALSE
+R> ###################################################
+R> ## plot(dd)
+R> ## lines(fitted(dd_bp, breaks = 2), col = 4)
+R> ## lines(confint(dd_bp, breaks = 2))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 55: dating-plot1
+R> ###################################################
+R> plot(dd_bp, legend = FALSE, main = "")
+R> plot(dd)
+R> lines(fitted(dd_bp, breaks = 2), col = 4)
+R> lines(confint(dd_bp, breaks = 2))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 56: StructTS
+R> ###################################################
+R> dd_struct <- StructTS(log(UKDriverDeaths))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 57: StructTS-plot eval=FALSE
+R> ###################################################
+R> ## plot(cbind(fitted(dd_struct), residuals(dd_struct)))
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 58: StructTS-plot1
+R> ###################################################
+R> dd_struct_plot <- cbind(fitted(dd_struct), residuals = residuals(dd_struct))
+R> colnames(dd_struct_plot) <- c("level", "slope", "season", "residuals")
+R> plot(dd_struct_plot, main = "")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 59: garch-plot
+R> ###################################################
+R> data("MarkPound")
+R> plot(MarkPound, main = "")
+R> 
+R> 
+R> ###################################################
+R> ### chunk number 60: garch
+R> ###################################################
+R> mp <- garch(MarkPound, grad = "numerical", trace = FALSE)
+R> summary(mp)
+
+Call:
+garch(x = MarkPound, grad = "numerical", trace = FALSE)
+
+Model:
+GARCH(1,1)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-6.79739 -0.53703 -0.00264  0.55233  5.24867 
+
+Coefficient(s):
+    Estimate  Std. Error  t value Pr(>|t|)
+a0    0.0109      0.0013     8.38   <2e-16
+a1    0.1546      0.0139    11.14   <2e-16
+b1    0.8044      0.0160    50.13   <2e-16
+
+Diagnostic Tests:
+	Jarque Bera Test
+
+data:  Residuals 
+X-squared = 1060.01, df = 2, p-value < 2.2e-16
+
+
+	Box-Ljung test
+
+data:  Squared.Residuals 
+X-squared = 2.4776, df = 1, p-value = 0.1155
+
+R> 
+R> 
+R> 
