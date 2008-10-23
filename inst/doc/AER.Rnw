@@ -50,7 +50,7 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
   taken from a wide variety of sources, the full source code for all examples
   used in the book, as well as further worked examples, e.g., from popular textbooks.
 
-  This vignette provides an overview of the package contains and contains
+  This vignette provides an overview of the package contents and contains
   a list of errata for the book.
 }
 
@@ -61,7 +61,7 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
   Petersgraben 51\\
   CH-4051 Basel, Switzerland\\
   E-mail: \email{Christian.Kleiber@unibas.ch}\\
-  URL: \url{http://www.wwz.unibas.ch/stat/team/kleiber/kleiber.htm}\\
+  URL: \url{http://www.wwz.unibas.ch/qm/team/kleiber/kleiber.htm}\\
 
   Achim Zeileis\\
   Department of Statistics and Mathematics\\
@@ -78,10 +78,9 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
 
 \subsection[R code from the book]{\proglang{R} code from the book}
 
-The full \proglang{R} code from the book is provided in the demos for
-\pkg{AER} the package. The source scripts can be found in the \code{demo}
+The full \proglang{R} code from the book is provided in the demos for the package \pkg{AER}. The source scripts can be found in the \code{demo}
 directory of the package and executed interactively by calling
-\fct{demo}, e.g.,
+\fct{demo}, as in
 
 <<demo, eval=FALSE>>=
 demo("Ch-Intro", package = "AER")
@@ -104,9 +103,7 @@ so that they are automatically checked and compared with the desired output
 provided in \code{.Rout.save} files.
 
 To make the code fully reproducible and to avoid some lengthy computations
-in the daily checks, a few selected code chunks are commented in the scripts.
-Also, for technical reasons, some graphics code chunks are repeated, once commented
-and once without comments.
+in the daily checks, a few selected code chunks are commented out in the scripts. Also, for technical reasons, some graphics code chunks are repeated, once commented out and once without comments.
 
 
 \subsection{Data sets}
@@ -124,20 +121,20 @@ all further data sets from \cite{AER:Baltagi:2002},  \cite{AER:Franses:1998},
 Detailed information about the source of each data set, descriptions of
 the variables included, and usually also examples for typical analyses
 are provided on the respective manual pages. A full list of all data sets
-in \pkg{AER} can be obtained via:
+in \pkg{AER} can be obtained via
 
 <<data, eval=FALSE>>=
 data(package = "AER")
 @
 
-Additionally, overview manual pages for some textbooks are provided.
+In addition, manual pages corresponding to selected textbooks are available.
 They list all data sets from the respective book and provide extensive
-code for replicating many of the empirical examples. See, e.g.
+code for replicating many of the empirical examples. See, for example,
 <<help, eval=FALSE>>=
 help("Greene2003", package = "AER")
 @
 for data sets and code for \cite{AER:Greene:2003}.
-The overview manual pages currently available in \pkg{AER} are:
+Currently available manual pages are:
 
 \begin{itemize}
   \item \code{Baltagi2002} for \cite{AER:Baltagi:2002},
@@ -176,11 +173,18 @@ or complementing methods previously available in \proglang{R}:
 
 \section{Errata}
 
-No errata, yet. Please report any errors you find to us.
 
-%% \begin{itemize}
-%%   \item p.123: abcde
-%% \end{itemize}
+\begin{itemize}
+  \item p.~205: The reference for Henningsen (2008) should be: %% FIXME: will be package vignette
+    \begin{quote}
+      Henningsen A (2008). ``Demand Analysis with the Almost Ideal Demand System
+      in \proglang{R}: Package \pkg{micEcon},'' Unpublished.
+      URL~\url{http://CRAN.R-project.org/package=micEcon}.
+    \end{quote}
+\end{itemize}
+
+Please report any further errors you find to us.
+
 
 \bibliography{AER}
 

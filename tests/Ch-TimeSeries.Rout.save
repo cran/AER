@@ -31,6 +31,14 @@ R> library("AER")
 Loading required package: car
 Loading required package: lmtest
 Loading required package: zoo
+
+Attaching package: 'zoo'
+
+
+	The following object(s) are masked from package:base :
+
+	 as.Date.numeric 
+
 Loading required package: sandwich
 Loading required package: strucchange
 Loading required package: survival

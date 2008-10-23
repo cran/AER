@@ -133,7 +133,7 @@ rbind(logLik = sapply(fm, function(x) round(logLik(x), digits = 0)),
   Df = sapply(fm, function(x) attr(logLik(x), "df")))
 
 ## predicted number of zeros
-round(c("Obs" = sum(dt$visits < 1),
+round(c("Obs" = sum(nmes$visits < 1),
   "ML-Pois" = sum(dpois(0, fitted(nmes_pois))),
   "Adj-Pois" = NA,
   "Quasi-Pois" = NA,

@@ -1,6 +1,6 @@
 Package: AER
-Version: 1.0-0
-Date: 2008-08-26
+Version: 1.0-1
+Date: 2008-10-23
 Title: Applied Econometrics with R
 Author: Achim Zeileis, Christian Kleiber
 Maintainer: Achim Zeileis <Achim.Zeileis@R-project.org>
@@ -15,4 +15,4 @@ Suggests: boot, dynlm, foreign, ineq, KernSmooth, lattice, MASS, nlme,
 	  tseries, urca
 Imports: stats
 License: GPL-2
-Packaged: Tue Aug 26 12:46:40 2008; zeileis
+Packaged: Wed Oct 22 12:32:32 2008; zeileis
