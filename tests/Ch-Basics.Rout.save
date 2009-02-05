@@ -1,5 +1,5 @@
 
-R version 2.7.1 (2008-06-23)
+R version 2.8.1 (2008-12-22)
 Copyright (C) 2008 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
@@ -31,14 +31,6 @@ R> library("AER")
 Loading required package: car
 Loading required package: lmtest
 Loading required package: zoo
-
-Attaching package: 'zoo'
-
-
-	The following object(s) are masked from package:base :
-
-	 as.Date.numeric 
-
 Loading required package: sandwich
 Loading required package: strucchange
 Loading required package: survival
@@ -788,7 +780,7 @@ R> ###################################################
 R> data("CPS1985")
 R> str(CPS1985)
 'data.frame':	533 obs. of  11 variables:
- $ wage      : num   4.95  6.67  4.00  7.50 13.07 ...
+ $ wage      : num  4.95 6.67 4 7.5 13.07 ...
  $ education : int  9 12 12 12 13 10 12 16 12 12 ...
  $ experience: int  42 1 4 17 9 27 9 11 9 17 ...
  $ age       : int  57 19 22 35 28 43 27 33 27 35 ...

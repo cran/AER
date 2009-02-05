@@ -1,7 +1,7 @@
 \name{GrowthDJ}
 \alias{GrowthDJ}
 
-\encoding{latin1}
+\encoding{UTF-8}
 
 \title{Determinants of Economic Growth}
 
@@ -45,7 +45,7 @@ Growth Behavior. \emph{Journal of Applied Econometrics}, \bold{10}, 365--384.
 
 Koenker, R., and Zeileis, A. (2007). \dQuote{Reproducible Econometric Research
 (A Critical Review of the State of the Art).} Report 60, Department of Statistics
-and Mathematics, Wirtschaftsuniversit‰t Wien, Research Report Series.
+and Mathematics, Wirtschaftsuniversit√§t Wien, Research Report Series.
 \url{http://epub.wu-wien.ac.at/}.
 
 Mankiw, N.G, Romer, D., and Weil, D.N. (1992). A Contribution to the Empirics of Economic Growth. 

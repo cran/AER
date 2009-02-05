@@ -1,5 +1,5 @@
 
-R version 2.7.1 (2008-06-23)
+R version 2.8.1 (2008-12-22)
 Copyright (C) 2008 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
@@ -31,14 +31,6 @@ R> library("AER")
 Loading required package: car
 Loading required package: lmtest
 Loading required package: zoo
-
-Attaching package: 'zoo'
-
-
-	The following object(s) are masked from package:base :
-
-	 as.Date.numeric 
-
 Loading required package: sandwich
 Loading required package: strucchange
 Loading required package: survival
@@ -493,6 +485,20 @@ R> library("quantreg")
 Loading required package: SparseM
 Package SparseM (0.78) loaded.  To cite, see citation("SparseM")
 
+Attaching package: 'SparseM'
+
+
+	The following object(s) are masked from package:stats :
+
+	 model.response 
+
+
+	The following object(s) are masked from package:base :
+
+	 backsolve,
+	 chol 
+
+
 Attaching package: 'quantreg'
 
 
@@ -558,7 +564,7 @@ R> ###################################################
 R> cps_rq25 <- rq(cps_f, tau = 0.25, data = CPS1988)
 R> cps_rq75 <- rq(cps_f, tau = 0.75, data = CPS1988)
 R> anova(cps_rq25, cps_rq75)
-Quantile Regression Analysis of Variance Table
+Quantile Regression Analysis of Deviance Table
 
 Model: log(wage) ~ experience + I(experience^2) + education
 Joint Test of Equality of Slopes: tau in {  0.25 0.75  }
@@ -571,7 +577,7 @@ R> ###################################################
 R> ### chunk number 45: cps-rq-anova
 R> ###################################################
 R> anova(cps_rq25, cps_rq75, joint = FALSE)
-Quantile Regression Analysis of Variance Table
+Quantile Regression Analysis of Deviance Table
 
 Model: log(wage) ~ experience + I(experience^2) + education
 Tests of Equality of Distinct Slopes: tau in {  0.25 0.75  }

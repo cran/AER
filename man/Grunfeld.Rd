@@ -1,6 +1,8 @@
 \name{Grunfeld}
 \alias{Grunfeld}
 
+\encoding{UTF-8}
+
 \title{Grunfeld's Investment Data}
 
 \description{
@@ -12,47 +14,61 @@ Panel data on 11 large US manufacturing firms over 20 years, for the years 1935-
 \format{
 A data frame containing 20 annual observations on 3 variables for 11 firms. 
 \describe{
-  \item{invest}{Annual real gross investment.}
-  \item{value}{Real value of the firm (shares outstanding).}
-  \item{capital}{Real value of the capital stock.}
-  \item{firm}{factor with 11 levels: \code{"General Motors"}, \code{"US Steel"}, \code{"General Electric"}, 
-              \code{"Chrysler"}, \code{"Atlantic Refining"}, \code{"IBM"}, \code{"Union Oil"}, \code{"Westinghouse"},
-              \code{"Goodyear"}, \code{"Diamond Match"}, \code{"American Steel"}.}
+  \item{invest}{Gross investment, defined as additions to plant and equipment plus 
+    maintenance and repairs in millions of dollars deflated by the implicit price
+    deflator of producers' durable equipment (base 1947).}
+  \item{value}{Market value of the firm, defined as the price of common shares at
+    December 31 (or, for WH, IBM and CH, the average price of December 31 and
+    January 31 of the following year) times the number of common shares
+    outstanding plus price of preferred shares at December 31 (or average price
+    of December 31 and January 31 of the following year) times number of
+    preferred shares plus total book value of debt at December 31 in millions of
+    dollars deflated by the implicit GNP price deflator (base 1947).}
+  \item{capital}{Stock of plant and equipment, defined as the accumulated sum of net additions
+    to plant and equipment deflated by the implicit price deflator for producers' durable
+    equipment (base 1947) minus depreciation allowance deflated by depreciation expense deflator
+    (10 years moving average of wholesale price index of metals and metal products, base 1947).}
+  \item{firm}{factor with 11 levels: \code{"General Motors"}, \code{"US Steel"},
+    \code{"General Electric"}, \code{"Chrysler"}, \code{"Atlantic Refining"}, \code{"IBM"},
+    \code{"Union Oil"}, \code{"Westinghouse"}, \code{"Goodyear"}, \code{"Diamond Match"},
+    \code{"American Steel"}.}
   \item{year}{Year.}
 }
 }
 
 \details{
 This is a popular data set for teaching purposes. Unfortunately, there exist several 
-different versions (see \url{http://www.stanford.edu/~clint/bench/grunfeld.htm} for details). 
-In particular, the variants given by Baltagi (2002) and Greene (2003) differ: 
-for \code{"US Steel"} (firm 2), Greene has investment for the year 1940 as 261.6 while Baltagi has 361.6, 
-and capital for 1946 as 132.6 while Baltagi has 232.6. 
+different versions (see Kleiber and Zeileis, 2008, for a detailed discussion). 
+In particular, the version provided with Greene (2003) has a couple of errors
+for \code{"US Steel"} (firm 2): 
+investment in 1940 is 261.6 (instead of the correct 361.6), 
+investment in 1952 is 645.2 (instead of the correct 645.5), 
+capital    in 1946 is 132.6 (instead of the correct 232.6).
 
-Here, we provide the original data from Grunfeld (1958, Table 9). The data for
-the first 10 firms is identical to that of Baltagi (2002), now also used by
-Greene (2008).
+Here, we provide the original data from Grunfeld (1958). The data for
+the first 10 firms are identical to those of Baltagi (2002) or Baltagi (2005),
+now also used by Greene (2008).
 }
 
 \source{
-The data are taken from Grunfeld (1958, Table 9).
-
-The data for the first 10 firms is identical to that of Baltagi (2002) available at
-
-\url{http://www.springeronline.com/sgw/cda/frontpage/0,10735,4-165-2-107420-0,00.html}
+The data are taken from Grunfeld (1958, Appendix, Tables 2--9 and 11--13).
 }
 
 \references{
-Baltagi, B.H. (2002). \emph{Econometrics}, 3rd ed. Berlin, Springer. 
+Baltagi, B.H. (2002). \emph{Econometrics}, 3rd ed., Berlin: Springer-Verlag. 
 
 Baltagi, B.H. (2005). \emph{Econometric Analysis of Panel Data}, 3rd ed. Chichester, UK: John Wiley.
+
+Kleiber, C., and Zeileis, A. (2008). \dQuote{The Grunfeld Data at 50.} Report 82,
+  Department of Statistics and Mathematics, Wirtschaftsuniversität Wien, Research Report Series.
+  \url{http://epub.wu-wien.ac.at/}.
 
 Greene, W.H. (2003). \emph{Econometric Analysis}, 5th edition. Upper Saddle River, NJ: Prentice Hall.
 
 Greene, W.H. (2008). \emph{Econometric Analysis}, 6th edition. Upper Saddle River, NJ: Prentice Hall.
 
 Grunfeld, Y. (1958). \emph{The Determinants of Corporate Investment}. 
-Unpublished Ph.D. Dissertation, University of Chicago.
+  Unpublished Ph.D. Dissertation, University of Chicago.
 }
 
 \seealso{\code{\link{Baltagi2002}}, \code{\link{Greene2003}}}
@@ -86,7 +102,7 @@ fm_sur <- systemfit(invest ~ value + capital, data = pggr, method = "SUR", metho
 fm_psur <- systemfit(invest ~ value + capital, data = pggr, method = "SUR", pooled = TRUE, 
   methodResidCov = "noDfCor", residCovWeighted = TRUE)
 
-## More examples can be found in:
+## Further examples:
 ## help("Greene2003")
 
 
@@ -125,7 +141,7 @@ rbind(
 ## Hausman test
 phtest(fm_fe, fm_reswar)
 
-## More examples can be found in:
+## Further examples:
 ## help("Baltagi2002")
 ## help("Greene2003")
 }

@@ -44,9 +44,9 @@ online complements to Stock and Watson (2007) at
 }
 
 \references{
-Hamermesh, D.S., and Parker, A. (2005). Beauty in the Classroom: Instructors'
-  Pulchritude and Putative Pedagogical Productivity.
-  \emph{Economics of Education Review}, \bold(24), 369--376.
+Hamermesh, D.S., and Parker, A. (2005).
+  Beauty in the Classroom: Instructors' Pulchritude and Putative Pedagogical Productivity.
+  \emph{Economics of Education Review}, \bold{24}, 369--376.
 
 Stock, J.H. and Watson, M.W. (2007). \emph{Introduction to Econometrics}, 2nd ed. Boston: Addison Wesley.
 }

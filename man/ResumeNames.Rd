@@ -67,7 +67,7 @@ Online complements to Stock and Watson (2007).
 \references{
 Bertrand, M. and Mullainathan, S. (2004). Are Emily and Greg More Employable Than Lakisha and
 Jamal? A Field Experiment on Labor Market Discrimination. 
-\emph{American Economic Review}, \bf{94}, 991--1013.
+\emph{American Economic Review}, \bold{94}, 991--1013.
 
 Stock, J.H. and Watson, M.W. (2007). \emph{Introduction to Econometrics}, 2nd ed. Boston: Addison Wesley.
 }

@@ -28,9 +28,9 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
 
 \Abstract{
   ``Applied Econometrics with \proglang{R}''
-  \citep[Springer-Verlag, ISBN~978-0-387-77316-2, pp.~vii+222]{AER:Kleiber+Zeileis:2008}
+  \citep[Springer-Verlag, ISBN~978-0-387-77316-2, pp.~vii+222]{aer:Kleiber+Zeileis:2008}
   is the first book on applied econometrics using the \proglang{R}~system
-  for statistical computing and graphics \citep{AER:R:2008}. 
+  for statistical computing and graphics \citep{aer:R:2008}. 
   It presents hands-on examples for a
   wide range of econometric models, from classical linear regression models for
   cross-section, time series or panel data and the common non-linear models of
@@ -45,7 +45,7 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
   participation or the demand for health care.
 
   The book is accompanied by the \proglang{R} package
-  \pkg{AER} \citep{AER:Zeileis+Kleiber:2008} which contains some new \proglang{R}
+  \pkg{AER} \citep{aer:Kleiber+Zeileis:2009} which contains some new \proglang{R}
   functionality, some 100 data sets
   taken from a wide variety of sources, the full source code for all examples
   used in the book, as well as further worked examples, e.g., from popular textbooks.
@@ -56,10 +56,10 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
 
 \Address{
   Christian Kleiber\\
-  Wirtschaftswissenschaftliches Zentrum\\
+  Wirtschaftswissenschaftliches Zentrum (WWZ)\\
   Universit\"at Basel\\
-  Petersgraben 51\\
-  CH-4051 Basel, Switzerland\\
+  Peter Merian-Weg 6\\
+  CH-4002 Basel, Switzerland\\
   E-mail: \email{Christian.Kleiber@unibas.ch}\\
   URL: \url{http://www.wwz.unibas.ch/qm/team/kleiber/kleiber.htm}\\
 
@@ -112,11 +112,11 @@ The \pkg{AER} package includes some 100 data sets from leading applied
 econometrics journals and popular econometrics textbooks. Many data sets
 have been obtained from the data archives of the \emph{Journal of Applied
 Econometrics} and the \emph{Journal of Business \& Economic Statistics}. 
-Some of these have been used in recent textbooks, among them 
-\cite{AER:Baltagi:2002}, \cite{AER:Davidson+MacKinnon:2004}, \cite{AER:Greene:2003},
-\cite{AER:Stock+Watson:2007}, and \cite{AER:Verbeek:2004}. In addition, we provide
-all further data sets from \cite{AER:Baltagi:2002},  \cite{AER:Franses:1998},
-\cite{AER:Greene:2003}, and \cite{AER:Stock+Watson:2007}.
+Some of these are used in recent textbooks, among them 
+\cite{aer:Baltagi:2002}, \cite{aer:Davidson+MacKinnon:2004}, \cite{aer:Greene:2003},
+\cite{aer:Stock+Watson:2007}, and \cite{aer:Verbeek:2004}. In addition, we provide
+all further data sets from \cite{aer:Baltagi:2002},  \cite{aer:Franses:1998},
+\cite{aer:Greene:2003}, and \cite{aer:Stock+Watson:2007}.
 
 Detailed information about the source of each data set, descriptions of
 the variables included, and usually also examples for typical analyses
@@ -133,15 +133,15 @@ code for replicating many of the empirical examples. See, for example,
 <<help, eval=FALSE>>=
 help("Greene2003", package = "AER")
 @
-for data sets and code for \cite{AER:Greene:2003}.
+for data sets and code for \cite{aer:Greene:2003}.
 Currently available manual pages are:
 
 \begin{itemize}
-  \item \code{Baltagi2002} for \cite{AER:Baltagi:2002},
-  \item \code{CameronTrivedi1998} for \cite{AER:Cameron+Trivedi:1998},
-  \item \code{Franses1998} for \cite{AER:Franses:1998},
-  \item \code{Greene2003} for \cite{AER:Greene:2003},
-  \item \code{StockWatson2007} for \cite{AER:Stock+Watson:2007}.
+  \item \code{Baltagi2002} for \cite{aer:Baltagi:2002},
+  \item \code{CameronTrivedi1998} for \cite{aer:Cameron+Trivedi:1998},
+  \item \code{Franses1998} for \cite{aer:Franses:1998},
+  \item \code{Greene2003} for \cite{aer:Greene:2003},
+  \item \code{StockWatson2007} for \cite{aer:Stock+Watson:2007}.
 \end{itemize}
 
 
@@ -175,6 +175,7 @@ or complementing methods previously available in \proglang{R}:
 
 
 \begin{itemize}
+  \item p.~179: For consistency, the GARCH code should be preceded by \code{data("MarkPound")}.
   \item p.~205: The reference for Henningsen (2008) should be: %% FIXME: will be package vignette
     \begin{quote}
       Henningsen A (2008). ``Demand Analysis with the Almost Ideal Demand System
@@ -186,6 +187,6 @@ or complementing methods previously available in \proglang{R}:
 Please report any further errors you find to us.
 
 
-\bibliography{AER}
+\bibliography{aer}
 
 \end{document}

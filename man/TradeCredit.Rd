@@ -1,6 +1,6 @@
 \name{TradeCredit}
 \alias{TradeCredit}
-\title{Trade Credit Data}
+\title{Trade Credit and the Money Market}
 
 \description{
 Macroeconomic time series data from 1946 to 1966 on trade credit and the money market.
@@ -22,7 +22,7 @@ An annual multiple time series from 1946 to 1966 on 7 variables.
 }
 
 \source{
-The data is from Baltagi (2002) and available at
+The data are from Baltagi (2002) and available at
 
 \url{http://www.springeronline.com/sgw/cda/frontpage/0,10735,4-165-2-107420-0,00.html}
 }

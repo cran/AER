@@ -437,6 +437,7 @@ plot(MarkPound, main = "")
 ###################################################
 ### chunk number 60: garch
 ###################################################
+data("MarkPound")
 mp <- garch(MarkPound, grad = "numerical", trace = FALSE)
 summary(mp)
 

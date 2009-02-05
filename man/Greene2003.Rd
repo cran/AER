@@ -876,11 +876,11 @@ summary(fm_probit)
 data("PSID1976", package = "AER")
 PSID1976$kids <- with(PSID1976, factor((youngkids + oldkids) > 0,
   levels = c(FALSE, TRUE), labels = c("no", "yes")))
-PSID1976$nwincome <- with(PSID1976, (fincome - hours * earnings)/1000)
+PSID1976$nwincome <- with(PSID1976, (fincome - hours * wage)/1000)
 
 ## Example 4.1, Table 4.2
 ## (reproduced in Example 7.1, Table 7.1)
-gr_lm <- lm(log(hours * earnings) ~ age + I(age^2) + education + kids,
+gr_lm <- lm(log(hours * wage) ~ age + I(age^2) + education + kids,
   data = PSID1976, subset = participation == "yes")
 summary(gr_lm)
 vcov(gr_lm)
@@ -888,7 +888,7 @@ vcov(gr_lm)
 ## Example 4.5
 summary(gr_lm)
 ## or equivalently
-gr_lm1 <- lm(log(hours * earnings) ~ 1, data = PSID1976, subset = participation == "yes")
+gr_lm1 <- lm(log(hours * wage) ~ 1, data = PSID1976, subset = participation == "yes")
 anova(gr_lm1, gr_lm)
 
 ## Example 21.4, p. 681
@@ -910,16 +910,16 @@ summary(gr_probit1)
 ## Example 22.8, Table 22.7, p. 786
 library("sampleSelection")
 gr_2step <- selection(participation ~ age + I(age^2) + fincome + education + kids, 
-  earnings ~ experience + I(experience^2) + education + city,
+  wage ~ experience + I(experience^2) + education + city,
   data = PSID1976, method = "2step")
 gr_ml <- selection(participation ~ age + I(age^2) + fincome + education + kids, 
-  earnings ~ experience + I(experience^2) + education + city,
+  wage ~ experience + I(experience^2) + education + city,
   data = PSID1976, method = "ml")
-gr_ols <- lm(wage ~ experience + I(experience^2) + education + city,
+gr_ols <- lm(wage ~ experience + I(experience^2) + education + city, 
   data = PSID1976, subset = participation == "yes")
-## NOTE:
-## - huge discrepancies for ML and OLS, source unclear
-## - selection() still prefers numeric response
+## NOTE: ML estimates agree with Greene, 5e errata. 
+## Standard errors are based on the Hessian (here), while Greene has BHHH/OPG.
+
 
 
 ####################

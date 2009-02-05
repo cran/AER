@@ -49,6 +49,11 @@ fm_mnl <- multinom(job ~ education + minority, data = BankWages,
   subset = gender == "male", trace = FALSE)
 summary(fm_mnl)
 confint(fm_mnl)
+
+## same with mlogit package
+library("mlogit")
+fm_mlogit <- mlogit(job ~ 1 | education + minority, data = BankWages, subset = gender == "male", shape = "wide", choice = "job", reflevel = "custodial")
+summary(fm_mlogit)
 }
 
 \keyword{datasets}

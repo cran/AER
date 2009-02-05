@@ -1,3 +1,29 @@
+Changes in Version 1.1-0
+
+  o Some variable names in the PSID1976 (aka Mroz) data
+    have been renamed: "earnings" is now called "wage"
+    (to avoid confusion with other data sets), the previous
+    variable "wage" is renamed as "repwage" (reported wage).
+    Currently, "earnings" is kept; it will be removed in future
+    releases.
+
+  o Documentation of the Grunfeld data has been enhanced and
+    updated. Much more details are available in a recent
+    technical report: Kleiber and Zeileis (2008), "The
+    Grunfeld Data at 50", available from http://epub.wu-wien.ac.at/.
+    
+  o Multinomial logit examples using Yves Croissant's "mlogit"
+    package have been added for the TravelMode and BankWages
+    data sets.
+
+  o Vignette/errata updated.
+    
+
+Changes in Version 1.0-1
+
+  o Small changes for R 2.8.0.
+  
+
 Changes in Version 1.0-0
 
   o official version accompanying the release of the

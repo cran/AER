@@ -1,5 +1,5 @@
 
-R version 2.7.1 (2008-06-23)
+R version 2.8.1 (2008-12-22)
 Copyright (C) 2008 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
@@ -31,14 +31,6 @@ R> library("AER")
 Loading required package: car
 Loading required package: lmtest
 Loading required package: zoo
-
-Attaching package: 'zoo'
-
-
-	The following object(s) are masked from package:base :
-
-	 as.Date.numeric 
-
 Loading required package: sandwich
 Loading required package: strucchange
 Loading required package: survival
@@ -414,8 +406,6 @@ R> cps$yhat2 <- predict(cps_plm, newdata = cps)
 R> 
 R> plot(log(wage) ~ jitter(experience, factor = 3), pch = 19,
 +    col = rgb(0.5, 0.5, 0.5, alpha = 0.02), data = CPS1988)
-Warning message:
-In plot.xy(xy, type, ...) : increasing the PDF version to 1.4
 R> lines(yhat1 ~ experience, data = cps, lty = 2)
 R> lines(yhat2 ~ experience, data = cps)
 R> legend("topleft", c("quadratic", "spline"), lty = c(2,1),
@@ -753,6 +743,7 @@ Loading required package: kinship
 Loading required package: nlme
 Loading required package: lattice
 [1] "kinship is loaded"
+Loading required package: Formula
 R> gr <- subset(Grunfeld, firm %in% c("General Electric",
 +    "General Motors", "IBM"))
 R> pgr <- plm.data(gr, index = c("firm", "year"))
@@ -935,6 +926,15 @@ Attaching package: 'Matrix'
 
 	 xtabs 
 
+
+	The following object(s) are masked from package:base :
+
+	 colMeans,
+	 colSums,
+	 rcond,
+	 rowMeans,
+	 rowSums 
+
 R> gr2 <- subset(Grunfeld, firm %in% c("Chrysler", "IBM"))
 R> pgr2 <- plm.data(gr2, c("firm", "year"))
 R> 
@@ -944,6 +944,11 @@ R> ### chunk number 68: SUR
 R> ###################################################
 R> gr_sur <- systemfit(invest ~ value + capital,
 +    method = "SUR", data = pgr2)
+Warning message:
+Ambiguous method selection for "crossprod", target "dgCMatrix#dgTMatrix" (the first of the signatures shown will be used)
+    Matrix#ANY
+    ANY#Matrix
+ 
 R> summary(gr_sur, residCov = FALSE, equations = FALSE)
 
 systemfit results 

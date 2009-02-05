@@ -58,7 +58,7 @@ data("Guns")
 library("lattice")
 xyplot(log(violent) ~ as.numeric(as.character(year)) | state, data = Guns, type = "l")
 
-## Stock & Watson (2007), Example 10.1
+## Stock & Watson (2007), Empirical Exercise 10.1, pp. 376--377
 fm1 <- lm(log(violent) ~ law, data = Guns)
 coeftest(fm1, vcov = sandwich)
 

@@ -180,7 +180,7 @@ fm3 <- glm(deny ~ pirat, family = binomial(link = "probit"), data = HMDA)
 fm4 <- glm(deny ~ pirat + afam, family = binomial(link = "probit"), data = HMDA)
 fm5 <- glm(deny ~ pirat + afam, family = binomial(link = "logit"), data = HMDA)
 
-## Table 11.1, pp. 401
+## Table 11.1, p. 401
 mean(HMDA$pirat)
 mean(HMDA$hirat)
 mean(HMDA$lvrat)
@@ -244,7 +244,7 @@ waldtest(fm6, fm6r3, vcov = sandwich)
 ## data
 data("Guns", package = "AER")
 
-## Example 10.1
+## Empirical Exercise 10.1
 fm1 <- lm(log(violent) ~ law, data = Guns)
 fm2 <- lm(log(violent) ~ law + prisoners + density + income + 
   population + afam + cauc + male, data = Guns)

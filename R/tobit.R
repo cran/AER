@@ -30,18 +30,18 @@ tobit <- function(formula, left = 0, right = Inf, dist = "gaussian", subset = NU
   y <- formula[[2]]  
   if(lfin & rfin) { 
   ## interval censoring
-    formula[[2]] <- call("Surv", call("ifelse", call(">=", y, right), right, 
-      call("ifelse", call("<=", y, left), left, y)), time2 = right,
-      call("ifelse", call(">=", y, right), 0, call("ifelse", call("<=", y, left), 2, 1)),
+    formula[[2]] <- call("Surv", call("ifelse", call(">=", y, substitute(right)), substitute(right), 
+      call("ifelse", call("<=", y, substitute(left)), substitute(left), y)), time2 = substitute(right),
+      call("ifelse", call(">=", y, substitute(right)), 0, call("ifelse", call("<=", y, substitute(left)), 2, 1)),
       type = "interval")
   } else if(!rfin) {
   ## left censoring
-    formula[[2]] <- call("Surv", call("ifelse", call("<=", y, left), left, y),
-      call(">", y, left) , type = "left")
+    formula[[2]] <- call("Surv", call("ifelse", call("<=", y, substitute(left)), substitute(left), y),
+      call(">", y, substitute(left)) , type = "left")
   } else {
   ## right censoring
-    formula[[2]] <- call("Surv", call("ifelse", call(">=", y, right), right, y),
-      call("<", y, right) , type = "right")
+    formula[[2]] <- call("Surv", call("ifelse", call(">=", y, substitute(right)), substitute(right), y),
+      call("<", y, substitute(right)) , type = "right")
   }
   
   ## call survreg

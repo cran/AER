@@ -11,16 +11,20 @@ based on data for the previous year, 1975.
 \usage{data("PSID1976")}
 
 \format{
-A data frame containing 753 observations on 21 variables.
+A data frame containing 753 observations on 22 variables.
 \describe{
-  \item{participation}{Factor. Did the individual participate in the labor force in 1975?}
+  \item{participation}{Factor. Did the individual participate in the labor force in 1975?
+    (This is essentially \code{wage > 0} or \code{hours > 0}.)}
   \item{hours}{Wife's hours of work in 1975.}
   \item{youngkids}{Number of children less than 6 years old in household.}
   \item{oldkids}{Number of children between ages 6 and 18 in household.}
   \item{age}{Wife's age in years.}
   \item{education}{Wife's education in years.}
-  \item{earnings}{Wife's average hourly earnings, in 1975 dollars.}
-  \item{wage}{Wife's wage reported at the time of the 1976 interview 
+  \item{earnings}{Wife's average hourly earnings, in 1975 dollars.
+    (Identical to \code{wage}. This variable is currently kept for
+    consistency with earlier releases. It will be removed in the near future.)}
+  \item{wage}{Wife's average hourly wage, in 1975 dollars.}
+  \item{repwage}{Wife's wage reported at the time of the 1976 interview 
     (not the same as the 1975 estimated wage). To use the subsample with this wage,
     one needs to select 1975 workers with \code{participation == "yes"}, then select only those
     women with non-zero wage. Only 325 women work in 1975 and have a non-zero wage in 1976.}
@@ -36,7 +40,7 @@ A data frame containing 753 observations on 21 variables.
   \item{meducation}{Wife's mother's educational attainment, in years.}
   \item{feducation}{Wife's father's educational attainment, in years.}
   \item{unemp}{Unemployment rate in county of residence, in percentage points.
-    (This taken from bracketed ranges.)}
+    (This is taken from bracketed ranges.)}
   \item{city}{Factor. Does the individual live in a large city?}
   \item{experience}{Actual years of wife's previous labor market experience.}
   \item{college}{Factor. Did the individual attend college?}
@@ -45,8 +49,11 @@ A data frame containing 753 observations on 21 variables.
 }
 
 \details{
-This data set is also known under the name Mroz (1987) data.
-Note that the variable \code{earnings} is called \code{wage} in many versions of this data set.
+This data set is also known as the Mroz (1987) data.
+
+Warning: typical applications using these data employ the variable
+\code{wage} aka \code{earnings} as the dependent variable. The variable
+\code{repwage} is the reported wage in a 1976 interview, named RPWG by Greene (2003).
 }
 
 \source{
@@ -77,7 +84,7 @@ Cambridge, MA: MIT Press.
 data("PSID1976")
 PSID1976$kids <- with(PSID1976, factor((youngkids + oldkids) > 0,
   levels = c(FALSE, TRUE), labels = c("no", "yes")))
-PSID1976$nwincome <- with(PSID1976, (fincome - hours * earnings)/1000)
+PSID1976$nwincome <- with(PSID1976, (fincome - hours * wage)/1000)
 PSID1976$partnum <- as.numeric(PSID1976$participation) - 1
 
 ###################
@@ -86,7 +93,7 @@ PSID1976$partnum <- as.numeric(PSID1976$participation) - 1
 
 ## Example 4.1, Table 4.2
 ## (reproduced in Example 7.1, Table 7.1)
-gr_lm <- lm(log(hours * earnings) ~ age + I(age^2) + education + kids,
+gr_lm <- lm(log(hours * wage) ~ age + I(age^2) + education + kids,
   data = PSID1976, subset = participation == "yes")
 summary(gr_lm)
 vcov(gr_lm)
@@ -94,7 +101,7 @@ vcov(gr_lm)
 ## Example 4.5
 summary(gr_lm)
 ## or equivalently
-gr_lm1 <- lm(log(hours * earnings) ~ 1, data = PSID1976, subset = participation == "yes")
+gr_lm1 <- lm(log(hours * wage) ~ 1, data = PSID1976, subset = participation == "yes")
 anova(gr_lm1, gr_lm)
 
 ## Example 21.4, p. 681
@@ -116,14 +123,15 @@ summary(gr_probit1)
 ## Example 22.8, Table 22.7, p. 786
 library("sampleSelection")
 gr_2step <- selection(participation ~ age + I(age^2) + fincome + education + kids, 
-  earnings ~ experience + I(experience^2) + education + city,
+  wage ~ experience + I(experience^2) + education + city,
   data = PSID1976, method = "2step")
 gr_ml <- selection(participation ~ age + I(age^2) + fincome + education + kids, 
-  earnings ~ experience + I(experience^2) + education + city,
+  wage ~ experience + I(experience^2) + education + city,
   data = PSID1976, method = "ml")
 gr_ols <- lm(wage ~ experience + I(experience^2) + education + city,
   data = PSID1976, subset = participation == "yes")
-## NOTE: huge discrepancies for ML and OLS, source unclear
+## NOTE: ML estimates agree with Greene, 5e errata. 
+## Standard errors are based on the Hessian (here), while Greene has BHHH/OPG. 
 
 
 #######################

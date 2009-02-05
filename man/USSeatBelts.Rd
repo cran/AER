@@ -43,7 +43,7 @@ Online complements to Stock and Watson (2007).
 \references{
 Cohen, A., and Einav, L. (2003). The Effects of Mandatory Seat Belt Laws on Driving
 Behavior and Traffic Fatalities.
-\emph(The Review of Economics and Statistics), \bold(85), 828--843
+\emph{The Review of Economics and Statistics}, \bold{85}, 828--843
 
 Stock, J.H. and Watson, M.W. (2007). \emph{Introduction to Econometrics}, 2nd ed. Boston: Addison Wesley.
 }
