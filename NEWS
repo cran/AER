@@ -1,3 +1,14 @@
+Changes in Version 1.1-1
+
+  o A new improved version of the "plm" package is available
+    from CRAN (version 1.1-1). This fixes a bug in the summary()
+    of "plm" objects, see the vignette/errata for details.
+    Furthermore, there is now a vcovHC() method for "panelmodel"
+    objects: It gives equivalent results to pvcovHC() but
+    is now the recommended user interface and hence used
+    in the examples of some manual pages (see e.g. ?Fatalities).
+
+
 Changes in Version 1.1-0
 
   o Some variable names in the PSID1976 (aka Mroz) data

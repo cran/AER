@@ -74,7 +74,7 @@ Grunfeld, Y. (1958). \emph{The Determinants of Corporate Investment}.
 \seealso{\code{\link{Baltagi2002}}, \code{\link{Greene2003}}}
 
 \examples{
-data("Grunfeld")
+data("Grunfeld", package = "AER")
 
 ## Greene (2003)
 ## subset of data with mistakes
@@ -113,7 +113,7 @@ pg <- plm.data(subset(Grunfeld, firm != "American Steel"), c("firm", "year"))
 
 fm_fe <- plm(invest ~ value + capital, model = "within", data = pg)
 summary(fm_fe)
-coeftest(fm_fe, vcov = pvcovHC)
+coeftest(fm_fe, vcov = vcovHC)
 
 fm_reswar <- plm(invest ~ value + capital, data = pg,
   model = "random", random.method = "swar")
@@ -129,7 +129,7 @@ fm_ream <- plm(invest ~ value + capital, data = pg, model = "random", random.met
 fm_rewh <- plm(invest ~ value + capital, data = pg, model = "random", random.method = "walhus")
 fm_rener <- plm(invest ~ value + capital, data = pg, model = "random", random.method = "nerlove")
 
-## Baltagi (2003), Tab. 2.1
+## Baltagi (2005), Tab. 2.1
 rbind(
   "OLS(pooled)" = coef(fm_ols),
   "FE" = c(NA, coef(fm_fe)),

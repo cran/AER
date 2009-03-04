@@ -43,12 +43,10 @@ data("TravelMode")
 with(TravelMode, prop.table(table(mode[choice == "yes"])))
 
 ## travel vs. waiting time for different travel modes
-if(require("lattice")) {
-  xyplot(travel ~ wait | mode, data = TravelMode)
-}
+library("lattice")
+xyplot(travel ~ wait | mode, data = TravelMode)
 
-## Greene (2003), Tab. 21.11, conditional logit model
-## Warning: needs mlogit, version 0.1-2, not on CRAN!
+## Greene (2003), Table 21.11, conditional logit model
 library("mlogit")
 TravelMode$choice2 <- TravelMode$choice == "yes"
 TravelMode$incair <- with(TravelMode, income * (mode == "air"))

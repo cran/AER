@@ -78,7 +78,8 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
 
 \subsection[R code from the book]{\proglang{R} code from the book}
 
-The full \proglang{R} code from the book is provided in the demos for the package \pkg{AER}. The source scripts can be found in the \code{demo}
+The full \proglang{R} code from the book is provided in the demos for the package \pkg{AER}.
+The source scripts can be found in the \code{demo}
 directory of the package and executed interactively by calling
 \fct{demo}, as in
 
@@ -103,7 +104,9 @@ so that they are automatically checked and compared with the desired output
 provided in \code{.Rout.save} files.
 
 To make the code fully reproducible and to avoid some lengthy computations
-in the daily checks, a few selected code chunks are commented out in the scripts. Also, for technical reasons, some graphics code chunks are repeated, once commented out and once without comments.
+in the daily checks, a few selected code chunks are commented out in the
+scripts. Also, for technical reasons, some graphics code chunks are repeated,
+once commented out and once without comments.
 
 
 \subsection{Data sets}
@@ -173,8 +176,16 @@ or complementing methods previously available in \proglang{R}:
 
 \section{Errata}
 
+The following errors have been found in the book so far.
+please report any further errors you find to us.
 
 \begin{itemize}
+  \item p.~85--86: Due to a bug in the \code{summary()} method for ``\code{plm}'' objects,
+    the degrees of freedom reported for the $F$~statistics were interchanged and thus the
+    $p$~values were not correct. Therefore, the $p$~values printed in the book at the end
+    of \code{summary(gr_fe)} and \code{summary(gr_re)} are not correct,
+    they should both be \code{< 2.22e-16}. Using \pkg{plm} 1.1-1 or higher, the code produces
+    the correct output.
   \item p.~179: For consistency, the GARCH code should be preceded by \code{data("MarkPound")}.
   \item p.~205: The reference for Henningsen (2008) should be: %% FIXME: will be package vignette
     \begin{quote}
@@ -183,8 +194,6 @@ or complementing methods previously available in \proglang{R}:
       URL~\url{http://CRAN.R-project.org/package=micEcon}.
     \end{quote}
 \end{itemize}
-
-Please report any further errors you find to us.
 
 
 \bibliography{aer}

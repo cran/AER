@@ -124,7 +124,7 @@ fm_sfe3 <- plm(frate ~ beertax, data = Fatalities,
 
 coeftest(fm_sfe, vcov = vcovHC(fm_sfe, type = "HC1"))[1,]
 coeftest(fm_sfe2, vcov = vcovHC(fm_sfe2, type = "HC1"))[1,] ## uses different df in sd and pval
-coeftest(fm_sfe3, vcov = pvcovHC(fm_sfe3, type = "HC1", method = "white1")) ## uses different df in pval
+coeftest(fm_sfe3, vcov = vcovHC(fm_sfe3, type = "HC1", method = "white1"))[,1] ## uses different df in pval
 
 
 ## pp. 363, Eq. (10.21)
@@ -134,7 +134,7 @@ coeftest(fm_stfe, vcov = vcovHC(fm_stfe, type = "HC1"))[1,]
 ## via plm()
 fm_stfe2 <- plm(frate ~ beertax, data = Fatalities,
   index = c("state", "year"), model = "within", effect = "twoways")
-coeftest(fm_stfe2, vcov = pvcovHC) ## different
+coeftest(fm_stfe2, vcov = vcovHC) ## different
 
 
 ## p. 368, Table 10.1, numbers refer to cols.
@@ -151,13 +151,13 @@ fm6 <- plm(frate ~ beertax + drinkage + punish + miles + unemp + log(income),
 fm7 <- plm(frate ~ beertax + drinkagec + jail + service + miles + unemp + log(income),
   data = Fatalities, index = c("state", "year"), model = "within", effect = "twoways")
 ## summaries not too close, s.e.s generally too small
-coeftest(fm1, pvcovHC)
-coeftest(fm2, pvcovHC)
-coeftest(fm3, pvcovHC)
-coeftest(fm4, pvcovHC)
-coeftest(fm5, pvcovHC)
-coeftest(fm6, pvcovHC)
-coeftest(fm7, pvcovHC)
+coeftest(fm1, vcov = vcovHC)
+coeftest(fm2, vcov = vcovHC)
+coeftest(fm3, vcov = vcovHC)
+coeftest(fm4, vcov = vcovHC)
+coeftest(fm5, vcov = vcovHC)
+coeftest(fm6, vcov = vcovHC)
+coeftest(fm7, vcov = vcovHC)
 
 ## TODO: Testing exclusion restrictions
 

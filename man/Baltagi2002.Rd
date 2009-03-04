@@ -70,9 +70,8 @@ bptest(cig_lm2, ~ income * price + I(income^2) + I(price^2), data = CigarettesB)
 coeftest(cig_lm2, vcov = vcovHC(cig_lm2, type = "HC1"))
 ## Jarque-Bera test (Figure 5.2, p. 115)
 hist(residuals(cig_lm2), breaks = 16, ylim = c(0, 10), col = "lightgray")
-if(require("tseries")) {
+library("tseries")
 jarque.bera.test(residuals(cig_lm2))
-}
 
 ## Tables 8.1 and 8.2
 influence.measures(cig_lm2)

@@ -31,6 +31,14 @@ R> library("AER")
 Loading required package: car
 Loading required package: lmtest
 Loading required package: zoo
+
+Attaching package: 'zoo'
+
+
+	The following object(s) are masked from package:base :
+
+	 as.Date.numeric 
+
 Loading required package: sandwich
 Loading required package: strucchange
 Loading required package: survival
@@ -744,6 +752,15 @@ Loading required package: nlme
 Loading required package: lattice
 [1] "kinship is loaded"
 Loading required package: Formula
+
+Attaching package: 'Formula'
+
+
+	The following object(s) are masked from package:car :
+
+	 has.intercept 
+
+Loading required package: MASS
 R> gr <- subset(Grunfeld, firm %in% c("General Electric",
 +    "General Motors", "IBM"))
 R> pgr <- plm.data(gr, index = c("firm", "year"))
@@ -778,10 +795,9 @@ Coefficients :
 value     0.1049     0.0163    6.42  1.3e-10
 capital   0.3453     0.0244   14.16  < 2e-16
 
-Total Sum of Squares: 1890000
+Total Sum of Squares:    1890000
 Residual Sum of Squares: 244000
-Multiple R-Squared: 0.871
-F-statistic: 185.407 on 55 and 2 DF, p-value: 0.00538
+F-statistic: 185.407 on 2 and 55 DF, p-value: <2e-16
 R> 
 R> 
 R> ###################################################
@@ -789,7 +805,7 @@ R> ### chunk number 60: plm-pFtest
 R> ###################################################
 R> pFtest(gr_fe, gr_pool)
 
-	F test for effects
+	F test for individual effects
 
 data:  invest ~ value + capital 
 F = 56.82, df1 = 2, df2 = 55, p-value = 4.148e-14
@@ -803,7 +819,8 @@ R> ###################################################
 R> gr_re <- plm(invest ~ value + capital, data = pgr, 
 +    model = "random", random.method = "walhus")
 R> summary(gr_re)
-Oneway (individual) effect Random Effect Model (Wallace-Hussain's transformation)
+Oneway (individual) effect Random Effect Model 
+   (Swamy-Arora's transformation)
 
 Call:
 plm(formula = invest ~ value + capital, data = pgr, model = "random", 
@@ -823,14 +840,13 @@ Residuals :
 
 Coefficients :
              Estimate Std. Error t-value Pr(>|t|)
-(intercept) -109.9766    61.7014   -1.78    0.075
+(Intercept) -109.9766    61.7014   -1.78    0.075
 value          0.1043     0.0150    6.95  3.6e-12
 capital        0.3448     0.0245   14.06  < 2e-16
 
-Total Sum of Squares: 1990000
+Total Sum of Squares:    1990000
 Residual Sum of Squares: 258000
-Multiple R-Squared: 0.87
-F-statistic: 191.545 on 57 and 2 DF, p-value: 0.00521
+F-statistic: 191.545 on 2 and 57 DF, p-value: <2e-16
 R> 
 R> 
 R> ###################################################

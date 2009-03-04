@@ -35,10 +35,9 @@ of Pooling and Testing Procedures. \emph{European Economic Review}, \bold{22}, 1
 \examples{
 data("OECDGas")
 
-if(require("lattice")) {
-  xyplot(exp(cars) ~ year | country, data = OECDGas, type = "l")
-  xyplot(exp(gas) ~ year | country, data = OECDGas, type = "l")
-}
+library("lattice")
+xyplot(exp(cars) ~ year | country, data = OECDGas, type = "l")
+xyplot(exp(gas) ~ year | country, data = OECDGas, type = "l")
 }
 
 \keyword{datasets}
