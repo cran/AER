@@ -104,7 +104,7 @@ summary.tobit <- function(object, correlation = FALSE, symbolic.cor = FALSE, vco
 {
   ## failure
   if(!is.null(object$fail)) {
-    warning("tobit/survreg failed.", x$fail, "   No summary provided\n")
+    warning("tobit/survreg failed.", object$fail, "   No summary provided\n")
     return(invisible(object))
   }
   
@@ -126,7 +126,9 @@ summary.tobit <- function(object, correlation = FALSE, symbolic.cor = FALSE, vco
   
   ## Wald test
   nc <- length(coef(object))
-  wald <- linear.hypothesis(object, cbind(0, diag(nc-1)), vcov. = vcov.)
+  wald <- linear.hypothesis(object,
+    if(attr(terms(object), "intercept") > 0.5) cbind(0, diag(nc-1)) else diag(nc),
+    vcov. = vcov.)
   ## instead of: waldtest(object, vcov = vcov.)
 
   ## correlation

@@ -353,19 +353,23 @@ CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
 c1985 <- subset(CigarettesSW, year == "1985")
 c1995 <- subset(CigarettesSW, year == "1995")
 
+## convenience function: HC1 covariances
+hc1 <- function(x) vcovHC(x, type = "HC1")
+
 ## Equations 12.9--12.11
 fm_s1 <- lm(log(rprice) ~ tdiff, data = c1995)
+coeftest(fm_s1, vcov = hc1)
 fm_s2 <- lm(log(packs) ~ fitted(fm_s1), data = c1995)
 fm_ivreg <- ivreg(log(packs) ~ log(rprice) | tdiff, data = c1995)
-coeftest(fm_ivreg, vcov = sandwich) ## s.e.s do not match
+coeftest(fm_ivreg, vcov = hc1)
 
 ## Equation 12.15
 fm_ivreg2 <- ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff, data = c1995)
-coeftest(fm_ivreg2, vcov = sandwich) ## s.e.s do not match
+coeftest(fm_ivreg2, vcov = hc1)
 ## Equation 12.16
 fm_ivreg3 <- ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax/cpi),
   data = c1995)
-coeftest(fm_ivreg3, vcov = sandwich) ## s.e.s do not match
+coeftest(fm_ivreg3, vcov = hc1)
 
 ## Table 12.1, p. 448
 ydiff <- log(c1995$packs) - log(c1985$packs)
@@ -377,28 +381,24 @@ taxdiff <- c1995$tax/c1995$cpi - c1985$tax/c1985$cpi
 fm_diff1 <- ivreg(ydiff ~ pricediff + incdiff | incdiff + taxsdiff)
 fm_diff2 <- ivreg(ydiff ~ pricediff + incdiff | incdiff + taxdiff)
 fm_diff3 <- ivreg(ydiff ~ pricediff + incdiff | incdiff + taxsdiff + taxdiff)
-## again problems with some s.e.s
+coeftest(fm_diff1, vcov = hc1)
+coeftest(fm_diff2, vcov = hc1)
+coeftest(fm_diff3, vcov = hc1)
 
 ## checking instrument relevance
 fm_rel1 <- lm(pricediff ~ taxsdiff + incdiff)
-linear.hypothesis(fm_rel1, "taxsdiff = 0", vcov = sandwich)
-## Stata uses
-linear.hypothesis(fm_rel1, "taxsdiff = 0", vcov = 48/45 * vcovHC(fm_rel1, type="HC0"))
-
 fm_rel2 <- lm(pricediff ~ taxdiff + incdiff)
-linear.hypothesis(fm_rel2, "taxdiff = 0", vcov = sandwich)
-## Stata uses
-linear.hypothesis(fm_rel2, "taxdiff = 0", vcov = 48/45 * vcovHC(fm_rel2, type="HC0"))
-
 fm_rel3 <- lm(pricediff ~ incdiff + taxsdiff + taxdiff)
-linear.hypothesis(fm_rel3, c("taxsdiff = 0", "taxdiff = 0"),  vcov = vcovHC(fm_rel3, type = "HC0"))
-## Stata uses (does not match SW)
-linear.hypothesis(fm_rel3, c("taxsdiff = 0", "taxdiff = 0"), test = "Chisq")
+linear.hypothesis(fm_rel1, "taxsdiff = 0", vcov = hc1)
+linear.hypothesis(fm_rel2, "taxdiff = 0", vcov = hc1)
+linear.hypothesis(fm_rel3, c("taxsdiff = 0", "taxdiff = 0"),  vcov = hc1)
 
 ## testing overidentifying restrictions (J test)
 fm_or <- lm(residuals(fm_diff3) ~ incdiff + taxsdiff + taxdiff)
-linear.hypothesis(fm_or, c("taxsdiff = 0", "taxdiff = 0"), test = "Chisq")
-## warning: p-value invalid!
+(fm_or_test <- linear.hypothesis(fm_or, c("taxsdiff = 0", "taxdiff = 0"), test = "Chisq"))
+## warning: df (and hence p-value) invalid above.
+## correct df: # instruments - # endogenous variables
+pchisq(fm_or_test[2,5], df.residual(fm_diff3) - df.residual(fm_or), lower.tail = FALSE)
 
 
 #####################################################

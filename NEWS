@@ -1,3 +1,21 @@
+Changes in Version 1.1-2
+
+  o New errata item (in AER.pdf): The comment regarding the
+    output from the Johansen test (p. 169) is in error. The null
+    hypothesis of no cointegration is not rejected at the
+    10% level (only at 15% level).
+
+  o Enhancements of the CigarettesSW examples from Stock & Watson.
+  
+  o Fixed overall Wald test in summary() for "tobit" models
+    without intercept.
+    
+  o Improved "rgl" code in the SIC33 example.
+
+  o The variable "gender" in the Parade2005 data set was
+    wrong for observation 70. It is now "male" (not "female"). 
+    
+
 Changes in Version 1.1-1
 
   o A new improved version of the "plm" package is available

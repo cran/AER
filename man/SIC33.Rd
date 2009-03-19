@@ -61,6 +61,7 @@ if(require("rgl")) {
   x <- log(SIC33)[,2]
   y <- log(SIC33)[,3]
   z <- log(SIC33)[,1]
+  rgl.open()
   rgl.bbox()
   rgl.spheres(x, y, z, radius = 0.15)
   x <- seq(4.5, 7.5, by = 0.5)
