@@ -187,12 +187,17 @@ Please report any further errors you find to us.
     of \code{summary(gr_fe)} and \code{summary(gr_re)} are not correct,
     they should both be \code{< 2.22e-16}. Using \pkg{plm} 1.1-1 or higher, the code produces
     the correct output.
+  \item p.~92: Exercise~6 cannot be solved using \code{PSID1982} since that data set only
+    contains a cross-section while Hausman-Taylor requires panel data. A panel version has
+    been available in the \pkg{plm} package under the name \code{Wages}; we have now added
+    \code{PSID7682} to \pkg{AER} for completeness (and consistent naming conventions).
+    Use \code{PSID7682} for the exercise.
   \item p.~169: The comment regarding the output from the Johansen test is in error.
     The null hypothesis of no cointegration is not rejected at the 10\% level. Nonetheless,
     the table corresponding to Case~2 in \citet[][p. 420]{aer:Juselius:2006} reveals that the
     trace statistic is significant at the 15\% level, thus the Johansen test weakly confirms
     the initial two-step approach.
-   \item p.~179: For consistency, the GARCH code should be preceded by \code{data("MarkPound")}.
+  \item p.~179: For consistency, the GARCH code should be preceded by \code{data("MarkPound")}.
   \item p.~205: The reference for Henningsen (2008) should be: %% FIXME: will be package vignette
     \begin{quote}
       Henningsen A (2008). ``Demand Analysis with the Almost Ideal Demand System

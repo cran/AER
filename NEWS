@@ -1,3 +1,16 @@
+Changes in Version 1.1-3
+
+  o Added PSID7682 data set which contains the full Cornwell & Rupert
+    (1988) panel data for the years 1976-1982. This should be used
+    for estimation of the Hausman-Taylor model in Exercise 6 from
+    Chapter 3 (instead of PSID1982 which does not provide panel data
+    but only the cross-section for 1982). See the errata and the
+    manual page for more details.
+
+  o Fixed overall Wald test in summary() for "tobit" models
+    with intercept only.
+    
+
 Changes in Version 1.1-2
 
   o New errata item (in AER.pdf): The comment regarding the

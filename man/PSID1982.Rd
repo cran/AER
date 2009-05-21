@@ -28,6 +28,14 @@ A data frame containing 595 observations on 12 variables.
 }
 }
 
+\details{
+\code{PSID1982} is the cross-section for the year 1982 taken from a larger panel data set
+\code{\link{PSID7682}} for the years 1976--1982, originating from Cornwell and Rupert (1988).
+Baltagi (2002) just uses the 1982 cross-section; hence \code{PSID1982} is available as a
+standalone data set because it was included in \pkg{AER} prior to the availability of the
+full \code{PSID7682} panel version.
+}
+
 \source{
 The data is from Baltagi (2002) and available at
 
@@ -42,7 +50,7 @@ An Empirical Comparison of Instrumental Variables Estimators.
 \emph{Journal of Applied Econometrics}, \bold{3}, 149--155.
 }
 
-\seealso{\code{\link{Baltagi2002}}, \code{\link{PSID1976}}}
+\seealso{\code{\link{PSID7682}}, \code{\link{Baltagi2002}}}
 
 \examples{
 data("PSID1982")

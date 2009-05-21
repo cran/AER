@@ -126,9 +126,10 @@ summary.tobit <- function(object, correlation = FALSE, symbolic.cor = FALSE, vco
   
   ## Wald test
   nc <- length(coef(object))
-  wald <- linear.hypothesis(object,
-    if(attr(terms(object), "intercept") > 0.5) cbind(0, diag(nc-1)) else diag(nc),
-    vcov. = vcov.)
+  has_intercept <- attr(terms(object), "intercept") > 0.5
+  wald <- if(nc <= has_intercept) NULL else linear.hypothesis(object,
+    if(has_intercept) cbind(0, diag(nc-1)) else diag(nc),
+    vcov. = vcov.)[2,3]
   ## instead of: waldtest(object, vcov = vcov.)
 
   ## correlation
@@ -149,7 +150,7 @@ summary.tobit <- function(object, correlation = FALSE, symbolic.cor = FALSE, vco
   rval <- object[match(c("call", "df", "loglik", "iter", "na.action", "idf", "scale"),
     names(object), nomatch = 0)]
   rval <- c(rval, list(coefficients = coef, correlation = correlation,
-    symbolic.cor = symbolic.cor, parms = pprint, n = nobs, wald = wald[2,3]))
+    symbolic.cor = symbolic.cor, parms = pprint, n = nobs, wald = wald))
 
   class(rval) <- "summary.tobit"
   return(rval)
@@ -182,8 +183,9 @@ print.summary.tobit <- function(x, digits = max(3, getOption("digits") - 3), ...
   cat(paste("\n", x$parms, "\n", sep = ""))
   cat("Number of Newton-Raphson Iterations:", format(trunc(x$iter)), "\n")
   cat("Log-likelihood:", formatC(x$loglik[2], digits = digits), "on", x$df, "Df\n")
-  cat("Wald-statistic:", formatC(x$wald, digits = digits), "on", sum(x$df) - x$idf, "Df, p-value:",
-      format.pval(pchisq(x$wald, sum(x$df) - x$idf, lower.tail = FALSE)), "\n")
+  if(!is.null(x$wald)) cat("Wald-statistic:", formatC(x$wald, digits = digits),
+    "on", sum(x$df) - x$idf, "Df, p-value:",
+    format.pval(pchisq(x$wald, sum(x$df) - x$idf, lower.tail = FALSE)), "\n")
 
   ## correlation
   correl <- x$correlation
