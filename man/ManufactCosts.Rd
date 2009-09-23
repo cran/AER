@@ -28,7 +28,7 @@ Online complements to Greene (2003).
 
 \references{
 Berndt, E. and Wood, D. (1975). Technology, Prices, and the Derived Demand for Energy.
-\emph{Review od Economics and Statistics}, \bold{57}, 376--384.
+\emph{Review of Economics and Statistics}, \bold{57}, 376--384.
 
 Greene, W.H. (2003). \emph{Econometric Analysis}, 5th edition. Upper Saddle River, NJ: Prentice Hall.
 }

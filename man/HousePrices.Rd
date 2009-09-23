@@ -23,7 +23,7 @@ A data frame containing 546 observations on 12 variables.
   \item{gasheat}{Factor. Does the house use gas for hot water heating?}
   \item{aircon}{Factor. Is there central air conditioning?}
   \item{garage}{Number of garage places.}
-  \item{prefer}{Factor. Is the house located in the preferred neighbourhood of the city?}
+  \item{prefer}{Factor. Is the house located in the preferred neighborhood of the city?}
 }
 }
 

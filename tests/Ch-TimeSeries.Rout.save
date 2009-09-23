@@ -1,6 +1,6 @@
 
-R version 2.8.1 (2008-12-22)
-Copyright (C) 2008 The R Foundation for Statistical Computing
+R version 2.9.1 (2009-06-26)
+Copyright (C) 2009 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -426,8 +426,8 @@ Weights W:
 (This is the loading matrix)
 
           black.l2   white.l2     constant
-black.d -0.0747230 0.00245321 -1.81566e-17
-white.d  0.0201561 0.00353701  5.60071e-18
+black.d -0.0747230 0.00245321 -1.83608e-17
+white.d  0.0201561 0.00353701  5.55318e-18
 
 R> 
 R> 

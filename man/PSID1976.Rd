@@ -77,7 +77,7 @@ Wooldridge, J.M. (2002). \emph{Econometric Analysis of Cross-Section and Panel D
 Cambridge, MA: MIT Press.
 }
 
-\seealso{\code{\link{Greene2003}}, \code{\link{PSID1982}}}
+\seealso{\code{\link{Greene2003}}}
 
 \examples{
 ## data and transformations

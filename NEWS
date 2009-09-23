@@ -1,3 +1,13 @@
+Changes in Version 1.1-4
+
+  o ivreg() now uses the "Formula" package (>= 0.2-0) for processing
+    of its model formulas. However, this only affects the internal
+    computations, the user interface has remained unchanged.
+    
+  o Numerous spelling improvements in the documentation (thanks to
+    the new aspell() functionality in base R).
+
+
 Changes in Version 1.1-3
 
   o Added PSID7682 data set which contains the full Cornwell & Rupert

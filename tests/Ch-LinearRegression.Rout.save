@@ -1,6 +1,6 @@
 
-R version 2.8.1 (2008-12-22)
-Copyright (C) 2008 The R Foundation for Statistical Computing
+R version 2.9.1 (2009-06-26)
+Copyright (C) 2009 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -752,14 +752,6 @@ Loading required package: nlme
 Loading required package: lattice
 [1] "kinship is loaded"
 Loading required package: Formula
-
-Attaching package: 'Formula'
-
-
-	The following object(s) are masked from package:car :
-
-	 has.intercept 
-
 Loading required package: MASS
 R> gr <- subset(Grunfeld, firm %in% c("General Electric",
 +    "General Motors", "IBM"))
@@ -820,7 +812,7 @@ R> gr_re <- plm(invest ~ value + capital, data = pgr,
 +    model = "random", random.method = "walhus")
 R> summary(gr_re)
 Oneway (individual) effect Random Effect Model 
-   (Swamy-Arora's transformation)
+   (Wallace-Hussain's transformation)
 
 Call:
 plm(formula = invest ~ value + capital, data = pgr, model = "random", 
@@ -898,11 +890,9 @@ R> summary(empl_ab)
 Twoways effects Two steps model
 
 Call:
-pgmm(formula = log(emp) ~ lag(log(emp), 1) + lag(log(emp), 2) + 
-    log(wage) + lag(log(wage), 1) + log(capital) + log(output) + 
-    lag(log(output), 1), data = EmplUK, effect = "twoways", model = "twosteps", 
-    gmm.inst = ~log(emp), lag.gmm = list(c(2, 99)), index = c("firm", 
-        "year"))
+pgmm(formula = dynformula(form, list(2, 1, 0, 1)), data = EmplUK, 
+    effect = "twoways", model = "twosteps", gmm.inst = ~log(emp), 
+    lag.gmm = list(c(2, 99)), index = c("firm", "year"))
 
 Unbalanced Panel: n=140, T=7-9, N=1031
 
@@ -926,7 +916,6 @@ Sargan Test: chisq(25) = 30.11 (p.value=0.22)
 Autocorrelation test (1): normal = -2.428 (p.value=0.0076)
 Autocorrelation test (2): normal = -0.3325 (p.value=0.37)
 Wald test for coefficients: chisq(7) = 372 (p.value=<2e-16)
-Wald test for time dummies: chisq(6) = 26.90 (p.value=0.000151)
 R> 
 R> 
 R> ###################################################
@@ -940,16 +929,17 @@ Attaching package: 'Matrix'
 
 	The following object(s) are masked from package:stats :
 
+	 contr.SAS,
+	 contr.helmert,
+	 contr.poly,
+	 contr.sum,
+	 contr.treatment,
 	 xtabs 
 
 
 	The following object(s) are masked from package:base :
 
-	 colMeans,
-	 colSums,
-	 rcond,
-	 rowMeans,
-	 rowSums 
+	 rcond 
 
 R> gr2 <- subset(Grunfeld, firm %in% c("Chrysler", "IBM"))
 R> pgr2 <- plm.data(gr2, c("firm", "year"))
@@ -960,11 +950,6 @@ R> ### chunk number 68: SUR
 R> ###################################################
 R> gr_sur <- systemfit(invest ~ value + capital,
 +    method = "SUR", data = pgr2)
-Warning message:
-Ambiguous method selection for "crossprod", target "dgCMatrix#dgTMatrix" (the first of the signatures shown will be used)
-    Matrix#ANY
-    ANY#Matrix
- 
 R> summary(gr_sur, residCov = FALSE, equations = FALSE)
 
 systemfit results 

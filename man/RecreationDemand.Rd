@@ -43,7 +43,7 @@ Gurmu, S. and Trivedi, P.K. (1996). Excess Zeros in Count Models for Recreationa
 Ozuna, T. and Gomez, I.A. (1995). Specification and Testing of Count Data Recreation Demand Functions.
 \emph{Empirical Economics}, \bold{20}, 543--550.
 
-Seller, C., Stoll, J.R. and Chavas, J.-P. (1985). Validation og Empirical Measures of Welfare Change: A Comparison of Nonmarket Techniques. \emph{Land Economics}, \bold{61}, 156--175.
+Seller, C., Stoll, J.R. and Chavas, J.-P. (1985). Validation of Empirical Measures of Welfare Change: A Comparison of Nonmarket Techniques. \emph{Land Economics}, \bold{61}, 156--175.
 }
 
 \seealso{\code{\link{CameronTrivedi1998}}}

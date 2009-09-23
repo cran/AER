@@ -43,10 +43,8 @@ Journal of Applied Econometrics Data Archive.
 Durlauf, S.N., and Johnson, P.A. (1995). Multiple Regimes and Cross-Country
 Growth Behavior. \emph{Journal of Applied Econometrics}, \bold{10}, 365--384. 
 
-Koenker, R., and Zeileis, A. (2007). \dQuote{Reproducible Econometric Research
-(A Critical Review of the State of the Art).} Report 60, Department of Statistics
-and Mathematics, Wirtschaftsuniversität Wien, Research Report Series.
-\url{http://epub.wu-wien.ac.at/}.
+Koenker, R., and Zeileis, A. (2009). On Reproducible Econometric Research.
+\emph{Journal of Applied Econometrics}, \bold{24}(5), 833--847.
 
 Mankiw, N.G, Romer, D., and Weil, D.N. (1992). A Contribution to the Empirics of Economic Growth. 
 \emph{Quarterly Journal of Economics}, \bold{107}, 407--437. 
@@ -64,7 +62,7 @@ data("GrowthDJ")
 dj <- subset(GrowthDJ, oil == "no")
 ## Different scalings have been used by different authors,
 ## different types of standard errors, etc.,
-## see Koenker & Zeileis (2007) for an overview
+## see Koenker & Zeileis (2009) for an overview
 
 ## Durlauf & Johnson (1995), Table II
 mrw_model <- I(log(gdp85) - log(gdp60)) ~ log(gdp60) +

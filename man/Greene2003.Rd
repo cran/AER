@@ -339,7 +339,9 @@ aux_lin <- lm(m1 ~ tbill + gdp + I(fitted(fm_log) - log(fitted(fm_lin))), data =
 aux_log <- lm(m1 ~ tbill + gdp + I(fitted(fm_lin) - exp(fitted(fm_log))), data = log(usm))
 coeftest(aux_lin)[4,]
 coeftest(aux_log)[4,]
-## does not match results of Greene
+## matches results from errata
+## With lmtest >= 0.9-24:
+## petest(fm_lin, fm_log)
 
 ## Example 12.1
 fm_m1 <- dynlm(log(m1) ~ log(gdp) + log(cpi), data = USMacroG)

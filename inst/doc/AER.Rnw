@@ -173,12 +173,12 @@ or complementing methods previously available in \proglang{R}:
 \end{itemize}
 
 
+
 \section{Errata}
 
 The following errors have been found in the book so far.
 
 Please report any further errors you find to us.
-
 
 \begin{itemize}
   \item p.~85--86: Due to a bug in the \code{summary()} method for ``\code{plm}'' objects,
@@ -205,6 +205,13 @@ Please report any further errors you find to us.
       URL~\url{http://CRAN.R-project.org/package=micEcon}.
     \end{quote}
 \end{itemize}
+
+
+\emph{Note:} Currently, all links on manual pages corresponding to data sets taken from
+the Journal of Business \& Economic Statistics (JBES) archive are broken (data sets
+\code{MarkPound}, and \code{RecreationDemand}). The reason is the redesign of the American
+Statistical Association (ASA) website, rendering the old ASA data archive nonfunctional.
+The ASA journals manager currently appears to supply data on a case-by-case basis. The problem awaits a more permanent solution.
 
 
 \bibliography{aer}

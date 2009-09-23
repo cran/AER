@@ -31,7 +31,7 @@ A data frame containing 4,870 observations on 27 variables.
   \item{computer}{factor. Does the resume mention some computer skills?}
   \item{special}{factor. Does the resume mention some special skills?}
   \item{college}{factor. Does the applicant have a college degree or more?}
-  \item{minimum}{factor inidacting minimum experience requirement of the employer.}
+  \item{minimum}{factor indicating minimum experience requirement of the employer.}
   \item{equal}{factor. Is the employer EOE (equal opportunity employment)?}
   \item{wanted}{factor indicating type of position wanted by employer.}
   \item{requirements}{factor. Does the ad mention some requirement for the job?}

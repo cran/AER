@@ -42,7 +42,7 @@ Lott, W.F., and Ray, S.C. (1992). \emph{Applied Econometrics: Problems with Data
 New York: The Dryden Press.
 
 Zaman, A., Rousseeuw, P.J., and  Orhan, M. (2001). Econometric Applications of
-High-Breakdown Robust Regression Rechniques. \emph{Economics Letters}, \bold{71}, 1--8.
+High-Breakdown Robust Regression Techniques. \emph{Economics Letters}, \bold{71}, 1--8.
 }
 
 \seealso{\code{\link{Baltagi2002}}}

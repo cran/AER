@@ -2,7 +2,7 @@
 \alias{MotorCycles}
 \title{Motor Cycles in The Netherlands}
 \description{
-Time series of stock of motor cyles (two wheels) in The Netherlands
+Time series of stock of motor cycles (two wheels) in The Netherlands
 (in thousands).
 }
 \usage{data("MotorCycles")}

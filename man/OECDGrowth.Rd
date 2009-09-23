@@ -38,7 +38,7 @@ Nonneman, W., and Vanhoudt, P. (1996). A Further Augmentation of the Solow Model
 and the Empirics of Economic Growth. \emph{Quarterly Journal of Economics}, \bold{111}, 943--953.
 
 Zaman, A., Rousseeuw, P.J., and  Orhan, M. (2001). Econometric Applications of
-High-Breakdown Robust Regression Rechniques. \emph{Economics Letters}, \bold{71}, 1--8.
+High-Breakdown Robust Regression Techniques. \emph{Economics Letters}, \bold{71}, 1--8.
 }
 
 \seealso{\code{\link{GrowthDJ}}, \code{\link{GrowthSW}}}

@@ -1,6 +1,6 @@
 
-R version 2.8.1 (2008-12-22)
-Copyright (C) 2008 The R Foundation for Statistical Computing
+R version 2.9.1 (2009-06-26)
+Copyright (C) 2009 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -127,7 +127,9 @@ R> ### chunk number 10: cps-reg
 R> ###################################################
 R> library("quantreg")
 Loading required package: SparseM
-Package SparseM (0.78) loaded.  To cite, see citation("SparseM")
+Package SparseM (0.80) loaded.  
+	   To cite, see citation("SparseM")
+
 
 Attaching package: 'SparseM'
 
@@ -201,8 +203,8 @@ R> ###################################################
 R> ### chunk number 16: bkde-fit
 R> ###################################################
 R> library("KernSmooth")
-KernSmooth 2.22 installed
-Copyright M. P. Wand 1997
+KernSmooth 2.23 installed
+Copyright M. P. Wand 1997-2009
 R> cps_bkde <- bkde2D(cbind(cps$experience, log(cps$wage)),
 +    bandwidth = c(3.5, 0.5), gridsize = c(200, 200))
 R> 

@@ -13,12 +13,12 @@ ivreg.fit(x, y, z, weights, offset, \dots)
 
 \arguments{
   \item{x}{regressor matrix.}
-  \item{y}{vector with dependet variable.}
+  \item{y}{vector with dependent variable.}
   \item{z}{instruments matrix.}
   \item{weights}{an optional vector of weights to be used in the fitting process.}
   \item{offset}{an optional offset that can be used to specify an a priori known
     component to be included during fitting.}       
-  \item{\dots}{further arguments passed to \code{\link[stats]{lm.fit}} or
+  \item{\dots}{further arguments passed to \code{\link[stats:lmfit]{lm.fit}} or
     \code{link[stats]{lm.wfit}}, respectively.}
 }
 
@@ -49,7 +49,7 @@ a regression of \code{y} onto the projected \code{x}.
     \item{hatvalues}{regression hat values.}
 }
 
-\seealso{\code{\link{ivreg}}, \code{\link[stats]{lm.fit}}}
+\seealso{\code{\link{ivreg}}, \code{\link[stats:lmfit]{lm.fit}}}
 
 \examples{
 ## data

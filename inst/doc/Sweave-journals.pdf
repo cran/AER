@@ -662,10 +662,10 @@ endstream
 endobj
 9 0 obj
 <<
-/CreationDate (D:20090521193940)
-/ModDate (D:20090521193940)
+/CreationDate (D:20090923223324)
+/ModDate (D:20090923223324)
 /Title (R Graphics Output)
-/Producer (R 2.9.0)
+/Producer (R 2.9.1)
 /Creator (R)
 >>
 endobj
@@ -904,8 +904,8 @@ endobj
 24 0 obj <<
 /Producer (pdfTeX-1.40.3)
 /Creator (TeX)
-/CreationDate (D:20090521193941+02'00')
-/ModDate (D:20090521193941+02'00')
+/CreationDate (D:20090923223325+02'00')
+/ModDate (D:20090923223325+02'00')
 /Trapped /False
 /PTEX.Fullbanner (This is pdfTeX using libpoppler, Version 3.141592-1.40.3-2.2 (Web2C 7.5.6) kpathsea version 3.5.6)
 >> endobj
@@ -940,7 +940,7 @@ trailer
 << /Size 25
 /Root 23 0 R
 /Info 24 0 R
-/ID [<A70FF326D23BE7D204665630BB65C399> <A70FF326D23BE7D204665630BB65C399>] >>
+/ID [<36FD3B1823CD8000E8E5A91B0D71673A> <36FD3B1823CD8000E8E5A91B0D71673A>] >>
 startxref
 38319
 %%EOF

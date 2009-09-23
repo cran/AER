@@ -31,15 +31,15 @@ Fitting and testing tobit regression models for censored data.
   \item{right}{right limit for the censored dependent variable \code{y}.
     If set to \code{Inf}, the default, \code{y} is assumed not be right-censored.}
   \item{dist}{assumed distribution for the dependent variable \code{y}.
-    This is passed to \code{\link[stats]{survreg}}, see the respective man page for
+    This is passed to \code{\link[survival]{survreg}}, see the respective man page for
     more details.}
   \item{subset}{a specification of the rows to be used.}
   \item{data}{a data frame containing the variables in the model.}
-  \item{\dots}{further arguments passed to \code{\link[stats]{survreg}}.}
+  \item{\dots}{further arguments passed to \code{\link[survival]{survreg}}.}
 }
 
 \details{
-  The function \code{tobit} is a convenience interface to \code{\link[stats]{survreg}}
+  The function \code{tobit} is a convenience interface to \code{\link[survival]{survreg}}
   (for survival regression, including censored regression) setting different
   defaults and providing a more convenient interface for specification
   of the censoring information.
@@ -48,10 +48,10 @@ Fitting and testing tobit regression models for censored data.
   a normal distribution for the dependent variable with left-censoring at 0.
   
   Technically, the formula of type \code{y ~ x1 + x2 + \dots} passed to \code{tobit}
-  is simply transformed into a formula suitable for \code{\link[stats]{survreg}}: This means
-  the dependent variable is first censored and then wrapped into a \code{\link[stats]{Surv}}
+  is simply transformed into a formula suitable for \code{\link[survival]{survreg}}: This means
+  the dependent variable is first censored and then wrapped into a \code{\link[survival]{Surv}}
   object containing the censoring information which is subsequently passed to 
-  \code{\link[stats]{survreg}}, e.g., \code{Surv(ifelse(y <= 0, 0, y), y > 0, type = "left") ~ x1 + x2 + \dots}
+  \code{\link[survival]{survreg}}, e.g., \code{Surv(ifelse(y <= 0, 0, y), y > 0, type = "left") ~ x1 + x2 + \dots}
   for the default settings.
 }
 

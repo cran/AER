@@ -1,6 +1,6 @@
 
-R version 2.8.1 (2008-12-22)
-Copyright (C) 2008 The R Foundation for Statistical Computing
+R version 2.9.1 (2009-06-26)
+Copyright (C) 2009 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -491,7 +491,9 @@ R> ### chunk number 41: quantreg
 R> ###################################################
 R> library("quantreg")
 Loading required package: SparseM
-Package SparseM (0.78) loaded.  To cite, see citation("SparseM")
+Package SparseM (0.80) loaded.  
+	   To cite, see citation("SparseM")
+
 
 Attaching package: 'SparseM'
 

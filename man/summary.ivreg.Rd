@@ -32,10 +32,10 @@
     coefficients. This can be specified as a matrix or as a function yielding a matrix
     when applied to the fitted model.}
   \item{df}{the degrees of freedom to be used. By default this is set to
-    residual degrees of freedom for which a t or F test ist computed. Alternatively,
+    residual degrees of freedom for which a t or F test is computed. Alternatively,
     it can be set to \code{Inf} (or equivalently \code{0}) for which a z or Chi-squared
     test is computed.}
-  \item{test}{character specifying wether to compute the large sample Chi-squared
+  \item{test}{character specifying whether to compute the large sample Chi-squared
     statistic (with asymptotic Chi-squared distribution) or the finite sample F statistic
     (with approximate F distribution).}
   \item{component}{character specifying for which component of the
@@ -51,7 +51,7 @@ a set of standard methods (including \code{summary}, \code{vcov}, \code{anova},
 \code{estfun}) is available.
 }
 
-\seealso{\code{\link{ivreg}}, \code{\link[stats]{lm.fit}}}
+\seealso{\code{\link{ivreg}}, \code{\link[stats:lmfit]{lm.fit}}}
 
 \examples{
 ## data

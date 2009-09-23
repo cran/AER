@@ -9,52 +9,17 @@ ivreg <- function(formula, instruments, data, subset, na.action, weights, offset
   mf <- mf[c(1, m)]
   mf$drop.unused.levels <- TRUE
   
-  ## extended formula processing, obtain:
-  ##   ffx:     y ~ x1 + x2                (main regression)
-  ##   ffz:       ~ z1 + z2 + z3           (instruments: can be NULL)
-  ##   ff:      y ~ x1 + x2 | z1 + z2 + z3 (compact model formula)
-  ##   formula: y ~ x1 + x2 + z1 + z2 + z3 (formula for setting up model frame)
-  if(length(formula[[3]]) > 1 && identical(formula[[3]][[1]], as.name("|")))
-  {
-    ## regressors X and instruments Z specified by a single formula (with |)    
-    if(!missing(instruments)) {
-      warning("formula with '|' specified, 'instruments' ignored")
-      cl$instruments <- NULL
-    }
-    ff <- formula
-    formula[[3]][1] <- call("+")
-    mf$formula <- formula
-    ffx <- . ~ .
-    ffz <- ~ .
-    ffx[[2]] <- ff[[2]]
-    ffx[[3]] <- ff[[3]][[2]]
-    ffz[[3]] <- ff[[3]][[3]]
-    ffz[[2]] <- NULL
-    if(any(sapply(unlist(as.list(ffz[[2]])), function(x) identical(x, as.name("."))))) {
-      ffz <- eval(parse(text = sprintf( paste("%s -", deparse(ffx[[2]])), deparse(ffz) )))
-    }
+  ## handle instruments for backward compatibility
+  if(!missing(instruments)) {
+    formula <- as.Formula(formula, instruments)
+    cl$instruments <- NULL
+    cl$formula <- formula(formula)
   } else {
-    if(missing(instruments)) {
-      ## no instruments: plain OLS
-      ffx <- ff <- formula
-      ffz <- NULL
-    } else {
-      ## also support old "instruments" interface
-      ffx <- formula
-      if(length(instruments) > 2) instruments[[2]] <- NULL
-      ffz <- instruments
-      ff <- . ~ . | .
-      ff[[2]] <- ffx[[2]]
-      ff[[3]][[2]] <- ffx[[3]]
-      ff[[3]][[3]] <- ffz[[2]]
-      formula <- ff
-      formula[[3]][1] <- call("+")
-      mf$formula <- formula
-      cl$instruments <- NULL
-      cl$formula <- ff
-    }
+    formula <- as.Formula(formula)
   }
-  
+  stopifnot(length(formula)[1] == 1L, length(formula)[2] %in% 1:2)
+  mf$formula <- formula
+
   ## call model.frame()
   mf[[1]] <- as.name("model.frame")
   mf <- eval(mf, parent.frame())
@@ -62,14 +27,13 @@ ivreg <- function(formula, instruments, data, subset, na.action, weights, offset
   ## extract response, terms, model matrices
   Y <- model.response(mf, "numeric")
   mt <- terms(formula, data = data)
-  mtX <- terms(ffx, data = data)
+  mtX <- terms(formula, data = data, rhs = 1)
   X <- model.matrix(mtX, mf, contrasts)
-  if(is.null(ffz)) {
+  if(length(formula)[2] < 2L) {
     mtZ <- NULL
     Z <- NULL
   } else {
-    mtZ <- terms(ffz, data = data)
-    mtZ <- terms(update(mtZ, ~ .), data = data)
+    mtZ <- delete.response(terms(formula, data = data, rhs = 2))
     Z <- model.matrix(mtZ, mf, contrasts)
   }
 
@@ -85,7 +49,7 @@ ivreg <- function(formula, instruments, data, subset, na.action, weights, offset
 
   ## enhance information stored in fitted model object
   rval$call <- cl
-  rval$formula <- ff
+  rval$formula <- formula(formula)
   rval$terms <- list(regressors = mtX, instruments = mtZ, full = mt)
   rval$na.action <- attr(mf, "na.action")
   rval$levels <- .getXlevels(mt, mf)

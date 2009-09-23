@@ -8,7 +8,7 @@ Panel data on gasoline consumption in 18 OECD countries over 19 years, 1960--197
 \format{
 A data frame containing 342 observations on 6 variables.
 \describe{
-  \item{country}{Factor indicating ountry.}
+  \item{country}{Factor indicating country.}
   \item{year}{Year.}
   \item{gas}{Logarithm of motor gasoline consumption per car.}
   \item{income}{Logarithm of real per-capita income.}

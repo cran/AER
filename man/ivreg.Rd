@@ -75,7 +75,7 @@ a set of standard methods (including \code{print}, \code{summary}, \code{vcov}, 
     \emph{Econometric Analysis}, 2nd ed., Macmillan.
 }
 
-\seealso{\code{\link{ivreg.fit}}, \code{\link[stats]{lm}}, \code{\link[stats]{lm.fit}}}
+\seealso{\code{\link{ivreg.fit}}, \code{\link[stats]{lm}}, \code{\link[stats:lmfit]{lm.fit}}}
 
 \examples{
 ## data

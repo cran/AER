@@ -15,7 +15,7 @@ students from approximately 1,100 high schools.
 A data frame containing 4,739 observations on 14 variables.
 \describe{
   \item{gender}{factor indicating gender.}
-  \item{ethnicity}{factor indicating ethincity (African-American, Hispanic or other).}
+  \item{ethnicity}{factor indicating ethnicity (African-American, Hispanic or other).}
   \item{score}{base year composite test score. These are achievement tests given to high
     school seniors in the sample.}
   \item{fcollege}{factor. Is the father a college graduate?}

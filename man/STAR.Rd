@@ -46,13 +46,13 @@ A data frame containing 11,598 observations on 47 variables.
     \code{"inner-city"}, \code{"suburban"}, \code{"rural"} or \code{"urban"}.}
   \item{school3}{factor indicating school type in 3rd grade:
     \code{"inner-city"}, \code{"suburban"}, \code{"rural"} or \code{"urban"}.}
-  \item{degreek}{factor indicating gighest degree of kindergarten teacher:
+  \item{degreek}{factor indicating highest degree of kindergarten teacher:
     \code{"bachelor"}, \code{"master"}, \code{"specialist"}, or \code{"master+"}.}
-  \item{degree1}{factor indicating gighest degree of 1st grade teacher:
+  \item{degree1}{factor indicating highest degree of 1st grade teacher:
     \code{"bachelor"}, \code{"master"}, \code{"specialist"}, or \code{"phd"}.}
-  \item{degree2}{factor indicating gighest degree of 2nd grade teacher:
+  \item{degree2}{factor indicating highest degree of 2nd grade teacher:
     \code{"bachelor"}, \code{"master"}, \code{"specialist"}, or \code{"phd"}.}
-  \item{degree3}{factor indicating gighest degree of 3rd grade teacher:
+  \item{degree3}{factor indicating highest degree of 3rd grade teacher:
     \code{"bachelor"}, \code{"master"}, \code{"specialist"}, or \code{"phd"}.}
   \item{ladderk}{factor indicating teacher's career ladder level in kindergarten: \code{"level1"},
     \code{"level2"}, \code{"level3"}, \code{"apprentice"}, \code{"probation"} or \code{"pending"}.}
