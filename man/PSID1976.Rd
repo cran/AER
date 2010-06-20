@@ -11,7 +11,7 @@ based on data for the previous year, 1975.
 \usage{data("PSID1976")}
 
 \format{
-A data frame containing 753 observations on 22 variables.
+A data frame containing 753 observations on 21 variables.
 \describe{
   \item{participation}{Factor. Did the individual participate in the labor force in 1975?
     (This is essentially \code{wage > 0} or \code{hours > 0}.)}
@@ -20,9 +20,6 @@ A data frame containing 753 observations on 22 variables.
   \item{oldkids}{Number of children between ages 6 and 18 in household.}
   \item{age}{Wife's age in years.}
   \item{education}{Wife's education in years.}
-  \item{earnings}{Wife's average hourly earnings, in 1975 dollars.
-    (Identical to \code{wage}. This variable is currently kept for
-    consistency with earlier releases. It will be removed in the near future.)}
   \item{wage}{Wife's average hourly wage, in 1975 dollars.}
   \item{repwage}{Wife's wage reported at the time of the 1976 interview 
     (not the same as the 1975 estimated wage). To use the subsample with this wage,
@@ -51,9 +48,9 @@ A data frame containing 753 observations on 22 variables.
 \details{
 This data set is also known as the Mroz (1987) data.
 
-Warning: typical applications using these data employ the variable
-\code{wage} aka \code{earnings} as the dependent variable. The variable
-\code{repwage} is the reported wage in a 1976 interview, named RPWG by Greene (2003).
+Warning: Typical applications using these data employ the variable
+\code{wage} (aka \code{earnings} in previous versions of the data) as the dependent variable.
+The variable \code{repwage} is the reported wage in a 1976 interview, named RPWG by Greene (2003).
 }
 
 \source{
@@ -73,11 +70,13 @@ Hoboken, NJ: John Wiley, Ch. 8, 199--218.
 Mroz, T.A. (1987). The Sensitivity of an Empirical Model of Married Women's Hours of Work to
 Economic and Statistical Assumptions. \emph{Econometrica}, \bold{55}, 765--799.
 
+Winkelmann, R., and Boes, S. (2009). \emph{Analysis of Microdata}, 2nd ed. Berlin and Heidelberg: Springer-Verlag.
+
 Wooldridge, J.M. (2002). \emph{Econometric Analysis of Cross-Section and Panel Data}. 
 Cambridge, MA: MIT Press.
 }
 
-\seealso{\code{\link{Greene2003}}}
+\seealso{\code{\link{Greene2003}}, \code{\link{WinkelmannBoes2009}}}
 
 \examples{
 ## data and transformations

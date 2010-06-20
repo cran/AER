@@ -1,6 +1,6 @@
 
-R version 2.9.1 (2009-06-26)
-Copyright (C) 2009 The R Foundation for Statistical Computing
+R version 2.11.1 (2010-05-31)
+Copyright (C) 2010 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -29,16 +29,9 @@ R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
 R> 
 R> library("AER")
 Loading required package: car
+Loading required package: Formula
 Loading required package: lmtest
 Loading required package: zoo
-
-Attaching package: 'zoo'
-
-
-	The following object(s) are masked from package:base :
-
-	 as.Date.numeric 
-
 Loading required package: sandwich
 Loading required package: strucchange
 Loading required package: survival
@@ -149,8 +142,8 @@ Analysis of Variance Table
 
 Response: log(subs)
                 Df Sum Sq Mean Sq F value Pr(>F)
-log(citeprice)   1  125.9   125.9     224 <2e-16
-Residuals      178  100.1     0.6               
+log(citeprice)   1    126   125.9     224 <2e-16
+Residuals      178    100     0.6               
 R> 
 R> 
 R> ###################################################
@@ -235,9 +228,9 @@ log(citeprice) = -0.5
 Model 1: log(subs) ~ log(citeprice)
 Model 2: restricted model
 
-  Res.Df   RSS  Df Sum of Sq    F Pr(>F)
-1    178 100.1                          
-2    179 100.5  -1      -0.5 0.86   0.35
+  Res.Df RSS Df Sum of Sq    F Pr(>F)
+1    178 100                         
+2    179 100 -1    -0.484 0.86   0.35
 R> 
 R> 
 R> ###################################################
@@ -322,9 +315,9 @@ Analysis of Variance Table
 
 Model 1: log(wage) ~ experience + I(experience^2) + education
 Model 2: log(wage) ~ experience + I(experience^2) + education + ethnicity
-  Res.Df  RSS    Df Sum of Sq   F Pr(>F)
-1  28151 9720                           
-2  28150 9599     1       121 355 <2e-16
+  Res.Df  RSS Df Sum of Sq   F Pr(>F)
+1  28151 9720                        
+2  28150 9599  1       121 355 <2e-16
 R> 
 R> 
 R> ###################################################
@@ -339,7 +332,7 @@ experience          1    840     840    2462 <2e-16
 I(experience^2)     1   2249    2249    6597 <2e-16
 education           1   1620    1620    4750 <2e-16
 ethnicity           1    121     121     355 <2e-16
-Residuals       28150   9599    0.34               
+Residuals       28150   9599       0               
 R> 
 R> 
 R> ###################################################
@@ -356,9 +349,9 @@ Wald test
 
 Model 1: log(wage) ~ experience + I(experience^2) + education + ethnicity
 Model 2: log(wage) ~ experience + I(experience^2) + education
-  Res.Df    Df   F Pr(>F)
-1  28150                 
-2  28151    -1 355 <2e-16
+  Res.Df Df   F Pr(>F)
+1  28150              
+2  28151 -1 355 <2e-16
 R> 
 R> 
 R> ###################################################
@@ -476,9 +469,9 @@ Analysis of Variance Table
 Model 1: log(wage) ~ ethnicity/(experience + I(experience^2) + education) - 
     1
 Model 2: log(wage) ~ experience + I(experience^2) + education + ethnicity
-  Res.Df  RSS    Df Sum of Sq    F  Pr(>F)
-1  28147 9582                             
-2  28150 9599    -3       -17 16.5 1.1e-10
+  Res.Df  RSS Df Sum of Sq    F  Pr(>F)
+1  28147 9582                          
+2  28150 9599 -3     -16.8 16.5 1.1e-10
 R> 
 R> 
 R> ###################################################
@@ -702,6 +695,9 @@ R> plot(merge(as.zoo(USMacroG[,"consumption"]), fitted(cons_lm1),
 +    residuals(cons_lm2)), screens = rep(1:2, c(3, 3)),
 +    lty = rep(1:3, 2), ylab = c("Fitted values", "Residuals"),
 +    xlab = "Time", main = "")
+Warning message:
+In merge.zoo(..., all = all, fill = fill, suffixes = suffixes, retclass = "zoo") :
+  Index vectors are of different classes: integer integer integer numeric integer integer
 R> legend(0.05, 0.95, c("observed", "cons_lm1", "cons_lm2"), 
 +    lty = 1:3, bty = "n")
 R> 
@@ -722,10 +718,10 @@ Analysis of Variance Table
 Model 1: consumption ~ dpi + L(dpi)
 Model 2: consumption ~ dpi + L(dpi) + L(consumption)
 Model 3: consumption ~ dpi + L(consumption)
-  Res.Df     RSS  Df Sum of Sq      F  Pr(>F)
-1    200 1534001                             
-2    199   73550   1   1460451 3951.4 < 2e-16
-3    200   92644  -1    -19094   51.7 1.3e-11
+  Res.Df     RSS Df Sum of Sq      F  Pr(>F)
+1    200 1534001                            
+2    199   73550  1   1460451 3951.4 < 2e-16
+3    200   92644 -1    -19094   51.7 1.3e-11
 R> 
 R> 
 R> ###################################################
@@ -737,9 +733,9 @@ Encompassing test
 Model 1: consumption ~ dpi + L(dpi)
 Model 2: consumption ~ dpi + L(consumption)
 Model E: consumption ~ dpi + L(dpi) + L(consumption)
-          Res.Df  Df      F  Pr(>F)
-M1 vs. ME    199  -1 3951.4 < 2e-16
-M2 vs. ME    199  -1   51.7 1.3e-11
+          Res.Df Df      F  Pr(>F)
+M1 vs. ME    199 -1 3951.4 < 2e-16
+M2 vs. ME    199 -1   51.7 1.3e-11
 R> 
 R> 
 R> ###################################################
@@ -751,7 +747,6 @@ Loading required package: kinship
 Loading required package: nlme
 Loading required package: lattice
 [1] "kinship is loaded"
-Loading required package: Formula
 Loading required package: MASS
 R> gr <- subset(Grunfeld, firm %in% c("General Electric",
 +    "General Motors", "IBM"))
@@ -784,7 +779,7 @@ Residuals :
 
 Coefficients :
         Estimate Std. Error t-value Pr(>|t|)
-value     0.1049     0.0163    6.42  1.3e-10
+value     0.1049     0.0163    6.42  3.3e-08
 capital   0.3453     0.0244   14.16  < 2e-16
 
 Total Sum of Squares:    1890000
@@ -832,8 +827,8 @@ Residuals :
 
 Coefficients :
              Estimate Std. Error t-value Pr(>|t|)
-(Intercept) -109.9766    61.7014   -1.78    0.075
-value          0.1043     0.0150    6.95  3.6e-12
+(Intercept) -109.9766    61.7014   -1.78     0.08
+value          0.1043     0.0150    6.95  3.8e-09
 capital        0.3448     0.0245   14.06  < 2e-16
 
 Total Sum of Squares:    1990000
@@ -891,8 +886,9 @@ Twoways effects Two steps model
 
 Call:
 pgmm(formula = dynformula(form, list(2, 1, 0, 1)), data = EmplUK, 
-    effect = "twoways", model = "twosteps", gmm.inst = ~log(emp), 
-    lag.gmm = list(c(2, 99)), index = c("firm", "year"))
+    effect = "twoways", model = "twosteps", index = c("firm", 
+        "year"), ... = list(gmm.inst = ~log(emp), lag.gmm = list(c(2, 
+        99))))
 
 Unbalanced Panel: n=140, T=7-9, N=1031
 
@@ -900,22 +896,23 @@ Number of Observations Used:  611
 
 Residuals
      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
--0.619000 -0.049500 -0.000457 -0.000184  0.053400  0.641000 
+-0.619000 -0.025600  0.000000 -0.000134  0.033200  0.641000 
 
 Coefficients
-                    Estimate Std. Error z-value Pr(>|z|)
-lag(log(emp), 1)      0.4742     0.0853    5.56  2.7e-08
-lag(log(emp), 2)     -0.0530     0.0273   -1.94  0.05222
-log(wage)            -0.5132     0.0493  -10.40  < 2e-16
-lag(log(wage), 1)     0.2246     0.0801    2.81  0.00502
-log(capital)          0.2927     0.0395    7.42  1.2e-13
-log(output)           0.6098     0.1085    5.62  1.9e-08
-lag(log(output), 1)  -0.4464     0.1248   -3.58  0.00035
+                        Estimate Std. Error z-value Pr(>|z|)
+lag(log(emp), c(1, 2))1   0.4742     0.0853    5.56  2.7e-08
+lag(log(emp), c(1, 2))2  -0.0530     0.0273   -1.94  0.05222
+log(wage)                -0.5132     0.0493  -10.40  < 2e-16
+lag(log(wage), 1)         0.2246     0.0801    2.81  0.00502
+log(capital)              0.2927     0.0395    7.42  1.2e-13
+log(output)               0.6098     0.1085    5.62  1.9e-08
+lag(log(output), 1)      -0.4464     0.1248   -3.58  0.00035
 
 Sargan Test: chisq(25) = 30.11 (p.value=0.22)
 Autocorrelation test (1): normal = -2.428 (p.value=0.0076)
 Autocorrelation test (2): normal = -0.3325 (p.value=0.37)
 Wald test for coefficients: chisq(7) = 372 (p.value=<2e-16)
+Wald test for time dummies: chisq(5) = 26.60 (p.value=6.81e-05)
 R> 
 R> 
 R> ###################################################
@@ -926,20 +923,9 @@ Loading required package: Matrix
 
 Attaching package: 'Matrix'
 
+The following object(s) are masked from 'package:base':
 
-	The following object(s) are masked from package:stats :
-
-	 contr.SAS,
-	 contr.helmert,
-	 contr.poly,
-	 contr.sum,
-	 contr.treatment,
-	 xtabs 
-
-
-	The following object(s) are masked from package:base :
-
-	 rcond 
+    det
 
 R> gr2 <- subset(Grunfeld, firm %in% c("Chrysler", "IBM"))
 R> pgr2 <- plm.data(gr2, c("firm", "year"))

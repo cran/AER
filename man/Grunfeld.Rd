@@ -1,8 +1,6 @@
 \name{Grunfeld}
 \alias{Grunfeld}
 
-\encoding{UTF-8}
-
 \title{Grunfeld's Investment Data}
 
 \description{
@@ -38,8 +36,8 @@ A data frame containing 20 annual observations on 3 variables for 11 firms.
 
 \details{
 This is a popular data set for teaching purposes. Unfortunately, there exist several 
-different versions (see Kleiber and Zeileis, 2008, for a detailed discussion). 
-In particular, the version provided with Greene (2003) has a couple of errors
+different versions (see Kleiber and Zeileis, 2010, for a detailed discussion). 
+In particular, the version provided by Greene (2003) has a couple of errors
 for \code{"US Steel"} (firm 2): 
 investment in 1940 is 261.6 (instead of the correct 361.6), 
 investment in 1952 is 645.2 (instead of the correct 645.5), 
@@ -59,16 +57,15 @@ Baltagi, B.H. (2002). \emph{Econometrics}, 3rd ed., Berlin: Springer-Verlag.
 
 Baltagi, B.H. (2005). \emph{Econometric Analysis of Panel Data}, 3rd ed. Chichester, UK: John Wiley.
 
-Kleiber, C., and Zeileis, A. (2008). \dQuote{The Grunfeld Data at 50.} Report 82,
-  Department of Statistics and Mathematics, Wirtschaftsuniversität Wien, Research Report Series.
-  \url{http://epub.wu-wien.ac.at/}.
-
 Greene, W.H. (2003). \emph{Econometric Analysis}, 5th edition. Upper Saddle River, NJ: Prentice Hall.
 
 Greene, W.H. (2008). \emph{Econometric Analysis}, 6th edition. Upper Saddle River, NJ: Prentice Hall.
 
 Grunfeld, Y. (1958). \emph{The Determinants of Corporate Investment}. 
   Unpublished Ph.D. Dissertation, University of Chicago.
+
+Kleiber, C., and Zeileis, A. (2010). \dQuote{The Grunfeld Data at 50.}
+  \emph{German Economic Review}, Forthcoming. \url{http://statmath.wu.ac.at/~zeileis/grunfeld/}.
 }
 
 \seealso{\code{\link{Baltagi2002}}, \code{\link{Greene2003}}}

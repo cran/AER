@@ -1,6 +1,6 @@
 
-R version 2.9.1 (2009-06-26)
-Copyright (C) 2009 The R Foundation for Statistical Computing
+R version 2.11.1 (2010-05-31)
+Copyright (C) 2010 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -29,16 +29,9 @@ R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
 R> 
 R> library("AER")
 Loading required package: car
+Loading required package: Formula
 Loading required package: lmtest
 Loading required package: zoo
-
-Attaching package: 'zoo'
-
-
-	The following object(s) are masked from package:base :
-
-	 as.Date.numeric 
-
 Loading required package: sandwich
 Loading required package: strucchange
 Loading required package: survival
@@ -189,22 +182,32 @@ Loading required package: gtools
 
 Attaching package: 'gtools'
 
+The following object(s) are masked from 'package:car':
 
-	The following object(s) are masked from package:car :
-
-	 logit 
+    logit
 
 Loading required package: gdata
+gdata: read.xls support for 'XLS' (Excel 97-2004) files
+gdata: ENABLED.
+
+gdata: read.xls support for 'XLSX' (Excel 2007+) files
+gdata: ENABLED.
+
+Attaching package: 'gdata'
+
+The following object(s) are masked from 'package:utils':
+
+    object.size
+
 Loading required package: caTools
 Loading required package: bitops
 Loading required package: grid
 
 Attaching package: 'gplots'
 
+The following object(s) are masked from 'package:stats':
 
-	The following object(s) are masked from package:stats :
-
-	 lowess 
+    lowess
 
 R> pred <- prediction(fitted(swiss_probit),
 +    SwissLabor$participation)
@@ -238,8 +241,7 @@ R> murder_logit <- glm(I(executions > 0) ~ time + income +
 +    noncauc + lfp + southern, data = MurderRates,
 +    family = binomial)
 Warning message:
-In glm.fit(x = X, y = Y, weights = weights, start = start, etastart = etastart,  :
-  fitted probabilities numerically 0 or 1 occurred
+glm.fit: fitted probabilities numerically 0 or 1 occurred 
 R> 
 R> 
 R> ###################################################
@@ -267,8 +269,7 @@ R> murder_logit2 <- glm(I(executions > 0) ~ time + income +
 +    family = binomial, control = list(epsilon = 1e-15,
 +    maxit = 50, trace = FALSE))
 Warning message:
-In glm.fit(x = X, y = Y, weights = weights, start = start, etastart = etastart,  :
-  fitted probabilities numerically 0 or 1 occurred
+glm.fit: fitted probabilities numerically 0 or 1 occurred 
 R> 
 R> 
 R> ###################################################
@@ -452,7 +453,12 @@ R> library("pscl")
 Loading required package: mvtnorm
 Loading required package: coda
 Loading required package: lattice
-pscl 1.03 	 2008-11-24 
+Classes and Methods for R developed in the
+Political Science Computational Laboratory
+Department of Political Science
+Stanford University
+Simon Jackman
+hurdle and zeroinfl functions by Achim Zeileis
 R> 
 R> 
 R> ###################################################
@@ -471,6 +477,9 @@ Call:
 zeroinfl(formula = trips ~ . | quality + income, data = RecreationDemand, 
     dist = "negbin")
 
+Pearson residuals:
+    Min      1Q  Median      3Q     Max 
+-1.0889 -0.2004 -0.0570 -0.0451 40.0139 
 
 Count model coefficients (negbin with log link):
             Estimate Std. Error z value Pr(>|z|)
@@ -514,6 +523,9 @@ Call:
 hurdle(formula = trips ~ . | quality + income, data = RecreationDemand, 
     dist = "negbin")
 
+Pearson residuals:
+   Min     1Q Median     3Q    Max 
+-1.610 -0.207 -0.185 -0.164 12.111 
 
 Count model coefficients (truncated negbin with log link):
             Estimate Std. Error z value Pr(>|z|)
@@ -629,9 +641,9 @@ Model 2: restricted model
 
 Note: Coefficient covariance matrix supplied.
 
-  Res.Df  Df Chisq Pr(>Chisq)
-1    594                     
-2    596  -2  4.91      0.086
+  Res.Df Df Chisq Pr(>Chisq)
+1    594                    
+2    596 -2  4.91      0.086
 R> 
 R> 
 R> ###################################################
@@ -743,7 +755,7 @@ z test of coefficients:
 education         0.8700     0.0931    9.35  < 2e-16
 minorityyes      -1.0564     0.4120   -2.56    0.010
 custodial|admin   7.9514     1.0769    7.38  1.5e-13
-admin|manage     14.1721     0.0941  150.65  < 2e-16
+admin|manage     14.1721     1.4744    9.61  < 2e-16
 
 R> 
 R> 

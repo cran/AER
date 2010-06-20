@@ -1,6 +1,6 @@
 
-R version 2.9.1 (2009-06-26)
-Copyright (C) 2009 The R Foundation for Statistical Computing
+R version 2.11.1 (2010-05-31)
+Copyright (C) 2010 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -29,16 +29,9 @@ R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
 R> 
 R> library("AER")
 Loading required package: car
+Loading required package: Formula
 Loading required package: lmtest
 Loading required package: zoo
-
-Attaching package: 'zoo'
-
-
-	The following object(s) are masked from package:base :
-
-	 as.Date.numeric 
-
 Loading required package: sandwich
 Loading required package: strucchange
 Loading required package: survival
@@ -190,20 +183,17 @@ R> library("boot")
 
 Attaching package: 'boot'
 
+The following object(s) are masked from 'package:lattice':
 
-	The following object(s) are masked from package:lattice :
+    melanoma
 
-	 melanoma 
+The following object(s) are masked from 'package:survival':
 
+    aml
 
-	The following object(s) are masked from package:survival :
+The following object(s) are masked from 'package:car':
 
-	 aml 
-
-
-	The following object(s) are masked from package:car :
-
-	 logit 
+    logit
 
 R> set.seed(123)
 R> jour_boot <- boot(journals, refit, R = 999)

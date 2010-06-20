@@ -17,7 +17,7 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
 %%\VignetteKeywords{econometrics, statistical software, R}
 
 \author{Christian Kleiber\\Universit\"at Basel
-   \And Achim Zeileis\\Wirtschaftsuniversit\"at Wien}
+   \And Achim Zeileis\\Universit\"at Innsbruck}
 \Plainauthor{Christian Kleiber, Achim Zeileis}
 \title{Applied Econometrics with \proglang{R}:\\Package Vignette and Errata}
 \Plaintitle{Applied Econometrics with R: Package Vignette and Errata}
@@ -30,7 +30,7 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
   ``Applied Econometrics with \proglang{R}''
   \citep[Springer-Verlag, ISBN~978-0-387-77316-2, pp.~vii+222]{aer:Kleiber+Zeileis:2008}
   is the first book on applied econometrics using the \proglang{R}~system
-  for statistical computing and graphics \citep{aer:R:2008}. 
+  for statistical computing and graphics \citep{aer:R:2010}. 
   It presents hands-on examples for a
   wide range of econometric models, from classical linear regression models for
   cross-section, time series or panel data and the common non-linear models of
@@ -44,7 +44,7 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
   regressions and time series models as well as various models of microeconometrics.
    
   The book is accompanied by the \proglang{R} package
-  \pkg{AER} \citep{aer:Kleiber+Zeileis:2009} which contains some new \proglang{R}
+  \pkg{AER} \citep{aer:Kleiber+Zeileis:2010} which contains some new \proglang{R}
   functionality, some 100 data sets
   taken from a wide variety of sources, the full source code for all examples
   used in the book, as well as further worked examples, e.g., from popular textbooks.
@@ -58,17 +58,17 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
   Wirtschaftswissenschaftliches Zentrum (WWZ)\\
   Universit\"at Basel\\
   Peter Merian-Weg 6\\
-  CH-4002 Basel, Switzerland\\
+  4002 Basel, Switzerland\\
   E-mail: \email{Christian.Kleiber@unibas.ch}\\
-  URL: \url{http://www.wwz.unibas.ch/kleiber/}\\
+  URL: \url{http://wwz.unibas.ch/kleiber/}\\
 
   Achim Zeileis\\
-  Department of Statistics and Mathematics\\
-  Wirtschaftsuniversit\"at Wien\\
-  Augasse 2--6\\
-  AT-1090 Wien, Austria\\
+  Department of Statistics\\
+  Universit\"at Innsbruck\\
+  Universit\"atsstr.~15\\
+  6020 Innsbruck, Austria\\
   E-mail: \email{Achim.Zeileis@R-project.org}\\
-  URL: \url{http://statmath.wu-wien.ac.at/~zeileis/}
+  URL: \url{http://statmath.wu.ac.at/~zeileis/}
 }
 
 \begin{document}
@@ -118,7 +118,7 @@ Some of these are used in recent textbooks, among them
 \cite{aer:Baltagi:2002}, \cite{aer:Davidson+MacKinnon:2004}, \cite{aer:Greene:2003},
 \cite{aer:Stock+Watson:2007}, and \cite{aer:Verbeek:2004}. In addition, we provide
 all further data sets from \cite{aer:Baltagi:2002},  \cite{aer:Franses:1998},
-\cite{aer:Greene:2003}, and \cite{aer:Stock+Watson:2007}.
+\cite{aer:Greene:2003}, \cite{aer:Stock+Watson:2007}, and \cite{aer:Winkelmann+Boes:2009}.
 
 Detailed information about the source of each data set, descriptions of
 the variables included, and usually also examples for typical analyses
@@ -144,6 +144,7 @@ Currently available manual pages are:
   \item \code{Franses1998} for \cite{aer:Franses:1998},
   \item \code{Greene2003} for \cite{aer:Greene:2003},
   \item \code{StockWatson2007} for \cite{aer:Stock+Watson:2007}.
+  \item \code{WinkelmannBoes2009} for \cite{aer:Winkelmann+Boes:2009}.
 \end{itemize}
 
 
@@ -181,6 +182,10 @@ The following errors have been found in the book so far.
 Please report any further errors you find to us.
 
 \begin{itemize}
+  \item p.~5--9, 46--53: There are now very minor differences in the plots pertaining to
+    Example~2 (Determinants of wages) in Chapter~1.1 and Chapter~2.8 (Exploratory Data Analysis with \proglang{R})
+    due to a missing observation. Specifically, the version of the \code{CPS1985} data used
+    for the book contained only 533~observations, the original observation~1 had been omitted inadvertently.
   \item p.~85--86: Due to a bug in the \code{summary()} method for ``\code{plm}'' objects,
     the degrees of freedom reported for the $F$~statistics were interchanged and thus the
     $p$~values were not correct. Therefore, the $p$~values printed in the book at the end
@@ -192,6 +197,18 @@ Please report any further errors you find to us.
     been available in the \pkg{plm} package under the name \code{Wages}; we have now added
     \code{PSID7682} to \pkg{AER} for completeness (and consistent naming conventions).
     Use \code{PSID7682} for the exercise.
+  \item p.~141: The log-likelihood for the tobit model lacked a minus sign. The correct version is
+%
+\[
+\ell(\beta, \sigma^2) 
+= \sum_{y_i > 0} \left( \log\phi\{(y_i - x_i^\top \beta)/\sigma\} - \log\sigma \right)
+ + \sum_{y_i = 0} \log \Phi( - x_i^\top \beta /\sigma).
+\]  
+%    
+  \item p.~149: The standard error (and hence the corresponding $z$~test) of \code{admin|manage}
+    in the output of \code{coeftest(bank_polr)} is wrong, it should be \code{1.4744}.
+    This was caused by an inconsistency between \fct{polr} and its \fct{vcov} method which
+    has now been improved in the \pkg{MASS} package ($\ge$ 7.3-6).
   \item p.~169: The comment regarding the output from the Johansen test is in error.
     The null hypothesis of no cointegration is not rejected at the 10\% level. Nonetheless,
     the table corresponding to Case~2 in \citet[][p. 420]{aer:Juselius:2006} reveals that the

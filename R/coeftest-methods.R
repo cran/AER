@@ -63,3 +63,14 @@ coeftest.polr <- function(x, vcov. = NULL, df = NULL, ...)
   attr(rval, "method") <- paste(mthd, "test of coefficients")
   return(rval)
 }
+
+lrtest.fitdistr <- function(object, ..., name = NULL)
+{
+  if(is.null(name)) name <- function(x) if(is.null(names(x$estimate))) {
+    paste(round(x$estimate, digits = max(getOption("digits") - 3, 2)), collapse = ", ")
+  } else {
+    paste(names(x$estimate), "=", round(x$estimate, digits = max(getOption("digits") - 3, 2)), collapse = ", ")
+  }
+  lrtest.default(object, ..., name = name)
+}
+

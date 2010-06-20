@@ -377,7 +377,7 @@ coeftest(fm_m1, vcov = NeweyWest(fm_m1, lag = 5))
 summary(fm_m1)$r.squared
 dwtest(fm_m1)
 as.vector(acf(residuals(fm_m1), plot = FALSE)$acf)[2]
-## does not match Table 12.1
+## matches Tab. 12.1 errata and Greene 6e, apart from Newey-West SE
 
 
 #################################################

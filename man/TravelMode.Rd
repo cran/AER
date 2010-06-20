@@ -48,9 +48,9 @@ xyplot(travel ~ wait | mode, data = TravelMode)
 
 ## Greene (2003), Table 21.11, conditional logit model
 library("mlogit")
-TravelMode$choice2 <- TravelMode$choice == "yes"
 TravelMode$incair <- with(TravelMode, income * (mode == "air"))
-tm_cl <- mlogit(choice2 ~ gcost + wait + incair, data = TravelMode, shape = "long", choice = "choice", alt.var = "mode", reflevel = "car")
+tm_cl <- mlogit(choice ~ gcost + wait + incair, data = TravelMode,
+  shape = "long", alt.var = "mode", reflevel = "car")
 summary(tm_cl)
 
 }

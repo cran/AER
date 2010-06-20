@@ -1,3 +1,39 @@
+Changes in Version 1.1-5
+  
+  o CPS1985 now has 534 observations (not 533 as in prior releases),
+    the original observation 1 had been omitted inadvertently. See
+    also the errata in vignette("AER", package = "AER").
+
+  o Data and examples for Winkelmann and Boes (2009),
+    "Analysis of Microdata" (2nd ed.) have been added. For details and
+    extensive (but not quite complete) replication code see
+    help("WinkelmannBoes2009") as well as help("GSS7402") and
+    help("GSOEP9402").
+
+  o As announced in the changes for version 1.1-0 of the "AER" package,
+    the variable "earnings" has now been removed from the
+    PSID1976 (aka Mroz) data. In 1.1-0 it was renamed to "wage"
+    to avoid confusion with other data sets.
+
+  o The coeftest() method for "polr" objects used to return wrong
+    standard errors (and hence wrong z tests) for the last intercept.
+    This was caused by an inconsistency between the summary() and
+    vcov() methods for "polr" objects which has been improved in
+    recent versions of the "MASS" package. The correct results are
+    computed by coeftest() for "polr" objects computed with MASS
+    version >= 7.3-6. See also the errata in vignette("AER",
+    package = "AER")
+
+  o The paper describing the various versions of the Grunfeld data
+    has been accepted for publication in the German Economic Review.
+    An updated version of the manuscript and associated replication
+    files -- mostly based on data("Grunfeld", package = "AER") --
+    is available from http://statmath.wu.ac.at/~zeileis/grunfeld/.
+
+  o Added lrtest() method for "fitdistr" objects with intelligible
+    model name (instead of the usual formula for formula-based models).
+
+
 Changes in Version 1.1-4
 
   o ivreg() now uses the "Formula" package (>= 0.2-0) for processing
@@ -23,9 +59,9 @@ Changes in Version 1.1-3
 
 Changes in Version 1.1-2
 
-  o New errata item (in AER.pdf): The comment regarding the
-    output from the Johansen test (p. 169) is in error. The null
-    hypothesis of no cointegration is not rejected at the
+  o New errata item in vignette("AER", package = "AER"): The comment
+    regarding the output from the Johansen test (p. 169) is in error.
+    The null hypothesis of no cointegration is not rejected at the
     10% level (only at 15% level).
 
   o Enhancements of the CigarettesSW examples from Stock & Watson.

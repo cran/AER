@@ -19,10 +19,9 @@ A data frame containing 62 observations on 2 variables for the period 1968--1976
 }
 
 \details{
-The original data provided by Kennan (1985) are on a monthly basis, 
-while Greene (2003) only provides the June data for each year.
-Also, the duration for observation 36 is given as 3 by Greene while Kennan has 2. 
-Here we use Greene's version.
+The original data provided by Kennan (1985) are on a monthly basis, for the period 1968(1) through 1976(12). Greene (2003) only provides the June data for each year. Also, the duration for observation 36 is given as 3 by Greene while Kennan has 2. Here we use Greene's version.
+
+\code{uoutput} is the residual from a regression of the logarithm of industrial production in manufacturing on time, time squared, and monthly dummy variables.  
 }
 
 \source{

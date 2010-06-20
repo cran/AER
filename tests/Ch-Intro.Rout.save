@@ -1,6 +1,6 @@
 
-R version 2.9.1 (2009-06-26)
-Copyright (C) 2009 The R Foundation for Statistical Computing
+R version 2.11.1 (2010-05-31)
+Copyright (C) 2010 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -29,16 +29,9 @@ R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
 R> 
 R> library("AER")
 Loading required package: car
+Loading required package: Formula
 Loading required package: lmtest
 Loading required package: zoo
-
-Attaching package: 'zoo'
-
-
-	The following object(s) are masked from package:base :
-
-	 as.Date.numeric 
-
 Loading required package: sandwich
 Loading required package: strucchange
 Loading required package: survival
@@ -127,30 +120,26 @@ R> ### chunk number 10: cps-reg
 R> ###################################################
 R> library("quantreg")
 Loading required package: SparseM
-Package SparseM (0.80) loaded.  
+Package SparseM (0.85) loaded.
 	   To cite, see citation("SparseM")
 
 
 Attaching package: 'SparseM'
 
+The following object(s) are masked from 'package:base':
 
-	The following object(s) are masked from package:stats :
-
-	 model.response 
-
-
-	The following object(s) are masked from package:base :
-
-	 backsolve,
-	 chol 
+    backsolve, norm
 
 
 Attaching package: 'quantreg'
 
+The following object(s) are masked from 'package:survival':
 
-	The following object(s) are masked from package:survival :
+    untangle.specials
 
-	 untangle.specials 
+The following object(s) are masked from 'package:utils':
+
+    vignette
 
 R> cps_lm <- lm(log(wage) ~ experience + I(experience^2) +
 +    education, data = cps)
@@ -195,15 +184,18 @@ R> ###################################################
 R> ### chunk number 15: srq-plot1
 R> ###################################################
 R> plot(summary(cps_rq))
-Warning message:
-In rq.fit.br(x, y, tau = tau, ci = TRUE, ...) : Solution may be nonunique
+Warning messages:
+1: In rq.fit.br(x, y, tau = tau, ci = TRUE, ...) :
+  Solution may be nonunique
+2: In rq.fit.br(x, y, tau = tau, ci = TRUE, ...) :
+  Solution may be nonunique
 R> 
 R> 
 R> ###################################################
 R> ### chunk number 16: bkde-fit
 R> ###################################################
 R> library("KernSmooth")
-KernSmooth 2.23 installed
+KernSmooth 2.23 loaded
 Copyright M. P. Wand 1997-2009
 R> cps_bkde <- bkde2D(cbind(cps$experience, log(cps$wage)),
 +    bandwidth = c(3.5, 0.5), gridsize = c(200, 200))
@@ -262,11 +254,12 @@ R> search()
  [5] "package:AER"         "package:survival"   
  [7] "package:splines"     "package:strucchange"
  [9] "package:sandwich"    "package:lmtest"     
-[11] "package:zoo"         "package:car"        
-[13] "package:stats"       "package:graphics"   
-[15] "package:grDevices"   "package:utils"      
-[17] "package:datasets"    "package:methods"    
-[19] "Autoloads"           "package:base"       
+[11] "package:zoo"         "package:Formula"    
+[13] "package:car"         "package:stats"      
+[15] "package:graphics"    "package:grDevices"  
+[17] "package:utils"       "package:datasets"   
+[19] "package:methods"     "Autoloads"          
+[21] "package:base"       
 R> 
 R> 
 R> ###################################################

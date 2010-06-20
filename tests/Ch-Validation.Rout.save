@@ -1,6 +1,6 @@
 
-R version 2.9.1 (2009-06-26)
-Copyright (C) 2009 The R Foundation for Statistical Computing
+R version 2.11.1 (2010-05-31)
+Copyright (C) 2010 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -29,16 +29,9 @@ R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
 R> 
 R> library("AER")
 Loading required package: car
+Loading required package: Formula
 Loading required package: lmtest
 Loading required package: zoo
-
-Attaching package: 'zoo'
-
-
-	The following object(s) are masked from package:base :
-
-	 as.Date.numeric 
-
 Loading required package: sandwich
 Loading required package: strucchange
 Loading required package: survival
@@ -491,30 +484,26 @@ R> ### chunk number 41: quantreg
 R> ###################################################
 R> library("quantreg")
 Loading required package: SparseM
-Package SparseM (0.80) loaded.  
+Package SparseM (0.85) loaded.
 	   To cite, see citation("SparseM")
 
 
 Attaching package: 'SparseM'
 
+The following object(s) are masked from 'package:base':
 
-	The following object(s) are masked from package:stats :
-
-	 model.response 
-
-
-	The following object(s) are masked from package:base :
-
-	 backsolve,
-	 chol 
+    backsolve, norm
 
 
 Attaching package: 'quantreg'
 
+The following object(s) are masked from 'package:survival':
 
-	The following object(s) are masked from package:survival :
+    untangle.specials
 
-	 untangle.specials 
+The following object(s) are masked from 'package:utils':
+
+    vignette
 
 R> 
 R> 
@@ -579,8 +568,8 @@ Quantile Regression Analysis of Deviance Table
 Model: log(wage) ~ experience + I(experience^2) + education
 Joint Test of Equality of Slopes: tau in {  0.25 0.75  }
 
-     Df Resid Df F value Pr(>F)
-1     3    56307     115 <2e-16
+  Df Resid Df F value Pr(>F)
+1  3    56307     115 <2e-16
 R> 
 R> 
 R> ###################################################
@@ -592,10 +581,10 @@ Quantile Regression Analysis of Deviance Table
 Model: log(wage) ~ experience + I(experience^2) + education
 Tests of Equality of Distinct Slopes: tau in {  0.25 0.75  }
 
-                   Df Resid Df F value Pr(>F)
-experience          1    56309  339.41 <2e-16
-I(experience^2)     1    56309  329.74 <2e-16
-education           1    56309    0.35   0.55
+                Df Resid Df F value Pr(>F)
+experience       1    56309  339.41 <2e-16
+I(experience^2)  1    56309  329.74 <2e-16
+education        1    56309    0.35   0.55
 R> 
 R> 
 R> ###################################################

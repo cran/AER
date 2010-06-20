@@ -43,6 +43,7 @@ export(
   S3method("fitted", "survreg")
   S3method("logLik", "survreg")
 
-## methods for class multinom/polr
+## methods for class multinom, polr, fitdistr
   S3method("coeftest", "multinom")
   S3method("coeftest", "polr")
+  S3method("lrtest", "fitdistr")
