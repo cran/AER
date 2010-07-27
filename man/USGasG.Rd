@@ -51,7 +51,7 @@ sqrt(diag(vcov(fm)))
 ## confidence interval
 confint(fm, parm = "log(income)")
 ## test linear hypothesis
-linear.hypothesis(fm, "log(income) = 1")
+linearHypothesis(fm, "log(income) = 1")
 
 ## Example 7.6
 ## re-used in Example 8.3

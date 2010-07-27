@@ -127,7 +127,7 @@ summary.tobit <- function(object, correlation = FALSE, symbolic.cor = FALSE, vco
   ## Wald test
   nc <- length(coef(object))
   has_intercept <- attr(terms(object), "intercept") > 0.5
-  wald <- if(nc <= has_intercept) NULL else linear.hypothesis(object,
+  wald <- if(nc <= has_intercept) NULL else linearHypothesis(object,
     if(has_intercept) cbind(0, diag(nc-1)) else diag(nc),
     vcov. = vcov.)[2,3]
   ## instead of: waldtest(object, vcov = vcov.)
@@ -262,7 +262,7 @@ lrtest.tobit <- function(object, ..., name = NULL)
   lrtest.default(object, ..., name = name)
 }
 
-linear.hypothesis.tobit <- function(model, hypothesis.matrix,
+linearHypothesis.tobit <- function(model, hypothesis.matrix,
   rhs = NULL, vcov. = NULL, ...)
 {
   if(is.null(vcov.)) {
@@ -272,6 +272,6 @@ linear.hypothesis.tobit <- function(model, hypothesis.matrix,
   }
   vcov. <- vcov.[-nrow(vcov.), -ncol(vcov.)]
   model$formula <- model$call$formula
-  car:::linear.hypothesis.default(model,
+  car:::linearHypothesis.default(model,
     hypothesis.matrix = hypothesis.matrix, rhs = rhs, vcov. = vcov., ...)
 }

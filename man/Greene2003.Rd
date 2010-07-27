@@ -156,7 +156,7 @@ sqrt(diag(vcov(fm)))
 ## confidence interval
 confint(fm, parm = "log(income)")
 ## test linear hypothesis
-linear.hypothesis(fm, "log(income) = 1")
+linearHypothesis(fm, "log(income) = 1")
 
 ## Figure 7.5
 plot(price ~ gas, data = as.data.frame(USGasG), pch = 19,
@@ -262,7 +262,7 @@ deviance(fm6.3)
 vcov(fm6.1)[2,3] 
 
 ## F test
-linear.hypothesis(fm6.1, "tbill + inflation = 0")
+linearHypothesis(fm6.1, "tbill + inflation = 0")
 ## alternatively
 anova(fm6.1, fm6.3)
 ## t statistic
@@ -278,7 +278,7 @@ summary(fm_distlag)
 
 ## estimate and test long-run MPC 
 coef(fm_distlag)[2]/(1-coef(fm_distlag)[3])
-linear.hypothesis(fm_distlag, "log(dpi) + L(log(consumption)) = 1")
+linearHypothesis(fm_distlag, "log(dpi) + L(log(consumption)) = 1")
 ## correct, see errata
  
 ## Example 6.4
@@ -328,7 +328,7 @@ fm_nls2 <- nls(consumption ~ alpha + beta * dpi,
   control = nls.control(maxiter = 100), data = as.data.frame(USMacroG))
 anova(fm_nls, fm_nls2)
 ## Wald test
-linear.hypothesis(fm_nls, "gamma = 1")
+linearHypothesis(fm_nls, "gamma = 1")
 
 ## Example 9.8, Table 9.2
 usm <- USMacroG[, c("m1", "tbill", "gdp")]
@@ -415,7 +415,7 @@ vcov(fm_cb)
 ## Cobb-Douglas vs. Translog model
 anova(fm_cb, fm_tl)
 ## hypothesis of constant returns
-linear.hypothesis(fm_cb, "labor + capital = 1")
+linearHypothesis(fm_cb, "labor + capital = 1")
 
 
 ###############################
@@ -505,7 +505,7 @@ fm_all <- lm(log(cost/fuel) ~ log(output) + log(labor/fuel) + log(capital/fuel),
 summary(fm_all)
 
 ## hypothesis of constant returns to scale
-linear.hypothesis(fm_all, "log(output) = 1")
+linearHypothesis(fm_all, "log(output) = 1")
 
 ## Figure 7.4
 plot(residuals(fm_all) ~ log(output), data = Electricity)
@@ -730,10 +730,13 @@ mean(residuals(fm_gm)^2)   ## Greene uses MLE
 fm_pool <- lm(invest ~ value + capital, data = ggr)
 
 ## Tab. 14.3 (and Tab 13.4, cross-section ML)
+## (not run due to long computation time)
+\dontrun{
 fm_ml <- systemfit(invest ~ value + capital, data = pggr, method = "SUR",
   methodResidCov = "noDfCor", maxiter = 1000, tol = 1e-10)
 fm_pml <- systemfit(invest ~ value + capital, data = pggr, method = "SUR", pooled = TRUE, 
   methodResidCov = "noDfCor", residCovWeighted = TRUE, maxiter = 1000, tol = 1e-10)
+}
 
 ## Fig. 14.2
 plot(unlist(residuals(fm_sur)[, c(3, 1, 2, 5, 4)]), 

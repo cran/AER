@@ -56,7 +56,7 @@ fm_all <- lm(log(cost/fuel) ~ log(output) + log(labor/fuel) + log(capital/fuel),
 summary(fm_all)
 
 ## hypothesis of constant returns to scale
-linear.hypothesis(fm_all, "log(output) = 1")
+linearHypothesis(fm_all, "log(output) = 1")
 
 ## Table 7.4
 ## log quadratic cost function

@@ -3,7 +3,7 @@ import("stats")
 importFrom("lmtest", "coeftest")
 importFrom("lmtest", "waldtest")
 importFrom("lmtest", "lrtest")
-importFrom("car", "linear.hypothesis")
+importFrom("car", "linearHypothesis")
 importFrom("sandwich", "bread")
 importFrom("sandwich", "estfun")
 
@@ -23,7 +23,7 @@ export(
   S3method("model.frame", "tobit")
   S3method("waldtest", "tobit")
   S3method("lrtest", "tobit")
-  S3method("linear.hypothesis", "tobit")
+  S3method("linearHypothesis", "tobit")
 
 ## methods for class ivreg
   S3method("print", "ivreg")

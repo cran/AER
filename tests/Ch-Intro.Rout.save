@@ -29,13 +29,16 @@ R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
 R> 
 R> library("AER")
 Loading required package: car
+Loading required package: MASS
+Loading required package: nnet
+Loading required package: leaps
+Loading required package: survival
+Loading required package: splines
 Loading required package: Formula
 Loading required package: lmtest
 Loading required package: zoo
 Loading required package: sandwich
 Loading required package: strucchange
-Loading required package: survival
-Loading required package: splines
 R> 
 R> set.seed(1071)
 R> 
@@ -251,15 +254,16 @@ R> ###################################################
 R> search()
  [1] ".GlobalEnv"          "package:KernSmooth" 
  [3] "package:quantreg"    "package:SparseM"    
- [5] "package:AER"         "package:survival"   
- [7] "package:splines"     "package:strucchange"
- [9] "package:sandwich"    "package:lmtest"     
-[11] "package:zoo"         "package:Formula"    
-[13] "package:car"         "package:stats"      
-[15] "package:graphics"    "package:grDevices"  
-[17] "package:utils"       "package:datasets"   
-[19] "package:methods"     "Autoloads"          
-[21] "package:base"       
+ [5] "package:AER"         "package:strucchange"
+ [7] "package:sandwich"    "package:lmtest"     
+ [9] "package:zoo"         "package:Formula"    
+[11] "package:car"         "package:survival"   
+[13] "package:splines"     "package:leaps"      
+[15] "package:nnet"        "package:MASS"       
+[17] "package:stats"       "package:graphics"   
+[19] "package:grDevices"   "package:utils"      
+[21] "package:datasets"    "package:methods"    
+[23] "Autoloads"           "package:base"       
 R> 
 R> 
 R> ###################################################

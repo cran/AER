@@ -48,7 +48,7 @@ vcov(fm_cb)
 ## Cobb-Douglas vs. Translog model
 anova(fm_cb, fm_tl)
 ## hypothesis of constant returns
-linear.hypothesis(fm_cb, "labor + capital = 1")
+linearHypothesis(fm_cb, "labor + capital = 1")
 
 ## 3D Visualization
 if(require("scatterplot3d")) {

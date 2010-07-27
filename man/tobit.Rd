@@ -8,7 +8,7 @@
 \alias{update.tobit}
 \alias{waldtest.tobit}
 \alias{lrtest.tobit}
-\alias{linear.hypothesis.tobit}
+\alias{linearHypothesis.tobit}
 \alias{logLik.survreg}
 \alias{deviance.survreg}
 \alias{fitted.survreg}

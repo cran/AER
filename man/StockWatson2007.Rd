@@ -389,13 +389,13 @@ coeftest(fm_diff3, vcov = hc1)
 fm_rel1 <- lm(pricediff ~ taxsdiff + incdiff)
 fm_rel2 <- lm(pricediff ~ taxdiff + incdiff)
 fm_rel3 <- lm(pricediff ~ incdiff + taxsdiff + taxdiff)
-linear.hypothesis(fm_rel1, "taxsdiff = 0", vcov = hc1)
-linear.hypothesis(fm_rel2, "taxdiff = 0", vcov = hc1)
-linear.hypothesis(fm_rel3, c("taxsdiff = 0", "taxdiff = 0"),  vcov = hc1)
+linearHypothesis(fm_rel1, "taxsdiff = 0", vcov = hc1)
+linearHypothesis(fm_rel2, "taxdiff = 0", vcov = hc1)
+linearHypothesis(fm_rel3, c("taxsdiff = 0", "taxdiff = 0"),  vcov = hc1)
 
 ## testing overidentifying restrictions (J test)
 fm_or <- lm(residuals(fm_diff3) ~ incdiff + taxsdiff + taxdiff)
-(fm_or_test <- linear.hypothesis(fm_or, c("taxsdiff = 0", "taxdiff = 0"), test = "Chisq"))
+(fm_or_test <- linearHypothesis(fm_or, c("taxsdiff = 0", "taxdiff = 0"), test = "Chisq"))
 ## warning: df (and hence p-value) invalid above.
 ## correct df: # instruments - # endogenous variables
 pchisq(fm_or_test[2,5], df.residual(fm_diff3) - df.residual(fm_or), lower.tail = FALSE)

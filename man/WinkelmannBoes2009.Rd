@@ -171,7 +171,9 @@ tfb_ols <- lm(log(tfb) ~ education + ethnicity + siblings + city16 + immigrant,
 gss2002 <- subset(GSS7402, year == 2002 & (agefirstbirth < 40 | age < 40))
 gss2002$afb <- with(gss2002, Surv(ifelse(kids > 0, agefirstbirth, age), kids > 0))
 afb_km <- survfit(afb ~ 1, data = gss2002)
-summary(afb_km)
+afb_skm <- summary(afb_km)
+print(afb_skm)
+with(afb_skm, plot(n.event/n.risk ~ time, type = "s"))
 plot(afb_km, xlim = c(10, 40), conf.int = FALSE)
 
 ## Example 8.9

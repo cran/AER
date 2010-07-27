@@ -1,3 +1,9 @@
+Changes in Version 1.1-6
+  
+  o Adapted code/examples/tests to new car version which has deprecated
+    linear.hypothesis() in favor of linearHypothesis().
+
+
 Changes in Version 1.1-5
   
   o CPS1985 now has 534 observations (not 533 as in prior releases),

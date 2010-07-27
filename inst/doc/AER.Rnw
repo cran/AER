@@ -186,6 +186,9 @@ Please report any further errors you find to us.
     Example~2 (Determinants of wages) in Chapter~1.1 and Chapter~2.8 (Exploratory Data Analysis with \proglang{R})
     due to a missing observation. Specifically, the version of the \code{CPS1985} data used
     for the book contained only 533~observations, the original observation~1 had been omitted inadvertently.
+  \item p.~63--65, 130, 143: The function \fct{linear.hypothesis} from the \pkg{car} package has
+    been renamed to \fct{linearHypothesis} starting from \pkg{car}~2.0-0. The old interface
+    is currently still supported but results in a warning.
   \item p.~85--86: Due to a bug in the \code{summary()} method for ``\code{plm}'' objects,
     the degrees of freedom reported for the $F$~statistics were interchanged and thus the
     $p$~values were not correct. Therefore, the $p$~values printed in the book at the end

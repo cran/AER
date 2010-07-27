@@ -57,7 +57,7 @@ deviance(fm6.3)
 vcov(fm6.1)[2,3] 
 
 ## F test
-linear.hypothesis(fm6.1, "tbill + inflation = 0")
+linearHypothesis(fm6.1, "tbill + inflation = 0")
 ## alternatively
 anova(fm6.1, fm6.3)
 ## t statistic

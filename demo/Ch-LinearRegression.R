@@ -142,7 +142,7 @@ par(mfrow = c(1, 1))
 ###################################################
 ### chunk number 18: journal-lht
 ###################################################
-linear.hypothesis(jour_lm, "log(citeprice) = -0.5")
+linearHypothesis(jour_lm, "log(citeprice) = -0.5")
 
 
 ###################################################

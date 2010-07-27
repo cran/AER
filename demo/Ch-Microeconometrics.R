@@ -295,7 +295,7 @@ summary(aff_tob2)
 ###################################################
 ### chunk number 39: tobit3
 ###################################################
-linear.hypothesis(aff_tob, c("age = 0", "occupation = 0"),
+linearHypothesis(aff_tob, c("age = 0", "occupation = 0"),
   vcov = sandwich)
 
 
