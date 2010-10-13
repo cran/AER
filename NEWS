@@ -1,3 +1,10 @@
+Changes in Version 1.1-7
+  
+  o Adapted some example in ?Greene2003 in order to work both with
+    the old and new "dynlm" package. dynlm() now provides convenient
+    support for linear time trends via dynlm(y ~ trend(y)) etc.    
+
+
 Changes in Version 1.1-6
   
   o Adapted code/examples/tests to new car version which has deprecated

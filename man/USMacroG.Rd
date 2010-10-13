@@ -43,13 +43,13 @@ Greene, W.H. (2003). \emph{Econometric Analysis}, 5th edition. Upper Saddle Rive
 \examples{
 ## data and trend as used by Greene (2003)
 data("USMacroG")
-USMacroG <- as.ts(merge(as.zoo(USMacroG), trend = 1:nrow(USMacroG) - 1))
+ltrend <- 1:nrow(USMacroG) - 1
 
 ## Example 6.1
 ## Table 6.1
 library("dynlm")
-fm6.1 <- dynlm(log(invest) ~ tbill + inflation + log(gdp) + trend, data = USMacroG)
-fm6.3 <- dynlm(log(invest) ~ I(tbill - inflation) + log(gdp) + trend, data = USMacroG)
+fm6.1 <- dynlm(log(invest) ~ tbill + inflation + log(gdp) + ltrend, data = USMacroG)
+fm6.3 <- dynlm(log(invest) ~ I(tbill - inflation) + log(gdp) + ltrend, data = USMacroG)
 summary(fm6.1)
 summary(fm6.3)
 deviance(fm6.1)

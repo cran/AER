@@ -165,28 +165,30 @@ legend("topleft", legend = c("after 1973", "up to 1973"), pch = 19, col = 2:1, b
 
 ## Example 7.6
 ## re-used in Example 8.3
-trend <- 1:nrow(USGasG)
+## linear time trend
+ltrend <- 1:nrow(USGasG)
+## shock factor
 shock <- factor(time(USGasG) > 1973, levels = c(FALSE, TRUE), labels = c("before", "after"))
 
 ## 1960-1995
-fm1 <- lm(log(gas/population) ~ log(income) + log(price) + log(newcar) + log(usedcar) + trend,
+fm1 <- lm(log(gas/population) ~ log(income) + log(price) + log(newcar) + log(usedcar) + ltrend,
   data = as.data.frame(USGasG))
 summary(fm1)
 ## pooled
-fm2 <- lm(log(gas/population) ~ shock + log(income) + log(price) + log(newcar) + log(usedcar) + trend,
+fm2 <- lm(log(gas/population) ~ shock + log(income) + log(price) + log(newcar) + log(usedcar) + ltrend,
   data = as.data.frame(USGasG))
 summary(fm2)
 ## segmented
-fm3 <- lm(log(gas/population) ~ shock/(log(income) + log(price) + log(newcar) + log(usedcar) + trend),
+fm3 <- lm(log(gas/population) ~ shock/(log(income) + log(price) + log(newcar) + log(usedcar) + ltrend),
   data = as.data.frame(USGasG))
 summary(fm3)
 
 ## Chow test
 anova(fm3, fm1)
-sctest(log(gas/population) ~ log(income) + log(price) + log(newcar) + log(usedcar) + trend,
+sctest(log(gas/population) ~ log(income) + log(price) + log(newcar) + log(usedcar) + ltrend,
   data = USGasG, point = c(1973, 1), type = "Chow")
 ## Recursive CUSUM test
-rcus <- efp(log(gas/population) ~ log(income) + log(price) + log(newcar) + log(usedcar) + trend,
+rcus <- efp(log(gas/population) ~ log(income) + log(price) + log(newcar) + log(usedcar) + ltrend,
    data = USGasG, type = "Rec-CUSUM")
 plot(rcus)
 sctest(rcus)
@@ -207,11 +209,11 @@ resplot <- function(obj, bound = TRUE) {
 resplot(dynlm(log(gas/population) ~ log(price), data = USGasG))
 resplot(dynlm(log(gas/population) ~ log(price) + log(income), data = USGasG))
 resplot(dynlm(log(gas/population) ~ log(price) + log(income) + log(newcar) + log(usedcar) +
-  log(transport) + log(nondurable) + log(durable) +log(service) + trend, data = USGasG))
+  log(transport) + log(nondurable) + log(durable) +log(service) + ltrend, data = USGasG))
 ## different shock variable than in 7.6
 shock <- factor(time(USGasG) > 1974, levels = c(FALSE, TRUE), labels = c("before", "after"))
 resplot(dynlm(log(gas/population) ~ shock/(log(price) + log(income) + log(newcar) + log(usedcar) +
-  log(transport) + log(nondurable) + log(durable) +log(service) + trend), data = USGasG))
+  log(transport) + log(nondurable) + log(durable) + log(service) + ltrend), data = USGasG))
 ## NOTE: something seems to be wrong with the sigma estimates in the `full' models
 
 ## Table 12.4, OLS
@@ -232,7 +234,7 @@ arima(y, order = c(1, 0, 0), xreg = X)
 #######################################
 ## data and trend
 data("USMacroG", package = "AER")
-USMacroG <- as.ts(merge(as.zoo(USMacroG), trend = 1:nrow(USMacroG) - 1))
+ltrend <- 0:(nrow(USMacroG) - 1)
 
 ## Example 5.3
 ## OLS and IV regression
@@ -253,8 +255,8 @@ coeftest(dynlm(consumption ~ gdp + fitted(auxreg), data = USMacroG))[3,3]
 
 ## Example 6.1
 ## Table 6.1
-fm6.1 <- dynlm(log(invest) ~ tbill + inflation + log(gdp) + trend, data = USMacroG)
-fm6.3 <- dynlm(log(invest) ~ I(tbill - inflation) + log(gdp) + trend, data = USMacroG)
+fm6.1 <- dynlm(log(invest) ~ tbill + inflation + log(gdp) + ltrend, data = USMacroG)
+fm6.3 <- dynlm(log(invest) ~ I(tbill - inflation) + log(gdp) + ltrend, data = USMacroG)
 summary(fm6.1)
 summary(fm6.3)
 deviance(fm6.1)
@@ -284,7 +286,7 @@ linearHypothesis(fm_distlag, "log(dpi) + L(log(consumption)) = 1")
 ## Example 6.4
 ## predict investiment in 2001(1)
 predict(fm6.1, interval = "prediction",
-  newdata = data.frame(tbill = 4.48, inflation = 5.262, gdp = 9316.8, trend = 204))
+  newdata = data.frame(tbill = 4.48, inflation = 5.262, gdp = 9316.8, ltrend = 204))
 
 ## Example 7.7
 ## no GMM available in "strucchange"
