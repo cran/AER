@@ -1,9 +1,11 @@
 coeftest.multinom <- function(x, vcov. = NULL, df = NULL, ...)
 {
   ## extract coefficients
-  cc <- coef(x)
-  est <- as.vector(t(cc))
-  names(est) <- as.vector(t(outer(rownames(cc), colnames(cc), paste, sep = ":")))
+  est <- coef(x)
+  if(!is.null(dim(est))) {
+    est <- structure(as.vector(t(est)), 
+      names = as.vector(t(outer(rownames(est), colnames(est), paste, sep = ":"))))
+  }
 
   ## process vcov.
   if(is.null(vcov.)) vc <- vcov(x) else {

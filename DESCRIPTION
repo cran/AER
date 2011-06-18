@@ -1,6 +1,6 @@
 Package: AER
-Version: 1.1-7
-Date: 2010-10-13
+Version: 1.1-8
+Date: 2011-06-18
 Title: Applied Econometrics with R
 Author: Christian Kleiber, Achim Zeileis
 Maintainer: Achim Zeileis <Achim.Zeileis@R-project.org>
@@ -17,6 +17,6 @@ Suggests: boot, dynlm, effects, foreign, ineq, KernSmooth, lattice,
         tseries, urca
 Imports: stats
 License: GPL-2
-Packaged: 2010-10-13 17:09:41 UTC; c403131
+Packaged: 2011-06-18 10:35:05 UTC; zeileis
 Repository: CRAN
-Date/Publication: 2010-10-13 17:38:20
+Date/Publication: 2011-06-18 11:48:07

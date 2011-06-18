@@ -1,7 +1,8 @@
 
-R version 2.11.1 (2010-05-31)
-Copyright (C) 2010 The R Foundation for Statistical Computing
+R version 2.13.0 (2011-04-13)
+Copyright (C) 2011 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
+Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -31,7 +32,6 @@ R> library("AER")
 Loading required package: car
 Loading required package: MASS
 Loading required package: nnet
-Loading required package: leaps
 Loading required package: survival
 Loading required package: splines
 Loading required package: Formula
@@ -123,7 +123,7 @@ R> ### chunk number 10: cps-reg
 R> ###################################################
 R> library("quantreg")
 Loading required package: SparseM
-Package SparseM (0.85) loaded.
+Package SparseM (0.89) loaded.
 	   To cite, see citation("SparseM")
 
 
@@ -131,7 +131,7 @@ Attaching package: 'SparseM'
 
 The following object(s) are masked from 'package:base':
 
-    backsolve, norm
+    backsolve
 
 
 Attaching package: 'quantreg'
@@ -139,10 +139,6 @@ Attaching package: 'quantreg'
 The following object(s) are masked from 'package:survival':
 
     untangle.specials
-
-The following object(s) are masked from 'package:utils':
-
-    vignette
 
 R> cps_lm <- lm(log(wage) ~ experience + I(experience^2) +
 +    education, data = cps)
@@ -258,12 +254,12 @@ R> search()
  [7] "package:sandwich"    "package:lmtest"     
  [9] "package:zoo"         "package:Formula"    
 [11] "package:car"         "package:survival"   
-[13] "package:splines"     "package:leaps"      
-[15] "package:nnet"        "package:MASS"       
-[17] "package:stats"       "package:graphics"   
-[19] "package:grDevices"   "package:utils"      
-[21] "package:datasets"    "package:methods"    
-[23] "Autoloads"           "package:base"       
+[13] "package:splines"     "package:nnet"       
+[15] "package:MASS"        "package:stats"      
+[17] "package:graphics"    "package:grDevices"  
+[19] "package:utils"       "package:datasets"   
+[21] "package:methods"     "Autoloads"          
+[23] "package:base"       
 R> 
 R> 
 R> ###################################################

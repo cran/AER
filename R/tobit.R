@@ -10,6 +10,8 @@ deviance.survreg <- function(object, ...)
 fitted.survreg <- function(object, ...)
   predict(object, type = "response", se.fit = FALSE)
 
+nobs.survreg <- function(object, ...)
+  length(object$linear.predictors)
 
 
 ## convenience tobit() interface to survreg()
@@ -194,7 +196,7 @@ print.summary.tobit <- function(x, digits = max(3, getOption("digits") - 3), ...
     if (p > 1) {
       cat("\nCorrelation of Coefficients:\n")
       if (is.logical(x$symbolic.cor) && x$symbolic.cor) {
-        print(symnum(correl, abbr.col = NULL))
+        print(symnum(correl, abbr.colnames = NULL))
       }
       else {
         correl <- format(round(correl, 2), nsmall = 2, digits = digits)

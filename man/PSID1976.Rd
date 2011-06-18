@@ -103,12 +103,12 @@ summary(gr_lm)
 gr_lm1 <- lm(log(hours * wage) ~ 1, data = PSID1976, subset = participation == "yes")
 anova(gr_lm1, gr_lm)
 
-## Example 21.4, p. 681
-gr_probit1 <- glm(participation ~ age + I(age^2) + fincome + education + kids,
-  data = PSID1976, family = binomial(link = "probit") )
-gr_probit2 <- glm(participation ~ age + I(age^2) + fincome + education,
+## Example 21.4, p. 681, and Tab. 21.3, p. 682
+gr_probit1 <- glm(participation ~ age + I(age^2) + I(fincome/10000) + education + kids,
+  data = PSID1976, family = binomial(link = "probit") )  
+gr_probit2 <- glm(participation ~ age + I(age^2) + I(fincome/10000) + education,
   data = PSID1976, family = binomial(link = "probit"))
-gr_probit3 <- glm(participation ~ kids/(age + I(age^2) + fincome + education),
+gr_probit3 <- glm(participation ~ kids/(age + I(age^2) + I(fincome/10000) + education),
   data = PSID1976, family = binomial(link = "probit"))
 ## LR test of all coefficients
 lrtest(gr_probit1)

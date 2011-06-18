@@ -1,7 +1,8 @@
 
-R version 2.11.1 (2010-05-31)
-Copyright (C) 2010 The R Foundation for Statistical Computing
+R version 2.13.0 (2011-04-13)
+Copyright (C) 2011 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
+Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -31,7 +32,6 @@ R> library("AER")
 Loading required package: car
 Loading required package: MASS
 Loading required package: nnet
-Loading required package: leaps
 Loading required package: survival
 Loading required package: splines
 Loading required package: Formula
@@ -298,7 +298,7 @@ R> bgtest(consump1)
 	Breusch-Godfrey test for serial correlation of order 1
 
 data:  consump1 
-LM test = 193.0, df = 1, p-value < 2.2e-16
+LM test = 193, df = 1, p-value < 2.2e-16
 
 R> 
 R> 
@@ -395,8 +395,8 @@ lm(formula = log(gdp85/gdp60) ~ log(gdp60) + log(invest) + log(popgrowth +
     0.05), data = OECDGrowth)
 
 Residuals:
-     Min       1Q   Median       3Q      Max 
--0.18400 -0.03989 -0.00785  0.04506  0.31879 
+    Min      1Q  Median      3Q     Max 
+-0.1840 -0.0399 -0.0078  0.0451  0.3188 
 
 Coefficients:
                       Estimate Std. Error t value Pr(>|t|)
@@ -466,8 +466,8 @@ lm(formula = log(gdp85/gdp60) ~ log(gdp60) + log(invest) + log(popgrowth +
     0.05), data = OECDGrowth, subset = goodobs)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--0.1545 -0.0555 -0.0065  0.0316  0.2677 
+     Min       1Q   Median       3Q      Max 
+-0.15454 -0.05548 -0.00651  0.03159  0.26773 
 
 Coefficients:
                       Estimate Std. Error t value Pr(>|t|)
@@ -487,7 +487,7 @@ R> ### chunk number 41: quantreg
 R> ###################################################
 R> library("quantreg")
 Loading required package: SparseM
-Package SparseM (0.85) loaded.
+Package SparseM (0.89) loaded.
 	   To cite, see citation("SparseM")
 
 
@@ -495,7 +495,7 @@ Attaching package: 'SparseM'
 
 The following object(s) are masked from 'package:base':
 
-    backsolve, norm
+    backsolve
 
 
 Attaching package: 'quantreg'
@@ -503,10 +503,6 @@ Attaching package: 'quantreg'
 The following object(s) are masked from 'package:survival':
 
     untangle.specials
-
-The following object(s) are masked from 'package:utils':
-
-    vignette
 
 R> 
 R> 

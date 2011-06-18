@@ -65,7 +65,8 @@ Grunfeld, Y. (1958). \emph{The Determinants of Corporate Investment}.
   Unpublished Ph.D. Dissertation, University of Chicago.
 
 Kleiber, C., and Zeileis, A. (2010). \dQuote{The Grunfeld Data at 50.}
-  \emph{German Economic Review}, Forthcoming. \url{http://statmath.wu.ac.at/~zeileis/grunfeld/}.
+  \emph{German Economic Review}, \bold{11}(4), 404--417.
+  \url{http://dx.doi.org/10.1111/j.1468-0475.2010.00513.x}
 }
 
 \seealso{\code{\link{Baltagi2002}}, \code{\link{Greene2003}}}

@@ -42,11 +42,11 @@ a regression of \code{y} onto the projected \code{x}.
     \item{offset}{either the offset used (if any) or \code{NULL} (if none).}
     \item{estfun}{a matrix containing the empirical estimating functions.}
     \item{n}{number of observations.}
+    \item{nobs}{number of observations with non-zero weights.}
     \item{rank}{the numeric rank of the fitted linear model.}
     \item{df.residual}{residual degrees of freedom for fitted model.}
     \item{cov.unscaled}{unscaled covariance matrix for the coefficients.}
     \item{sigma}{residual standard error.}
-    \item{hatvalues}{regression hat values.}
 }
 
 \seealso{\code{\link{ivreg}}, \code{\link[stats:lmfit]{lm.fit}}}

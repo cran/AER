@@ -51,11 +51,11 @@ a set of standard methods (including \code{print}, \code{summary}, \code{vcov}, 
     \item{weights}{either the vector of weights used (if any) or \code{NULL} (if none).}
     \item{offset}{either the offset used (if any) or \code{NULL} (if none).}
     \item{n}{number of observations.}
+    \item{nobs}{number of observations with non-zero weights.}
     \item{rank}{the numeric rank of the fitted linear model.}
     \item{df.residual}{residual degrees of freedom for fitted model.}
     \item{cov.unscaled}{unscaled covariance matrix for the coefficients.}
     \item{sigma}{residual standard error.}
-    \item{hatvalues}{regression hat values.}
     \item{call}{the original function call.}
     \item{formula}{the model formula.}
     \item{terms}{a list with elements \code{"regressors"} and \code{"instruments"}

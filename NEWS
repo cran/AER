@@ -1,3 +1,19 @@
+Changes in Version 1.1-8
+  
+  o The hat values for instrumental variables regressions are now
+    computed in the hatvalues() method and not within ivreg.fit()
+    to save computation time for large data sets.
+
+  o Added nobs() method for "survreg" objects (and thus "tobit" objects).
+    Modified "ivreg" objects so that default nobs() methods works.
+
+  o Labeling in coeftest() method for "multinom" objects with
+    binary responses has been fixed.
+  
+  o Example 21.4 in ?Greene2003 now employs the scaled regressor
+    fincome/10000.
+
+
 Changes in Version 1.1-7
   
   o Adapted some example in ?Greene2003 in order to work both with

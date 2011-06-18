@@ -27,9 +27,9 @@ Fitting and testing tobit regression models for censored data.
   \item{formula}{a symbolic description of a regression model of type
     \code{y ~ x1 + x2 + \dots}.}
   \item{left}{left limit for the censored dependent variable \code{y}.
-    If set to \code{-Inf}, \code{y} is assumed not be left-censored.}
+    If set to \code{-Inf}, \code{y} is assumed not to be left-censored.}
   \item{right}{right limit for the censored dependent variable \code{y}.
-    If set to \code{Inf}, the default, \code{y} is assumed not be right-censored.}
+    If set to \code{Inf}, the default, \code{y} is assumed not to be right-censored.}
   \item{dist}{assumed distribution for the dependent variable \code{y}.
     This is passed to \code{\link[survival]{survreg}}, see the respective man page for
     more details.}

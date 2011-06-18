@@ -1,7 +1,8 @@
 
-R version 2.11.1 (2010-05-31)
-Copyright (C) 2010 The R Foundation for Statistical Computing
+R version 2.13.0 (2011-04-13)
+Copyright (C) 2011 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
+Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -31,7 +32,6 @@ R> library("AER")
 Loading required package: car
 Loading required package: MASS
 Loading required package: nnet
-Loading required package: leaps
 Loading required package: survival
 Loading required package: splines
 Loading required package: Formula
@@ -636,8 +636,8 @@ Call:
 dynlm(formula = consumption ~ dpi + L(dpi), data = USMacroG)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--190.02  -56.68    1.58   49.91  323.94 
+   Min     1Q Median     3Q    Max 
+-190.0  -56.7    1.6   49.9  323.9 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)
@@ -746,10 +746,8 @@ R> ### chunk number 57: plm-data
 R> ###################################################
 R> data("Grunfeld", package = "AER")
 R> library("plm")
-Loading required package: kinship
+Loading required package: bdsmatrix
 Loading required package: nlme
-Loading required package: lattice
-[1] "kinship is loaded"
 R> gr <- subset(Grunfeld, firm %in% c("General Electric",
 +    "General Motors", "IBM"))
 R> pgr <- plm.data(gr, index = c("firm", "year"))
@@ -901,8 +899,8 @@ Unbalanced Panel: n=140, T=7-9, N=1031
 Number of Observations Used:  611 
 
 Residuals
-     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
--0.619000 -0.025600  0.000000 -0.000134  0.033200  0.641000 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+-0.6190 -0.0256  0.0000 -0.0001  0.0332  0.6410 
 
 Coefficients
                         Estimate Std. Error z-value Pr(>|z|)
@@ -915,10 +913,10 @@ log(output)               0.6098     0.1085    5.62  1.9e-08
 lag(log(output), 1)      -0.4464     0.1248   -3.58  0.00035
 
 Sargan Test: chisq(25) = 30.11 (p.value=0.22)
-Autocorrelation test (1): normal = -2.428 (p.value=0.0076)
+Autocorrelation test (1): normal = -2.428 (p.value=0.00759)
 Autocorrelation test (2): normal = -0.3325 (p.value=0.37)
 Wald test for coefficients: chisq(7) = 372 (p.value=<2e-16)
-Wald test for time dummies: chisq(5) = 26.60 (p.value=6.81e-05)
+Wald test for time dummies: chisq(6) = 26.9 (p.value=0.000151)
 R> 
 R> 
 R> ###################################################
@@ -926,6 +924,7 @@ R> ### chunk number 67: systemfit
 R> ###################################################
 R> library("systemfit")
 Loading required package: Matrix
+Loading required package: lattice
 
 Attaching package: 'Matrix'
 

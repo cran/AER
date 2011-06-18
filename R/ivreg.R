@@ -82,13 +82,14 @@ ivreg.fit <- function(x, y, z, weights, offset, ...)
   
   ## project regressors x on image of instruments z
   if(!is.null(z)) {
+    if(ncol(z) < ncol(x)) warning("more regressors than instruments")
     auxreg <- if(is.null(weights)) lm.fit(z, x, ...) else lm.wfit(z, x, weights, ...)
     xz <- as.matrix(auxreg$fitted.values)
-    pz <- z %*% chol2inv(auxreg$qr$qr) %*% t(z)
+    # pz <- z %*% chol2inv(auxreg$qr$qr) %*% t(z)
     colnames(xz) <- colnames(x)
   } else {
     xz <- x
-    pz <- diag(NROW(x))
+    # pz <- diag(NROW(x))
     colnames(pz) <- rownames(pz) <- rownames(x)
   }
   
@@ -103,8 +104,8 @@ ivreg.fit <- function(x, y, z, weights, offset, ...)
   ucov <- chol2inv(fit$qr$qr[1:p, 1:p, drop = FALSE])
   colnames(ucov) <- rownames(ucov) <- names(fit$coefficients)
   rss <- if(is.null(weights)) sum(res^2) else sum(weights * res^2)
-  hat <- diag(x %*% ucov %*% t(x) %*% pz)
-  names(hat) <- rownames(x)
+  ## hat <- diag(x %*% ucov %*% t(x) %*% pz)
+  ## names(hat) <- rownames(x)
 
   rval <- list(
     coefficients = fit$coefficients,
@@ -113,11 +114,12 @@ ivreg.fit <- function(x, y, z, weights, offset, ...)
     weights = weights,
     offset = if(identical(offset, rep(0, n))) NULL else offset,
     n = n,
+    nobs = if(is.null(weights)) n else sum(weights > 0),
     rank = fit$rank,
     df.residual = fit$df.residual,
     cov.unscaled = ucov,
     sigma = sqrt(rss/fit$df.residual),
-    hatvalues = hat,
+    # hatvalues = hat,
     x = xz
   )
   
@@ -128,7 +130,7 @@ vcov.ivreg <- function(object, ...)
   object$sigma^2 * object$cov.unscaled
     
 bread.ivreg <- function (x, ...) 
-    x$cov.unscaled * x$n
+    x$cov.unscaled * x$nobs
 
 estfun.ivreg <- function (x, ...) 
 {
@@ -142,8 +144,13 @@ estfun.ivreg <- function (x, ...)
     return(rval)
 }
 
-hatvalues.ivreg <- function(model, ...)
-  model$hatvalues
+hatvalues.ivreg <- function(model, ...) {
+  xz <- model.matrix(model, component = "projected")
+  x  <- model.matrix(model, component = "regressors")
+  z  <- model.matrix(model, component = "instruments")
+  solve_qr <- function(x) chol2inv(qr.R(qr(x)))
+  diag(x %*% solve_qr(xz) %*% t(x) %*% z %*% solve_qr(z) %*% t(z))
+}
 
 terms.ivreg <- function(x, component = c("regressors", "instruments"), ...)
   x$terms[[match.arg(component)]]
@@ -233,7 +240,7 @@ summary.ivreg <- function(object, vcov. = NULL, df = NULL, ...)
   Rmat <- if(attr(object$terms$regressors, "intercept"))
     cbind(0, diag(length(coef(object))-1)) else diag(length(coef(object)))
   waldtest <- linearHypothesis(object, Rmat, vcov. = vcov., test = ifelse(df > 0, "F", "Chisq"))
-  waldtest <- c(waldtest[2,3], waldtest[2,4], -waldtest[2,2], if(df > 0) waldtest[1,1] else NULL)
+  waldtest <- c(waldtest[2,3], waldtest[2,4], abs(waldtest[2,2]), if(df > 0) waldtest[1,1] else NULL)
   
   rval <- list(
     call = object$call,
@@ -299,22 +306,22 @@ anova.ivreg <- function(object, object2, test = "F", vcov = NULL, ...)
 }
 
 
-## Falls #Instr. = #Regressoren, dann ist
+## If #Instr. = #Regressoren then
 ##   b = (Z'X)^{-1} Z'y
-## und loest die Schaetzgleichung
+## and solves the estimating equations
 ##   Z' (y - X beta) = 0
-## Fuer
+## For
 ##   cov(y) = Omega
-## haben wir dann
+## the following holds
 ##   cov(b) = (Z'X)^{-1} Z' Omega Z (X'Z)^{-1}
 ##   
-## Allgemein:  
+## Generally:  
 ##   b = (X' P_Z X)^{-1} X' P_Z y
-## mit Schaetzgleichung
+## with estimating equations
 ##   X' P_Z (y - X beta) = 0
-## wobei P_Z der uebliche Projektor ist (Hat-Matrix bzgl Z) und
+## where P_Z is the usual projector (hat matrix wrt Z) and
 ##   cov(b) = (X' P_Z X)^{-1} X' P_Z Omega P_Z X (X' P_Z X)^{-1}
-## ist. M.a.W. meat ist X' P_Z Omega P_Z X, und bread ist (X' P_Z X)^{-1}
+## Thus meat is X' P_Z Omega P_Z X and bread i (X' P_Z X)^{-1}
 ## 
-## Siehe auch
+## See
 ##   http://www.stata.com/support/faqs/stat/2sls.html
