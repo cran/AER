@@ -1,5 +1,5 @@
 
-R version 2.13.0 (2011-04-13)
+R version 2.14.0 (2011-10-31)
 Copyright (C) 2011 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 Platform: x86_64-pc-linux-gnu (64-bit)
@@ -37,6 +37,13 @@ Loading required package: splines
 Loading required package: Formula
 Loading required package: lmtest
 Loading required package: zoo
+
+Attaching package: 'zoo'
+
+The following object(s) are masked from 'package:base':
+
+    as.Date, as.Date.numeric
+
 Loading required package: sandwich
 Loading required package: strucchange
 R> 
@@ -226,7 +233,7 @@ R> linearHypothesis(jour_lm, "log(citeprice) = -0.5")
 Linear hypothesis test
 
 Hypothesis:
-log(citeprice) = -0.5
+log(citeprice) = - 0.5
 
 Model 1: restricted model
 Model 2: log(subs) ~ log(citeprice)
@@ -698,9 +705,6 @@ R> plot(merge(as.zoo(USMacroG[,"consumption"]), fitted(cons_lm1),
 +    residuals(cons_lm2)), screens = rep(1:2, c(3, 3)),
 +    lty = rep(1:3, 2), ylab = c("Fitted values", "Residuals"),
 +    xlab = "Time", main = "")
-Warning message:
-In merge.zoo(..., all = all, fill = fill, suffixes = suffixes, retclass = "zoo") :
-  Index vectors are of different classes: integer integer integer numeric integer integer
 R> legend(0.05, 0.95, c("observed", "cons_lm1", "cons_lm2"), 
 +    lty = 1:3, bty = "n")
 R> 
@@ -747,6 +751,13 @@ R> ###################################################
 R> data("Grunfeld", package = "AER")
 R> library("plm")
 Loading required package: bdsmatrix
+
+Attaching package: 'bdsmatrix'
+
+The following object(s) are masked from 'package:base':
+
+    backsolve
+
 Loading required package: nlme
 R> gr <- subset(Grunfeld, firm %in% c("General Electric",
 +    "General Motors", "IBM"))

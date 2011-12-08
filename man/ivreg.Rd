@@ -41,6 +41,15 @@ ivreg(formula, instruments, data, subset, na.action, weights, offset,
 a set of standard methods (including \code{print}, \code{summary}, \code{vcov}, \code{anova},
 \code{hatvalues}, \code{predict}, \code{terms}, \code{model.matrix}, \code{bread},
 \code{estfun}) is available and described on \code{\link{summary.ivreg}}.
+
+Regressors and instruments for \code{ivreg} are most easily specified in a formula
+with two parts on the right-hand side, e.g., \code{y ~ x1 + x2 | z1 + z2 + z3},
+where \code{x1} and \code{x2} are the regressors and \code{z1},
+\code{z2}, and \code{z3} are the instruments. Note that exogenous
+regressors have to be included as instruments for themselves. For
+example, if there is one exogenous regressor \code{ex} and one endogenous
+regressor \code{en} with instrument \code{in}, the appropriate formula
+would be \code{y ~ ex + en | ex + in}.
 }
 
 \value{

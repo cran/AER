@@ -90,7 +90,7 @@ ivreg.fit <- function(x, y, z, weights, offset, ...)
   } else {
     xz <- x
     # pz <- diag(NROW(x))
-    colnames(pz) <- rownames(pz) <- rownames(x)
+    # colnames(pz) <- rownames(pz) <- rownames(x)
   }
   
   ## main regression
@@ -240,7 +240,7 @@ summary.ivreg <- function(object, vcov. = NULL, df = NULL, ...)
   Rmat <- if(attr(object$terms$regressors, "intercept"))
     cbind(0, diag(length(coef(object))-1)) else diag(length(coef(object)))
   waldtest <- linearHypothesis(object, Rmat, vcov. = vcov., test = ifelse(df > 0, "F", "Chisq"))
-  waldtest <- c(waldtest[2,3], waldtest[2,4], abs(waldtest[2,2]), if(df > 0) waldtest[1,1] else NULL)
+  waldtest <- c(waldtest[2,3], waldtest[2,4], abs(waldtest[2,2]), if(df > 0) waldtest[2,1] else NULL)
   
   rval <- list(
     call = object$call,
@@ -248,7 +248,7 @@ summary.ivreg <- function(object, vcov. = NULL, df = NULL, ...)
     residuals = res,
     weights <- object$weights,
     coefficients = cf,
-    sigma = object$sigma,    
+    sigma = object$sigma,
     df = c(object$rank, if(df > 0) df else Inf, object$rank), ## aliasing not handled yet
     r.squared = r.squared,
     adj.r.squared = adj.r.squared,

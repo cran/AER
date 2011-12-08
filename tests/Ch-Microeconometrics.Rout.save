@@ -1,5 +1,5 @@
 
-R version 2.13.0 (2011-04-13)
+R version 2.14.0 (2011-10-31)
 Copyright (C) 2011 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 Platform: x86_64-pc-linux-gnu (64-bit)
@@ -37,6 +37,13 @@ Loading required package: splines
 Loading required package: Formula
 Loading required package: lmtest
 Loading required package: zoo
+
+Attaching package: 'zoo'
+
+The following object(s) are masked from 'package:base':
+
+    as.Date, as.Date.numeric
+
 Loading required package: sandwich
 Loading required package: strucchange
 R> 
@@ -209,6 +216,9 @@ The following object(s) are masked from 'package:utils':
 Loading required package: caTools
 Loading required package: bitops
 Loading required package: grid
+Loading required package: KernSmooth
+KernSmooth 2.23 loaded
+Copyright M. P. Wand 1997-2009
 
 Attaching package: 'gplots'
 
@@ -461,14 +471,22 @@ Loading required package: mvtnorm
 Loading required package: coda
 Loading required package: lattice
 Loading required package: gam
+Loaded gam 1.06.2
+
 Loading required package: vcd
 Loading required package: colorspace
 Classes and Methods for R developed in the
+
 Political Science Computational Laboratory
+
 Department of Political Science
+
 Stanford University
+
 Simon Jackman
+
 hurdle and zeroinfl functions by Achim Zeileis
+
 R> 
 R> 
 R> ###################################################

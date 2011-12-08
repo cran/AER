@@ -51,10 +51,11 @@ summary(fm_mnl)
 confint(fm_mnl)
 
 ## same with mlogit package
-library("mlogit")
+if(require("mlogit")) {
 fm_mlogit <- mlogit(job ~ 1 | education + minority, data = BankWages,
   subset = gender == "male", shape = "wide", reflevel = "custodial")
 summary(fm_mlogit)
+}
 }
 
 \keyword{datasets}

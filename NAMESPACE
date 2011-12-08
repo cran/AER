@@ -12,7 +12,8 @@ export(
   "dispersiontest",
   "tobit",
   "ivreg",
-  "ivreg.fit")
+  "ivreg.fit",
+  "nobs.survreg")
 
 ## methods for class tobit
   S3method("print", "tobit")
@@ -42,7 +43,7 @@ export(
   S3method("deviance", "survreg")
   S3method("fitted", "survreg")
   S3method("logLik", "survreg")
-  S3method("nobs", "survreg")
+ #S3method("nobs", "survreg")
 
 ## methods for class multinom, polr, fitdistr
   S3method("coeftest", "multinom")

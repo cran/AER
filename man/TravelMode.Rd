@@ -47,12 +47,12 @@ library("lattice")
 xyplot(travel ~ wait | mode, data = TravelMode)
 
 ## Greene (2003), Table 21.11, conditional logit model
-library("mlogit")
+if(require("mlogit")) {
 TravelMode$incair <- with(TravelMode, income * (mode == "air"))
 tm_cl <- mlogit(choice ~ gcost + wait + incair, data = TravelMode,
   shape = "long", alt.var = "mode", reflevel = "car")
 summary(tm_cl)
-
+}
 }
 
 \keyword{datasets}

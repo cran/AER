@@ -1,3 +1,17 @@
+Changes in Version 1.1-9
+
+  o Recompressed data sets in package to reduce file storage requirements.
+  
+  o ivreg() failed when used without instruments. Now fixed.
+
+  o The summary() for ivreg() displayed the degrees of freedom of the
+    overall Wald test incorrectly (although the p-value was computed
+    correctly).
+  
+  o Some technical changes for new R 2.14.0, e.g., adding Authors@R in
+    DESCRIPTION, recompressing data, etc.
+
+
 Changes in Version 1.1-8
   
   o The hat values for instrumental variables regressions are now

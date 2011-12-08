@@ -12,6 +12,7 @@
 \alias{logLik.survreg}
 \alias{deviance.survreg}
 \alias{fitted.survreg}
+\alias{nobs.survreg}
 
 \title{Tobit Regression}
 

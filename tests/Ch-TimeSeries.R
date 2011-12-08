@@ -120,7 +120,8 @@ plot(dd_stl)
 ### chunk number 16: Holt-Winters
 ###################################################
 dd_past <- window(UKDriverDeaths, end = c(1982, 12))
-dd_hw <- HoltWinters(dd_past)
+dd_hw <- try(HoltWinters(dd_past))
+if(!inherits(dd_hw, "try-error")) {
 dd_pred <- predict(dd_hw, n.ahead = 24)
 
 
@@ -136,7 +137,7 @@ lines(UKDriverDeaths)
 ###################################################
 plot(dd_hw, dd_pred, ylim = range(UKDriverDeaths))
 lines(UKDriverDeaths)
-
+}
 
 ###################################################
 ### chunk number 19: acf eval=FALSE

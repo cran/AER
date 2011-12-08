@@ -222,10 +222,11 @@ gsoep_mnl <- multinom(school ~ meducation + memployment + log(income) + log(size
 coeftest(gsoep_mnl)[c(1:6, 1:6 + 14),]
  
 ## alternatively
-library("mlogit")
+if(require("mlogit")) {
 gsoep_mnl2 <- mlogit(school ~ 0 | meducation + memployment + log(income) + log(size) + parity + year2,
   data = gsoep, shape = "wide", reflevel = "Hauptschule")
 coeftest(gsoep_mnl2)[1:12,]
+}
 
 ## Table 5.2
 library("effects")
@@ -326,6 +327,7 @@ wage_mlcoef <- sapply(c(0.5, 1, 1.5, 2), function(censpoint)
 ##################################
 
 ## data
+if(require("mlogit")) {
 data("Cracker", package = "mlogit")
 head(Cracker, 3)
 crack <- mlogit.data(Cracker, varying = 2:13, shape = "wide", choice = "choice")
@@ -342,6 +344,7 @@ lrtest(crack_mlogit1, crack_mlogit2, crack_mlogit3)
 crack_mlogit_all <- update(crack_mlogit2, reflevel = "nabisco")
 crack_mlogit_res <- update(crack_mlogit_all, alt.subset = c("keebler", "nabisco", "sunshine"))
 hmftest(crack_mlogit_all, crack_mlogit_res)
+}
 }
 
 \keyword{datasets}

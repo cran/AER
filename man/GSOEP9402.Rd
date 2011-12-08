@@ -81,10 +81,11 @@ gsoep_mnl <- multinom(school ~ meducation + memployment + log(income) + log(size
 coeftest(gsoep_mnl)[c(1:6, 1:6 + 14),]
  
 ## alternatively
-library("mlogit")
+if(require("mlogit")) {
 gsoep_mnl2 <- mlogit(school ~ 0 | meducation + memployment + log(income) + log(size) + parity + year2,
   data = gsoep, shape = "wide", reflevel = "Hauptschule")
 coeftest(gsoep_mnl2)[1:12,]
+}
 
 ## Table 5.2
 library("effects")
