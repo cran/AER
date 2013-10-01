@@ -21,7 +21,8 @@ Fitting and testing tobit regression models for censored data.
 }
 
 \usage{
-  tobit(formula, left = 0, right = Inf, dist = "gaussian", subset = NULL, data = list(), \dots)
+  tobit(formula, left = 0, right = Inf, dist = "gaussian",
+    subset = NULL, data = list(), \dots)
 }
 
 \arguments{
@@ -71,7 +72,8 @@ Tobin, J. (1958). Estimation of Relationships for Limited Dependent Variables.
 data("Affairs")
 
 ## from Table 22.4 in Greene (2003)
-fm.tobit <- tobit(affairs ~ age + yearsmarried + religiousness + occupation + rating, data = Affairs)
+fm.tobit <- tobit(affairs ~ age + yearsmarried + religiousness + occupation + rating,
+  data = Affairs)
 fm.tobit2 <- tobit(affairs ~ age + yearsmarried + religiousness + occupation + rating,
   right = 4, data = Affairs)
 

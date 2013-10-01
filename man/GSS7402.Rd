@@ -101,6 +101,7 @@ plot(nokids_p3_ef, rescale.axis = FALSE, ylim = c(0, 0.3))
 ## Chapter 8, Example 8.11
 kids_pois <- glm(kids ~ education + trend + ethnicity + immigrant + lowincome16 + city16,
   data = gss40, family = poisson)
+library("MASS")
 kids_nb <- glm.nb(kids ~ education + trend + ethnicity + immigrant + lowincome16 + city16,
   data = gss40)
 lrtest(kids_pois, kids_nb)

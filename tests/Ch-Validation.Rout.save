@@ -1,7 +1,6 @@
 
-R version 2.14.0 (2011-10-31)
-Copyright (C) 2011 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
+R version 3.0.1 (2013-05-16) -- "Good Sport"
+Copyright (C) 2013 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -30,22 +29,18 @@ R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
 R> 
 R> library("AER")
 Loading required package: car
-Loading required package: MASS
-Loading required package: nnet
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
 Loading required package: lmtest
 Loading required package: zoo
 
 Attaching package: 'zoo'
 
-The following object(s) are masked from 'package:base':
+The following object is masked from 'package:base':
 
     as.Date, as.Date.numeric
 
 Loading required package: sandwich
-Loading required package: strucchange
+Loading required package: survival
+Loading required package: splines
 R> 
 R> set.seed(1071)
 R> 
@@ -62,7 +57,7 @@ R> summary(PublicSchools)
  Mean   :373   Mean   : 7608  
  3rd Qu.:426   3rd Qu.: 8286  
  Max.   :821   Max.   :10851  
- NA's   :  1                  
+ NA's   :1                    
 R> 
 R> 
 R> ###################################################
@@ -192,7 +187,7 @@ R> bptest(jour_lm)
 
 	studentized Breusch-Pagan test
 
-data:  jour_lm 
+data:  jour_lm
 BP = 9.803, df = 1, p-value = 0.001742
 
 R> 
@@ -205,7 +200,7 @@ R> bptest(jour_lm, ~ log(citeprice) + I(log(citeprice)^2),
 
 	studentized Breusch-Pagan test
 
-data:  jour_lm 
+data:  jour_lm
 BP = 10.91, df = 2, p-value = 0.004271
 
 R> 
@@ -217,7 +212,7 @@ R> gqtest(jour_lm, order.by = ~ citeprice, data = journals)
 
 	Goldfeld-Quandt test
 
-data:  jour_lm 
+data:  jour_lm
 GQ = 1.703, df1 = 88, df2 = 88, p-value = 0.00665
 
 R> 
@@ -229,7 +224,7 @@ R> resettest(jour_lm)
 
 	RESET test
 
-data:  jour_lm 
+data:  jour_lm
 RESET = 1.441, df1 = 2, df2 = 176, p-value = 0.2395
 
 R> 
@@ -241,7 +236,7 @@ R> raintest(jour_lm, order.by = ~ age, data = journals)
 
 	Rainbow test
 
-data:  jour_lm 
+data:  jour_lm
 Rain = 1.774, df1 = 90, df2 = 88, p-value = 0.003741
 
 R> 
@@ -253,7 +248,7 @@ R> harvtest(jour_lm, order.by = ~ age, data = journals)
 
 	Harvey-Collier test
 
-data:  jour_lm 
+data:  jour_lm
 HC = 5.081, df = 177, p-value = 9.464e-07
 
 R> 
@@ -279,9 +274,9 @@ R> dwtest(consump1)
 
 	Durbin-Watson test
 
-data:  consump1 
+data:  consump1
 DW = 0.0866, p-value < 2.2e-16
-alternative hypothesis: true autocorrelation is greater than 0 
+alternative hypothesis: true autocorrelation is greater than 0
 
 R> 
 R> 
@@ -292,7 +287,7 @@ R> Box.test(residuals(consump1), type = "Ljung-Box")
 
 	Box-Ljung test
 
-data:  residuals(consump1) 
+data:  residuals(consump1)
 X-squared = 176.1, df = 1, p-value < 2.2e-16
 
 R> 
@@ -305,7 +300,7 @@ R> bgtest(consump1)
 	Breusch-Godfrey test for serial correlation of order up
 	to 1
 
-data:  consump1 
+data:  consump1
 LM test = 193, df = 1, p-value < 2.2e-16
 
 R> 
@@ -414,8 +409,8 @@ log(invest)             0.6501     0.2020    3.22   0.0048
 log(popgrowth + 0.05)  -0.5730     0.2904   -1.97   0.0640
 
 Residual standard error: 0.133 on 18 degrees of freedom
-Multiple R-squared: 0.746,	Adjusted R-squared: 0.704 
-F-statistic: 17.7 on 3 and 18 DF,  p-value: 1.34e-05 
+Multiple R-squared:  0.746,	Adjusted R-squared:  0.704 
+F-statistic: 17.7 on 3 and 18 DF,  p-value: 1.34e-05
 
 R> 
 R> 
@@ -485,8 +480,8 @@ log(invest)             0.7033     0.1906    3.69   0.0024
 log(popgrowth + 0.05)  -0.6504     0.4190   -1.55   0.1429
 
 Residual standard error: 0.107 on 14 degrees of freedom
-Multiple R-squared: 0.853,	Adjusted R-squared: 0.822 
-F-statistic: 27.1 on 3 and 14 DF,  p-value: 4.3e-06 
+Multiple R-squared:  0.853,	Adjusted R-squared:  0.822 
+F-statistic: 27.1 on 3 and 14 DF,  p-value: 4.3e-06
 
 R> 
 R> 
@@ -495,20 +490,17 @@ R> ### chunk number 41: quantreg
 R> ###################################################
 R> library("quantreg")
 Loading required package: SparseM
-Package SparseM (0.91) loaded.
-	   To cite, see citation("SparseM")
-
 
 Attaching package: 'SparseM'
 
-The following object(s) are masked from 'package:base':
+The following object is masked from 'package:base':
 
     backsolve
 
 
 Attaching package: 'quantreg'
 
-The following object(s) are masked from 'package:survival':
+The following object is masked from 'package:survival':
 
     untangle.specials
 
@@ -617,3 +609,6 @@ R> plot(cps_rqbigs)
 R> 
 R> 
 R> 
+> proc.time()
+   user  system elapsed 
+ 45.948   0.172  46.170 

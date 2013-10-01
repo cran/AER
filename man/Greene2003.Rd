@@ -175,16 +175,19 @@ fm1 <- lm(log(gas/population) ~ log(income) + log(price) + log(newcar) + log(use
   data = as.data.frame(USGasG))
 summary(fm1)
 ## pooled
-fm2 <- lm(log(gas/population) ~ shock + log(income) + log(price) + log(newcar) + log(usedcar) + ltrend,
+fm2 <- lm(
+  log(gas/population) ~ shock + log(income) + log(price) + log(newcar) + log(usedcar) + ltrend,
   data = as.data.frame(USGasG))
 summary(fm2)
 ## segmented
-fm3 <- lm(log(gas/population) ~ shock/(log(income) + log(price) + log(newcar) + log(usedcar) + ltrend),
+fm3 <- lm(
+  log(gas/population) ~ shock/(log(income) + log(price) + log(newcar) + log(usedcar) + ltrend),
   data = as.data.frame(USGasG))
 summary(fm3)
 
 ## Chow test
 anova(fm3, fm1)
+library("strucchange")
 sctest(log(gas/population) ~ log(income) + log(price) + log(newcar) + log(usedcar) + ltrend,
   data = USGasG, point = c(1973, 1), type = "Chow")
 ## Recursive CUSUM test
@@ -217,7 +220,8 @@ resplot(dynlm(log(gas/population) ~ shock/(log(price) + log(income) + log(newcar
 ## NOTE: something seems to be wrong with the sigma estimates in the `full' models
 
 ## Table 12.4, OLS
-fm <- dynlm(log(gas/population) ~ log(price) + log(income) + log(newcar) + log(usedcar), data = USGasG)
+fm <- dynlm(log(gas/population) ~ log(price) + log(income) + log(newcar) + log(usedcar),
+  data = USGasG)
 summary(fm)
 resplot(fm, bound = FALSE)
 dwtest(fm)
@@ -401,7 +405,8 @@ data("SIC33", package = "AER")
 
 ## Example 6.2
 ## Translog model
-fm_tl <- lm(output ~ labor + capital + I(0.5 * labor^2) + I(0.5 * capital^2) + I(labor * capital),
+fm_tl <- lm(
+  output ~ labor + capital + I(0.5 * labor^2) + I(0.5 * capital^2) + I(labor * capital),
   data = log(SIC33))
 ## Cobb-Douglas model
 fm_cb <- lm(output ~ labor + capital, data = log(SIC33))
@@ -516,7 +521,8 @@ plot(residuals(fm_all) ~ log(output), data = Electricity)
 ## grouped functions
 Electricity$group <- with(Electricity, cut(log(output), quantile(log(output), 0:5/5),
   include.lowest = TRUE, labels = 1:5))
-fm_group <- lm(log(cost/fuel) ~ group/(log(output) + log(labor/fuel) + log(capital/fuel)) - 1,
+fm_group <- lm(
+  log(cost/fuel) ~ group/(log(output) + log(labor/fuel) + log(capital/fuel)) - 1,
   data = Electricity)
 
 ## Table 7.3 (close, but not quite)
@@ -524,7 +530,8 @@ round(rbind(coef(fm_all)[-1], matrix(coef(fm_group), nrow = 5)[,-1]), digits = 3
 
 ## Table 7.4
 ## log quadratic cost function
-fm_all2 <- lm(log(cost/fuel) ~ log(output) + I(log(output)^2) + log(labor/fuel) + log(capital/fuel),
+fm_all2 <- lm(
+  log(cost/fuel) ~ log(output) + I(log(output)^2) + log(labor/fuel) + log(capital/fuel),
   data = Electricity)
 summary(fm_all2)
 
@@ -542,7 +549,8 @@ fm4 <- lm(log(output/technology) ~ I(1/clr), data = TechChange)
 
 ## Exercise 7.2 (a) and (c)
 plot(I(output/technology) ~ clr, data = TechChange)
-sctest(I(output/technology) ~ log(clr), data = TechChange, type = "Chow", point = c(1942, 1))
+sctest(I(output/technology) ~ log(clr), data = TechChange,
+  type = "Chow", point = c(1942, 1))
 
 
 ##################################
@@ -580,14 +588,17 @@ sqrt(diag(vcovHC(cc_ols, type = "HC0")))
 sqrt(diag(vcovHC(cc_ols, type = "HC2"))) 
 sqrt(diag(vcovHC(cc_ols, type = "HC1")))
 
-bptest(cc_ols, ~ (age + income + I(income^2) + owner)^2 + I(age^2) + I(income^4), data = ccard0)
+bptest(cc_ols, ~ (age + income + I(income^2) + owner)^2 + I(age^2) + I(income^4),
+  data = ccard0)
 gqtest(cc_ols)
 bptest(cc_ols, ~ income + I(income^2), data = ccard0, studentize = FALSE)
 bptest(cc_ols, ~ income + I(income^2), data = ccard0)
 
 ## Table 11.2, WLS and FGLS
-cc_wls1 <- lm(expenditure ~ age + owner + income + I(income^2), weights = 1/income, data = ccard0)
-cc_wls2 <- lm(expenditure ~ age + owner + income + I(income^2), weights = 1/income^2, data = ccard0)
+cc_wls1 <- lm(expenditure ~ age + owner + income + I(income^2), weights = 1/income,
+  data = ccard0)
+cc_wls2 <- lm(expenditure ~ age + owner + income + I(income^2), weights = 1/income^2,
+  data = ccard0)
 
 auxreg1 <- lm(log(residuals(cc_ols)^2) ~ log(income), data = ccard0)
 cc_fgls1 <- lm(expenditure ~ age + owner + income + I(income^2),
@@ -601,17 +612,21 @@ alphai <- coef(lm(log(residuals(cc_ols)^2) ~ log(income), data = ccard0))[2]
 alpha <- 0
 while(abs((alphai - alpha)/alpha) > 1e-7) {
   alpha <- alphai
-  cc_fgls3 <- lm(expenditure ~ age + owner + income + I(income^2), weights = 1/income^alpha, data = ccard0)
+  cc_fgls3 <- lm(expenditure ~ age + owner + income + I(income^2), weights = 1/income^alpha,
+    data = ccard0)
   alphai <- coef(lm(log(residuals(cc_fgls3)^2) ~ log(income), data = ccard0))[2]
 }
 alpha ## 1.7623 for Greene
-cc_fgls3 <- lm(expenditure ~ age + owner + income + I(income^2), weights = 1/income^alpha, data = ccard0)
+cc_fgls3 <- lm(expenditure ~ age + owner + income + I(income^2), weights = 1/income^alpha,
+  data = ccard0)
 
 llik <- function(alpha)
-  -logLik(lm(expenditure ~ age + owner + income + I(income^2), weights = 1/income^alpha, data = ccard0))
+  -logLik(lm(expenditure ~ age + owner + income + I(income^2), weights = 1/income^alpha,
+    data = ccard0))
 plot(0:100/20, -sapply(0:100/20, llik), type = "l", xlab = "alpha", ylab = "logLik")
 alpha <- optimize(llik, interval = c(0, 5))$minimum
-cc_fgls4 <- lm(expenditure ~ age + owner + income + I(income^2), weights = 1/income^alpha, data = ccard0)
+cc_fgls4 <- lm(expenditure ~ age + owner + income + I(income^2), weights = 1/income^alpha,
+  data = ccard0)
 
 ## Table 11.2
 cc_fit <- list(cc_ols, cc_wls1, cc_wls2, cc_fgls2, cc_fgls1, cc_fgls3, cc_fgls4)
@@ -627,13 +642,15 @@ xhat <- as.data.frame(t(xhat))
 lambda <- predict(cc_pois, newdata = xhat, type = "response")
 ppois(0, lambda) * nrow(CreditCard)
 
-cc_logit <- glm(factor(reports > 0) ~ age + income + owner, data = CreditCard, family = binomial)
+cc_logit <- glm(factor(reports > 0) ~ age + income + owner,
+  data = CreditCard, family = binomial)
 summary(cc_logit)
 logLik(cc_logit)
 
 ## Table 21.21, "split population model"
 library("pscl")
-cc_zip <- zeroinfl(reports ~ age + income + expenditure | age + income + owner, data = CreditCard)
+cc_zip <- zeroinfl(reports ~ age + income + expenditure | age + income + owner,
+  data = CreditCard)
 summary(cc_zip)
 sum(predict(cc_zip, type = "prob")[,1])
 
@@ -718,7 +735,8 @@ pggr <- plm.data(ggr, c("firm", "year"))
 
 ## Tab. 14.1
 library("systemfit")
-fm_sur <- systemfit(invest ~ value + capital, data = pggr, method = "SUR", methodResidCov = "noDfCor")
+fm_sur <- systemfit(invest ~ value + capital, data = pggr, method = "SUR",
+  methodResidCov = "noDfCor")
 fm_psur <- systemfit(invest ~ value + capital, data = pggr, method = "SUR", pooled = TRUE, 
   methodResidCov = "noDfCor", residCovWeighted = TRUE)
 
@@ -802,11 +820,12 @@ data("Equipment", package = "AER")
 
 ## Example 17.5
 ## Cobb-Douglas
-fm_cd <- lm(log(valueadded/firms) ~ log(capital/firms) + log(labor/firms), data = Equipment)
+fm_cd <- lm(log(valueadded/firms) ~ log(capital/firms) + log(labor/firms),
+  data = Equipment)
 
 ## generalized Cobb-Douglas with Zellner-Revankar trafo
 GCobbDouglas <- function(theta)
- lm(I(log(valueadded/firms) + theta * valueadded/firms) ~ log(capital/firms) + log(labor/firms), 
+ lm(I(log(valueadded/firms) + theta * valueadded/firms) ~ log(capital/firms) + log(labor/firms),
      data = Equipment)
 
 ## yields classical Cobb-Douglas for theta = 0
@@ -967,11 +986,13 @@ dispersiontest(sa_full, trafo = 2)
 data("Affairs", package = "AER")
 
 ## Tab. 22.3 and 22.4
-fm_ols <- lm(affairs ~ age + yearsmarried + religiousness + occupation + rating, data = Affairs)
+fm_ols <- lm(affairs ~ age + yearsmarried + religiousness + occupation + rating,
+  data = Affairs)
 fm_probit <- glm(I(affairs > 0) ~ age + yearsmarried + religiousness + occupation + rating,
   data = Affairs, family = binomial(link = "probit"))
 
-fm_tobit <- tobit(affairs ~ age + yearsmarried + religiousness + occupation + rating, data = Affairs)
+fm_tobit <- tobit(affairs ~ age + yearsmarried + religiousness + occupation + rating,
+  data = Affairs)
 fm_tobit2 <- tobit(affairs ~ age + yearsmarried + religiousness + occupation + rating,
   right = 4, data = Affairs)
 
@@ -979,7 +1000,8 @@ fm_pois <- glm(affairs ~ age + yearsmarried + religiousness + occupation + ratin
   data = Affairs, family = poisson)
 
 library("MASS")
-fm_nb <- glm.nb(affairs ~ age + yearsmarried + religiousness + occupation + rating, data = Affairs)
+fm_nb <- glm.nb(affairs ~ age + yearsmarried + religiousness + occupation + rating,
+  data = Affairs)
 
 ## Tab. 22.6
 library("pscl")

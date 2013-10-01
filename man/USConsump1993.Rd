@@ -28,7 +28,7 @@ Baltagi, B.H. (2002). \emph{Econometrics}, 3rd ed. Berlin, Springer.
 
 \examples{
 ## data from Baltagi (2002)
-data("USConsump1993")
+data("USConsump1993", package = "AER")
 plot(USConsump1993, plot.type = "single", col = 1:2)
 
 ## Chapter 5 (p. 122-125)
@@ -42,6 +42,7 @@ bgtest(fm)
 coeftest(fm, vcov = NeweyWest(fm, lag = 3, prewhite = FALSE, adjust = TRUE)) 
 
 ## Chapter 8
+library("strucchange")
 ## Recursive residuals
 rr <- recresid(fm)
 rr

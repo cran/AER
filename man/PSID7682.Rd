@@ -104,8 +104,8 @@ psid_ht2 <- plm(log(wage) ~ occupation + south + smsa + industry +
 ## original choice of exogenous variables + time dummies
 ## (see also Baltagi, 2001, Table 7.1)
 psid$time <- psid$year
-psid_ht3 <- plm(log(wage) ~ weeks + south + smsa + married +
-  experience + I(experience^2) + occupation + industry + union + gender + ethnicity + education + time |
+psid_ht3 <- plm(log(wage) ~ weeks + south + smsa + married + experience + I(experience^2) +
+  occupation + industry + union + gender + ethnicity + education + time |
   weeks + south + smsa + married + gender + ethnicity + time,
   data = psid, model = "ht")
 }

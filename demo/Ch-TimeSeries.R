@@ -326,6 +326,7 @@ dynlm(dd ~ L(dd) + L(dd, 12))
 ###################################################
 ### chunk number 44: efp
 ###################################################
+library("strucchange")
 dd_ocus <- efp(dd ~ dd1 + dd12, data = dd_dat,
   type = "OLS-CUSUM")
 

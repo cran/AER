@@ -123,8 +123,10 @@ fm_sfe3 <- plm(frate ~ beertax, data = Fatalities,
   index = c("state", "year"), model = "within")
 
 coeftest(fm_sfe, vcov = vcovHC(fm_sfe, type = "HC1"))[1,]
-coeftest(fm_sfe2, vcov = vcovHC(fm_sfe2, type = "HC1"))[1,] ## uses different df in sd and pval
-coeftest(fm_sfe3, vcov = vcovHC(fm_sfe3, type = "HC1", method = "white1"))[,1] ## uses different df in pval
+## uses different df in sd and pval
+coeftest(fm_sfe2, vcov = vcovHC(fm_sfe2, type = "HC1"))[1,]
+## uses different df in pval
+coeftest(fm_sfe3, vcov = vcovHC(fm_sfe3, type = "HC1", method = "white1"))[,1]
 
 
 ## pp. 363, Eq. (10.21)

@@ -36,11 +36,13 @@ Model of Labour Market Participation. \emph{Journal of Applied Econometrics},
 data("SwissLabor")
 
 ### Gerfin (1996), Table I.
-fm_probit <- glm(participation ~ . + I(age^2), data = SwissLabor, family = binomial(link = "probit"))
+fm_probit <- glm(participation ~ . + I(age^2), data = SwissLabor,
+  family = binomial(link = "probit"))
 summary(fm_probit)
 
 ### alternatively
-fm_logit <- glm(participation ~ . + I(age^2), data = SwissLabor, family = binomial)
+fm_logit <- glm(participation ~ . + I(age^2), data = SwissLabor,
+  family = binomial)
 summary(fm_logit)
 }
 

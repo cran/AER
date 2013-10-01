@@ -74,6 +74,7 @@ coeftest(fm4, vcov = vcovHC(fm4, type = "HC1"))
 waldtest(fm3, fm4, vcov = vcovHC(fm3, type = "HC1"))
 
 ## changes with respect to age
+library("strucchange")
 ## Nyblom-Hansen test
 scus <- gefp(subs ~ citeprice, data = log(journals), fit = lm, order.by = ~ age)
 plot(scus, functional = meanL2BB)

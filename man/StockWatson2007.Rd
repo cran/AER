@@ -72,11 +72,13 @@ fmloglog <- lm(log(score) ~ log(income), data = CASchools)
 ## Equation 8.24, p. 274
 fmloglin <- lm(log(score) ~ income, data = CASchools)
 ## Equation 8.26, p. 275
-fmlinlogcub <- lm(score ~ log(income) + I(log(income)^2) + I(log(income)^3), data = CASchools)
+fmlinlogcub <- lm(score ~ log(income) + I(log(income)^2) + I(log(income)^3),
+  data = CASchools)
 
 ## Table 8.3, p. 292 (numbers refer to columns)
 fmc2 <- lm(score ~ stratio + english + lunch + log(income), data = CASchools)
-fmc7 <- lm(score ~ stratio + I(stratio^2) + I(stratio^3) + english + lunch + log(income), data = CASchools)
+fmc7 <- lm(score ~ stratio + I(stratio^2) + I(stratio^3) + english + lunch + log(income),
+  data = CASchools)
 
 
 #####################################
@@ -131,10 +133,14 @@ cbind(
 MASchools$higheng <- with(MASchools, english > median(english))
 fm1 <- lm(score4 ~ stratio, data = MASchools)
 fm2 <- lm(score4 ~ stratio + english + lunch + log(income), data = MASchools)
-fm3 <- lm(score4 ~ stratio + english + lunch + income + I(income^2) + I(income^3), data = MASchools)
-fm4 <- lm(score4 ~ stratio + I(stratio^2) + I(stratio^3) + english + lunch + income + I(income^2) + I(income^3), data = MASchools)
-fm5 <- lm(score4 ~ stratio + higheng + I(higheng * stratio) + lunch + income + I(income^2) + I(income^3), data = MASchools)
-fm6 <- lm(score4 ~ stratio + lunch + income + I(income^2) + I(income^3), data = MASchools)
+fm3 <- lm(score4 ~ stratio + english + lunch + income + I(income^2) + I(income^3),
+  data = MASchools)
+fm4 <- lm(score4 ~ stratio + I(stratio^2) + I(stratio^3) + english + lunch +
+  income + I(income^2) + I(income^3), data = MASchools)
+fm5 <- lm(score4 ~ stratio + higheng + I(higheng * stratio) + lunch +
+  income + I(income^2) + I(income^3), data = MASchools)
+fm6 <- lm(score4 ~ stratio + lunch + income + I(income^2) + I(income^3),
+  data = MASchools)
 
 ## for comparability with Stata use HC1 below
 coeftest(fm1, vcov = vcovHC(fm1, type = "HC1"))
@@ -203,20 +209,20 @@ HMDA$lvrat <- factor(ifelse(HMDA$lvrat < 0.8, "low",
 HMDA$mhist <- as.numeric(HMDA$mhist)
 HMDA$chist <- as.numeric(HMDA$chist)
 
-fm1 <- lm(I(as.numeric(deny) - 1) ~ afam + pirat + hirat + lvrat + chist + mhist + phist +
-  insurance + selfemp, data = HMDA)
-fm2 <- glm(deny ~ afam + pirat + hirat + lvrat + chist + mhist + phist + insurance + selfemp, 
-  family = binomial, data = HMDA)
-fm3 <- glm(deny ~ afam + pirat + hirat + lvrat + chist + mhist + phist + insurance + selfemp, 
-  family = binomial(link = "probit"), data = HMDA)
-fm4 <- glm(deny ~ afam + pirat + hirat + lvrat + chist + mhist + phist + insurance + selfemp + 
-  single + hschool + unemp, family = binomial(link = "probit"), data = HMDA)
-fm5 <- glm(deny ~ afam + pirat + hirat + lvrat + chist + mhist + phist + insurance + selfemp + 
-  single + hschool + unemp + condomin + 
+fm1 <- lm(I(as.numeric(deny) - 1) ~ afam + pirat + hirat + lvrat + chist + mhist +
+  phist + insurance + selfemp, data = HMDA)
+fm2 <- glm(deny ~ afam + pirat + hirat + lvrat + chist + mhist + phist + insurance +
+  selfemp, family = binomial, data = HMDA)
+fm3 <- glm(deny ~ afam + pirat + hirat + lvrat + chist + mhist + phist + insurance +
+  selfemp, family = binomial(link = "probit"), data = HMDA)
+fm4 <- glm(deny ~ afam + pirat + hirat + lvrat + chist + mhist + phist + insurance +
+  selfemp + single + hschool + unemp, family = binomial(link = "probit"), data = HMDA)
+fm5 <- glm(deny ~ afam + pirat + hirat + lvrat + chist + mhist + phist + insurance +
+  selfemp + single + hschool + unemp + condomin + 
   I(mhist==3) + I(mhist==4) + I(chist==3) + I(chist==4) + I(chist==5) + I(chist==6), 
   family = binomial(link = "probit"), data = HMDA)
-fm6 <- glm(deny ~ afam * (pirat + hirat) + lvrat + chist + mhist + phist + insurance + selfemp + 
-  single + hschool + unemp, family = binomial(link = "probit"), data = HMDA)
+fm6 <- glm(deny ~ afam * (pirat + hirat) + lvrat + chist + mhist + phist + insurance +
+  selfemp + single + hschool + unemp, family = binomial(link = "probit"), data = HMDA)
 coeftest(fm1, vcov = sandwich)
 
 fm4r <- update(fm4, . ~ . - single - hschool - unemp)
@@ -226,7 +232,8 @@ waldtest(fm5, fm5r, vcov = sandwich)
 fm6r <- update(fm6, . ~ . - single - hschool - unemp)
 waldtest(fm6, fm6r, vcov = sandwich)
 
-fm5r2 <- update(fm5, . ~ . - I(mhist==3) - I(mhist==4) - I(chist==3) - I(chist==4) - I(chist==5) - I(chist==6))
+fm5r2 <- update(fm5, . ~ . - I(mhist==3) - I(mhist==4) - I(chist==3) - I(chist==4) -
+  I(chist==5) - I(chist==6))
 waldtest(fm5, fm5r2, vcov = sandwich)
 
 fm6r2 <- update(fm6, . ~ . - afam * (pirat + hirat) + pirat + hirat)
@@ -305,8 +312,12 @@ fm_sfe3 <- plm(frate ~ beertax, data = Fatalities,
   index = c("state", "year"), model = "within")
 
 coeftest(fm_sfe, vcov = vcovHC(fm_sfe, type = "HC1"))[1,]
-coeftest(fm_sfe2, vcov = vcovHC(fm_sfe2, type = "HC1"))[1,] ## uses different df in sd and pval
-coeftest(fm_sfe3, vcov = vcovHC(fm_sfe3, type = "HC1", method = "white1")) ## uses different df in pval
+
+## uses different df in sd and pval
+coeftest(fm_sfe2, vcov = vcovHC(fm_sfe2, type = "HC1"))[1,]
+
+## uses different df in pval
+coeftest(fm_sfe3, vcov = vcovHC(fm_sfe3, type = "HC1", method = "white1"))
 
 
 ## pp. 363, Eq. (10.21)
@@ -320,9 +331,12 @@ coeftest(fm_stfe2, vcov = vcovHC) ## different
 
 
 ## p. 368, Table 10.1, numbers refer to cols.
-fm1 <- plm(frate ~ beertax, data = Fatalities, index = c("state", "year"), model = "pooling")
-fm2 <- plm(frate ~ beertax, data = Fatalities, index = c("state", "year"), model = "within")
-fm3 <- plm(frate ~ beertax, data = Fatalities, index = c("state", "year"), model = "within", effect = "twoways")
+fm1 <- plm(frate ~ beertax, data = Fatalities, index = c("state", "year"),
+  model = "pooling")
+fm2 <- plm(frate ~ beertax, data = Fatalities, index = c("state", "year"),
+  model = "within")
+fm3 <- plm(frate ~ beertax, data = Fatalities, index = c("state", "year"),
+  model = "within", effect = "twoways")
 fm4 <- plm(frate ~ beertax + drinkagec + jail + service + miles + unemp + log(income),
   data = Fatalities, index = c("state", "year"), model = "within", effect = "twoways")
 fm5 <- plm(frate ~ beertax + drinkagec + jail + service + miles,
@@ -364,7 +378,8 @@ fm_ivreg <- ivreg(log(packs) ~ log(rprice) | tdiff, data = c1995)
 coeftest(fm_ivreg, vcov = hc1)
 
 ## Equation 12.15
-fm_ivreg2 <- ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff, data = c1995)
+fm_ivreg2 <- ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff,
+  data = c1995)
 coeftest(fm_ivreg2, vcov = hc1)
 ## Equation 12.16
 fm_ivreg3 <- ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax/cpi),
@@ -374,7 +389,8 @@ coeftest(fm_ivreg3, vcov = hc1)
 ## Table 12.1, p. 448
 ydiff <- log(c1995$packs) - log(c1985$packs)
 pricediff <- log(c1995$price/c1995$cpi) - log(c1985$price/c1985$cpi)
-incdiff <- log(c1995$income/c1995$population/c1995$cpi) - log(c1985$income/c1985$population/c1985$cpi)
+incdiff <- log(c1995$income/c1995$population/c1995$cpi) -
+  log(c1985$income/c1985$population/c1985$cpi)
 taxsdiff <- (c1995$taxs - c1995$tax)/c1995$cpi - (c1985$taxs - c1985$tax)/c1985$cpi
 taxdiff <- c1995$tax/c1995$cpi - c1985$tax/c1985$cpi
 
@@ -433,7 +449,8 @@ star <- reshape(STAR, idvar = "id", ids = row.names(STAR),
 ## (c) improve variable names and type
 names(star)[5:15] <- nam
 star$id <- factor(star$id)
-star$grade <- factor(star$grade, levels = lev, labels = c("kindergarten", "1st", "2nd", "3rd"))
+star$grade <- factor(star$grade, levels = lev,
+  labels = c("kindergarten", "1st", "2nd", "3rd"))
 rm(nam, lev)
 ## (d) model fitting
 fm <- lm(I(read + math) ~ 0 + grade/star, data = star)
@@ -528,9 +545,12 @@ fm3 <- dynlm(returns ~ L(returns, 1:4), data = USStocksSW, start = c(1960,1))
 waldtest(fm3, vcov = sandwich)
 
 ## Table 14.7, p. 574
-fm4 <- dynlm(returns ~ L(returns) + L(d(dividend)), data = USStocksSW, start = c(1960, 1))
-fm5 <- dynlm(returns ~ L(returns, 1:2) + L(d(dividend), 1:2), data = USStocksSW, start = c(1960,1))
-fm6 <- dynlm(returns ~ L(returns) + L(dividend), data = USStocksSW, start = c(1960,1))
+fm4 <- dynlm(returns ~ L(returns) + L(d(dividend)),
+  data = USStocksSW, start = c(1960, 1))
+fm5 <- dynlm(returns ~ L(returns, 1:2) + L(d(dividend), 1:2),
+  data = USStocksSW, start = c(1960, 1))
+fm6 <- dynlm(returns ~ L(returns) + L(dividend),
+  data = USStocksSW, start = c(1960, 1))
 
 
 ##################################

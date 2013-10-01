@@ -44,6 +44,8 @@ fm4 <- lm(log(output/technology) ~ I(1/clr), data = TechChange)
 
 ## Exercise 7.2 (a) and (c)
 plot(I(output/technology) ~ clr, data = TechChange)
+
+library("strucchange")
 sctest(I(output/technology) ~ log(clr), data = TechChange, type = "Chow", point = c(1942, 1))
 }
 

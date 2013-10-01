@@ -18,6 +18,7 @@ Cambridge: Cambridge University Press.
 \seealso{\code{\link{DoctorVisits}}, \code{\link{NMES1988}}, \code{\link{RecreationDemand}}}
 
 \examples{
+library("MASS")
 library("pscl")
 
 ###########################################
@@ -136,7 +137,8 @@ logLik(fm_hnb)
 sval <- list(count = c(0.841, 0.172, .622, -.057, .576, .057, -.078, .012), 
              zero = c(-3.046, 4.638, -.025, .026, 16.203, 0.030, -.156, .117),
              theta = c(count = 1/1.7, zero = 1/5.609))
-fm_hnb2 <- hurdle(trips ~ ., data = RecreationDemand, dist = "negbin", zero = "negbin", start = sval)
+fm_hnb2 <- hurdle(trips ~ ., data = RecreationDemand,
+  dist = "negbin", zero = "negbin", start = sval)
 summary(fm_hnb2)
 logLik(fm_hnb2)
 
@@ -154,7 +156,7 @@ summary(fm_hgnb)
 logLik(fm_hgnb)
 
 ## logLik with starting values from Gurmu + Trivedi 1996
-fm_hgnb96 <- hurdle(trips ~ ., data = RecreationDemand, dist = "negbin", zero = "geometric", 
+fm_hgnb96 <- hurdle(trips ~ ., data = RecreationDemand, dist = "negbin", zero = "geometric",
                   start = sval96, maxit = 0)
 logLik(fm_hgnb96)
 

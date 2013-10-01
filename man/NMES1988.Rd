@@ -61,7 +61,8 @@ forthcoming.
 \seealso{\code{\link{CameronTrivedi1998}}}
 
 \examples{
-## package
+## packages
+library("MASS")
 library("pscl")
 
 ## select variables for analysis

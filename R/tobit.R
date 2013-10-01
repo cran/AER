@@ -267,6 +267,9 @@ lrtest.tobit <- function(object, ..., name = NULL)
 linearHypothesis.tobit <- function(model, hypothesis.matrix,
   rhs = NULL, vcov. = NULL, ...)
 {
+  if(compareVersion(packageDescription("car")$Version, "2.0-19") < 0L) {
+    stop("The linearHypothesis() method requires package car version 2.0-19 or later.")
+  }
   if(is.null(vcov.)) {
     vcov. <- vcov(model)
   } else {
@@ -274,6 +277,6 @@ linearHypothesis.tobit <- function(model, hypothesis.matrix,
   }
   vcov. <- vcov.[-nrow(vcov.), -ncol(vcov.)]
   model$formula <- model$call$formula
-  car:::linearHypothesis.default(model,
+  car::linearHypothesis.default(model,
     hypothesis.matrix = hypothesis.matrix, rhs = rhs, vcov. = vcov., ...)
 }

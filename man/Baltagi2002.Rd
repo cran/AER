@@ -38,7 +38,8 @@ plot(residuals(cig_lm) ~ price, data = CigarettesB)
 abline(h = 0, lty = 2)
 
 ## Figure 3.10
-cig_pred <- with(CigarettesB, data.frame(price = seq(from = min(price), to = max(price), length = 30)))
+cig_pred <- with(CigarettesB,
+  data.frame(price = seq(from = min(price), to = max(price), length = 30)))
 cig_pred <- cbind(cig_pred, predict(cig_lm, newdata = cig_pred, interval = "confidence"))
 plot(packs ~ price, data = CigarettesB)
 lines(fit ~ price, data = cig_pred)
@@ -96,6 +97,7 @@ bgtest(fm)
 coeftest(fm, vcov = NeweyWest(fm, lag = 3, prewhite = FALSE, adjust = TRUE)) 
 
 ## Chapter 8
+library("strucchange")
 ## Recursive residuals
 rr <- recresid(fm)
 rr

@@ -20,8 +20,7 @@ ivreg(formula, instruments, data, subset, na.action, weights, offset,
     (recommended) or \code{formula} is \code{y ~ x1 + x2} and \code{instruments}
     is a one-sided formula \code{~ z1 + z2 + z3} (only for backward compatibility).}
   \item{data}{an optional data frame containing the variables in the model. 
-    By default the variables are taken from the environment from which \code{ivreg} is
-    called.}
+    By default the variables are taken from the environment of the \code{formula}.}
   \item{subset}{an optional vector specifying a subset of observations to be used in 
     fitting the model.}
   \item{na.action}{a function that indicates what should happen when the 
@@ -49,7 +48,10 @@ where \code{x1} and \code{x2} are the regressors and \code{z1},
 regressors have to be included as instruments for themselves. For
 example, if there is one exogenous regressor \code{ex} and one endogenous
 regressor \code{en} with instrument \code{in}, the appropriate formula
-would be \code{y ~ ex + en | ex + in}.
+would be \code{y ~ ex + en | ex + in}. Equivalently, this can be specified as
+\code{y ~ ex + en | . - en + in}, i.e., by providing an update formula with a
+\code{.} in the second part of the formula. The latter is typically more convenient,
+if there is a large number of exogenous regressors.
 }
 
 \value{

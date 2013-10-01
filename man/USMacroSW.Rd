@@ -48,8 +48,9 @@ Stock, J.H. and Watson, M.W. (2007). \emph{Introduction to Econometrics}, 2nd ed
 
 \examples{
 ## Stock and Watson (2007)
-data("USMacroSW")
+data("USMacroSW", package = "AER")
 library("dynlm")
+library("strucchange")
 usm <- ts.intersect(USMacroSW, 4 * 100 * diff(log(USMacroSW[, "cpi"])))
 colnames(usm) <- c(colnames(USMacroSW), "infl")
 

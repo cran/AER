@@ -93,11 +93,13 @@ library("plm")
 pggr <- plm.data(ggr, c("firm", "year"))
 library("systemfit")
 fm_ols <- systemfit(invest ~ value + capital, data = pggr, method = "OLS")
-fm_pols <- systemfit(invest ~ value + capital, data = pggr, method = "OLS", pooled = TRUE)
+fm_pols <- systemfit(invest ~ value + capital, data = pggr, method = "OLS",
+  pooled = TRUE)
 
 ## Tab. 14.1
-fm_sur <- systemfit(invest ~ value + capital, data = pggr, method = "SUR", methodResidCov = "noDfCor")
-fm_psur <- systemfit(invest ~ value + capital, data = pggr, method = "SUR", pooled = TRUE, 
+fm_sur <- systemfit(invest ~ value + capital, data = pggr, method = "SUR",
+  methodResidCov = "noDfCor")
+fm_psur <- systemfit(invest ~ value + capital, data = pggr, method = "SUR", pooled = TRUE,
   methodResidCov = "noDfCor", residCovWeighted = TRUE)
 
 ## Further examples:
@@ -123,9 +125,12 @@ plmtest(fm_ols, type = "bp")
 plmtest(fm_ols, type = "honda")
 
 ## Random effects models
-fm_ream <- plm(invest ~ value + capital, data = pg, model = "random", random.method = "amemiya")
-fm_rewh <- plm(invest ~ value + capital, data = pg, model = "random", random.method = "walhus")
-fm_rener <- plm(invest ~ value + capital, data = pg, model = "random", random.method = "nerlove")
+fm_ream <- plm(invest ~ value + capital, data = pg, model = "random",
+  random.method = "amemiya")
+fm_rewh <- plm(invest ~ value + capital, data = pg, model = "random",
+  random.method = "walhus")
+fm_rener <- plm(invest ~ value + capital, data = pg, model = "random",
+  random.method = "nerlove")
 
 ## Baltagi (2005), Tab. 2.1
 rbind(

@@ -18,9 +18,18 @@ ivreg <- function(formula, instruments, data, subset, na.action, weights, offset
     formula <- as.Formula(formula)
   }
   stopifnot(length(formula)[1] == 1L, length(formula)[2] %in% 1:2)
-  mf$formula <- formula
-
+  
+  ## try to handle dots in formula
+  has_dot <- function(formula) inherits(try(terms(formula), silent = TRUE), "try-error")
+  if(has_dot(formula)) {
+    f1 <- formula(formula, rhs = 1)
+    f2 <- formula(formula, lhs = 0, rhs = 2)
+    if(!has_dot(f1) & has_dot(f2)) formula <- as.Formula(f1,
+      update(formula(formula, lhs = 0, rhs = 1), f2))
+  }
+  
   ## call model.frame()
+  mf$formula <- formula
   mf[[1]] <- as.name("model.frame")
   mf <- eval(mf, parent.frame())
   
@@ -194,7 +203,7 @@ print.ivreg <- function(x, digits = max(3, getOption("digits") - 3), ...)
   invisible(x)
 }
 
-summary.ivreg <- function(object, vcov. = NULL, df = NULL, ...)
+summary.ivreg <- function(object, vcov. = NULL, df = NULL, diagnostics = FALSE, ...)
 {
   ## weighted residuals
   res <- object$residuals
@@ -242,6 +251,9 @@ summary.ivreg <- function(object, vcov. = NULL, df = NULL, ...)
   waldtest <- linearHypothesis(object, Rmat, vcov. = vcov., test = ifelse(df > 0, "F", "Chisq"))
   waldtest <- c(waldtest[2,3], waldtest[2,4], abs(waldtest[2,2]), if(df > 0) waldtest[2,1] else NULL)
   
+  ## diagnostic tests
+  diag <- if(diagnostics) ivdiag(object, vcov. = vcov.) else NULL
+  
   rval <- list(
     call = object$call,
     terms = object$terms,
@@ -253,7 +265,8 @@ summary.ivreg <- function(object, vcov. = NULL, df = NULL, ...)
     r.squared = r.squared,
     adj.r.squared = adj.r.squared,
     waldtest = waldtest,
-    vcov = vc)
+    vcov = vc,
+    diagnostics = diag)
     
   class(rval) <- "summary.ivreg"
   return(rval)
@@ -266,7 +279,7 @@ print.summary.ivreg <- function(x, digits = max(3, getOption("digits") - 3),
   cat(paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
 
   cat(if(!is.null(x$weights) && diff(range(x$weights))) "Weighted ", "Residuals:\n", sep = "")      
-  if(NROW(x$residuals) > 5) {
+  if(NROW(x$residuals) > 5L) {
       nam <- c("Min", "1Q", "Median", "3Q", "Max")
       rq <- if(length(dim(x$residuals)) == 2) 
 	  structure(apply(t(x$residuals), 1, quantile), dimnames = list(nam, dimnames(x$residuals)[[2]]))
@@ -277,16 +290,25 @@ print.summary.ivreg <- function(x, digits = max(3, getOption("digits") - 3),
   }
 
   cat("\nCoefficients:\n")
-  printCoefmat(x$coefficients, digits = digits, signif.stars = signif.stars, na.print = "NA", ...)
+  printCoefmat(x$coefficients, digits = digits, signif.stars = signif.stars,
+    signif.legend = signif.stars & is.null(x$diagnostics), na.print = "NA", ...)
+
+  if(!is.null(x$diagnostics)) {
+    cat("\nDiagnostic tests:\n")
+    printCoefmat(x$diagnostics, cs.ind = 1L:2L, tst.ind = 3L,
+      has.Pvalue = TRUE, P.values = TRUE, digits = digits,
+      signif.stars = signif.stars, na.print = "NA", ...)  
+  }
 
   cat("\nResidual standard error:", format(signif(x$sigma, digits)),
-    "on", x$df[2], "degrees of freedom\n")
+    "on", x$df[2L], "degrees of freedom\n")
 
   cat("Multiple R-Squared:", formatC(x$r.squared, digits = digits))
   cat(",\tAdjusted R-squared:", formatC(x$adj.r.squared, digits = digits),
-    "\nWald test:", formatC(x$waldtest[1], digits = digits),
-    "on", x$waldtest[3], if(length(x$waldtest) > 3) c("and", x$waldtest[4]) else NULL,       
-    "DF,  p-value:", format.pval(x$waldtest[2], digits = digits), "\n\n")
+    "\nWald test:", formatC(x$waldtest[1L], digits = digits),
+    "on", x$waldtest[3L], if(length(x$waldtest) > 3L) c("and", x$waldtest[4L]) else NULL,       
+    "DF,  p-value:", format.pval(x$waldtest[2L], digits = digits), "\n\n")
+
   invisible(x)
 }
     
@@ -298,15 +320,74 @@ anova.ivreg <- function(object, object2, test = "F", vcov = NULL, ...)
     head[1] <- "Analysis of Variance Table\n"
     rss <- sapply(list(object, object2), function(x) sum(residuals(x)^2))
     dss <- c(NA, -diff(rss))
-    rval <- cbind(rval, cbind("RSS" = rss, "Sum of Sq" = dss))[,c(1, 5, 2, 6, 3:4)]
+    rval <- cbind(rval, cbind("RSS" = rss, "Sum of Sq" = dss))[,c(1L, 5L, 2L, 6L, 3L:4L)]
     attr(rval, "heading") <- head
     class(rval) <- c("anova", "data.frame")
   }
   return(rval)
 }
 
+ivdiag <- function(obj, vcov. = NULL) {
+  ## extract data
+  y <- model.response(model.frame(obj))
+  x <- model.matrix(obj, component = "regressors")
+  z <- model.matrix(obj, component = "instruments")
+  
+  ## endogenous/instrument variables
+  endo <- which(!(colnames(x) %in% colnames(z)))
+  inst <- which(!(colnames(z) %in% colnames(x)))
+  if((length(endo) <= 0L) | (length(inst) <= 0L))
+    stop("no endogenous/instrument variables")
 
-## If #Instr. = #Regressoren then
+  ## return value
+  rval <- matrix(NA, nrow = 3L, ncol = 4L)
+  colnames(rval) <- c("df1", "df2", "statistic", "p-value")
+  rownames(rval) <- c("Weak instruments", "Wu-Hausman", "Sargan")
+  
+  ## convenience functions
+  lmfit <- function(x, y) {
+    rval <- lm.fit(x, y)
+    rval$x <- x
+    rval$y <- y
+    return(rval)
+  }
+  rss <- function(obj) sum(obj$residuals^2)
+  wald <- function(obj0, obj1, vcov. = NULL) {
+    df <- c(obj1$rank - obj0$rank, obj1$df.residual)
+    if(!is.function(vcov.)) {
+      w <- ((rss(obj0) - rss(obj1)) / df[1L]) / (rss(obj1)/df[2L])
+    } else {
+      ovar <- which(!(names(obj1$coefficients) %in% names(obj0$coefficients)))
+      vc <- vcov.(lm(obj1$y ~ 0 + obj1$x))
+      w <- t(obj1$coefficients[ovar]) %*% solve(vc[ovar,ovar]) %*% obj1$coefficients[ovar]
+    }
+    pval <- pf(w, df[1L], df[2L], lower.tail = FALSE)
+    c(df, w, pval)
+  }
+    
+  # Test for weak instruments
+  aux0 <- lmfit(z[, -inst, drop = FALSE], x[, endo])
+  aux1 <- lmfit(z,                        x[, endo])
+  rval[1L, ] <- wald(aux0, aux1, vcov. = vcov.)
+
+  ## Wu-Hausman test for endogeneity
+  auxo <- lmfit(      x,                      y)
+  auxe <- lmfit(cbind(x, aux1$fitted.values), y)
+  rval[2L, ] <- wald(auxo, auxe, vcov. = vcov.)
+
+  ## Sargan test of overidentifying restrictions 
+  r <- residuals(obj)  
+  auxs <- lmfit(z, r)
+  rval[3L, 1L] <- length(inst) - 1L
+  if(rval[3L, 1L] > 0L) {
+    rval[3L, 3L] <- length(r) * (1 - rss(auxs)/sum((r - mean(r))^2))
+    rval[3L, 4L] <- pchisq(rval[3L, 3L], rval[3L, 1L], lower.tail = FALSE)
+  }
+
+  return(rval)
+}
+
+## If #Instruments = #Regressors then
 ##   b = (Z'X)^{-1} Z'y
 ## and solves the estimating equations
 ##   Z' (y - X beta) = 0

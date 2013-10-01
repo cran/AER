@@ -570,7 +570,7 @@ empl_ab <- pgmm(dynformula(form, list(2, 1, 0, 1)),
 ###################################################
 ### chunk number 66: plm-AB-summary
 ###################################################
-summary(empl_ab)     
+summary(empl_ab, robust = FALSE)     
 
 
 ###################################################

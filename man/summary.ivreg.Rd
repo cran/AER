@@ -18,7 +18,7 @@
 }
 
 \usage{
-\method{summary}{ivreg}(object, vcov. = NULL, df = NULL, \dots)
+\method{summary}{ivreg}(object, vcov. = NULL, df = NULL, diagnostics = FALSE, \dots)
 \method{anova}{ivreg}(object, object2, test = "F", vcov = NULL, \dots)
 
 \method{terms}{ivreg}(x, component = c("regressors", "instruments"), \dots)
@@ -30,11 +30,17 @@
     \code{\link{ivreg}}.}
   \item{vcov., vcov}{a specification of the covariance matrix of the estimated
     coefficients. This can be specified as a matrix or as a function yielding a matrix
-    when applied to the fitted model.}
+    when applied to the fitted model. If it is a function it is also employed in the two
+    diagnostic F tests (if \code{diagnostics = TRUE} in the \code{summary()} method).}
   \item{df}{the degrees of freedom to be used. By default this is set to
     residual degrees of freedom for which a t or F test is computed. Alternatively,
     it can be set to \code{Inf} (or equivalently \code{0}) for which a z or Chi-squared
     test is computed.}
+  \item{diagnostics}{logical. Should diagnostic tests for the instrumental-variable
+    regression be carried out? These encompass an F test of the first stage regression
+    for weak instruments, a Wu-Hausman test for endogeneity, and a Sargan
+    test of overidentifying restrictions (only if there are more instruments than
+    regressors).}
   \item{test}{character specifying whether to compute the large sample Chi-squared
     statistic (with asymptotic Chi-squared distribution) or the finite sample F statistic
     (with approximate F distribution).}
@@ -63,7 +69,7 @@ CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
 ## model 
 fm <- ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax/cpi),
   data = CigarettesSW, subset = year == "1995")
-summary(fm, vcov = sandwich, df = Inf)
+summary(fm, vcov = sandwich, df = Inf, diagnostics = TRUE)
 
 ## ANOVA
 fm2 <- ivreg(log(packs) ~ log(rprice) | tdiff, data = CigarettesSW, subset = year == "1995")

@@ -50,6 +50,7 @@ with an Application to Medicaid Utilization.  \emph{Journal of Applied Econometr
 \examples{
 ## data and packages
 data("Medicaid1986")
+library("MASS")
 library("pscl")
 
 ## scale regressors

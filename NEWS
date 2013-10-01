@@ -1,3 +1,19 @@
+Changes in Version 1.2-0
+
+  o The summary() method for ivreg() now has a diagnostics=FALSE argument.
+    If set to TRUE, three diagnostic tests are performed: an F test of
+    the first stage regression for weak instruments, a Wu-Hausman test
+    for endogeneity, and a Sargan test of overidentifying restrictions
+    (only if there are more instruments than regressors).
+
+  o Added new data set EquationCitations provided by Fawcett & Higginson
+    (2012, PNAS).
+
+  o Changes in Depends/Imports/Suggests due to new CRAN check requirements.
+    In particular, the "Formula" package is now only imported (but not
+    loaded into the search path).
+
+
 Changes in Version 1.1-9
 
   o Recompressed data sets in package to reduce file storage requirements.

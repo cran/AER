@@ -63,7 +63,8 @@ barplot(t(kids_tab[, c(4, 8)]), beside = TRUE, legend = TRUE)
 
 ## Chapter 3, Example 3.14
 ## Table 3.1
-gss40$nokids <- factor(gss40$kids <= 0, levels = c(FALSE, TRUE), labels = c("no", "yes"))
+gss40$nokids <- factor(gss40$kids <= 0,
+  levels = c(FALSE, TRUE), labels = c("no", "yes"))
 nokids_p1 <- glm(nokids ~ 1, data = gss40, family = binomial(link = "probit"))
 nokids_p2 <- glm(nokids ~ trend, data = gss40, family = binomial(link = "probit"))
 nokids_p3 <- glm(nokids ~ trend + education + ethnicity + siblings,
@@ -177,16 +178,21 @@ with(afb_skm, plot(n.event/n.risk ~ time, type = "s"))
 plot(afb_km, xlim = c(10, 40), conf.int = FALSE)
 
 ## Example 8.9
-afb_ex <- survreg(afb ~ education + siblings + ethnicity + immigrant + lowincome16 + city16,
+library("survival")
+afb_ex <- survreg(
+  afb ~ education + siblings + ethnicity + immigrant + lowincome16 + city16,
   data = gss2002, dist = "exponential")
-afb_wb <- survreg(afb ~ education + siblings + ethnicity + immigrant + lowincome16 + city16,
+afb_wb <- survreg(
+  afb ~ education + siblings + ethnicity + immigrant + lowincome16 + city16,
   data = gss2002, dist = "weibull")
-afb_ln <- survreg(afb ~ education + siblings + ethnicity + immigrant + lowincome16 + city16,
+afb_ln <- survreg(
+  afb ~ education + siblings + ethnicity + immigrant + lowincome16 + city16,
   data = gss2002, dist = "lognormal")
 
 ## Example 8.11
 kids_pois <- glm(kids ~ education + trend + ethnicity + immigrant + lowincome16 + city16,
   data = gss40, family = poisson)
+library("MASS")
 kids_nb <- glm.nb(kids ~ education + trend + ethnicity + immigrant + lowincome16 + city16,
   data = gss40)
 lrtest(kids_pois, kids_nb)
@@ -217,14 +223,15 @@ plot(school ~ meducation, data = gsoep, breaks = c(7, 9, 10.5, 11.5, 12.5, 15, 1
 ## Chapter 5
 ## Table 5.1
 library("nnet")
-gsoep_mnl <- multinom(school ~ meducation + memployment + log(income) + log(size) + parity + year2,
+gsoep_mnl <- multinom(
+  school ~ meducation + memployment + log(income) + log(size) + parity + year2,
   data = gsoep)
 coeftest(gsoep_mnl)[c(1:6, 1:6 + 14),]
  
 ## alternatively
 if(require("mlogit")) {
-gsoep_mnl2 <- mlogit(school ~ 0 | meducation + memployment + log(income) + log(size) + parity + year2,
-  data = gsoep, shape = "wide", reflevel = "Hauptschule")
+gsoep_mnl2 <- mlogit(school ~ 0 | meducation + memployment + log(income) +
+  log(size) + parity + year2, data = gsoep, shape = "wide", reflevel = "Hauptschule")
 coeftest(gsoep_mnl2)[1:12,]
 }
 
@@ -244,7 +251,8 @@ plot(eff_mnl, ask = FALSE, confint = FALSE)
 plot(eff_mnl, ask = FALSE, style = "stacked", colors = gray.colors(3))
 
 ## omit year
-gsoep_mnl1 <- multinom(school ~ meducation + memployment + log(income) + log(size) + parity,
+gsoep_mnl1 <- multinom(
+  school ~ meducation + memployment + log(income) + log(size) + parity,
   data = gsoep)
 lrtest(gsoep_mnl, gsoep_mnl1)
 eff_mnl1 <- allEffects(gsoep_mnl1)
@@ -255,7 +263,8 @@ plot(eff_mnl1, ask = FALSE, style = "stacked", colors = gray.colors(3))
 ## Chapter 6
 ## Table 6.1
 library("MASS")
-gsoep$munemp <- factor(gsoep$memployment != "none", levels = c(FALSE, TRUE), labels = c("no", "yes"))
+gsoep$munemp <- factor(gsoep$memployment != "none",
+  levels = c(FALSE, TRUE), labels = c("no", "yes"))
 gsoep_pop <- polr(school ~ meducation + munemp + log(income) + log(size) + parity + year2,
   data = gsoep, method = "probit", Hess = TRUE)
 gsoep_pol <- polr(school ~ meducation + munemp + log(income) + log(size) + parity + year2,
@@ -293,33 +302,38 @@ hours_lm <- lm(hours ~ wage + nwincome + youngkids + oldkids, data = PSID1976,
 
 ## Chapter 7
 ## Example 7.2, Table 7.1
-hours_tobit <- tobit(hours ~ nwincome + education + experience + I(experience^2) + age + youngkids + oldkids,
-  data = PSID1976)
-hours_ols1 <- lm(hours ~ nwincome + education + experience + I(experience^2) + age + youngkids + oldkids,
-  data = PSID1976)
-hours_ols2 <- lm(hours ~ nwincome + education + experience + I(experience^2) + age + youngkids + oldkids,
-  data = PSID1976, subset = participation == "yes")
+hours_tobit <- tobit(hours ~ nwincome + education + experience + I(experience^2) +
+  age + youngkids + oldkids, data = PSID1976)
+hours_ols1 <- lm(hours ~ nwincome + education + experience + I(experience^2) +
+  age + youngkids + oldkids, data = PSID1976)
+hours_ols2 <- lm(hours ~ nwincome + education + experience + I(experience^2) +
+  age + youngkids + oldkids, data = PSID1976, subset = participation == "yes")
 
 ## Example 7.10, Table 7.4
 wage_ols <- lm(log(wage) ~ education + experience + I(experience^2),
   data = PSID1976, subset = participation == "yes")
 
 library("sampleSelection")
-wage_ghr <- selection(participation ~ nwincome + age + youngkids + oldkids + education + experience + I(experience^2), 
-log(wage) ~ education + experience + I(experience^2), data = PSID1976)
+wage_ghr <- selection(participation ~ nwincome + age + youngkids + oldkids +
+  education + experience + I(experience^2), 
+  log(wage) ~ education + experience + I(experience^2), data = PSID1976)
 
 ## Exercise 7.13
-hours_cragg1 <- glm(participation ~ nwincome + education + experience + I(experience^2) + age + youngkids + oldkids,
+hours_cragg1 <- glm(participation ~ nwincome + education +
+  experience + I(experience^2) + age + youngkids + oldkids,
   data = PSID1976, family = binomial(link = "probit"))
 library("truncreg")
-hours_cragg2 <- truncreg(hours ~ nwincome + education + experience + I(experience^2) + age + youngkids + oldkids,
+hours_cragg2 <- truncreg(hours ~ nwincome + education +
+  experience + I(experience^2) + age + youngkids + oldkids,
   data = PSID1976, subset = participation == "yes")
 
 ## Exercise 7.15
 wage_olscoef <- sapply(c(-Inf, 0.5, 1, 1.5, 2), function(censpoint)
-  coef(lm(log(wage) ~ education + experience + I(experience^2), data = PSID1976[log(PSID1976$wage) > censpoint,])))
+  coef(lm(log(wage) ~ education + experience + I(experience^2),
+  data = PSID1976[log(PSID1976$wage) > censpoint,])))
 wage_mlcoef <- sapply(c(0.5, 1, 1.5, 2), function(censpoint)
-  coef(tobit(log(wage) ~ education + experience + I(experience^2), data = PSID1976, left = censpoint)))
+  coef(tobit(log(wage) ~ education + experience + I(experience^2),
+  data = PSID1976, left = censpoint)))
 
 
 ##################################
@@ -337,12 +351,14 @@ head(crack, 12)
 crack$price <- crack$price/100
 crack_mlogit1 <- mlogit(choice ~ price | 0, data = crack, reflevel = "private")
 crack_mlogit2 <- mlogit(choice ~ price | 1, data = crack, reflevel = "private")
-crack_mlogit3 <- mlogit(choice ~ price + feat + disp | 1, data = crack, reflevel = "private")
+crack_mlogit3 <- mlogit(choice ~ price + feat + disp | 1, data = crack,
+  reflevel = "private")
 lrtest(crack_mlogit1, crack_mlogit2, crack_mlogit3)
 
 ## IIA test
 crack_mlogit_all <- update(crack_mlogit2, reflevel = "nabisco")
-crack_mlogit_res <- update(crack_mlogit_all, alt.subset = c("keebler", "nabisco", "sunshine"))
+crack_mlogit_res <- update(crack_mlogit_all,
+  alt.subset = c("keebler", "nabisco", "sunshine"))
 hmftest(crack_mlogit_all, crack_mlogit_res)
 }
 }
