@@ -378,7 +378,7 @@ ivdiag <- function(obj, vcov. = NULL) {
   ## Sargan test of overidentifying restrictions 
   r <- residuals(obj)  
   auxs <- lmfit(z, r)
-  rval[3L, 1L] <- length(inst) - 1L
+  rval[3L, 1L] <- length(inst) - length(endo)
   if(rval[3L, 1L] > 0L) {
     rval[3L, 3L] <- length(r) * (1 - rss(auxs)/sum((r - mean(r))^2))
     rval[3L, 4L] <- pchisq(rval[3L, 3L], rval[3L, 1L], lower.tail = FALSE)

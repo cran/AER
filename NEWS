@@ -1,3 +1,14 @@
+Changes in Version 1.2-1
+
+  o Bug fix in the new summary(ivreg_object, diagnostics = TRUE). If there
+    is more than one endogenous variable, the degrees of freedom (and hence
+    the associated p-values) for the Sargan test were too large.
+    
+  o The examples employing "rgl" for 3d visualizations (e.g., for the SIC33
+    data) are not tested anymore in R CMD check (as "rgl" currently has some
+    problems on CRAN's checks for OS X).
+
+
 Changes in Version 1.2-0
 
   o The summary() method for ivreg() now has a diagnostics=FALSE argument.

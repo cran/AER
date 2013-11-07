@@ -54,8 +54,8 @@ Elderly: A Finite Mixture Approach. \emph{Journal of Applied Econometrics},
 \bold{12}, 313--336.
 
 Zeileis, A., Kleiber, C., and Jackman, S. (2008). Regression Models
-for Count Data in R. \emph{Journal of Statistical Software},
-forthcoming.
+for Count Data in R. \emph{Journal of Statistical Software}, \bold{27}(8).
+URL \url{http://www.jstatsoft.org/v27/i08/}.
 }
 
 \seealso{\code{\link{CameronTrivedi1998}}}
