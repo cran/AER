@@ -69,6 +69,7 @@ CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
 ## model 
 fm <- ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax/cpi),
   data = CigarettesSW, subset = year == "1995")
+summary(fm)
 summary(fm, vcov = sandwich, df = Inf, diagnostics = TRUE)
 
 ## ANOVA

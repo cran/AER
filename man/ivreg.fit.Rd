@@ -64,7 +64,7 @@ fm <- ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(t
 
 ## low-level interface
 y <- fm$y
-x <- model.matrix(fm)
+x <- model.matrix(fm, component = "regressors")
 z <- model.matrix(fm, component = "instruments")
 ivreg.fit(x, y, z)$coefficients
 }

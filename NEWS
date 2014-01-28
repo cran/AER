@@ -1,3 +1,15 @@
+Changes in Version 1.2-2
+
+  o Another bug fix in the new summary(ivreg_object, diagnostics = TRUE). If
+    sandwich standard errors (or other vcov) were used, the chi-squared form
+    rather than the F form of the diagnostic Wald tests was computed and hence
+    the p-values were incorrect.
+    
+  o If there is more than one endogenous variable, summary(ivreg_object,
+    diagnostics = TRUE) now reports separate tests of weak instruments for
+    each endogenous variable.
+
+    
 Changes in Version 1.2-1
 
   o Bug fix in the new summary(ivreg_object, diagnostics = TRUE). If there

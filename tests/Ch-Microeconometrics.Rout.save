@@ -1,5 +1,5 @@
 
-R version 3.0.1 (2013-05-16) -- "Good Sport"
+R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
 Copyright (C) 2013 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -34,7 +34,7 @@ Loading required package: zoo
 
 Attaching package: 'zoo'
 
-The following object is masked from 'package:base':
+The following objects are masked from 'package:base':
 
     as.Date, as.Date.numeric
 
@@ -183,37 +183,8 @@ R> ### chunk number 12: roc-plot1
 R> ###################################################
 R> library("ROCR")
 Loading required package: gplots
-Loading required package: gtools
-
-Attaching package: 'gtools'
-
-The following object is masked from 'package:car':
-
-    logit
-
-Loading required package: gdata
-gdata: read.xls support for 'XLS' (Excel 97-2004) files
-gdata: ENABLED.
-
-gdata: read.xls support for 'XLSX' (Excel 2007+) files
-gdata: ENABLED.
-
-Attaching package: 'gdata'
-
-The following object is masked from 'package:stats':
-
-    nobs
-
-The following object is masked from 'package:utils':
-
-    object.size
-
-Loading required package: caTools
-Loading required package: grid
-Loading required package: KernSmooth
 KernSmooth 2.23 loaded
 Copyright M. P. Wand 1997-2009
-Loading required package: MASS
 
 Attaching package: 'gplots'
 
@@ -469,7 +440,7 @@ Loading required package: gam
 Loaded gam 1.09
 
 Loading required package: vcd
-Loading required package: colorspace
+Loading required package: grid
 Classes and Methods for R developed in the
 
 Political Science Computational Laboratory
@@ -794,4 +765,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  5.600   0.160   5.785 
+  5.672   0.112   5.912 

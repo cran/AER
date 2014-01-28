@@ -720,7 +720,7 @@ fm_pmlh <- lm(invest ~ value + capital, data = ggr, weights = 1/sigmas)
 summary(fm_pmlh)
 logLik(fm_pmlh)
 
-## Tab. 15.3
+## Tab. 13.5
 auxreg2 <- lm(residuals(fm_pfgls)^2 ~ firm - 1, data = ggr)
 auxreg3 <- lm(residuals(fm_pmlh)^2 ~ firm - 1, data = ggr)
 rbind(

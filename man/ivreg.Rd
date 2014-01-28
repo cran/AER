@@ -90,7 +90,7 @@ if there is a large number of exogenous regressors.
 
 \examples{
 ## data
-data("CigarettesSW")
+data("CigarettesSW", package = "AER")
 CigarettesSW$rprice <- with(CigarettesSW, price/cpi)
 CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
 CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
@@ -99,6 +99,7 @@ CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
 fm <- ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax/cpi),
   data = CigarettesSW, subset = year == "1995")
 summary(fm)
+summary(fm, vcov = sandwich, df = Inf, diagnostics = TRUE)
 
 ## ANOVA
 fm2 <- ivreg(log(packs) ~ log(rprice) | tdiff, data = CigarettesSW, subset = year == "1995")

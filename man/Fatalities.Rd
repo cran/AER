@@ -81,7 +81,7 @@ Stock, J. H. and Watson, M. W. (2007). \emph{Introduction to Econometrics}, 2nd 
 
 \examples{
 ## data from Stock and Watson (2007)
-data("Fatalities")
+data("Fatalities", package = "AER")
 ## add fatality rate (number of traffic deaths
 ## per 10,000 people living in that state in that year)
 Fatalities$frate <- with(Fatalities, fatal/pop * 10000)
@@ -123,10 +123,10 @@ fm_sfe3 <- plm(frate ~ beertax, data = Fatalities,
   index = c("state", "year"), model = "within")
 
 coeftest(fm_sfe, vcov = vcovHC(fm_sfe, type = "HC1"))[1,]
-## uses different df in sd and pval
+## uses different df in sd and p-value
 coeftest(fm_sfe2, vcov = vcovHC(fm_sfe2, type = "HC1"))[1,]
-## uses different df in pval
-coeftest(fm_sfe3, vcov = vcovHC(fm_sfe3, type = "HC1", method = "white1"))[,1]
+## uses different df in p-value
+coeftest(fm_sfe3, vcov = vcovHC(fm_sfe3, type = "HC1", method = "white1"))[1,]
 
 
 ## pp. 363, Eq. (10.21)
