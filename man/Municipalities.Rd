@@ -36,7 +36,7 @@ Financial Accounts for the Municipalities (Kommunernas Finanser).
 \source{
 Journal of Applied Econometrics Data Archive. 
 
-\url{http://www.econ.queensu.ca/jae/2000-v15.4/dahlberg-johansson/}
+\url{http://qed.econ.queensu.ca/jae/2000-v15.4/dahlberg-johansson/}
 }
 
 \references{

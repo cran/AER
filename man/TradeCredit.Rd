@@ -22,9 +22,7 @@ An annual multiple time series from 1946 to 1966 on 7 variables.
 }
 
 \source{
-The data are from Baltagi (2002) and available at
-
-\url{http://www.springeronline.com/sgw/cda/frontpage/0,10735,4-165-2-107420-0,00.html}
+The data are from Baltagi (2002).
 }
 
 \references{

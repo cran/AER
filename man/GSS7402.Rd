@@ -44,7 +44,7 @@ of being childless, are of interest.
 \source{
 Online complements to Winkelmann and Boes (2009).
 
-\url{http://www.sts.uzh.ch/research/publications/microdata/datasets/kids.zip}
+\url{http://www.econ.uzh.ch/faculty/groupwinkelmann/research/publications/microdata/datasets/kids.zip}
 }
 
 \references{

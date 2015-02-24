@@ -12,7 +12,6 @@ please contact the package maintainer.
 
 \references{
 Baltagi, B.H. (2002). \emph{Econometrics}, 3rd ed., Berlin: Springer-Verlag. 
-URL \url{http://www.springeronline.com/sgw/cda/frontpage/0,10735,4-165-2-107420-0,00.html}.
 }
 
 \seealso{\code{\link{BenderlyZwick}}, \code{\link{CigarettesB}}, \code{\link{EuroEnergy}},

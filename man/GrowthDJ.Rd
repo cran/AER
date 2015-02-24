@@ -36,7 +36,7 @@ except \code{literacy60} that is from the World Bank's World Development Report.
 \source{
 Journal of Applied Econometrics Data Archive. 
 
-\url{http://www.econ.queensu.ca/jae/1995-v10.4/durlauf-johnson/}
+\url{http://qed.econ.queensu.ca/jae/1995-v10.4/durlauf-johnson/}
 }
 
 \references{

@@ -38,11 +38,12 @@ dispersiontest <- function(object, trafo = NULL, alternative = c("greater", "two
   return(rval)
 }
 
-## TODO:
-## 1. compare with DCluster::DeanB() and DCluster::DeanB2()
-## and unify
+
+## NB. score tests a la DCluster now implemented in countreg
 ##
-## 2. also fix DCluster::test.nb.pois() and pscl::odTest()
+## TODO:
+## LRT for Poi vs NB2.
+## fix DCluster::test.nb.pois() and pscl::odTest()
 ## proposed interface:
 ##   poistest(object, object2 = NULL)
 ## where either a "negbin" and a "glm" object have to be

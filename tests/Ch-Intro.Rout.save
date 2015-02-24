@@ -1,6 +1,6 @@
 
-R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
-Copyright (C) 2013 The R Foundation for Statistical Computing
+R version 3.1.2 (2014-10-31) -- "Pumpkin Helmet"
+Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -40,7 +40,6 @@ The following objects are masked from 'package:base':
 
 Loading required package: sandwich
 Loading required package: survival
-Loading required package: splines
 R> 
 R> set.seed(1071)
 R> 
@@ -250,13 +249,12 @@ R> search()
  [1] ".GlobalEnv"         "package:KernSmooth"
  [3] "package:quantreg"   "package:SparseM"   
  [5] "package:AER"        "package:survival"  
- [7] "package:splines"    "package:sandwich"  
- [9] "package:lmtest"     "package:zoo"       
-[11] "package:car"        "package:stats"     
-[13] "package:graphics"   "package:grDevices" 
-[15] "package:utils"      "package:datasets"  
-[17] "package:methods"    "Autoloads"         
-[19] "package:base"      
+ [7] "package:sandwich"   "package:lmtest"    
+ [9] "package:zoo"        "package:car"       
+[11] "package:stats"      "package:graphics"  
+[13] "package:grDevices"  "package:utils"     
+[15] "package:datasets"   "package:methods"   
+[17] "Autoloads"          "package:base"      
 R> 
 R> 
 R> ###################################################
@@ -302,4 +300,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  2.328   0.088   2.439 
+  7.032   0.160   7.189 

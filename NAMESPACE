@@ -3,7 +3,7 @@ import("stats")
 import("Formula")
 import("zoo")
 
-importFrom("lmtest", "coeftest", "waldtest", "lrtest")
+importFrom("lmtest", "coeftest", "waldtest", "waldtest.default", "lrtest", "lrtest.default")
 importFrom("car", "linearHypothesis")
 importFrom("sandwich", "bread", "estfun")
 importFrom("survival", "Surv", "survreg", "survreg.distributions")
@@ -43,8 +43,8 @@ S3method("model.matrix", "ivreg")
 ## methods for class survreg
 S3method("deviance", "survreg")
 S3method("fitted", "survreg")
-S3method("logLik", "survreg")
 S3method("nobs", "survreg")
+S3method("weights", "survreg")
 
 ## methods for class multinom, polr, fitdistr
 S3method("coeftest", "multinom")

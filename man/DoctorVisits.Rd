@@ -31,7 +31,7 @@ A data frame containing 5,190 observations on 12 variables.
 \source{
 Journal of Applied Econometrics Data Archive. 
 
-\url{http://www.econ.queensu.ca/jae/1997-v12.3/mullahy/}
+\url{http://qed.econ.queensu.ca/jae/1997-v12.3/mullahy/}
 }
 
 \references{

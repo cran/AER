@@ -21,7 +21,7 @@ A data frame containing 25 observations on 4 variables.
 \source{
 Journal of Applied Econometrics Data Archive. 
 
-\url{http://www.econ.queensu.ca/jae/1998-v13.2/zellner-ryu/}
+\url{http://qed.econ.queensu.ca/jae/1998-v13.2/zellner-ryu/}
 
 Online complements to Greene (2003), Table F9.2.
 

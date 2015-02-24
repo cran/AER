@@ -1,9 +1,6 @@
 ## some convenience functions generally applicable to survreg
 ## hopefully in survival soon
 
-logLik.survreg <- function(object, ...)
-  structure(object$loglik[2], df = sum(object$df), class = "logLik")
-
 deviance.survreg <- function(object, ...)
   sum(residuals(object, type = "deviance")^2)
 
@@ -12,6 +9,9 @@ fitted.survreg <- function(object, ...)
 
 nobs.survreg <- function(object, ...)
   length(object$linear.predictors)
+
+weights.survreg <- function(object, ...)
+  model.weights(model.frame(object))
 
 
 ## convenience tobit() interface to survreg()

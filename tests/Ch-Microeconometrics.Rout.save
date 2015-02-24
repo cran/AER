@@ -1,7 +1,7 @@
 
-R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
-Copyright (C) 2013 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
+R Under development (unstable) (2015-02-11 r67792) -- "Unsuffered Consequences"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-unknown-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -268,7 +268,7 @@ time         1.94e-02   1.04e-02    1.87    0.062
 income       1.06e+01   5.65e+00    1.88    0.061
 noncauc      7.10e+01   3.64e+01    1.95    0.051
 lfp         -6.68e-01   4.77e-01   -1.40    0.161
-southernyes  3.33e+01   1.73e+07    0.00    1.000
+southernyes  3.13e+01   1.73e+07    0.00    1.000
 
 R> 
 R> 
@@ -437,7 +437,7 @@ Loading required package: mvtnorm
 Loading required package: coda
 Loading required package: lattice
 Loading required package: gam
-Loaded gam 1.09
+Loaded gam 1.09.1
 
 Loading required package: vcd
 Loading required package: grid
@@ -765,4 +765,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  5.672   0.112   5.912 
+  3.536   0.072   3.600 

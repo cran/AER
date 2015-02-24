@@ -1,3 +1,12 @@
+Changes in Version 1.2-3
+
+  o Package "splines" is loaded explicitly if needed (rather than assuming
+    that it is loaded along with "survival").
+
+  o Some URLs in the manual pages had been outdated and are updated (or omitted)
+    now.
+
+
 Changes in Version 1.2-2
 
   o Another bug fix in the new summary(ivreg_object, diagnostics = TRUE). If

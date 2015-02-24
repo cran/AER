@@ -42,7 +42,7 @@ A data frame containing 4,406 observations on 19 variables.
 \source{
 Journal of Applied Econometrics Data Archive for Deb and Trivedi (1997). 
 
-\url{http://www.econ.queensu.ca/jae/1997-v12.3/deb-trivedi/}
+\url{http://qed.econ.queensu.ca/jae/1997-v12.3/deb-trivedi/}
 }
 
 \references{

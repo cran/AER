@@ -211,6 +211,7 @@ waldtest(cps_lm, . ~ . - ethnicity)
 ###################################################
 ### chunk number 27: CPS-spline
 ###################################################
+library("splines")
 cps_plm <- lm(log(wage) ~ bs(experience, df = 5) +
   education + ethnicity, data = CPS1988)
 

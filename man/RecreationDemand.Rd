@@ -29,7 +29,7 @@ According to the original source (Seller, Stoll and Chavas, 1985, p. 168), the q
 \source{
 Journal of Business \& Economic Statistics Data Archive. 
 
-\url{http://www.amstat.org/publications/jbes/upload/index.cfm?fuseaction=ViewArticles&pub=JBES&issue=96-4-OCT}
+\verb{http://www.amstat.org/publications/jbes/upload/index.cfm?fuseaction=ViewArticles&pub=JBES&issue=96-4-OCT}
 }
 
 \references{

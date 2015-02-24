@@ -30,7 +30,7 @@ A data frame containing 546 observations on 12 variables.
 \source{
 Journal of Applied Econometrics Data Archive. 
 
-\url{http://www.econ.queensu.ca/jae/1996-v11.6/anglin-gencay/}
+\url{http://qed.econ.queensu.ca/jae/1996-v11.6/anglin-gencay/}
 }
 
 \references{

@@ -15,9 +15,7 @@ An annual multiple time series from 1950 to 1993 with 2 variables.
 }
 
 \source{
-The data is from Baltagi (2002) and available at
-
-\url{http://www.springeronline.com/sgw/cda/frontpage/0,10735,4-165-2-107420-0,00.html}
+The data is from Baltagi (2002).
 }
 
 \references{

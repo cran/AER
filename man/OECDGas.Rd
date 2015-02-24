@@ -18,9 +18,7 @@ A data frame containing 342 observations on 6 variables.
 }
 
 \source{
-The data is from Baltagi (2002) and available at
-
-\url{http://www.springeronline.com/sgw/cda/frontpage/0,10735,4-165-2-107420-0,00.html}
+The data is from Baltagi (2002).
 }
 
 \references{

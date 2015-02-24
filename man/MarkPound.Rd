@@ -23,7 +23,7 @@ eight observations where a slightly different rounding arithmetic was used).
 \source{
 Journal of Business \& Economic Statistics Data Archive. 
 
-\url{http://www.amstat.org/publications/jbes/upload/index.cfm?fuseaction=ViewArticles&pub=JBES&issue=96-2-APR}
+\verb{http://www.amstat.org/publications/jbes/upload/index.cfm?fuseaction=ViewArticles&pub=JBES&issue=96-2-APR}
 }
 
 \references{

@@ -27,9 +27,7 @@ The remaining columns are taken from the online complements of Baltagi (2002).
 The first column is identical in both sources, the other two variables differ
 in their numeric values and additionally the growth series seems to be lagged
 differently. Baltagi (2002) states Lott and Ray (1992) as the source for his
-version of the data set which is available from
-
-\url{http://www.springeronline.com/sgw/cda/frontpage/0,10735,4-165-2-107420-0,00.html}
+version of the data set.
 }
 
 \references{

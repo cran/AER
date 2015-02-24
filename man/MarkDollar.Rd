@@ -17,7 +17,7 @@ A univariate time series of 518 returns (exact dates unknown) for the DEM/USD ex
 \source{
 Journal of Business \& Economic Statistics Data Archive. 
 
-\url{http://www.amstat.org/publications/jbes/upload/index.cfm?fuseaction=ViewArticles&pub=JBES&issue=96-2-APR}
+\verb{http://www.amstat.org/publications/jbes/upload/index.cfm?fuseaction=ViewArticles&pub=JBES&issue=96-2-APR}
 }
 
 \references{
