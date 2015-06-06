@@ -1,6 +1,6 @@
 
-R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
-Copyright (C) 2013 The R Foundation for Statistical Computing
+R version 3.2.0 (2015-04-16) -- "Full of Ingredients"
+Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -40,7 +40,6 @@ The following objects are masked from 'package:base':
 
 Loading required package: sandwich
 Loading required package: survival
-Loading required package: splines
 R> 
 R> set.seed(1071)
 R> 
@@ -188,7 +187,7 @@ R> bptest(jour_lm)
 	studentized Breusch-Pagan test
 
 data:  jour_lm
-BP = 9.803, df = 1, p-value = 0.001742
+BP = 9.8, df = 1, p-value = 0.002
 
 R> 
 R> 
@@ -201,7 +200,7 @@ R> bptest(jour_lm, ~ log(citeprice) + I(log(citeprice)^2),
 	studentized Breusch-Pagan test
 
 data:  jour_lm
-BP = 10.91, df = 2, p-value = 0.004271
+BP = 11, df = 2, p-value = 0.004
 
 R> 
 R> 
@@ -213,7 +212,7 @@ R> gqtest(jour_lm, order.by = ~ citeprice, data = journals)
 	Goldfeld-Quandt test
 
 data:  jour_lm
-GQ = 1.703, df1 = 88, df2 = 88, p-value = 0.00665
+GQ = 1.7, df1 = 88, df2 = 88, p-value = 0.007
 
 R> 
 R> 
@@ -225,7 +224,7 @@ R> resettest(jour_lm)
 	RESET test
 
 data:  jour_lm
-RESET = 1.441, df1 = 2, df2 = 176, p-value = 0.2395
+RESET = 1.4, df1 = 2, df2 = 180, p-value = 0.2
 
 R> 
 R> 
@@ -237,7 +236,7 @@ R> raintest(jour_lm, order.by = ~ age, data = journals)
 	Rainbow test
 
 data:  jour_lm
-Rain = 1.774, df1 = 90, df2 = 88, p-value = 0.003741
+Rain = 1.8, df1 = 90, df2 = 88, p-value = 0.004
 
 R> 
 R> 
@@ -249,7 +248,7 @@ R> harvtest(jour_lm, order.by = ~ age, data = journals)
 	Harvey-Collier test
 
 data:  jour_lm
-HC = 5.081, df = 177, p-value = 9.464e-07
+HC = 5.1, df = 180, p-value = 9e-07
 
 R> 
 R> 
@@ -275,7 +274,7 @@ R> dwtest(consump1)
 	Durbin-Watson test
 
 data:  consump1
-DW = 0.0866, p-value < 2.2e-16
+DW = 0.087, p-value <2e-16
 alternative hypothesis: true autocorrelation is greater than 0
 
 R> 
@@ -288,7 +287,7 @@ R> Box.test(residuals(consump1), type = "Ljung-Box")
 	Box-Ljung test
 
 data:  residuals(consump1)
-X-squared = 176.1, df = 1, p-value < 2.2e-16
+X-squared = 180, df = 1, p-value <2e-16
 
 R> 
 R> 
@@ -301,7 +300,7 @@ R> bgtest(consump1)
 	to 1
 
 data:  consump1
-LM test = 193, df = 1, p-value < 2.2e-16
+LM test = 190, df = 1, p-value <2e-16
 
 R> 
 R> 
@@ -611,4 +610,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
- 50.596   0.176  52.955 
+ 56.044   0.312  78.254 

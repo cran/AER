@@ -1,7 +1,7 @@
 
-R Under development (unstable) (2015-02-11 r67792) -- "Unsuffered Consequences"
+R version 3.2.0 (2015-04-16) -- "Full of Ingredients"
 Copyright (C) 2015 The R Foundation for Statistical Computing
-Platform: x86_64-unknown-linux-gnu (64-bit)
+Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -40,7 +40,6 @@ The following objects are masked from 'package:base':
 
 Loading required package: sandwich
 Loading required package: survival
-Loading required package: splines
 R> 
 R> set.seed(1071)
 R> 
@@ -796,7 +795,7 @@ R> pFtest(gr_fe, gr_pool)
 	F test for individual effects
 
 data:  invest ~ value + capital
-F = 56.82, df1 = 2, df2 = 55, p-value = 4.148e-14
+F = 57, df1 = 2, df2 = 55, p-value = 4e-14
 alternative hypothesis: significant effects
 
 R> 
@@ -847,7 +846,7 @@ R> plmtest(gr_pool)
 	Lagrange Multiplier Test - (Honda)
 
 data:  invest ~ value + capital
-normal = 15.47, p-value < 2.2e-16
+normal = 15, p-value <2e-16
 alternative hypothesis: significant effects
 
 R> 
@@ -860,7 +859,7 @@ R> phtest(gr_re, gr_fe)
 	Hausman Test
 
 data:  invest ~ value + capital
-chisq = 0.0404, df = 2, p-value = 0.98
+chisq = 0.04, df = 2, p-value = 1
 alternative hypothesis: one model is inconsistent
 
 R> 
@@ -966,4 +965,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  9.220   0.232   9.512 
+ 12.404   0.332  12.794 

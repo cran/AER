@@ -1,6 +1,6 @@
 
-R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
-Copyright (C) 2013 The R Foundation for Statistical Computing
+R version 3.2.0 (2015-04-16) -- "Full of Ingredients"
+Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -40,7 +40,6 @@ The following objects are masked from 'package:base':
 
 Loading required package: sandwich
 Loading required package: survival
-Loading required package: splines
 R> 
 R> set.seed(1071)
 R> 
@@ -316,7 +315,7 @@ R> adf.test(log(PepperPrice[, "white"]))
 	Augmented Dickey-Fuller Test
 
 data:  log(PepperPrice[, "white"])
-Dickey-Fuller = -1.744, Lag order = 6, p-value = 0.6838
+Dickey-Fuller = -1.744, Lag order = 6, p-value = 0.684
 alternative hypothesis: stationary
 
 R> 
@@ -345,7 +344,7 @@ R> pp.test(log(PepperPrice[, "white"]), type = "Z(t_alpha)")
 	Phillips-Perron Unit Root Test
 
 data:  log(PepperPrice[, "white"])
-Dickey-Fuller Z(t_alpha) = -1.6439, Truncation lag
+Dickey-Fuller Z(t_alpha) = -1.644, Truncation lag
 parameter = 5, p-value = 0.726
 alternative hypothesis: stationary
 
@@ -384,8 +383,8 @@ R> po.test(log(PepperPrice))
 	Phillips-Ouliaris Cointegration Test
 
 data:  log(PepperPrice)
-Phillips-Ouliaris demeaned = -24.0987, Truncation lag
-parameter = 2, p-value = 0.02404
+Phillips-Ouliaris demeaned = -24.1, Truncation lag
+parameter = 2, p-value = 0.024
 
 R> 
 R> 
@@ -487,7 +486,7 @@ R> sctest(dd_ocus)
 	OLS-based CUSUM test
 
 data:  dd_ocus
-S0 = 1.4866, p-value = 0.02407
+S0 = 1.487, p-value = 0.0241
 
 R> 
 R> 
@@ -507,7 +506,7 @@ R> sctest(dd_fs)
 	supF test
 
 data:  dd_fs
-sup.F = 19.3331, p-value = 0.006721
+sup.F = 19.33, p-value = 0.00672
 
 R> 
 R> 
@@ -626,17 +625,17 @@ Diagnostic Tests:
 	Jarque Bera Test
 
 data:  Residuals
-X-squared = 1060.01, df = 2, p-value < 2.2e-16
+X-squared = 1060, df = 2, p-value <2e-16
 
 
 	Box-Ljung test
 
 data:  Squared.Residuals
-X-squared = 2.4776, df = 1, p-value = 0.1155
+X-squared = 2.478, df = 1, p-value = 0.115
 
 R> 
 R> 
 R> 
 > proc.time()
    user  system elapsed 
-  8.328   0.104   8.717 
+ 11.324   0.212  11.620 

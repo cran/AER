@@ -1,6 +1,6 @@
 Package: AER
-Version: 1.2-3
-Date: 2015-02-24
+Version: 1.2-4
+Date: 2015-06-06
 Title: Applied Econometrics with R
 Authors@R: c(person(given = "Christian", family = "Kleiber", role = "aut", email = "Christian.Kleiber@unibas.ch"),
              person(given = "Achim", family = "Zeileis", role = c("aut", "cre"), email = "Achim.Zeileis@R-project.org"))
@@ -17,10 +17,10 @@ Suggests: boot, dynlm, effects, foreign, ineq, KernSmooth, lattice,
         truncreg, tseries, urca
 Imports: stats, Formula (>= 0.2-0)
 License: GPL-2 | GPL-3
-Packaged: 2015-02-24 17:50:03 UTC; zeileis
+NeedsCompilation: no
+Packaged: 2015-06-06 08:43:21 UTC; zeileis
 Author: Christian Kleiber [aut],
   Achim Zeileis [aut, cre]
 Maintainer: Achim Zeileis <Achim.Zeileis@R-project.org>
-NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2015-02-24 20:08:04
+Date/Publication: 2015-06-06 13:03:50

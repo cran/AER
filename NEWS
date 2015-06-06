@@ -1,3 +1,8 @@
+Changes in Version 1.2-4
+
+  o Reference output updated for recent versions of R.
+  
+
 Changes in Version 1.2-3
 
   o Package "splines" is loaded explicitly if needed (rather than assuming
