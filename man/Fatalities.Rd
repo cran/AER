@@ -66,8 +66,6 @@ rate was obtained from the US Bureau of Labor Statistics.
 
 \source{
 Online complements to Stock and Watson (2007). 
-
-\url{http://wps.aw.com/aw_stock_ie_2}
 }
 
 \references{

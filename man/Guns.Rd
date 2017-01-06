@@ -37,8 +37,6 @@ There are a total of 51 states times 23 years = 1,173 observations.
 
 \source{
 Online complements to Stock and Watson (2007). 
-
-\url{http://wps.aw.com/aw_stock_ie_2/0,12040,3332253-,00.html}
 }
 
 \references{

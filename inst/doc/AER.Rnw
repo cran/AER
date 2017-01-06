@@ -30,7 +30,7 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
   ``Applied Econometrics with \proglang{R}''
   \citep[Springer-Verlag, ISBN~978-0-387-77316-2, pp.~vii+222]{aer:Kleiber+Zeileis:2008}
   is the first book on applied econometrics using the \proglang{R}~system
-  for statistical computing and graphics \citep{aer:R:2010}. 
+  for statistical computing and graphics \citep{aer:R:2016}. 
   It presents hands-on examples for a
   wide range of econometric models, from classical linear regression models for
   cross-section, time series or panel data and the common non-linear models of
@@ -44,7 +44,7 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
   regressions and time series models as well as various models of microeconometrics.
    
   The book is accompanied by the \proglang{R} package
-  \pkg{AER} \citep{aer:Kleiber+Zeileis:2010} which contains some new \proglang{R}
+  \pkg{AER} \citep{aer:Kleiber+Zeileis:2016} which contains some new \proglang{R}
   functionality, some 100 data sets
   taken from a wide variety of sources, the full source code for all examples
   used in the book, as well as further worked examples, e.g., from popular textbooks.
@@ -55,12 +55,12 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
 
 \Address{
   Christian Kleiber\\
-  Wirtschaftswissenschaftliches Zentrum (WWZ)\\
+  Faculty of Business and Economics\\
   Universit\"at Basel\\
   Peter Merian-Weg 6\\
   4002 Basel, Switzerland\\
   E-mail: \email{Christian.Kleiber@unibas.ch}\\
-  URL: \url{http://wwz.unibas.ch/kleiber/}\\
+  URL: \url{https://wwz.unibas.ch/kleiber/}\\
 
   Achim Zeileis\\
   Department of Statistics\\
@@ -69,7 +69,7 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
   Universit\"atsstr.~15\\
   6020 Innsbruck, Austria\\
   E-mail: \email{Achim.Zeileis@R-project.org}\\
-  URL: \url{http://eeecon.uibk.ac.at/~zeileis/}
+  URL: \url{https://eeecon.uibk.ac.at/~zeileis/}
 }
 
 \begin{document}
@@ -113,13 +113,15 @@ once commented out and once without comments.
 
 The \pkg{AER} package includes some 100 data sets from leading applied
 econometrics journals and popular econometrics textbooks. Many data sets
-have been obtained from the data archives of the \emph{Journal of Applied
-Econometrics} and the \emph{Journal of Business \& Economic Statistics}. 
+have been obtained from the data archive of the \emph{Journal of Applied
+Econometrics} and the (now defunct) data archive of the 
+\emph{Journal of Business \& Economic Statistics} (see note below). 
 Some of these are used in recent textbooks, among them 
 \cite{aer:Baltagi:2002}, \cite{aer:Davidson+MacKinnon:2004}, \cite{aer:Greene:2003},
 \cite{aer:Stock+Watson:2007}, and \cite{aer:Verbeek:2004}. In addition, we provide
 all further data sets from \cite{aer:Baltagi:2002},  \cite{aer:Franses:1998},
-\cite{aer:Greene:2003}, \cite{aer:Stock+Watson:2007}, and \cite{aer:Winkelmann+Boes:2009}.
+\cite{aer:Greene:2003}, \cite{aer:Stock+Watson:2007}, and \cite{aer:Winkelmann+Boes:2009}. 
+Selected data sets from \cite{aer:Franses+vanDijk+Opschoor:2014} are also included.
 
 Detailed information about the source of each data set, descriptions of
 the variables included, and usually also examples for typical analyses
@@ -176,17 +178,19 @@ or complementing methods previously available in \proglang{R}:
 
 
 
-\section{Errata}
+\section{Errata and comments}
 
-The following errors have been found in the book so far.
+Below we list the errors that have been found in the book so far. Please report any further errors you find to us.
 
-Please report any further errors you find to us.
+We also provide some comments, for example on functions whose interface has changed.
 
 \begin{itemize}
   \item p.~5--9, 46--53: There are now very minor differences in the plots pertaining to
     Example~2 (Determinants of wages) in Chapter~1.1 and Chapter~2.8 (Exploratory Data Analysis with \proglang{R})
     due to a missing observation. Specifically, the version of the \code{CPS1985} data used
     for the book contained only 533~observations, the original observation~1 had been omitted inadvertently.
+  \item p.~38, 48, 85: By default there is less rounding in calls to \code{summary()} starting from
+    \proglang{R}~3.4.0.
   \item p.~63--65, 130, 143: The function \fct{linear.hypothesis} from the \pkg{car} package has
     been renamed to \fct{linearHypothesis} starting from \pkg{car}~2.0-0. The old interface
     is currently still supported but results in a warning.
@@ -199,11 +203,27 @@ Please report any further errors you find to us.
   \item pp.~88--89: As of version 1.3-1 of the \pkg{plm} package, summaries of ``\code{pgmm}''
     objects provide robust standard errors by default. The output presented on pp.~88--89 is
     still available, but now requires \code{summary(empl_ab, robust = FALSE)}.   
+
+    Also, the formula interface for \fct{pgmm} has changed. Using the new interface, 
+    the function call for the Arellano-Bond example is 
+%
+<<pgmm-new, eval=FALSE>>=
+empl_ab <- pgmm(log(emp) ~ lag(log(emp), 1:2) + lag(log(wage), 0:1)
+     + log(capital) + lag(log(output), 0:1) | lag(log(emp), 2:99),
+     data = EmplUK, effect = "twoways", model = "twosteps")
+@
+%   
+    The function call given in the book is still valid though.
+
   \item p.~92: Exercise~6 cannot be solved using \code{PSID1982} since that data set only
     contains a cross-section while Hausman-Taylor requires panel data. A panel version has
     been available in the \pkg{plm} package under the name \code{Wages}; we have now added
     \code{PSID7682} to \pkg{AER} for completeness (and consistent naming conventions).
     Use \code{PSID7682} for the exercise.
+  \item pp.~98--100: \proglang{R} only provides a function \code{dffits()} but not \code{dffit()}
+    as claimed on p.~99. Somewhat confusingly the corresponding column in the output of
+    \code{influence.measures()} (as shown on p.~100) is called \code{dffit} by \proglang{R}
+    (rather than \code{dffits}).
   \item p.~141: The log-likelihood for the tobit model lacked a minus sign. The correct version is
 %
 \[
@@ -252,7 +272,8 @@ giving the log-likelihood
 the Journal of Business \& Economic Statistics (JBES) archive are broken (data sets
 \code{MarkPound}, and \code{RecreationDemand}). The reason is the redesign of the American
 Statistical Association (ASA) website, rendering the old ASA data archive nonfunctional.
-The ASA journals manager currently appears to supply data on a case-by-case basis. The problem awaits a more permanent solution.
+The ASA journals manager currently appears to supply data on a case-by-case basis. 
+The problem awaits a more permanent solution.
 
 
 \bibliography{aer}

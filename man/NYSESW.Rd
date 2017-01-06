@@ -16,8 +16,6 @@ A daily univariate time series from 1990-01-02 to 2005-11-11 (of class
 
 \source{
 Online complements to Stock and Watson (2007). 
-
-\url{http://wps.aw.com/aw_stock_ie_2/}
 }
 
 \references{

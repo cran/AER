@@ -60,8 +60,6 @@ from the prospective employer.
 
 \source{
 Online complements to Stock and Watson (2007). 
-
-\url{http://wps.aw.com/aw_stock_ie_2/}
 }
 
 \references{

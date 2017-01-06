@@ -20,8 +20,6 @@ A monthly multiple time series from 1947(1) to 2004(4) with 4 variables.
 
 \source{
 Online complements to Stock and Watson (2007). 
-
-\url{http://wps.aw.com/aw_stock_ie_2/0,12040,3332253-,00.html}
 }
 
 \references{

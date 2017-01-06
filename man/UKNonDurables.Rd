@@ -12,8 +12,6 @@ A quarterly univariate time series from 1955(1) to 1988(4).
 
 \source{
 Online complements to Franses (1998).
-
-\url{http://www.few.eur.nl/few/people/franses/research/book2.htm}
 }
 
 \references{

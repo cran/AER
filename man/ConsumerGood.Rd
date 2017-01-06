@@ -18,8 +18,6 @@ A weekly multiple time series from 1989(11) to 1991(9) with 3 variables.
 
 \source{
 Online complements to Franses (1998).
-
-\url{http://www.few.eur.nl/few/people/franses/research/book2.htm}
 }
 
 \references{

@@ -13,8 +13,6 @@ A weekly univariate time series from 1980(1) to 1994(42).
 
 \source{
 Online complements to Franses (1998).
-
-\url{http://www.few.eur.nl/few/people/franses/research/book2.htm}
 }
 
 \references{

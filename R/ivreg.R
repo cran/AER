@@ -11,11 +11,11 @@ ivreg <- function(formula, instruments, data, subset, na.action, weights, offset
   
   ## handle instruments for backward compatibility
   if(!missing(instruments)) {
-    formula <- as.Formula(formula, instruments)
+    formula <- Formula::as.Formula(formula, instruments)
     cl$instruments <- NULL
     cl$formula <- formula(formula)
   } else {
-    formula <- as.Formula(formula)
+    formula <- Formula::as.Formula(formula)
   }
   stopifnot(length(formula)[1] == 1L, length(formula)[2] %in% 1:2)
   
@@ -24,7 +24,7 @@ ivreg <- function(formula, instruments, data, subset, na.action, weights, offset
   if(has_dot(formula)) {
     f1 <- formula(formula, rhs = 1)
     f2 <- formula(formula, lhs = 0, rhs = 2)
-    if(!has_dot(f1) & has_dot(f2)) formula <- as.Formula(f1,
+    if(!has_dot(f1) & has_dot(f2)) formula <- Formula::as.Formula(f1,
       update(formula(formula, lhs = 0, rhs = 1), f2))
   }
   
@@ -107,11 +107,12 @@ ivreg.fit <- function(x, y, z, weights, offset, ...)
     else lm.wfit(xz, y, weights, offset = offset, ...)
  
   ## model fit information
-  yhat <- drop(x %*% fit$coefficients)
+  ok <- which(!is.na(fit$coefficients))
+  yhat <- drop(x[, ok, drop = FALSE] %*% fit$coefficients[ok])
   names(yhat) <- names(y)
   res <- y - yhat
-  ucov <- chol2inv(fit$qr$qr[1:p, 1:p, drop = FALSE])
-  colnames(ucov) <- rownames(ucov) <- names(fit$coefficients)
+  ucov <- chol2inv(fit$qr$qr[1:length(ok), 1:length(ok), drop = FALSE])
+  colnames(ucov) <- rownames(ucov) <- names(fit$coefficients[ok])
   rss <- if(is.null(weights)) sum(res^2) else sum(weights * res^2)
   ## hat <- diag(x %*% ucov %*% t(x) %*% pz)
   ## names(hat) <- rownames(x)
@@ -144,6 +145,7 @@ bread.ivreg <- function (x, ...)
 estfun.ivreg <- function (x, ...) 
 {
     xmat <- model.matrix(x)
+    if(any(alias <- is.na(coef(x)))) xmat <- xmat[, !alias, drop = FALSE]
     wts <- weights(x)
     if(is.null(wts)) wts <- 1
     res <- residuals(x)
@@ -190,7 +192,8 @@ predict.ivreg <- function(object, newdata, na.action = na.pass, ...)
       na.action = na.action, xlev = object$levels)
     X <- model.matrix(delete.response(object$terms$regressors), mf,
       contrasts = object$contrasts$regressors)
-    drop(X %*% object$coefficients)
+    ok <- !is.na(object$coefficients)
+    drop(X[, ok, drop = FALSE] %*% object$coefficients[ok])
   }
 }
 
@@ -241,14 +244,14 @@ summary.ivreg <- function(object, vcov. = NULL, df = NULL, diagnostics = FALSE, 
   }
   
   ## Wald test of each coefficient
-  cf <- coeftest(object, vcov. = vc, df = df, ...)
+  cf <- lmtest::coeftest(object, vcov. = vc, df = df, ...)
   attr(cf, "method") <- NULL
   class(cf) <- "matrix"
   
   ## Wald test of all coefficients
   Rmat <- if(attr(object$terms$regressors, "intercept"))
-    cbind(0, diag(length(coef(object))-1)) else diag(length(coef(object)))
-  waldtest <- linearHypothesis(object, Rmat, vcov. = vcov., test = ifelse(df > 0, "F", "Chisq"))
+    cbind(0, diag(length(na.omit(coef(object)))-1)) else diag(length(na.omit(coef(object))))
+  waldtest <- car::linearHypothesis(object, Rmat, vcov. = vcov., test = ifelse(df > 0, "F", "Chisq"), singular.ok = TRUE)
   waldtest <- c(waldtest[2,3], waldtest[2,4], abs(waldtest[2,2]), if(df > 0) waldtest[2,1] else NULL)
   
   ## diagnostic tests
@@ -261,7 +264,7 @@ summary.ivreg <- function(object, vcov. = NULL, df = NULL, diagnostics = FALSE, 
     weights <- object$weights,
     coefficients = cf,
     sigma = object$sigma,
-    df = c(object$rank, if(df > 0) df else Inf, object$rank), ## aliasing not handled yet
+    df = c(object$rank, if(df > 0) df else Inf, object$rank), ## aliasing
     r.squared = r.squared,
     adj.r.squared = adj.r.squared,
     waldtest = waldtest,
@@ -367,6 +370,8 @@ ivdiag <- function(obj, vcov. = NULL) {
         cf0 <- obj0$coefficients
         cf1 <- obj1$coefficients
       }
+      cf0 <- na.omit(cf0)
+      cf1 <- na.omit(cf1)
       ovar <- which(!(names(cf1) %in% names(cf0)))
       vc <- vcov.(lm(obj1$y ~ 0 + obj1$x))
       w <- t(cf1[ovar]) %*% solve(vc[ovar,ovar]) %*% cf1[ovar]

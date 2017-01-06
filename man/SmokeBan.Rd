@@ -34,8 +34,6 @@ smoking ban, whether or not the individuals smoked and other individual characte
 
 \source{
 Online complements to Stock and Watson (2007). 
-
-\url{http://wps.aw.com/aw_stock_ie_2/0,12040,3332253-,00.html}
 }
 
 \references{

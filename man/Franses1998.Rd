@@ -13,7 +13,6 @@ please contact the package maintainer.
 \references{
 Franses, P.H. (1998). \emph{Time Series Models for Business and Economic Forecasting}.
 Cambridge, UK: Cambridge University Press.
-URL \url{http://www.few.eur.nl/few/people/franses/research/book2.htm}.
 }
 
 \seealso{\code{\link{ArgentinaCPI}}, \code{\link{ChinaIncome}}, \code{\link{ConsumerGood}},

@@ -24,3 +24,11 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
 ## help("Greene2003", package = "AER")
 
 
+###################################################
+### code chunk number 5: pgmm-new (eval = FALSE)
+###################################################
+## empl_ab <- pgmm(log(emp) ~ lag(log(emp), 1:2) + lag(log(wage), 0:1)
+##      + log(capital) + lag(log(output), 0:1) | lag(log(emp), 2:99),
+##      data = EmplUK, effect = "twoways", model = "twosteps")
+
+

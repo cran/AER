@@ -14,8 +14,6 @@ A monthly univariate time series from 1960(5) to 1995(9).
 
 \source{
 Online complements to Franses (1998).
-
-\url{http://www.few.eur.nl/few/people/franses/research/book2.htm}
 }
 
 \references{

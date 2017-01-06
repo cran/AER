@@ -20,8 +20,6 @@ A quarterly multiple time series from 1947(1) to 2004(4) with 2 variables.
 
 \source{
 Online complements to Stock and Watson (2007). 
-
-\url{http://wps.aw.com/aw_stock_ie_2/}
 }
 
 \references{

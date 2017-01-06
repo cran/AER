@@ -1,3 +1,17 @@
+Changes in Version 1.2-5
+
+  o Support for aliased coefficients in ivreg() (suggested and tested by
+    Liviu Andronic).
+
+  o New data sets GoldSilver, MotorCycles2 and MSCISwitzerland, taken from
+    Franses, van Dijk, Opschoor (2014): "Time Series Models for Business and
+    Economic Forecasting", 2nd ed. For replication of the corresponding
+    examples, several packages were added to the list of 'suggested' packages 
+    (including fGarch, forecast, longmemo, rugarch, vars).
+
+  o Small improvements in DESCRIPTION/Imports and NAMESPACE for R CMD check.
+  
+
 Changes in Version 1.2-4
 
   o Reference output updated for recent versions of R.

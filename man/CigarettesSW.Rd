@@ -25,8 +25,6 @@ A data frame containing 48 observations on 7 variables for 2 periods.
 
 \source{
 Online complements to Stock and Watson (2007). 
-
-\url{http://wps.aw.com/aw_stock_ie_2/}
 }
 
 \references{

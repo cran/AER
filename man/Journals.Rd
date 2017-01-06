@@ -28,15 +28,13 @@ pricing. See also \url{http://www.econ.ucsb.edu/~tedb/Journals/jpricing.html}
 for general information on this topic as well as a more up-to-date version of
 the data set. This version is taken from Stock and Watson (2007).
 
-The data as obtained from \url{http://wps.aw.com/aw_stock_ie_2}
+The data as obtained from the online complements for Stock and Watson (2007)
 contained two journals with title \dQuote{World Development}. One of these (observation 80)
 seemed to be an error and was changed to \dQuote{The World Economy}.
 }
 
 \source{
 Online complements to Stock and Watson (2007). 
-
-\url{http://wps.aw.com/aw_stock_ie_2/0,12040,3332253-,00.html}
 }
 
 \references{

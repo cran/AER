@@ -18,13 +18,16 @@ A four-weekly multiple time series from 1978(1) to 1994(13) with 2 variables.
 }
 
 \source{
-Online complements to Franses (1998).
+Originally available as an online supplement to Franses (1998). Now available via online complements to Franses, van Dijk and Opschoor (2014).
 
-\url{http://www.few.eur.nl/few/people/franses/research/book2.htm}
+\url{http://www.cambridge.org/us/academic/subjects/economics/econometrics-statistics-and-mathematical-economics/time-series-models-business-and-economic-forecasting-2nd-edition}
 }
 
 \references{
 Franses, P.H. (1998). \emph{Time Series Models for Business and Economic Forecasting}.
+Cambridge, UK: Cambridge University Press.
+
+Franses, P.H., van Dijk, D. and Opschoor, A. (2014). \emph{Time Series Models for Business and Economic Forecasting}, 2nd ed.
 Cambridge, UK: Cambridge University Press.
 }
 
@@ -34,7 +37,7 @@ Cambridge, UK: Cambridge University Press.
 data("DutchAdvert")
 plot(DutchAdvert)
 
-## EACF tables (Franses 1998, p. 99)
+## EACF tables (Franses 1998, Sec. 5.1, p. 99)
 ctrafo <- function(x) residuals(lm(x ~ factor(cycle(x))))
 ddiff <- function(x) diff(diff(x, frequency(x)), 1)
 eacf <- function(y, lag = 12) {
@@ -48,7 +51,7 @@ eacf <- function(y, lag = 12) {
   return(rval)
 }
 
-## Franses (1998), Table 5.4
+## Franses (1998, p. 103), Table 5.4
 round(eacf(log(DutchAdvert[,"tv"]), lag = c(1:19, 26, 39)), digits = 3)
 }
 

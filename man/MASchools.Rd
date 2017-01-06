@@ -49,8 +49,6 @@ income are from the 1990 US Census.
 
 \source{
 Online complements to Stock and Watson (2007). 
-
-\url{http://wps.aw.com/aw_stock_ie_2}
 }
 
 \references{

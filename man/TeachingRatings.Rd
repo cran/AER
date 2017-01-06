@@ -39,8 +39,6 @@ beauty rating (average from six independent judges)  and a number of other chara
 \source{
 The data were provided by Prof. Hamermesh. The first 8 variables are also available in the
 online complements to Stock and Watson (2007) at
-
-\url{http://wps.aw.com/aw_stock_ie_2/}
 }
 
 \references{

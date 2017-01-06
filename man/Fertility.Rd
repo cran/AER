@@ -41,8 +41,6 @@ Not all variables from Angrist and Evans (1998) have been included.
 
 \source{
 Online complements to Stock and Watson (2007). 
-
-\url{http://wps.aw.com/aw_stock_ie_2/0,12040,3332253-,00.html}
 }
 
 \references{

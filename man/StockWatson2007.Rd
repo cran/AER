@@ -12,7 +12,6 @@ please contact the package maintainer.
 
 \references{
 Stock, J.H. and Watson, M.W. (2007). \emph{Introduction to Econometrics}, 2nd ed. Boston: Addison Wesley.
-URL \url{http://wps.aw.com/aw_stock_ie_2/0,12040,3332253-,00.html}.
 }
 
 \seealso{\code{\link{CartelStability}}, \code{\link{CASchools}}, \code{\link{CigarettesSW}},

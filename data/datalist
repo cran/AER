@@ -20,6 +20,7 @@ CollegeDistance
 ConsumerGood
 CreditCard
 DJFranses
+DJIA8012
 DoctorVisits
 DutchAdvert
 DutchSales
@@ -35,6 +36,7 @@ FrozenJuice
 GSOEP9402
 GSS7402
 GermanUnemployment
+GoldSilver
 GrowthDJ
 GrowthSW
 Grunfeld
@@ -46,12 +48,14 @@ Journals
 KleinI
 Longley
 MASchools
+MSCISwitzerland
 ManufactCosts
 MarkDollar
 MarkPound
 Medicaid1986
 Mortgage
 MotorCycles
+MotorCycles2
 Municipalities
 MurderRates
 NMES1988

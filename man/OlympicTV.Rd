@@ -16,8 +16,6 @@ A data frame with 10 observations and 2 variables.
 
 \source{
 Online complements to Franses (1998).
-
-\url{http://www.few.eur.nl/few/people/franses/research/book2.htm}
 }
 
 \seealso{\code{\link{Franses1998}}}

@@ -67,7 +67,7 @@ library("pscl")
 
 ## select variables for analysis
 data("NMES1988")
-nmes <- NMES1988[, c(1, 6:8, 13, 15, 18)]
+nmes <- NMES1988[, c(1, 7:8, 13, 15, 18)]
 
 ## dependent variable
 hist(nmes$visits, breaks = 0:(max(nmes$visits)+1) - 0.5)
@@ -88,7 +88,6 @@ par(mfrow = c(3, 2))
 plot(clog(visits) ~ health, data = nmes, varwidth = TRUE)
 plot(clog(visits) ~ cfac(chronic), data = nmes)
 plot(clog(visits) ~ insurance, data = nmes, varwidth = TRUE)
-plot(clog(visits) ~ cfac(hospital, c(0:2, 8)), data = nmes)
 plot(clog(visits) ~ gender, data = nmes, varwidth = TRUE)
 plot(cfac(visits, c(0:2, 4, 6, 10, 100)) ~ school, data = nmes, breaks = 9)
 par(mfrow = c(1, 1))
@@ -111,22 +110,22 @@ nmes_qpois <- glm(visits ~ ., data = nmes, family = quasipoisson)
 nmes_nb <- glm.nb(visits ~ ., data = nmes)
 
 ## hurdle regression
-nmes_hurdle <- hurdle(visits ~ . | hospital + chronic + insurance + school + gender,
+nmes_hurdle <- hurdle(visits ~ . | chronic + insurance + school + gender,
   data = nmes, dist = "negbin")
 
 ## zero-inflated regression model
-nmes_zinb <- zeroinfl(visits ~ . | hospital + chronic + insurance + school + gender,
+nmes_zinb <- zeroinfl(visits ~ . | chronic + insurance + school + gender,
   data = nmes, dist = "negbin")
 
 ## compare estimated coefficients
 fm <- list("ML-Pois" = nmes_pois, "Quasi-Pois" = nmes_qpois, "NB" = nmes_nb,
   "Hurdle-NB" = nmes_hurdle, "ZINB" = nmes_zinb)
-round(sapply(fm, function(x) coef(x)[1:8]), digits = 3)
+round(sapply(fm, function(x) coef(x)[1:7]), digits = 3)
 
 ## associated standard errors
 round(cbind("ML-Pois" = sqrt(diag(vcov(nmes_pois))),
   "Adj-Pois" = sqrt(diag(sandwich(nmes_pois))),
-  sapply(fm[-1], function(x) sqrt(diag(vcov(x)))[1:8])),
+  sapply(fm[-1], function(x) sqrt(diag(vcov(x)))[1:7])),
   digits = 3)
 
 ## log-likelihoods and number of estimated parameters

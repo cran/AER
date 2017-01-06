@@ -33,8 +33,6 @@ This is a subset of the data used in Perry and Rosen (2004).
 
 \source{
 Online complements to Stock and Watson (2007). 
-
-\url{http://wps.aw.com/aw_stock_ie_2/0,12040,3332253-,00.html}
 }
 
 \references{

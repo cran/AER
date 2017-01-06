@@ -1,6 +1,6 @@
 
-R version 3.2.0 (2015-04-16) -- "Full of Ingredients"
-Copyright (C) 2015 The R Foundation for Statistical Computing
+R version 3.3.2 (2016-10-31) -- "Sincere Pumpkin Patch"
+Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -673,7 +673,7 @@ R> ###################################################
 R> summary
 function (object, ...) 
 UseMethod("summary")
-<bytecode: 0x60ad7d0>
+<bytecode: 0x55d041640c08>
 <environment: namespace:base>
 R> 
 R> 
@@ -989,4 +989,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  4.576   0.192   4.788 
+  1.336   0.040   1.389 

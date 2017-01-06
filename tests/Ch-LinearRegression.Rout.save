@@ -1,6 +1,6 @@
 
-R version 3.2.0 (2015-04-16) -- "Full of Ingredients"
-Copyright (C) 2015 The R Foundation for Statistical Computing
+R version 3.3.2 (2016-10-31) -- "Sincere Pumpkin Patch"
+Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -782,8 +782,8 @@ capital   0.3453     0.0244   14.16  < 2e-16
 
 Total Sum of Squares:    1890000
 Residual Sum of Squares: 244000
-R-Squared      :  0.871 
-      Adj. R-Squared :  0.798 
+R-Squared:      0.871
+Adj. R-Squared: 0.861
 F-statistic: 185.407 on 2 and 55 DF, p-value: <2e-16
 R> 
 R> 
@@ -833,8 +833,8 @@ capital        0.3448     0.0245   14.06  < 2e-16
 
 Total Sum of Squares:    1990000
 Residual Sum of Squares: 258000
-R-Squared      :  0.87 
-      Adj. R-Squared :  0.827 
+R-Squared:      0.87
+Adj. R-Squared: 0.866
 F-statistic: 191.545 on 2 and 57 DF, p-value: <2e-16
 R> 
 R> 
@@ -843,7 +843,7 @@ R> ### chunk number 62: plm-plmtest
 R> ###################################################
 R> plmtest(gr_pool)
 
-	Lagrange Multiplier Test - (Honda)
+	Lagrange Multiplier Test - (Honda) for balanced panels
 
 data:  invest ~ value + capital
 normal = 15, p-value <2e-16
@@ -889,8 +889,7 @@ Twoways effects Two steps model
 Call:
 pgmm(formula = dynformula(form, list(2, 1, 0, 1)), data = EmplUK, 
     effect = "twoways", model = "twosteps", index = c("firm", 
-        "year"), ... = pairlist(gmm.inst = ~log(emp), lag.gmm = list(c(2, 
-        99))))
+        "year"), gmm.inst = ~log(emp), lag.gmm = list(c(2, 99)))
 
 Unbalanced Panel: n=140, T=7-9, N=1031
 
@@ -965,4 +964,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
- 12.404   0.332  12.794 
+  3.772   0.072   3.846 

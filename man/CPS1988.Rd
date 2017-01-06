@@ -34,7 +34,7 @@ As a result, some respondents have negative experience.
 }
 
 \source{
-\url{http://econ.la.psu.edu/~hbierens/MEDIAN.HTM}
+\url{http://www.personal.psu.edu/hxb11/MEDIAN.HTM}
 }
 
 \references{

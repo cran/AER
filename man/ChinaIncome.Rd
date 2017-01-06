@@ -19,8 +19,6 @@ An annual multiple time series from 1952 to 1988 with 5 variables.
 
 \source{
 Online complements to Franses (1998).
-
-\url{http://www.few.eur.nl/few/people/franses/research/book2.htm}
 }
 
 \seealso{\code{\link{Franses1998}}}
