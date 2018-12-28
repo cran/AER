@@ -19,7 +19,7 @@ ivreg.fit(x, y, z, weights, offset, \dots)
   \item{offset}{an optional offset that can be used to specify an a priori known
     component to be included during fitting.}       
   \item{\dots}{further arguments passed to \code{\link[stats:lmfit]{lm.fit}} or
-    \code{link[stats]{lm.wfit}}, respectively.}
+    \code{\link[stats]{lm.wfit}}, respectively.}
 }
 
 \details{

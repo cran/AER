@@ -90,7 +90,7 @@ fm_pool <- lm(invest ~ value + capital, data = ggr)
 
 ## equivalently
 library("plm")
-pggr <- plm.data(ggr, c("firm", "year"))
+pggr <- pdata.frame(ggr, c("firm", "year"))
 library("systemfit")
 fm_ols <- systemfit(invest ~ value + capital, data = pggr, method = "OLS")
 fm_pols <- systemfit(invest ~ value + capital, data = pggr, method = "OLS",
@@ -109,7 +109,7 @@ fm_psur <- systemfit(invest ~ value + capital, data = pggr, method = "SUR", pool
 
 ## Panel models
 library("plm")
-pg <- plm.data(subset(Grunfeld, firm != "American Steel"), c("firm", "year"))
+pg <- pdata.frame(subset(Grunfeld, firm != "American Steel"), c("firm", "year"))
 
 fm_fe <- plm(invest ~ value + capital, model = "within", data = pg)
 summary(fm_fe)

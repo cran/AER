@@ -167,15 +167,24 @@ terms.ivreg <- function(x, component = c("regressors", "instruments"), ...)
   x$terms[[match.arg(component)]]
 
 model.matrix.ivreg <- function(object, component = c("projected", "regressors", "instruments"), ...) {
-  component <- match.arg(component)
+  component <- match.arg(component, c("projected", "regressors", "instruments"))
   if(!is.null(object$x)) rval <- object$x[[component]]
     else if(!is.null(object$model)) {
       X <- model.matrix(object$terms$regressors, object$model, contrasts = object$contrasts$regressors)
       Z <- if(is.null(object$terms$instruments)) NULL
         else model.matrix(object$terms$instruments, object$model, contrasts = object$contrasts$instruments)
       w <- weights(object)
-      XZ <- if(is.null(Z)) X
-        else if(is.null(w)) lm.fit(Z, X)$fitted.values else lm.wfit(Z, X, w)$fitted.values
+      XZ <- if(is.null(Z)) {
+        X
+      } else if(is.null(w)) {
+        lm.fit(Z, X)$fitted.values
+      } else {
+        lm.wfit(Z, X, w)$fitted.values
+      }
+      if(is.null(dim(XZ))) {
+        XZ <- matrix(XZ, ncol = 1L, dimnames = list(names(XZ), colnames(X)))
+	attr(XZ, "assign") <- attr(X, "assign")
+      }
       rval <- switch(component,
         "regressors" = X,
 	"instruments" = Z,
@@ -328,6 +337,23 @@ anova.ivreg <- function(object, object2, test = "F", vcov = NULL, ...)
     class(rval) <- c("anova", "data.frame")
   }
   return(rval)
+}
+
+update.ivreg <- function (object, formula., ..., evaluate = TRUE)
+{
+  if(is.null(call <- getCall(object))) stop("need an object with call component")
+  extras <- match.call(expand.dots = FALSE)$...
+  if(!missing(formula.)) call$formula <- formula(update(Formula(formula(object)), formula.))
+  if(length(extras)) {
+    existing <- !is.na(match(names(extras), names(call)))
+    for (a in names(extras)[existing]) call[[a]] <- extras[[a]]
+    if(any(!existing)) {
+      call <- c(as.list(call), extras[!existing])
+      call <- as.call(call)
+    }
+  }
+  if(evaluate) eval(call, parent.frame())
+  else call
 }
 
 ivdiag <- function(obj, vcov. = NULL) {

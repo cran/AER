@@ -211,6 +211,7 @@ waldtest(cps_lm, . ~ . - ethnicity)
 ###################################################
 ### chunk number 27: CPS-spline
 ###################################################
+library("splines")
 cps_plm <- lm(log(wage) ~ bs(experience, df = 5) +
   education + ethnicity, data = CPS1988)
 
@@ -501,13 +502,13 @@ encomptest(cons_lm1, cons_lm2)
 
 
 ###################################################
-### chunk number 57: plm-data
+### chunk number 57: pdata.frame
 ###################################################
 data("Grunfeld", package = "AER")
 library("plm")
 gr <- subset(Grunfeld, firm %in% c("General Electric",
   "General Motors", "IBM"))
-pgr <- plm.data(gr, index = c("firm", "year"))
+pgr <- pdata.frame(gr, index = c("firm", "year"))
 
 
 ###################################################
@@ -578,7 +579,7 @@ summary(empl_ab)
 ###################################################
 library("systemfit")
 gr2 <- subset(Grunfeld, firm %in% c("Chrysler", "IBM"))
-pgr2 <- plm.data(gr2, c("firm", "year"))
+pgr2 <- pdata.frame(gr2, c("firm", "year"))
 
 
 ###################################################

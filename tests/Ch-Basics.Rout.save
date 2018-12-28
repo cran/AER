@@ -1,6 +1,6 @@
 
-R version 3.3.2 (2016-10-31) -- "Sincere Pumpkin Patch"
-Copyright (C) 2016 The R Foundation for Statistical Computing
+R version 3.5.2 (2018-12-20) -- "Eggshell Igloo"
+Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -29,6 +29,7 @@ R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
 R> 
 R> library("AER")
 Loading required package: car
+Loading required package: carData
 Loading required package: lmtest
 Loading required package: zoo
 
@@ -652,7 +653,7 @@ R> ### chunk number 75: oop2
 R> ###################################################
 R> summary(x)
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   1.80    3.14    4.00   22.00   13.00   88.20 
+   1.80    3.14    4.00   22.02   13.00   88.17 
 R> summary(g)
   male female 
      2      4 
@@ -673,7 +674,7 @@ R> ###################################################
 R> summary
 function (object, ...) 
 UseMethod("summary")
-<bytecode: 0x55d041640c08>
+<bytecode: 0x5566fd9a2d70>
 <environment: namespace:base>
 R> 
 R> 
@@ -831,7 +832,7 @@ R> ### chunk number 92: eda4
 R> ###################################################
 R> summary(wage)
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-   1.00    5.25    7.78    9.02   11.20   44.50 
+   1.00    5.25    7.78    9.02   11.25   44.50 
 R> 
 R> 
 R> ###################################################
@@ -989,4 +990,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  1.336   0.040   1.389 
+  1.248   0.070   1.306 

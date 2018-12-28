@@ -1,6 +1,6 @@
 
-R version 3.3.2 (2016-10-31) -- "Sincere Pumpkin Patch"
-Copyright (C) 2016 The R Foundation for Statistical Computing
+R version 3.5.2 (2018-12-20) -- "Eggshell Igloo"
+Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -29,6 +29,7 @@ R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
 R> 
 R> library("AER")
 Loading required package: car
+Loading required package: carData
 Loading required package: lmtest
 Loading required package: zoo
 
@@ -265,7 +266,7 @@ time         1.94e-02   1.04e-02    1.87    0.062
 income       1.06e+01   5.65e+00    1.88    0.061
 noncauc      7.10e+01   3.64e+01    1.95    0.051
 lfp         -6.68e-01   4.77e-01   -1.40    0.161
-southernyes  3.13e+01   1.73e+07    0.00    1.000
+southernyes  3.33e+01   1.73e+07    0.00    1.000
 
 R> 
 R> 
@@ -430,19 +431,12 @@ R> ###################################################
 R> ### chunk number 31: countreg-pscl
 R> ###################################################
 R> library("pscl")
-Loading required package: lattice
 Classes and Methods for R developed in the
-
 Political Science Computational Laboratory
-
 Department of Political Science
-
 Stanford University
-
 Simon Jackman
-
 hurdle and zeroinfl functions by Achim Zeileis
-
 R> 
 R> 
 R> ###################################################
@@ -627,7 +621,7 @@ Note: Coefficient covariance matrix supplied.
 
   Res.Df Df Chisq Pr(>Chisq)
 1    596                    
-2    594  2  4.91      0.086
+2    594  2  1.59       0.45
 R> 
 R> 
 R> ###################################################
@@ -755,4 +749,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  1.904   0.048   1.951 
+  1.594   0.099   1.680 

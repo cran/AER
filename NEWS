@@ -1,3 +1,24 @@
+Changes in Version 1.2-6
+
+  o Added update() method for "ivreg" objects that correctly handles the
+    two-part right-hand side of the formula (suggested by Matthieu Stigler).
+
+  o Use pdata.frame() instead of plm.data() as preparation for modeling
+    with "plm" and certain "systemfit" functions (requires systemfit
+    1.1-20).
+
+  o The model.matrix() method for "ivreg" objects erroneously dropped
+    the dimension of single-column projected regressor matrices. This
+    propagated to the estfun() method and hence lead to problems with
+    sandwich covariances (reported by Justus Winkelmann).
+
+  o In a bug fix the survival package changed the internal structure of
+    survreg()$y starting from survival 2.42-7. This leads to incorrect
+    summary() output for "tobit" objects which has been worked around
+    now. Thanks to Terry Therneau for pointing out the problem and suggesting
+    a fix.
+
+
 Changes in Version 1.2-5
 
   o Support for aliased coefficients in ivreg() (suggested and tested by

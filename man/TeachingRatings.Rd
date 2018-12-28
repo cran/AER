@@ -52,7 +52,7 @@ Stock, J.H. and Watson, M.W. (2007). \emph{Introduction to Econometrics}, 2nd ed
 \seealso{\code{\link{StockWatson2007}}}
 
 \examples{
-data("TeachingRatings")
+data("TeachingRatings", package = "AER")
 
 ## evaluation score vs. beauty
 plot(eval ~ beauty, data = TeachingRatings)
@@ -68,8 +68,7 @@ predict(fm, newdata = data.frame(beauty = sw))
 ## Hamermesh and Parker, 2005, Table 3
 fmw <- lm(eval ~ beauty + gender + minority + native + tenure + division + credits,
   weights = students, data = TeachingRatings)
-coeftest(fmw, vcov = sandwich)
-## (same coefficients but with different covariances)
+coeftest(fmw, vcov = vcovCL, cluster = TeachingRatings$prof)
 }
 
 \keyword{datasets}

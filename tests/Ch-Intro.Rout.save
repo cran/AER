@@ -1,6 +1,6 @@
 
-R version 3.3.2 (2016-10-31) -- "Sincere Pumpkin Patch"
-Copyright (C) 2016 The R Foundation for Statistical Computing
+R version 3.5.2 (2018-12-20) -- "Eggshell Igloo"
+Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -29,6 +29,7 @@ R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
 R> 
 R> library("AER")
 Loading required package: car
+Loading required package: carData
 Loading required package: lmtest
 Loading required package: zoo
 
@@ -251,10 +252,11 @@ R> search()
  [5] "package:AER"        "package:survival"  
  [7] "package:sandwich"   "package:lmtest"    
  [9] "package:zoo"        "package:car"       
-[11] "package:stats"      "package:graphics"  
-[13] "package:grDevices"  "package:utils"     
-[15] "package:datasets"   "package:methods"   
-[17] "Autoloads"          "package:base"      
+[11] "package:carData"    "package:stats"     
+[13] "package:graphics"   "package:grDevices" 
+[15] "package:utils"      "package:datasets"  
+[17] "package:methods"    "Autoloads"         
+[19] "package:base"      
 R> 
 R> 
 R> ###################################################
@@ -300,4 +302,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  1.508   0.048   1.557 
+  1.441   0.069   1.493 

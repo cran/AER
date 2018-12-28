@@ -9,6 +9,7 @@
 \alias{predict.ivreg}
 \alias{terms.ivreg}
 \alias{model.matrix.ivreg}
+\alias{update.ivreg}
 
 
 \title{Methods for Instrumental-Variable Regression}
@@ -53,7 +54,7 @@
 \details{
 \code{\link{ivreg}} is the high-level interface to the work-horse function \code{\link{ivreg.fit}},
 a set of standard methods (including \code{summary}, \code{vcov}, \code{anova},
-\code{hatvalues}, \code{predict}, \code{terms}, \code{model.matrix}, \code{bread},
+\code{hatvalues}, \code{predict}, \code{terms}, \code{model.matrix}, \code{update}, \code{bread},
 \code{estfun}) is available.
 }
 

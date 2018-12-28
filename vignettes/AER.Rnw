@@ -236,6 +236,9 @@ empl_ab <- pgmm(log(emp) ~ lag(log(emp), 1:2) + lag(log(wage), 0:1)
     in the output of \code{coeftest(bank_polr)} is wrong, it should be \code{1.4744}.
     This was caused by an inconsistency between \fct{polr} and its \fct{vcov} method which
     has now been improved in the \pkg{MASS} package ($\ge$ 7.3-6).
+  \item p.~167: The truncation lag parameter in th output of \code{kpss.test(log(PepperPrice[, "white"]))}
+    is wrong, it should be \code{5} instead of \code{3}, also leading to a somewhat smaller test
+    statistic and larger $p$~value. This has now been corrected in the \pkg{tseries} package ($\ge$ 0.10-46).
   \item p.~169: The comment regarding the output from the Johansen test is in error.
     The null hypothesis of no cointegration is not rejected at the 10\% level. Nonetheless,
     the table corresponding to Case~2 in \citet[][p.~420]{aer:Juselius:2006} reveals that the

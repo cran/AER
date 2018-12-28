@@ -1,6 +1,6 @@
 
-R version 3.3.2 (2016-10-31) -- "Sincere Pumpkin Patch"
-Copyright (C) 2016 The R Foundation for Statistical Computing
+R version 3.5.2 (2018-12-20) -- "Eggshell Igloo"
+Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -29,6 +29,7 @@ R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
 R> 
 R> library("AER")
 Loading required package: car
+Loading required package: carData
 Loading required package: lmtest
 Loading required package: zoo
 
@@ -367,12 +368,9 @@ R> kpss.test(log(PepperPrice[, "white"]))
 	KPSS Test for Level Stationarity
 
 data:  log(PepperPrice[, "white"])
-KPSS Level = 0.9129, Truncation lag parameter = 3,
-p-value = 0.01
+KPSS Level = 0.6173, Truncation lag parameter = 5,
+p-value = 0.0211
 
-Warning message:
-In kpss.test(log(PepperPrice[, "white"])) :
-  p-value smaller than printed p-value
 R> 
 R> 
 R> ###################################################
@@ -638,4 +636,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  2.756   0.052   2.807 
+  2.703   0.095   2.788 

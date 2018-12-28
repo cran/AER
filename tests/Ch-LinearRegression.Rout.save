@@ -1,6 +1,6 @@
 
-R version 3.3.2 (2016-10-31) -- "Sincere Pumpkin Patch"
-Copyright (C) 2016 The R Foundation for Statistical Computing
+R version 3.5.2 (2018-12-20) -- "Eggshell Igloo"
+Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -29,6 +29,7 @@ R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
 R> 
 R> library("AER")
 Loading required package: car
+Loading required package: carData
 Loading required package: lmtest
 Loading required package: zoo
 
@@ -741,14 +742,14 @@ M2 vs. ME    199 -1   51.7 1.3e-11
 R> 
 R> 
 R> ###################################################
-R> ### chunk number 57: plm-data
+R> ### chunk number 57: pdata.frame
 R> ###################################################
 R> data("Grunfeld", package = "AER")
 R> library("plm")
 Loading required package: Formula
 R> gr <- subset(Grunfeld, firm %in% c("General Electric",
 +    "General Motors", "IBM"))
-R> pgr <- plm.data(gr, index = c("firm", "year"))
+R> pgr <- pdata.frame(gr, index = c("firm", "year"))
 R> 
 R> 
 R> ###################################################
@@ -769,13 +770,13 @@ Oneway (individual) effect Within Model
 Call:
 plm(formula = invest ~ value + capital, data = pgr, model = "within")
 
-Balanced Panel: n=3, T=20, N=60
+Balanced Panel: n = 3, T = 20, N = 60
 
-Residuals :
+Residuals:
    Min. 1st Qu.  Median 3rd Qu.    Max. 
--167.00  -26.10    2.09   26.80  202.00 
+-167.33  -26.14    2.09   26.84  201.68 
 
-Coefficients :
+Coefficients:
         Estimate Std. Error t-value Pr(>|t|)
 value     0.1049     0.0163    6.42  3.3e-08
 capital   0.3453     0.0244   14.16  < 2e-16
@@ -813,19 +814,19 @@ Call:
 plm(formula = invest ~ value + capital, data = pgr, model = "random", 
     random.method = "walhus")
 
-Balanced Panel: n=3, T=20, N=60
+Balanced Panel: n = 3, T = 20, N = 60
 
 Effects:
                  var std.dev share
 idiosyncratic 4389.3    66.3  0.35
 individual    8079.7    89.9  0.65
-theta:  0.837  
+theta: 0.837
 
-Residuals :
+Residuals:
    Min. 1st Qu.  Median 3rd Qu.    Max. 
--187.00  -32.90    6.96   31.40  210.00 
+-187.40  -32.92    6.96   31.43  210.20 
 
-Coefficients :
+Coefficients:
              Estimate Std. Error t-value Pr(>|t|)
 (Intercept) -109.9766    61.7014   -1.78     0.08
 value          0.1043     0.0150    6.95  3.8e-09
@@ -891,15 +892,15 @@ pgmm(formula = dynformula(form, list(2, 1, 0, 1)), data = EmplUK,
     effect = "twoways", model = "twosteps", index = c("firm", 
         "year"), gmm.inst = ~log(emp), lag.gmm = list(c(2, 99)))
 
-Unbalanced Panel: n=140, T=7-9, N=1031
+Unbalanced Panel: n = 140, T = 7-9, N = 1031
 
-Number of Observations Used:  611 
+Number of Observations Used: 611
 
-Residuals
+Residuals:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
--0.6190 -0.0256  0.0000 -0.0001  0.0332  0.6410 
+-0.6191 -0.0256  0.0000 -0.0001  0.0332  0.6410 
 
-Coefficients
+Coefficients:
                         Estimate Std. Error z-value Pr(>|z|)
 lag(log(emp), c(1, 2))1   0.4742     0.0853    5.56  2.7e-08
 lag(log(emp), c(1, 2))2  -0.0530     0.0273   -1.94  0.05222
@@ -909,11 +910,11 @@ log(capital)              0.2927     0.0395    7.42  1.2e-13
 log(output)               0.6098     0.1085    5.62  1.9e-08
 lag(log(output), 1)      -0.4464     0.1248   -3.58  0.00035
 
-Sargan Test: chisq(25) = 30.11 (p.value=0.22)
-Autocorrelation test (1): normal = -2.428 (p.value=0.0152)
-Autocorrelation test (2): normal = -0.3325 (p.value=0.739)
-Wald test for coefficients: chisq(7) = 372 (p.value=<2e-16)
-Wald test for time dummies: chisq(6) = 26.9 (p.value=0.000151)
+Sargan test: chisq(25) = 30.11 (p-value = 0.22)
+Autocorrelation test (1): normal = -2.428 (p-value = 0.0152)
+Autocorrelation test (2): normal = -0.3325 (p-value = 0.739)
+Wald test for coefficients: chisq(7) = 372 (p-value = <2e-16)
+Wald test for time dummies: chisq(6) = 26.9 (p-value = 0.000151)
 R> 
 R> 
 R> ###################################################
@@ -921,8 +922,14 @@ R> ### chunk number 67: systemfit
 R> ###################################################
 R> library("systemfit")
 Loading required package: Matrix
+
+Please cite the 'systemfit' package as:
+Arne Henningsen and Jeff D. Hamann (2007). systemfit: A Package for Estimating Systems of Simultaneous Equations in R. Journal of Statistical Software 23(4), 1-40. http://www.jstatsoft.org/v23/i04/.
+
+If you have questions, suggestions, or comments regarding the 'systemfit' package, please use a forum or 'tracker' at systemfit's R-Forge site:
+https://r-forge.r-project.org/projects/systemfit/
 R> gr2 <- subset(Grunfeld, firm %in% c("Chrysler", "IBM"))
-R> pgr2 <- plm.data(gr2, c("firm", "year"))
+R> pgr2 <- pdata.frame(gr2, c("firm", "year"))
 R> 
 R> 
 R> ###################################################
@@ -964,4 +971,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  3.772   0.072   3.846 
+  3.320   0.113   3.421 

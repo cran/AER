@@ -456,7 +456,7 @@ anova(fm_full, fm_no)
 
 ## alternatively, use plm()
 library("plm")
-usair <- plm.data(USAirlines, c("firm", "year"))
+usair <- pdata.frame(USAirlines, c("firm", "year"))
 fm_full2 <- plm(log(cost) ~ log(output) + I(log(output)^2) + log(price) + load,
   data = usair, model = "within", effect = "twoways")
 fm_time2 <- plm(log(cost) ~ log(output) + I(log(output)^2) + log(price) + load,
@@ -731,7 +731,7 @@ rbind(
 
 ## Chapter 14: explicitly treat as panel data
 library("plm")
-pggr <- plm.data(ggr, c("firm", "year"))
+pggr <- pdata.frame(ggr, c("firm", "year"))
 
 ## Tab. 14.1
 library("systemfit")

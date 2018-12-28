@@ -154,7 +154,7 @@ summary(fm)
 data("Grunfeld", package = "AER")
 pgr <- subset(Grunfeld, firm \%in\% levels(Grunfeld$firm)[1:3])
 library("plm")
-pgr <- plm.data(pgr, c("firm", "year"))
+pgr <- pdata.frame(pgr, c("firm", "year"))
 
 ## Ex. 10.9
 library("systemfit")

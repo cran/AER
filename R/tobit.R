@@ -145,9 +145,21 @@ summary.tobit <- function(object, correlation = FALSE, symbolic.cor = FALSE, vco
     else pprint <- paste(sd$name, "distribution")
 
   ## number of observations
-  nobs <- as.vector(table(factor(object$y[,2], levels = 2:0)))
-  nobs <- c(sum(nobs), nobs)
-  names(nobs) <- c("Total", "Left-censored", "Uncensored", "Right-censored")
+  ## (incorporating "bug fix" change for $y in survival 2.42-7)
+  surv_table <- function(y) {
+    if(!inherits(y, "Surv")) y <- y$y
+    type <- attr(y, "type")
+    if(is.null(type) || (type == "left" && any(y[, 2L] > 1))) type <- "old"
+    y <- switch(type,    
+      "left" = 2 - y[, 2L],
+      "interval" = y[, 3L],
+      y[, 2L]
+    )
+    table(factor(y, levels = c(2, 1, 0, 3),
+      labels = c("Left-censored", "Uncensored", "Right-censored", "Interval-censored")))
+  }
+  nobs <- surv_table(object$y)
+  nobs <- c("Total" = sum(nobs), nobs[1:3])
 
   rval <- object[match(c("call", "df", "loglik", "iter", "na.action", "idf", "scale"),
     names(object), nomatch = 0)]

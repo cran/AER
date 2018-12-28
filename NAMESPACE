@@ -39,6 +39,7 @@ S3method("predict", "ivreg")
 S3method("anova", "ivreg")
 S3method("terms", "ivreg")
 S3method("model.matrix", "ivreg")
+S3method("update", "ivreg")
 
 ## methods for class survreg
 S3method("deviance", "survreg")

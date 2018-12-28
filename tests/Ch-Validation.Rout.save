@@ -1,6 +1,6 @@
 
-R version 3.3.2 (2016-10-31) -- "Sincere Pumpkin Patch"
-Copyright (C) 2016 The R Foundation for Statistical Computing
+R version 3.5.2 (2018-12-20) -- "Eggshell Igloo"
+Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -29,6 +29,7 @@ R> options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
 R> 
 R> library("AER")
 Loading required package: car
+Loading required package: carData
 Loading required package: lmtest
 Loading required package: zoo
 
@@ -213,6 +214,7 @@ R> gqtest(jour_lm, order.by = ~ citeprice, data = journals)
 
 data:  jour_lm
 GQ = 1.7, df1 = 88, df2 = 88, p-value = 0.007
+alternative hypothesis: variance increases from segment 1 to 2
 
 R> 
 R> 
@@ -610,4 +612,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
- 16.812   0.044  16.859 
+ 16.066   0.092  16.151 

@@ -84,7 +84,7 @@ Greene, W.H. (2008). \emph{Econometric Analysis}, 6th ed. Upper Saddle River, NJ
 data("PSID7682")
 
 library("plm")
-psid <- plm.data(PSID7682, c("id", "year"))
+psid <- pdata.frame(PSID7682, c("id", "year"))
 
 ## Baltagi & Khanti-Akom, Table I, column "HT"
 ## original Cornwell & Rupert choice of exogenous variables
