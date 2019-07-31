@@ -1,6 +1,6 @@
 
-R version 3.5.2 (2018-12-20) -- "Eggshell Igloo"
-Copyright (C) 2018 The R Foundation for Statistical Computing
+R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
+Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -42,6 +42,7 @@ The following objects are masked from 'package:base':
 Loading required package: sandwich
 Loading required package: survival
 R> 
+R> suppressWarnings(RNGversion("3.5.0"))
 R> set.seed(1071)
 R> 
 R> 
@@ -827,16 +828,16 @@ Residuals:
 -187.40  -32.92    6.96   31.43  210.20 
 
 Coefficients:
-             Estimate Std. Error t-value Pr(>|t|)
-(Intercept) -109.9766    61.7014   -1.78     0.08
-value          0.1043     0.0150    6.95  3.8e-09
+             Estimate Std. Error z-value Pr(>|z|)
+(Intercept) -109.9766    61.7014   -1.78    0.075
+value          0.1043     0.0150    6.95  3.6e-12
 capital        0.3448     0.0245   14.06  < 2e-16
 
 Total Sum of Squares:    1990000
 Residual Sum of Squares: 258000
 R-Squared:      0.87
 Adj. R-Squared: 0.866
-F-statistic: 191.545 on 2 and 57 DF, p-value: <2e-16
+Chisq: 383.089 on 2 DF, p-value: <2e-16
 R> 
 R> 
 R> ###################################################
@@ -869,16 +870,15 @@ R> ###################################################
 R> ### chunk number 64: EmplUK-data
 R> ###################################################
 R> data("EmplUK", package = "plm")
-R> form <- log(emp) ~ log(wage) + log(capital) + log(output)
 R> 
 R> 
 R> ###################################################
 R> ### chunk number 65: plm-AB
 R> ###################################################
-R> empl_ab <- pgmm(dynformula(form, list(2, 1, 0, 1)),
+R> empl_ab <- pgmm(log(emp) ~ lag(log(emp), 1:2) + lag(log(wage), 0:1) +
++    log(capital) + lag(log(output), 0:1) | lag(log(emp), 2:99),
 +    data = EmplUK, index = c("firm", "year"),
-+    effect = "twoways", model = "twosteps",
-+    gmm.inst = ~ log(emp), lag.gmm = list(c(2, 99)))
++    effect = "twoways", model = "twosteps")
 R> 
 R> 
 R> ###################################################
@@ -888,9 +888,10 @@ R> summary(empl_ab, robust = FALSE)
 Twoways effects Two steps model
 
 Call:
-pgmm(formula = dynformula(form, list(2, 1, 0, 1)), data = EmplUK, 
-    effect = "twoways", model = "twosteps", index = c("firm", 
-        "year"), gmm.inst = ~log(emp), lag.gmm = list(c(2, 99)))
+pgmm(formula = log(emp) ~ lag(log(emp), 1:2) + lag(log(wage), 
+    0:1) + log(capital) + lag(log(output), 0:1) | lag(log(emp), 
+    2:99), data = EmplUK, effect = "twoways", model = "twosteps", 
+    index = c("firm", "year"))
 
 Unbalanced Panel: n = 140, T = 7-9, N = 1031
 
@@ -901,14 +902,14 @@ Residuals:
 -0.6191 -0.0256  0.0000 -0.0001  0.0332  0.6410 
 
 Coefficients:
-                        Estimate Std. Error z-value Pr(>|z|)
-lag(log(emp), c(1, 2))1   0.4742     0.0853    5.56  2.7e-08
-lag(log(emp), c(1, 2))2  -0.0530     0.0273   -1.94  0.05222
-log(wage)                -0.5132     0.0493  -10.40  < 2e-16
-lag(log(wage), 1)         0.2246     0.0801    2.81  0.00502
-log(capital)              0.2927     0.0395    7.42  1.2e-13
-log(output)               0.6098     0.1085    5.62  1.9e-08
-lag(log(output), 1)      -0.4464     0.1248   -3.58  0.00035
+                       Estimate Std. Error z-value Pr(>|z|)
+lag(log(emp), 1:2)1      0.4742     0.0853    5.56  2.7e-08
+lag(log(emp), 1:2)2     -0.0530     0.0273   -1.94  0.05222
+lag(log(wage), 0:1)0    -0.5132     0.0493  -10.40  < 2e-16
+lag(log(wage), 0:1)1     0.2246     0.0801    2.81  0.00502
+log(capital)             0.2927     0.0395    7.42  1.2e-13
+lag(log(output), 0:1)0   0.6098     0.1085    5.62  1.9e-08
+lag(log(output), 0:1)1  -0.4464     0.1248   -3.58  0.00035
 
 Sargan test: chisq(25) = 30.11 (p-value = 0.22)
 Autocorrelation test (1): normal = -2.428 (p-value = 0.0152)
@@ -971,4 +972,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  3.320   0.113   3.421 
+  3.513   0.168   3.668 

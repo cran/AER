@@ -105,7 +105,7 @@ chapter are the sum of the scores on the math and reading portion of the
 Stanford Achievement Test. 
 
 Stock and Watson (2007) obtained the data set from the
-Project STAR Web site at \url{http://www.heros-inc.org/star.htm}.
+Project STAR Web site.
 
 The data is provided in wide format. Reshaping it into long format
 is illustrated below. Note that the levels of the \code{degree}, \code{ladder}

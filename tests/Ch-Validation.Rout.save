@@ -1,6 +1,6 @@
 
-R version 3.5.2 (2018-12-20) -- "Eggshell Igloo"
-Copyright (C) 2018 The R Foundation for Statistical Computing
+R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
+Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -42,6 +42,7 @@ The following objects are masked from 'package:base':
 Loading required package: sandwich
 Loading required package: survival
 R> 
+R> suppressWarnings(RNGversion("3.5.0"))
 R> set.seed(1071)
 R> 
 R> 
@@ -226,7 +227,7 @@ R> resettest(jour_lm)
 	RESET test
 
 data:  jour_lm
-RESET = 1.4, df1 = 2, df2 = 180, p-value = 0.2
+RESET = 1.4, df1 = 2, df2 = 176, p-value = 0.2
 
 R> 
 R> 
@@ -250,7 +251,7 @@ R> harvtest(jour_lm, order.by = ~ age, data = journals)
 	Harvey-Collier test
 
 data:  jour_lm
-HC = 5.1, df = 180, p-value = 9e-07
+HC = 5.1, df = 177, p-value = 9e-07
 
 R> 
 R> 
@@ -289,7 +290,7 @@ R> Box.test(residuals(consump1), type = "Ljung-Box")
 	Box-Ljung test
 
 data:  residuals(consump1)
-X-squared = 180, df = 1, p-value <2e-16
+X-squared = 176, df = 1, p-value <2e-16
 
 R> 
 R> 
@@ -302,7 +303,7 @@ R> bgtest(consump1)
 	to 1
 
 data:  consump1
-LM test = 190, df = 1, p-value <2e-16
+LM test = 193, df = 1, p-value <2e-16
 
 R> 
 R> 
@@ -612,4 +613,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
- 16.066   0.092  16.151 
+ 16.529   0.105  16.620 

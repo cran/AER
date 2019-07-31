@@ -43,8 +43,6 @@ of being childless, are of interest.
 
 \source{
 Online complements to Winkelmann and Boes (2009).
-
-\url{http://econsites.uzh.ch/rwinke/microdata.zip}
 }
 
 \references{

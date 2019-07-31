@@ -12,6 +12,7 @@ options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
 
 library("AER")
 
+suppressWarnings(RNGversion("3.5.0"))
 set.seed(1071)
 
 
@@ -115,7 +116,7 @@ for(i in 6:10) lines(cps2[,i] ~ experience,
 ###################################################
 ### chunk number 15: srq-plot1
 ###################################################
-plot(summary(cps_rq))
+try(plot(summary(cps_rq)))
 
 
 ###################################################

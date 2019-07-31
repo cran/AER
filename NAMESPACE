@@ -20,6 +20,8 @@ export(
 S3method("print", "tobit")
 S3method("print", "summary.tobit")
 S3method("summary", "tobit")
+S3method("bread", "tobit")
+S3method("vcov", "tobit")
 S3method("formula", "tobit")
 S3method("update", "tobit")
 S3method("model.frame", "tobit")

@@ -42,6 +42,7 @@ The following objects are masked from 'package:base':
 Loading required package: sandwich
 Loading required package: survival
 R> 
+R> suppressWarnings(RNGversion("3.5.0"))
 R> set.seed(1071)
 R> 
 R> 
@@ -181,7 +182,7 @@ R>
 R> ###################################################
 R> ### chunk number 15: srq-plot1
 R> ###################################################
-R> plot(summary(cps_rq))
+R> try(plot(summary(cps_rq)))
 Warning messages:
 1: In rq.fit.br(x, y, tau = tau, ci = TRUE, ...) :
   Solution may be nonunique

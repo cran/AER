@@ -12,6 +12,7 @@ options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
 
 library("AER")
 
+suppressWarnings(RNGversion("3.5.0"))
 set.seed(1071)
 
 

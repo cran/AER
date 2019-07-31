@@ -13,6 +13,27 @@ nobs.survreg <- function(object, ...)
 weights.survreg <- function(object, ...)
   model.weights(model.frame(object))
 
+## fix vcov() and bread() methods because some versions of survival
+## do not report row/column names anymore
+vcov.tobit <- function(object, ...) {
+  vc <- NextMethod()
+  if(is.null(colnames(vc))) {
+    nam <- names(object$coefficients)    
+    nam <- if(length(nam) == ncol(vc)) {
+      nam
+    } else if(length(nam) == ncol(vc) - 1L) {
+      c(nam, "Log(scale)")
+    } else {
+      c(nam, names(object$scale))
+    }
+    colnames(vc) <- rownames(vc) <- nam
+  }
+  return(vc)  
+}
+
+bread.tobit <- function(x, ...) {
+  length(x$linear.predictors) * vcov(x)
+}
 
 ## convenience tobit() interface to survreg()
 
@@ -284,7 +305,7 @@ linearHypothesis.tobit <- function(model, hypothesis.matrix,
   } else {
     if(is.function(vcov.)) vcov. <- vcov.(model)
   }
-  vcov. <- vcov.[-nrow(vcov.), -ncol(vcov.)]
+  if("Log(scale)" %in% rownames(vcov.)) vcov. <- vcov.[-nrow(vcov.), -ncol(vcov.)]
   model$formula <- model$call$formula
   car::linearHypothesis.default(model,
     hypothesis.matrix = hypothesis.matrix, rhs = rhs, vcov. = vcov., ...)

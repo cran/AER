@@ -29,6 +29,7 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
 ###################################################
 ## empl_ab <- pgmm(log(emp) ~ lag(log(emp), 1:2) + lag(log(wage), 0:1)
 ##      + log(capital) + lag(log(output), 0:1) | lag(log(emp), 2:99),
-##      data = EmplUK, effect = "twoways", model = "twosteps")
+##      data = EmplUK, index = c("firm", "year"), 
+##      effect = "twoways", model = "twosteps")
 
 

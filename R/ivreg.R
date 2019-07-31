@@ -361,6 +361,7 @@ ivdiag <- function(obj, vcov. = NULL) {
   y <- model.response(model.frame(obj))
   x <- model.matrix(obj, component = "regressors")
   z <- model.matrix(obj, component = "instruments")
+  w <- weights(obj)
   
   ## endogenous/instrument variables
   endo <- which(!(colnames(x) %in% colnames(z)))
@@ -375,17 +376,17 @@ ivdiag <- function(obj, vcov. = NULL) {
     "Wu-Hausman", "Sargan")
   
   ## convenience functions
-  lmfit <- function(x, y) {
-    rval <- lm.fit(x, y)
+  lmfit <- function(x, y, w = NULL) {
+    rval <- if(is.null(w)) lm.fit(x, y) else lm.wfit(x, y, w)
     rval$x <- x
     rval$y <- y
     return(rval)
   }
-  rss <- function(obj) sum(obj$residuals^2)
-  wald <- function(obj0, obj1, vcov. = NULL) {
+  rss <- function(obj, weights = NULL) if(is.null(weights)) sum(obj$residuals^2) else sum(weights * obj$residuals^2)
+  wald <- function(obj0, obj1, vcov. = NULL, weights = NULL) {
     df <- c(obj1$rank - obj0$rank, obj1$df.residual)
     if(!is.function(vcov.)) {
-      w <- ((rss(obj0) - rss(obj1)) / df[1L]) / (rss(obj1)/df[2L])
+      w <- ((rss(obj0, w) - rss(obj1, w)) / df[1L]) / (rss(obj1, w)/df[2L])
     } else {
       if(NCOL(obj0$coefficients) > 1L) {
         cf0 <- structure(as.vector(obj0$coefficients),
@@ -399,7 +400,7 @@ ivdiag <- function(obj, vcov. = NULL) {
       cf0 <- na.omit(cf0)
       cf1 <- na.omit(cf1)
       ovar <- which(!(names(cf1) %in% names(cf0)))
-      vc <- vcov.(lm(obj1$y ~ 0 + obj1$x))
+      vc <- vcov.(lm(obj1$y ~ 0 + obj1$x, weights = w))
       w <- t(cf1[ovar]) %*% solve(vc[ovar,ovar]) %*% cf1[ovar]
       w <- w / df[1L]
     }
@@ -409,25 +410,26 @@ ivdiag <- function(obj, vcov. = NULL) {
     
   # Test for weak instruments
   for(i in seq_along(endo)) {
-  aux0 <- lmfit(z[, -inst, drop = FALSE], x[, endo[i]])
-  aux1 <- lmfit(z,                        x[, endo[i]])
-  rval[i, ] <- wald(aux0, aux1, vcov. = vcov.)
+  aux0 <- lmfit(z[, -inst, drop = FALSE], x[, endo[i]], w)
+  aux1 <- lmfit(z,                        x[, endo[i]], w)
+  rval[i, ] <- wald(aux0, aux1, vcov. = vcov., weights = w)
   }
 
   ## Wu-Hausman test for endogeneity
-  if(length(endo) > 1L) aux1 <- lmfit(z, x[, endo])
+  if(length(endo) > 1L) aux1 <- lmfit(z, x[, endo], w)
   xfit <- as.matrix(aux1$fitted.values)
   colnames(xfit) <- paste("fit", colnames(xfit), sep = "_")
-  auxo <- lmfit(      x,        y)
-  auxe <- lmfit(cbind(x, xfit), y)
-  rval[nrow(rval) - 1L, ] <- wald(auxo, auxe, vcov. = vcov.)
+  auxo <- lmfit(      x,        y, w)
+  auxe <- lmfit(cbind(x, xfit), y, w)
+  rval[nrow(rval) - 1L, ] <- wald(auxo, auxe, vcov. = vcov., weights = w)
 
   ## Sargan test of overidentifying restrictions 
   r <- residuals(obj)  
-  auxs <- lmfit(z, r)
+  auxs <- lmfit(z, r, w)
+  rssr <- if(is.null(w)) sum((r - mean(r))^2) else sum(w * (r - weighted.mean(r, w))^2)
   rval[nrow(rval), 1L] <- length(inst) - length(endo)
   if(rval[nrow(rval), 1L] > 0L) {
-    rval[nrow(rval), 3L] <- length(r) * (1 - rss(auxs)/sum((r - mean(r))^2))
+    rval[nrow(rval), 3L] <- length(r) * (1 - rss(auxs, w)/rssr)
     rval[nrow(rval), 4L] <- pchisq(rval[nrow(rval), 3L], rval[nrow(rval), 1L], lower.tail = FALSE)
   }
 

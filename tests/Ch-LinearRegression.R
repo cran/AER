@@ -12,6 +12,7 @@ options(SweaveHooks = list(onefig =   function() {par(mfrow = c(1,1))},
 
 library("AER")
 
+suppressWarnings(RNGversion("3.5.0"))
 set.seed(1071)
 
 
@@ -556,16 +557,15 @@ phtest(gr_re, gr_fe)
 ### chunk number 64: EmplUK-data
 ###################################################
 data("EmplUK", package = "plm")
-form <- log(emp) ~ log(wage) + log(capital) + log(output)
 
 
 ###################################################
 ### chunk number 65: plm-AB
 ###################################################
-empl_ab <- pgmm(dynformula(form, list(2, 1, 0, 1)),
+empl_ab <- pgmm(log(emp) ~ lag(log(emp), 1:2) + lag(log(wage), 0:1) +
+  log(capital) + lag(log(output), 0:1) | lag(log(emp), 2:99),
   data = EmplUK, index = c("firm", "year"),
-  effect = "twoways", model = "twosteps",
-  gmm.inst = ~ log(emp), lag.gmm = list(c(2, 99)))
+  effect = "twoways", model = "twosteps")
 
 
 ###################################################

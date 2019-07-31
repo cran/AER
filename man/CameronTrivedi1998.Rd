@@ -137,11 +137,12 @@ logLik(fm_hnb)
 sval <- list(count = c(0.841, 0.172, .622, -.057, .576, .057, -.078, .012), 
              zero = c(-3.046, 4.638, -.025, .026, 16.203, 0.030, -.156, .117),
              theta = c(count = 1/1.7, zero = 1/5.609))
-fm_hnb2 <- hurdle(trips ~ ., data = RecreationDemand,
-  dist = "negbin", zero = "negbin", start = sval)
+fm_hnb2 <- try(hurdle(trips ~ ., data = RecreationDemand,
+  dist = "negbin", zero = "negbin", start = sval))
+if(!inherits(fm_hnb2, "try-error")) {
 summary(fm_hnb2)
 logLik(fm_hnb2)
-
+}
 
 ## geo-negbin
 sval98 <- list(count = c(0.841, 0.172, .622, -.057, .576, .057, -.078, .012), 

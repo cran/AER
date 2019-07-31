@@ -42,6 +42,7 @@ The following objects are masked from 'package:base':
 Loading required package: sandwich
 Loading required package: survival
 R> 
+R> suppressWarnings(RNGversion("3.5.0"))
 R> set.seed(1071)
 R> 
 R> 

@@ -30,7 +30,7 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
   ``Applied Econometrics with \proglang{R}''
   \citep[Springer-Verlag, ISBN~978-0-387-77316-2, pp.~vii+222]{aer:Kleiber+Zeileis:2008}
   is the first book on applied econometrics using the \proglang{R}~system
-  for statistical computing and graphics \citep{aer:R:2016}. 
+  for statistical computing and graphics \citep{aer:R:2019}. 
   It presents hands-on examples for a
   wide range of econometric models, from classical linear regression models for
   cross-section, time series or panel data and the common non-linear models of
@@ -44,7 +44,7 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
   regressions and time series models as well as various models of microeconometrics.
    
   The book is accompanied by the \proglang{R} package
-  \pkg{AER} \citep{aer:Kleiber+Zeileis:2016} which contains some new \proglang{R}
+  \pkg{AER} \citep{aer:Kleiber+Zeileis:2019} which contains some new \proglang{R}
   functionality, some 100 data sets
   taken from a wide variety of sources, the full source code for all examples
   used in the book, as well as further worked examples, e.g., from popular textbooks.
@@ -60,7 +60,7 @@ options(prompt = "R> ", digits = 4, show.signif.stars = FALSE)
   Peter Merian-Weg 6\\
   4002 Basel, Switzerland\\
   E-mail: \email{Christian.Kleiber@unibas.ch}\\
-  URL: \url{https://wwz.unibas.ch/kleiber/}\\
+  URL: \url{https://wwz.unibas.ch/en/kleiber/}\\
 
   Achim Zeileis\\
   Department of Statistics\\
@@ -191,30 +191,32 @@ We also provide some comments, for example on functions whose interface has chan
     for the book contained only 533~observations, the original observation~1 had been omitted inadvertently.
   \item p.~38, 48, 85: By default there is less rounding in calls to \code{summary()} starting from
     \proglang{R}~3.4.0.
-  \item p.~63--65, 130, 143: The function \fct{linear.hypothesis} from the \pkg{car} package has
-    been renamed to \fct{linearHypothesis} starting from \pkg{car}~2.0-0. The old interface
-    is currently still supported but results in a warning.
+  \item p.~63--65, 130, 143: The function \fct{linear.hypothesis} from the \pkg{car} package is now defunct, 
+    it has been replaced by \fct{linearHypothesis} starting from \pkg{car}~2.0-0. 
   \item p.~85--86: Due to a bug in the \code{summary()} method for ``\code{plm}'' objects,
     the degrees of freedom reported for the $F$~statistics were interchanged and thus the
     $p$~values were not correct. Therefore, the $p$~values printed in the book at the end
     of \code{summary(gr_fe)} and \code{summary(gr_re)} are not correct,
     they should both be \code{< 2.22e-16}. Using \pkg{plm} 1.1-1 or higher, the code produces
-    the correct output.
+    the correct output. Also the degrees-of-freedom adjustment in the $p$~values for the
+    coefficient tests in  \code{summary(gr_re)} were corrected.
   \item pp.~88--89: As of version 1.3-1 of the \pkg{plm} package, summaries of ``\code{pgmm}''
     objects provide robust standard errors by default. The output presented on pp.~88--89 is
     still available, but now requires \code{summary(empl_ab, robust = FALSE)}.   
 
-    Also, the formula interface for \fct{pgmm} has changed. Using the new interface, 
-    the function call for the Arellano-Bond example is 
+    Also, the formula interface for \fct{pgmm} has changed: as of version 1.7-0 of the \pkg{plm} 
+    package, the function \fct{dynformula} is deprecated. Instead, lags should now be specified via 
+    the package's \fct{lag} function. In addition, instruments should now be specified via a two-part formula. 
+    
+    Using the new interface, the function call for the Arellano-Bond example is 
 %
 <<pgmm-new, eval=FALSE>>=
 empl_ab <- pgmm(log(emp) ~ lag(log(emp), 1:2) + lag(log(wage), 0:1)
      + log(capital) + lag(log(output), 0:1) | lag(log(emp), 2:99),
-     data = EmplUK, effect = "twoways", model = "twosteps")
+     data = EmplUK, index = c("firm", "year"), 
+     effect = "twoways", model = "twosteps")
 @
 %   
-    The function call given in the book is still valid though.
-
   \item p.~92: Exercise~6 cannot be solved using \code{PSID1982} since that data set only
     contains a cross-section while Hausman-Taylor requires panel data. A panel version has
     been available in the \pkg{plm} package under the name \code{Wages}; we have now added
@@ -236,7 +238,7 @@ empl_ab <- pgmm(log(emp) ~ lag(log(emp), 1:2) + lag(log(wage), 0:1)
     in the output of \code{coeftest(bank_polr)} is wrong, it should be \code{1.4744}.
     This was caused by an inconsistency between \fct{polr} and its \fct{vcov} method which
     has now been improved in the \pkg{MASS} package ($\ge$ 7.3-6).
-  \item p.~167: The truncation lag parameter in th output of \code{kpss.test(log(PepperPrice[, "white"]))}
+  \item p.~167: The truncation lag parameter in the output of \code{kpss.test(log(PepperPrice[, "white"]))}
     is wrong, it should be \code{5} instead of \code{3}, also leading to a somewhat smaller test
     statistic and larger $p$~value. This has now been corrected in the \pkg{tseries} package ($\ge$ 0.10-46).
   \item p.~169: The comment regarding the output from the Johansen test is in error.

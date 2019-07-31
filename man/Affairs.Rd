@@ -13,7 +13,9 @@ conducted by Psychology Today in 1969.
 A data frame containing 601 observations on 9 variables.
 \describe{
   \item{affairs}{numeric. How often engaged in extramarital sexual intercourse
-    during the past year?}
+    during the past year? \code{0} = none, \code{1} = once, \code{2} = twice,
+    \code{3} = 3 times, \code{7} = 4--10 times, \code{12} = monthly,
+    \code{12} = weekly, \code{12} = daily.}
   \item{gender}{factor indicating gender.}
   \item{age}{numeric variable coding age in years: \code{17.5} = under 20, \code{22} = 20--24,
     \code{27} = 25--29, \code{32} = 30--34, \code{37} = 35--39, \code{42} = 40--44,

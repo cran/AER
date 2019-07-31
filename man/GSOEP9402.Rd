@@ -52,8 +52,6 @@ their own educational level and directly through influence on the teachers.
 
 \source{
 Online complements to Winkelmann and Boes (2009).
-
-\url{http://econsites.uzh.ch/rwinke/microdata.zip}
 }
 
 \references{

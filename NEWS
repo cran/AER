@@ -1,3 +1,35 @@
+Changes in Version 1.2-7
+
+  o Diagnostic tests ivdiag() for _weighted_ instrumental variables regression
+    was incorrect as weights were erroneously ignored (detected and tested by
+    Jonathan Siverskog).
+
+  o vcov() method for "survreg" objects in "survival" currently (version 2.44-1.1)
+    provides no row/column names. Hence, a new vcov() method for "tobit" objects
+    was added in "AER" mimicking the naming conventions from survival:::summary.survreg.
+    Analogously, a bread() method was added for "tobit" objects that calls
+    the vcov() method internally.
+
+  o linearHypothesis() method for tobit() objects no longer assumes that a scale
+    parameter was estimated as part of the model. This enables the somewhat
+    unusual but possible case of summary(tobit(..., dist = "exponential")).
+
+  o In examples/demos/tests with calls to set.seed(...) the RNG version is now fixed
+    to suppressWarnings(RNGversion("3.5.0")) to keep results exactly reproducible
+    after fixing RNG problems in R 3.6.0.
+
+  o New errata item in vignette("AER", package = "AER"): The formula interface for
+    pgmm() has changed. As of "plm" version 1.7-0, the function dynformula() is
+    deprecated. Examples, tests, and demos have been adapted accordingly.
+
+  o In tests/Ch-Intro.R some quantreg computations are now wrapped into try()
+    because the summary method yields non-finite standard errors on some platforms.
+    
+  o In ?CameronTrivedi1998 one version of the negbin-negbin hurdle model is now
+    wrapped into try() because evaluating the log-likelihood at the given start
+    values becomes too unstable on some platforms.
+
+
 Changes in Version 1.2-6
 
   o Added update() method for "ivreg" objects that correctly handles the
