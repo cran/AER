@@ -1,3 +1,13 @@
+Changes in Version 1.2-8
+
+  o Starting from survival >= 3.1-6 the survival provides (or corrected) some standard
+    S3 methods for "survreg" objects: fitted(), nobs(), weights(), vcov(). Previously,
+    these were registered by AE" in order to work for "tobit" objects. For now,
+    AER registers the methods for "tobit" objects. In the future, the methods will
+    be dropped by AER altogether and inherited from survival (when AER depends on
+    survival >= 3.1-6).
+
+
 Changes in Version 1.2-7
 
   o Diagnostic tests ivdiag() for _weighted_ instrumental variables regression

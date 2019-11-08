@@ -20,14 +20,19 @@ export(
 S3method("print", "tobit")
 S3method("print", "summary.tobit")
 S3method("summary", "tobit")
-S3method("bread", "tobit")
-S3method("vcov", "tobit")
 S3method("formula", "tobit")
 S3method("update", "tobit")
 S3method("model.frame", "tobit")
 S3method("waldtest", "tobit")
 S3method("lrtest", "tobit")
 S3method("linearHypothesis", "tobit")
+## methods for class tobit that could also be
+## inherited from survival >= 3.1-6
+S3method("bread", "tobit")
+S3method("vcov", "tobit")
+S3method("fitted", "tobit")
+S3method("nobs", "tobit")
+S3method("weights", "tobit")
 
 ## methods for class ivreg
 S3method("print", "ivreg")
@@ -45,9 +50,6 @@ S3method("update", "ivreg")
 
 ## methods for class survreg
 S3method("deviance", "survreg")
-S3method("fitted", "survreg")
-S3method("nobs", "survreg")
-S3method("weights", "survreg")
 
 ## methods for class multinom, polr, fitdistr
 S3method("coeftest", "multinom")

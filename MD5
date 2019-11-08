@@ -1,10 +1,10 @@
-11c0169ef7529f1fb6de0698bf608d8f *DESCRIPTION
-28b5805d0d9f74177067b9e6ab2f9d80 *NAMESPACE
-1439ebe12e4ed3afde6b750ac152dcf3 *NEWS
+50dd7a1bed8c0d75112594ec8bc9d2e4 *DESCRIPTION
+2a204f006caa299b52cae788a9d49849 *NAMESPACE
+9a3699e307b4774859d314cd2d1f9015 *NEWS
 3dd3d9497975612509b765b789beac40 *R/coeftest-methods.R
 c939ea5a5fc99674637505396b5fc14c *R/dispersiontest.R
 2c19235454151119634609618004cfe6 *R/ivreg.R
-b48cdf5c6f3655f2ddfa0ac784e543cd *R/tobit.R
+10093c55c4eecc4256e10965b0f52dbc *R/tobit.R
 00dfb9d39c982d6635da69ecc361f5f8 *build/vignette.rds
 8103051d10be69cc21189c675d1fc5d4 *data/Affairs.rda
 8e5b5a8ee695bdbb6484dedfb5fe9a84 *data/ArgentinaCPI.rda
@@ -125,10 +125,10 @@ ce79593f13ea25f8dcea3e8b0e86c6c0 *demo/Ch-LinearRegression.R
 be1c63e8b99a84caf2b69089584c3882 *inst/CITATION
 d320a0b0d4260e95b7f54aa7328e0d1d *inst/doc/AER.R
 ece1f99e848b513eaee01c83a01d912d *inst/doc/AER.Rnw
-30d27bf992098994579fbb1a29716faf *inst/doc/AER.pdf
+71cebca3d833731929131a64d345a1e7 *inst/doc/AER.pdf
 55645a67fdf53c524f1352c9ba6a5910 *inst/doc/Sweave-journals.R
 043acb4ba18e012bfc0c60717156d385 *inst/doc/Sweave-journals.Rnw
-39e8460eb01c4c420448e0c7e059bbc7 *inst/doc/Sweave-journals.pdf
+7fa7455a4ab580c7949cec860f439f89 *inst/doc/Sweave-journals.pdf
 6955f77b9eb0055824b5d521feb2455a *man/Affairs.Rd
 60062af9c93b24cac2b25377dac5e222 *man/ArgentinaCPI.Rd
 3617226a597ceb88dc058af8c2e545c1 *man/Baltagi2002.Rd
@@ -240,7 +240,7 @@ fdd4cba1108159fdfd1eb8e62325f2cf *man/WinkelmannBoes2009.Rd
 c11ba4bc897fa906f13ebf7143d807c7 *man/ivreg.Rd
 3dd6caf5430813b2787bcc8e6d1ab9c0 *man/ivreg.fit.Rd
 89d13021a279d1d8674b17a46be0a5b1 *man/summary.ivreg.Rd
-b35acc4f0314e13a53c3d06fc9235327 *man/tobit.Rd
+cc34a837cad33dbd00a528de7a7512ab *man/tobit.Rd
 09ab183ef26bd0d986d93d298dde09a7 *tests/Ch-Basics.R
 4b89f7f36dd4ed2a858f1d525cb9f058 *tests/Ch-Basics.Rout.save
 97db6390838efa25b157d29ed12198ae *tests/Ch-Intro.R

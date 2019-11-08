@@ -10,9 +10,6 @@
 \alias{lrtest.tobit}
 \alias{linearHypothesis.tobit}
 \alias{deviance.survreg}
-\alias{fitted.survreg}
-\alias{nobs.survreg}
-\alias{weights.survreg}
 
 \title{Tobit Regression}
 

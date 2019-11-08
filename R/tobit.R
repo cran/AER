@@ -1,20 +1,18 @@
-## some convenience functions generally applicable to survreg
-## hopefully in survival soon
+## Dedicated methods for "tobit" objects that really should be inherited
+## from "survival". However, some versions of "survival" did not provide
+## these at all or had bugs. With survival >= 3.1-6 the methods in
+## "survival" are ok. So for now we still keep the "tobit" methods but
+## might remove them in future versions.
 
-deviance.survreg <- function(object, ...)
-  sum(residuals(object, type = "deviance")^2)
-
-fitted.survreg <- function(object, ...)
+fitted.tobit <- function(object, ...)
   predict(object, type = "response", se.fit = FALSE)
 
-nobs.survreg <- function(object, ...)
+nobs.tobit <- function(object, ...)
   length(object$linear.predictors)
 
-weights.survreg <- function(object, ...)
+weights.tobit <- function(object, ...)
   model.weights(model.frame(object))
 
-## fix vcov() and bread() methods because some versions of survival
-## do not report row/column names anymore
 vcov.tobit <- function(object, ...) {
   vc <- NextMethod()
   if(is.null(colnames(vc))) {
@@ -34,6 +32,15 @@ vcov.tobit <- function(object, ...) {
 bread.tobit <- function(x, ...) {
   length(x$linear.predictors) * vcov(x)
 }
+
+
+## "survival" chose not to include this deviance() method
+## so this needs to be provided even if "survival" >= 3.1-6
+## is required.
+
+deviance.survreg <- function(object, ...)
+  sum(residuals(object, type = "deviance")^2)
+
 
 ## convenience tobit() interface to survreg()
 
