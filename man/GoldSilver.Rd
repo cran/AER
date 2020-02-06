@@ -47,13 +47,14 @@ absgret <- abs(100 * diff(lgs7812[, "gold"]))
 sacf <- acf(absgret, lag.max = 200, na.action = na.exclude, plot = FALSE)
 plot(1:201, sacf$acf, ylim = c(0.04, 0.28), type = "l", xaxs = "i", yaxs = "i", las = 1)
 
+\donttest{
 ## ARFIMA(0,1,1) model, eq. (4.44)
 library("longmemo")
 WhittleEst(absgret, model = "fARIMA", p = 0, q = 1, start = list(H = 0.3, MA = .25))
 
 library("forecast")
 arfima(as.vector(absgret), max.p = 0, max.q = 1)
-
+}
 
 ## p.254: VAR(2), monthly data for 1986.1 - 2012.12
 library("vars")
@@ -74,9 +75,11 @@ summary(gs2)$covres
 ## ACF of residuals, p.256
 acf(resid(gs2), 2, plot = FALSE)
 
+\donttest{
 ## Figure 9.1, p.260 (somewhat different)
 plot(irf(gs2, impulse = "gold", n.ahead = 50), ylim = c(-0.02, 0.1))
 plot(irf(gs2, impulse = "silver", n.ahead = 50), ylim = c(-0.02, 0.1))
+}
 
 ## Table 9.2, p.261
 fevd(gs2)

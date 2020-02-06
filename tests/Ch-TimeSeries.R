@@ -121,24 +121,24 @@ plot(dd_stl)
 ### chunk number 16: Holt-Winters
 ###################################################
 dd_past <- window(UKDriverDeaths, end = c(1982, 12))
-dd_hw <- try(HoltWinters(dd_past))
-if(!inherits(dd_hw, "try-error")) {
-dd_pred <- predict(dd_hw, n.ahead = 24)
-
-
-###################################################
-### chunk number 17: Holt-Winters-plot
-###################################################
-plot(dd_hw, dd_pred, ylim = range(UKDriverDeaths))
-lines(UKDriverDeaths)
-
-
-###################################################
-### chunk number 18: Holt-Winters-plot1
-###################################################
-plot(dd_hw, dd_pred, ylim = range(UKDriverDeaths))
-lines(UKDriverDeaths)
-}
+## dd_hw <- try(HoltWinters(dd_past)) ## IGNORE_RDIFF, excluded due to small numeric deviations on different platforms
+## if(!inherits(dd_hw, "try-error")) {
+## dd_pred <- predict(dd_hw, n.ahead = 24)
+## 
+## 
+## ###################################################
+## ### chunk number 17: Holt-Winters-plot
+## ###################################################
+## plot(dd_hw, dd_pred, ylim = range(UKDriverDeaths))
+## lines(UKDriverDeaths)
+## 
+## 
+## ###################################################
+## ### chunk number 18: Holt-Winters-plot1
+## ###################################################
+## plot(dd_hw, dd_pred, ylim = range(UKDriverDeaths))
+## lines(UKDriverDeaths)
+## }
 
 ###################################################
 ### chunk number 19: acf eval=FALSE
@@ -299,7 +299,7 @@ po.test(log(PepperPrice))
 library("urca")
 pepper_jo <- ca.jo(log(PepperPrice), ecdet = "const",
   type = "trace")
-summary(pepper_jo)
+## summary(pepper_jo) ## IGNORE_RDIFF, excluded due to small numeric deviations on different platforms
 
 
 ###################################################

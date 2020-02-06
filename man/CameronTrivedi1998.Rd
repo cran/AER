@@ -18,6 +18,7 @@ Cambridge: Cambridge University Press.
 \seealso{\code{\link{DoctorVisits}}, \code{\link{NMES1988}}, \code{\link{RecreationDemand}}}
 
 \examples{
+\donttest{
 library("MASS")
 library("pscl")
 
@@ -168,6 +169,7 @@ logLik(fm_hgnb2)
 
 ## Note: quasi-complete separation
 with(RecreationDemand, table(trips > 0, userfee))
+}
 }
 
 \keyword{datasets}

@@ -1,8 +1,20 @@
 Changes in Version 1.2-8
 
+  o Some examples from the AER book lead to small numeric differences across different
+    platforms. Hence, these have been excluded now from tests/Ch-*.R with an IGNORE_RDIFF
+    comment for CRAN.
+
+  o The examples on the manual pages for the books CameronTrivedi1998, Greene2003,
+    WinkelmannBoes2009 are now excluded from testing to reduce the computational demands
+    on CRAN. The corresponding analyses are mostly available on the manual pages for the
+    underlying data sets, though.
+
+
+Changes in Version 1.2-8
+
   o Starting from survival >= 3.1-6 the survival provides (or corrected) some standard
     S3 methods for "survreg" objects: fitted(), nobs(), weights(), vcov(). Previously,
-    these were registered by AE" in order to work for "tobit" objects. For now,
+    these were registered by AER" in order to work for "tobit" objects. For now,
     AER registers the methods for "tobit" objects. In the future, the methods will
     be dropped by AER altogether and inherited from survival (when AER depends on
     survival >= 3.1-6).

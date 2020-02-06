@@ -26,6 +26,7 @@ URL \url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}.
   \code{\link{USInvest}}, \code{\link{USMacroG}}, \code{\link{USMoney}}}
 
 \examples{
+\donttest{
 #####################################
 ## US consumption data (1970-1979) ##
 #####################################
@@ -1031,6 +1032,7 @@ exp(-fit_lnorm$estimate[1])
 library("survival")
 fm_wei <- survreg(Surv(duration) ~ uoutput, dist = "weibull", data = StrikeDuration)
 summary(fm_wei)
+}
 }
 
 \keyword{datasets}

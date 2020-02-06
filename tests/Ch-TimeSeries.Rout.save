@@ -1,6 +1,6 @@
 
-R version 3.5.2 (2018-12-20) -- "Eggshell Igloo"
-Copyright (C) 2018 The R Foundation for Statistical Computing
+R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
+Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -155,24 +155,24 @@ R> ###################################################
 R> ### chunk number 16: Holt-Winters
 R> ###################################################
 R> dd_past <- window(UKDriverDeaths, end = c(1982, 12))
-R> dd_hw <- try(HoltWinters(dd_past))
-R> if(!inherits(dd_hw, "try-error")) {
-+  dd_pred <- predict(dd_hw, n.ahead = 24)
-+  
-+  
-+  ###################################################
-+  ### chunk number 17: Holt-Winters-plot
-+  ###################################################
-+  plot(dd_hw, dd_pred, ylim = range(UKDriverDeaths))
-+  lines(UKDriverDeaths)
-+  
-+  
-+  ###################################################
-+  ### chunk number 18: Holt-Winters-plot1
-+  ###################################################
-+  plot(dd_hw, dd_pred, ylim = range(UKDriverDeaths))
-+  lines(UKDriverDeaths)
-+  }
+R> ## dd_hw <- try(HoltWinters(dd_past)) ## IGNORE_RDIFF, excluded due to small numeric deviations on different platforms
+R> ## if(!inherits(dd_hw, "try-error")) {
+R> ## dd_pred <- predict(dd_hw, n.ahead = 24)
+R> ## 
+R> ## 
+R> ## ###################################################
+R> ## ### chunk number 17: Holt-Winters-plot
+R> ## ###################################################
+R> ## plot(dd_hw, dd_pred, ylim = range(UKDriverDeaths))
+R> ## lines(UKDriverDeaths)
+R> ## 
+R> ## 
+R> ## ###################################################
+R> ## ### chunk number 18: Holt-Winters-plot1
+R> ## ###################################################
+R> ## plot(dd_hw, dd_pred, ylim = range(UKDriverDeaths))
+R> ## lines(UKDriverDeaths)
+R> ## }
 R> 
 R> ###################################################
 R> ### chunk number 19: acf eval=FALSE
@@ -393,38 +393,7 @@ R> ###################################################
 R> library("urca")
 R> pepper_jo <- ca.jo(log(PepperPrice), ecdet = "const",
 +    type = "trace")
-R> summary(pepper_jo)
-
-###################### 
-# Johansen-Procedure # 
-###################### 
-
-Test type: trace statistic , without linear trend and constant in cointegration 
-
-Eigenvalues (lambda):
-[1] 4.93195e-02 1.35081e-02 2.08167e-17
-
-Values of teststatistic and critical values of test:
-
-          test 10pct  5pct  1pct
-r <= 1 |  3.66  7.52  9.24 12.97
-r = 0  | 17.26 17.85 19.96 24.60
-
-Eigenvectors, normalised to first column:
-(These are the cointegration relations)
-
-          black.l2 white.l2  constant
-black.l2  1.000000  1.00000   1.00000
-white.l2 -0.889231 -5.09942   2.28091
-constant -0.556994 33.02742 -20.03244
-
-Weights W:
-(This is the loading matrix)
-
-          black.l2   white.l2     constant
-black.d -0.0747230 0.00245321 -4.95816e-18
-white.d  0.0201561 0.00353701  8.85035e-18
-
+R> ## summary(pepper_jo) ## IGNORE_RDIFF, excluded due to small numeric deviations on different platforms
 R> 
 R> 
 R> ###################################################
@@ -637,4 +606,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  2.703   0.095   2.788 
+  4.372   2.273   3.386 

@@ -133,30 +133,30 @@ sum(residuals(swiss_probit, type = "pearson")^2)
 ### chunk number 15: murder
 ###################################################
 data("MurderRates")
-murder_logit <- glm(I(executions > 0) ~ time + income +
-  noncauc + lfp + southern, data = MurderRates,
-  family = binomial)
-
-
-###################################################
-### chunk number 16: murder-coeftest
-###################################################
-coeftest(murder_logit)
-
-
-###################################################
-### chunk number 17: murder2
-###################################################
-murder_logit2 <- glm(I(executions > 0) ~ time + income +
-  noncauc + lfp + southern, data = MurderRates,
-  family = binomial, control = list(epsilon = 1e-15,
-  maxit = 50, trace = FALSE))
-
-
-###################################################
-### chunk number 18: murder2-coeftest
-###################################################
-coeftest(murder_logit2)
+## murder_logit <- glm(I(executions > 0) ~ time + income +  ## IGNORE_RDIFF, excluded due to small numeric deviations on different platforms
+##   noncauc + lfp + southern, data = MurderRates,
+##   family = binomial)
+## 
+## 
+## ###################################################
+## ### chunk number 16: murder-coeftest
+## ###################################################
+## coeftest(murder_logit)
+## 
+## 
+## ###################################################
+## ### chunk number 17: murder2
+## ###################################################
+## murder_logit2 <- glm(I(executions > 0) ~ time + income +
+##   noncauc + lfp + southern, data = MurderRates,
+##   family = binomial, control = list(epsilon = 1e-15,
+##   maxit = 50, trace = FALSE))
+## 
+## 
+## ###################################################
+## ### chunk number 18: murder2-coeftest
+## ###################################################
+## coeftest(murder_logit2)
 
 
 ###################################################

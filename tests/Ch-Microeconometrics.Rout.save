@@ -1,5 +1,5 @@
 
-R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
+R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -219,56 +219,30 @@ R> ###################################################
 R> ### chunk number 15: murder
 R> ###################################################
 R> data("MurderRates")
-R> murder_logit <- glm(I(executions > 0) ~ time + income +
-+    noncauc + lfp + southern, data = MurderRates,
-+    family = binomial)
-Warning message:
-glm.fit: fitted probabilities numerically 0 or 1 occurred 
-R> 
-R> 
-R> ###################################################
-R> ### chunk number 16: murder-coeftest
-R> ###################################################
-R> coeftest(murder_logit)
-
-z test of coefficients:
-
-             Estimate Std. Error z value Pr(>|z|)
-(Intercept)   10.9933    20.7734    0.53    0.597
-time           0.0194     0.0104    1.87    0.062
-income        10.6101     5.6541    1.88    0.061
-noncauc       70.9879    36.4118    1.95    0.051
-lfp           -0.6676     0.4767   -1.40    0.161
-southernyes   17.3313  2872.1707    0.01    0.995
-
-R> 
-R> 
-R> ###################################################
-R> ### chunk number 17: murder2
-R> ###################################################
-R> murder_logit2 <- glm(I(executions > 0) ~ time + income +
-+    noncauc + lfp + southern, data = MurderRates,
-+    family = binomial, control = list(epsilon = 1e-15,
-+    maxit = 50, trace = FALSE))
-Warning message:
-glm.fit: fitted probabilities numerically 0 or 1 occurred 
-R> 
-R> 
-R> ###################################################
-R> ### chunk number 18: murder2-coeftest
-R> ###################################################
-R> coeftest(murder_logit2)
-
-z test of coefficients:
-
-             Estimate Std. Error z value Pr(>|z|)
-(Intercept)  1.10e+01   2.08e+01    0.53    0.597
-time         1.94e-02   1.04e-02    1.87    0.062
-income       1.06e+01   5.65e+00    1.88    0.061
-noncauc      7.10e+01   3.64e+01    1.95    0.051
-lfp         -6.68e-01   4.77e-01   -1.40    0.161
-southernyes  3.13e+01   1.73e+07    0.00    1.000
-
+R> ## murder_logit <- glm(I(executions > 0) ~ time + income +  ## IGNORE_RDIFF, excluded due to small numeric deviations on different platforms
+R> ##   noncauc + lfp + southern, data = MurderRates,
+R> ##   family = binomial)
+R> ## 
+R> ## 
+R> ## ###################################################
+R> ## ### chunk number 16: murder-coeftest
+R> ## ###################################################
+R> ## coeftest(murder_logit)
+R> ## 
+R> ## 
+R> ## ###################################################
+R> ## ### chunk number 17: murder2
+R> ## ###################################################
+R> ## murder_logit2 <- glm(I(executions > 0) ~ time + income +
+R> ##   noncauc + lfp + southern, data = MurderRates,
+R> ##   family = binomial, control = list(epsilon = 1e-15,
+R> ##   maxit = 50, trace = FALSE))
+R> ## 
+R> ## 
+R> ## ###################################################
+R> ## ### chunk number 18: murder2-coeftest
+R> ## ###################################################
+R> ## coeftest(murder_logit2)
 R> 
 R> 
 R> ###################################################
@@ -750,4 +724,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  1.719   0.074   1.793 
+  2.316   0.823   2.117 
