@@ -78,6 +78,7 @@ Stock, J. H. and Watson, M. W. (2007). \emph{Introduction to Econometrics}, 2nd 
 \seealso{\code{\link{StockWatson2007}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("plm")) q() }
 ## data from Stock and Watson (2007)
 data("Fatalities", package = "AER")
 ## add fatality rate (number of traffic deaths

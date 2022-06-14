@@ -1,3 +1,5 @@
+if(!requireNamespace("quantreg") || !requireNamespace("KernSmooth")) q()
+
 ###################################################
 ### chunk number 1: setup
 ###################################################

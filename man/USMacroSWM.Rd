@@ -1,7 +1,7 @@
 \name{USMacroSWM}
 \alias{USMacroSWM}
 
-\title{Monthly US Macroeconomic Data (1947--2004, Stock \& Watson)}
+\title{Monthly US Macroeconomic Data (1947--2004, Stock & Watson)}
 
 \description{
 Time series data on 4 US macroeconomic variables for 1947--2004.

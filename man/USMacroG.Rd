@@ -30,7 +30,7 @@ A quarterly multiple time series from 1950(1) to 2000(4) with 12 variables.
 \source{
 Online complements to Greene (2003). Table F5.1.
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{
@@ -41,6 +41,7 @@ Greene, W.H. (2003). \emph{Econometric Analysis}, 5th edition. Upper Saddle Rive
   \code{\link{USMacroSWM}}, \code{\link{USMacroB}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("dynlm")) q() }
 ## data and trend as used by Greene (2003)
 data("USMacroG")
 ltrend <- 1:nrow(USMacroG) - 1

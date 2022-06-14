@@ -25,6 +25,10 @@ Stock, J.H. and Watson, M.W. (2007). \emph{Introduction to Econometrics}, 2nd ed
   \code{\link{USStocksSW}}, \code{\link{WeakInstrument}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("plm") ||
+              !requireNamespace("dynlm") ||
+              !requireNamespace("strucchange") ||
+              !requireNamespace("tseries")) q() }
 ###############################
 ## Current Population Survey ##
 ###############################
@@ -43,8 +47,10 @@ abline(fm)
 
 ## data and transformations
 data("CASchools", package = "AER")
-CASchools$stratio <- with(CASchools, students/teachers)
-CASchools$score <- with(CASchools, (math + read)/2)
+CASchools <- transform(CASchools,
+  stratio = students/teachers,
+  score   = (math + read)/2
+)
 
 ## p. 152
 fm1 <- lm(score ~ stratio, data = CASchools)
@@ -117,8 +123,10 @@ waldtest(fm3, fm4, vcov = vcovHC(fm3, type = "HC1"))
 ## compare Massachusetts with California
 data("MASchools", package = "AER")
 data("CASchools", package = "AER")
-CASchools$stratio <- with(CASchools, students/teachers)
-CASchools$score4 <- with(CASchools, (math + read)/2)
+CASchools <- transform(CASchools,
+  stratio = students/teachers,
+  score4  = (math + read)/2
+)
 
 ## parts of Table 9.1, p. 330
 vars <- c("score4", "stratio", "english", "lunch", "income")
@@ -129,7 +137,7 @@ cbind(
   MA_sd   = sapply(MASchools[, vars], sd))
 
 ## Table 9.2, pp. 332--333, numbers refer to columns
-MASchools$higheng <- with(MASchools, english > median(english))
+MASchools <- transform(MASchools, higheng = english > median(english))
 fm1 <- lm(score4 ~ stratio, data = MASchools)
 fm2 <- lm(score4 ~ stratio + english + lunch + log(income), data = MASchools)
 fm3 <- lm(score4 ~ stratio + english + lunch + income + I(income^2) + I(income^3),
@@ -269,17 +277,15 @@ printCoefmat(coeftest(fm4, vcov = sandwich)[1:9,])
 ###########################
 
 ## data from Stock and Watson (2007)
-data("Fatalities")
-## add fatality rate (number of traffic deaths
-## per 10,000 people living in that state in that year)
-Fatalities$frate <- with(Fatalities, fatal/pop * 10000)
-## add discretized version of minimum legal drinking age
-Fatalities$drinkagec <- cut(Fatalities$drinkage,
-  breaks = 18:22, include.lowest = TRUE, right = FALSE)
-Fatalities$drinkagec <- relevel(Fatalities$drinkagec, ref = 4)
-## any punishment?
-Fatalities$punish <- with(Fatalities,
-  factor(jail == "yes" | service == "yes", labels = c("no", "yes")))
+data("Fatalities", package = "AER")
+Fatalities <- transform(Fatalities, 
+  ## fatality rate (number of traffic deaths per 10,000 people living in that state in that year)
+  frate = fatal/pop * 10000,
+  ## add discretized version of minimum legal drinking age
+  drinkagec = relevel(cut(drinkage, breaks = 18:22, include.lowest = TRUE, right = FALSE), ref = 4),
+  ## any punishment?
+  punish = factor(jail == "yes" | service == "yes", labels = c("no", "yes"))
+)
 ## plm package
 library("plm")
 
@@ -359,11 +365,13 @@ coeftest(fm7, vcov = vcovHC)
 ######################################
 
 ## data and transformations 
-data("CigarettesSW")
-CigarettesSW$rprice <- with(CigarettesSW, price/cpi)
-CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
-CigarettesSW$rtax <- with(CigarettesSW, tax/cpi)
-CigarettesSW$rtdiff <- with(CigarettesSW, (taxs - tax)/cpi)
+data("CigarettesSW", package = "AER")
+CigarettesSW <- transform(CigarettesSW,
+  rprice  = price/cpi,
+  rincome = income/population/cpi,
+  rtax    = tax/cpi,
+  rtdiff  = (taxs - tax)/cpi
+)
 c1985 <- subset(CigarettesSW, year == "1985")
 c1995 <- subset(CigarettesSW, year == "1995")
 

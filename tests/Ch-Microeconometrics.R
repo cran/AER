@@ -1,3 +1,9 @@
+if(!requireNamespace("ROCR") ||
+   !requireNamespace("MASS") ||
+   !requireNamespace("pscl") ||
+   !requireNamespace("np") ||
+   !requireNamespace("nnet")) q()
+
 ###################################################
 ### chunk number 1: setup
 ###################################################

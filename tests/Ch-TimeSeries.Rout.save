@@ -1,6 +1,6 @@
 
-R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
-Copyright (C) 2019 The R Foundation for Statistical Computing
+R version 4.2.0 (2022-04-22) -- "Vigorous Calisthenics"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -15,6 +15,15 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
+> if(!requireNamespace("tseries") ||
++    !requireNamespace("urca") ||
++    !requireNamespace("dynlm") ||
++    !requireNamespace("strucchange")) q()
+Loading required namespace: tseries
+Loading required namespace: urca
+Loading required namespace: dynlm
+Loading required namespace: strucchange
+> 
 > ###################################################
 > ### chunk number 1: setup
 > ###################################################
@@ -606,4 +615,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  4.372   2.273   3.386 
+  2.221   0.048   2.266 

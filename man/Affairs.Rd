@@ -41,7 +41,7 @@ A data frame containing 601 observations on 9 variables.
 \source{
 Online complements to Greene (2003). Table F22.2.
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{
@@ -54,6 +54,8 @@ Fair, R.C. (1978). A Theory of Extramarital Affairs. \emph{Journal of Political 
 \seealso{\code{\link{Greene2003}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("MASS") ||
+              !requireNamespace("pscl")) q() }
 data("Affairs")
 
 ## Greene (2003)

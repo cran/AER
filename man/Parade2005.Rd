@@ -31,6 +31,7 @@ Parade (2005). What People Earn. Issue March 13, 2005.
 }
 
 \examples{
+\dontshow{ if(!requireNamespace("ineq")) q() }
 ## data
 data("Parade2005")
 attach(Parade2005)

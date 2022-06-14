@@ -1,6 +1,6 @@
 \name{USMacroSW}
 \alias{USMacroSW}
-\title{US Macroeconomic Data (1957--2005, Stock \& Watson)}
+\title{US Macroeconomic Data (1957--2005, Stock & Watson)}
 
 \description{
 Time series data on 7 (mostly) US macroeconomic variables for 1957--2005.
@@ -45,6 +45,8 @@ Stock, J.H. and Watson, M.W. (2007). \emph{Introduction to Econometrics}, 2nd ed
   \code{\link{USMacroB}}, \code{\link{USMacroG}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("dynlm") ||
+              !requireNamespace("strucchange")) q() }
 ## Stock and Watson (2007)
 data("USMacroSW", package = "AER")
 library("dynlm")

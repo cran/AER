@@ -21,7 +21,7 @@ An annual multiple time series from 1968 to 1982 with 4 variables.
 \source{
 Online complements to Greene (2003). Table F3.1.
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{

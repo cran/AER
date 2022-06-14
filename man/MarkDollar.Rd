@@ -15,20 +15,21 @@ A univariate time series of 518 returns (exact dates unknown) for the DEM/USD ex
 }
 
 \source{
-Journal of Business \& Economic Statistics Data Archive. 
+Journal of Business & Economic Statistics Data Archive. 
 
 \verb{http://www.amstat.org/publications/jbes/upload/index.cfm?fuseaction=ViewArticles&pub=JBES&issue=96-2-APR}
 }
 
 \references{
 Bollerslev, T., and Ghysels, E. (1996). Periodic Autoregressive Conditional Heteroskedasticity.  
-\emph{Journal of Business \& Economic Statistics},
+\emph{Journal of Business & Economic Statistics},
 \bold{14}, 139--151.
 }
 
 \seealso{\code{\link{MarkPound}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("tseries")) q() }
 library("tseries")
 data("MarkDollar")
 

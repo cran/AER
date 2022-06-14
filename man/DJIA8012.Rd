@@ -15,7 +15,7 @@ A daily univariate time series from 1980-01-01 to 2012-12-31 (of class \code{"zo
 \source{
 Online complements to Franses, van Dijk and Opschoor (2014).
 
-\url{http://www.cambridge.org/us/academic/subjects/economics/econometrics-statistics-and-mathematical-economics/time-series-models-business-and-economic-forecasting-2nd-edition}
+\url{https://www.cambridge.org/us/academic/subjects/economics/econometrics-statistics-and-mathematical-economics/time-series-models-business-and-economic-forecasting-2nd-edition}
 }
 
 \references{

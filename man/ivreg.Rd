@@ -91,9 +91,11 @@ if there is a large number of exogenous regressors.
 \examples{
 ## data
 data("CigarettesSW", package = "AER")
-CigarettesSW$rprice <- with(CigarettesSW, price/cpi)
-CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
-CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
+CigarettesSW <- transform(CigarettesSW,
+  rprice  = price/cpi,
+  rincome = income/population/cpi,
+  tdiff   = (taxs - tax)/cpi
+)
 
 ## model 
 fm <- ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax/cpi),

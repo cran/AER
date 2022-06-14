@@ -57,7 +57,7 @@ Online complements to Baltagi (2005).
 
 Also provided in the online complements to Greene (2008), Table F9.1.
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/Edition6/tablelist6.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/Edition6/tablelist6.htm}
 }
 
 \references{
@@ -81,6 +81,7 @@ Greene, W.H. (2008). \emph{Econometric Analysis}, 6th ed. Upper Saddle River, NJ
 \seealso{\code{\link{PSID1982}}, \code{\link{Baltagi2002}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("plm")) q() }
 data("PSID7682")
 
 library("plm")

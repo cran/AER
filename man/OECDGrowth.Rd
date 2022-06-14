@@ -44,6 +44,7 @@ High-Breakdown Robust Regression Techniques. \emph{Economics Letters}, \bold{71}
 \seealso{\code{\link{GrowthDJ}}, \code{\link{GrowthSW}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("MASS")) q() }
 data("OECDGrowth")
 
 ## Nonneman and Vanhoudt (1996), Table II

@@ -20,7 +20,7 @@ An annual multiple time series from 1940 to 1950 with 3 variables.
 \source{
 Online complements to Greene (2003). Table F2.1.
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{

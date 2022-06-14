@@ -38,14 +38,14 @@ only to those observations with \code{service > 0}.
 \source{
 Online complements to Greene (2003).
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{
 Greene, W.H. (2003). \emph{Econometric Analysis}, 5th edition. Upper Saddle River, NJ: Prentice Hall.
 
 McCullagh, P. and Nelder, J.A. (1989). \emph{Generalized Linear Models}, 2nd edition.
-London: Chapman \& Hall.
+London: Chapman & Hall.
 }
 
 \seealso{\code{\link{Greene2003}}}

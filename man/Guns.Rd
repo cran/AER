@@ -49,6 +49,7 @@ Stock, J.H. and Watson, M.W. (2007). \emph{Introduction to Econometrics}, 2nd ed
 \seealso{\code{\link{StockWatson2007}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("lattice")) q() }
 ## data
 data("Guns")
 

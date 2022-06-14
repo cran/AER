@@ -14,7 +14,7 @@ A monthly univariate time series from 1990(1) to 1994(12).
 \source{
 Online complements to Greene (2003), Table F20.1.
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{

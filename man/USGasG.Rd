@@ -25,7 +25,7 @@ An annual multiple time series from 1960 to 1995 with 10 variables.
 \source{
 Online complements to Greene (2003). Table F2.2.
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{
@@ -35,6 +35,7 @@ Greene, W.H. (2003). \emph{Econometric Analysis}, 5th edition. Upper Saddle Rive
 \seealso{\code{\link{Greene2003}}, \code{\link{USGasB}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("strucchange")) q() }
 data("USGasG", package = "AER")
 plot(USGasG)
 

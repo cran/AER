@@ -48,6 +48,8 @@ with an Application to Medicaid Utilization.  \emph{Journal of Applied Econometr
 }
 
 \examples{
+\dontshow{ if(!requireNamespace("MASS") ||
+              !requireNamespace("pscl")) q() }
 ## data and packages
 data("Medicaid1986")
 library("MASS")

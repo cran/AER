@@ -1,6 +1,6 @@
 
-R version 3.5.2 (2018-12-20) -- "Eggshell Igloo"
-Copyright (C) 2018 The R Foundation for Statistical Computing
+R version 4.2.0 (2022-04-22) -- "Vigorous Calisthenics"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -15,6 +15,10 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
+> if(!requireNamespace("lattice") || !requireNamespace("boot")) q()
+Loading required namespace: lattice
+Loading required namespace: boot
+> 
 > ###################################################
 > ### chunk number 1: setup
 > ###################################################
@@ -343,4 +347,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
- 14.829   0.073  14.896 
+ 11.213   0.076  11.282 

@@ -1,3 +1,5 @@
+if(!requireNamespace("lattice") || !requireNamespace("boot")) q()
+
 ###################################################
 ### chunk number 1: setup
 ###################################################

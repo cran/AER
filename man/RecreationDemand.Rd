@@ -27,7 +27,7 @@ According to the original source (Seller, Stoll and Chavas, 1985, p. 168), the q
 }
 
 \source{
-Journal of Business \& Economic Statistics Data Archive. 
+Journal of Business & Economic Statistics Data Archive. 
 
 \verb{http://www.amstat.org/publications/jbes/upload/index.cfm?fuseaction=ViewArticles&pub=JBES&issue=96-4-OCT}
 }
@@ -37,7 +37,7 @@ Cameron, A.C. and Trivedi, P.K. (1998). \emph{Regression Analysis of Count Data}
 Cambridge: Cambridge University Press.
 
 Gurmu, S. and Trivedi, P.K. (1996). Excess Zeros in Count Models for Recreational Trips.  
-\emph{Journal of Business \& Economic Statistics},
+\emph{Journal of Business & Economic Statistics},
 \bold{14}, 469--477.
 
 Ozuna, T. and Gomez, I.A. (1995). Specification and Testing of Count Data Recreation Demand Functions.
@@ -49,6 +49,8 @@ Seller, C., Stoll, J.R. and Chavas, J.-P. (1985). Validation of Empirical Measur
 \seealso{\code{\link{CameronTrivedi1998}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("MASS") ||
+              !requireNamespace("pscl")) q() }
 data("RecreationDemand")
 
 ## Poisson model:

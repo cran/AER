@@ -15,7 +15,7 @@ A daily univariate time series from 1994-12-30 to 2012-12-31 (of class \code{"zo
 \source{
 Online complements to Franses, van Dijk and Opschoor (2014).
 
-\url{http://www.cambridge.org/us/academic/subjects/economics/econometrics-statistics-and-mathematical-economics/time-series-models-business-and-economic-forecasting-2nd-edition}
+\url{https://www.cambridge.org/us/academic/subjects/economics/econometrics-statistics-and-mathematical-economics/time-series-models-business-and-economic-forecasting-2nd-edition}
 }
 
 \references{
@@ -26,6 +26,9 @@ Cambridge, UK: Cambridge University Press.
 }
 
 \examples{
+\dontshow{ if(!requireNamespace("tseries") ||
+              !requireNamespace("fGarch") ||
+              !requireNamespace("rugarch")) q() }
 data("MSCISwitzerland", package = "AER")
 
 ## p.190, Fig. 7.6

@@ -51,7 +51,7 @@ Online complements to Stock and Watson (2007).
 
 \references{
 Rouse, C.E. (1995). Democratization or Diversion? The Effect of Community
-Colleges on Educational Attainment. \emph{Journal of Business \& Economic Statistics},
+Colleges on Educational Attainment. \emph{Journal of Business & Economic Statistics},
 \bold{12}, 217--224.
 
 Stock, J.H. and Watson, M.W. (2007). \emph{Introduction to Econometrics}, 2nd ed. Boston: Addison Wesley.

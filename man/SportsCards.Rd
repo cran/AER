@@ -53,10 +53,8 @@ Stock, J.H. and Watson, M.W. (2007). \emph{Introduction to Econometrics}, 2nd ed
 data("SportsCards")
 summary(SportsCards)
 
-plot(trade ~ permonth, data = SportsCards,
-  ylevels = 2:1, breaks = c(0, 5, 10, 20, 30, 70))
-plot(trade ~ years, data = SportsCards,
-  ylevels = 2:1, breaks = c(0, 5, 10, 20, 60))
+plot(trade ~ permonth, data = SportsCards, breaks = c(0, 5, 10, 20, 30, 70))
+plot(trade ~ years, data = SportsCards, breaks = c(0, 5, 10, 20, 60))
 }
 
 \keyword{datasets}

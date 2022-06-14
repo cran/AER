@@ -24,7 +24,7 @@ A data frame containing 180 observations on 10 variables.
 
 \details{
 Data on 180 economic journals, collected in particular for analyzing journal
-pricing. See also \url{http://www.econ.ucsb.edu/~tedb/Journals/jpricing.html}
+pricing. See also \url{https://econ.ucsb.edu/~tedb/Journals/jpricing.html}
 for general information on this topic as well as a more up-to-date version of
 the data set. This version is taken from Stock and Watson (2007).
 
@@ -46,6 +46,7 @@ Stock, J.H. and Watson, M.W. (2007). \emph{Introduction to Econometrics}, 2nd ed
 \seealso{\code{\link{StockWatson2007}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("strucchange")) q() }
 ## data and transformed variables
 data("Journals")
 journals <- Journals[, c("subs", "price")]

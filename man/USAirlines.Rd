@@ -24,7 +24,7 @@ A data frame containing 90 observations on 6 variables.
 \source{
 Online complements to Greene (2003). Table F7.1.
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{
@@ -34,6 +34,7 @@ Greene, W.H. (2003). \emph{Econometric Analysis}, 5th edition. Upper Saddle Rive
 \seealso{\code{\link{Greene2003}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("plm")) q() }
 data("USAirlines")
 
 ## Example 7.2 in Greene (2003)

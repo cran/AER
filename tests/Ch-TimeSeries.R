@@ -1,3 +1,8 @@
+if(!requireNamespace("tseries") ||
+   !requireNamespace("urca") ||
+   !requireNamespace("dynlm") ||
+   !requireNamespace("strucchange")) q()
+
 ###################################################
 ### chunk number 1: setup
 ###################################################

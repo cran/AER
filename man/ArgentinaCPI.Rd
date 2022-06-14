@@ -25,6 +25,7 @@ Cambridge, UK: Cambridge University Press.
 \seealso{\code{\link{Franses1998}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("dynlm")) q() }
 data("ArgentinaCPI")
 plot(ArgentinaCPI)
 plot(log(ArgentinaCPI))

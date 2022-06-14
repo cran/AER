@@ -18,7 +18,7 @@ A data frame containing 27 observations on 3 variables.
 \source{
 Online complements to Greene (2003). Table F6.1.
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{
@@ -28,7 +28,8 @@ Greene, W.H. (2003). \emph{Econometric Analysis}, 5th edition. Upper Saddle Rive
 \seealso{\code{\link{Greene2003}}}
 
 \examples{
-data("SIC33")
+\dontshow{ if(!requireNamespace("scatterplot3d")) q() }
+data("SIC33", package = "AER")
 
 ## Example 6.2 in Greene (2003)
 ## Translog model
@@ -51,10 +52,9 @@ anova(fm_cb, fm_tl)
 linearHypothesis(fm_cb, "labor + capital = 1")
 
 ## 3D Visualization
-if(require("scatterplot3d")) {
+library("scatterplot3d")
   s3d <- scatterplot3d(log(SIC33)[,c(2, 3, 1)], pch = 16)
   s3d$plane3d(fm_cb, lty.box = "solid", col = 4)
-}
 
 ## Interactive 3D Visualization
 \donttest{

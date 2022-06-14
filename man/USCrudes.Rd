@@ -29,16 +29,16 @@ Baltagi, B.H. (2002). \emph{Econometrics}, 3rd ed. Berlin, Springer.
 \seealso{\code{\link{Baltagi2002}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("scatterplot3d")) q() }
 data("USCrudes")
 plot(price ~ gravity, data = USCrudes)
 plot(price ~ sulphur, data = USCrudes)
 fm <- lm(price ~ sulphur + gravity, data = USCrudes)
 
 ## 3D Visualization
-if(require("scatterplot3d")) {
-  s3d <- scatterplot3d(USCrudes[, 3:1], pch = 16)
-  s3d$plane3d(fm, lty.box = "solid", col = 4)
-}
+library("scatterplot3d")
+s3d <- scatterplot3d(USCrudes[, 3:1], pch = 16)
+s3d$plane3d(fm, lty.box = "solid", col = 4)
 }
 
 \keyword{datasets}

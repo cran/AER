@@ -20,7 +20,7 @@ An annual multiple time series from 1909 to 1949 with 3 variables.
 \source{
 Online complements to Greene (2003), Table F7.2.
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{
@@ -33,6 +33,7 @@ Solow, R. (1957). Technical Change and the Aggregate Production Function.
 \seealso{\code{\link{Greene2003}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("strucchange")) q() }
 data("TechChange")
 
 ## Greene (2003)

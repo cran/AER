@@ -31,7 +31,7 @@ of commonly owned firms. Only the first 145 observations should be used for anal
 \source{
 Online complements to Greene (2003). Table F14.2.
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{

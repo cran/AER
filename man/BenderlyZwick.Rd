@@ -46,6 +46,7 @@ High-Breakdown Robust Regression Techniques. \emph{Economics Letters}, \bold{71}
 \seealso{\code{\link{Baltagi2002}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("dynlm")) q() }
 data("BenderlyZwick")
 plot(BenderlyZwick)
 

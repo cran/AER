@@ -66,12 +66,14 @@ Grunfeld, Y. (1958). \emph{The Determinants of Corporate Investment}.
 
 Kleiber, C., and Zeileis, A. (2010). \dQuote{The Grunfeld Data at 50.}
   \emph{German Economic Review}, \bold{11}(4), 404--417.
-  \url{http://dx.doi.org/10.1111/j.1468-0475.2010.00513.x}
+  \doi{10.1111/j.1468-0475.2010.00513.x}
 }
 
 \seealso{\code{\link{Baltagi2002}}, \code{\link{Greene2003}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("plm") ||
+              !requireNamespace("systemfit")) q() }
 data("Grunfeld", package = "AER")
 
 ## Greene (2003)

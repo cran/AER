@@ -26,7 +26,7 @@ of teaching economics significantly influenced performance in later economics co
 \source{
 Online complements to Greene (2003).
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{

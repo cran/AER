@@ -51,6 +51,7 @@ Mullahy, J. (1997). Heterogeneity, Excess Zeros, and the Structure of Count Data
 \seealso{\code{\link{CameronTrivedi1998}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("MASS")) q() }
 data("DoctorVisits", package = "AER")
 library("MASS")
 

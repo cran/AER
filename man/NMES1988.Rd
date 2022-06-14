@@ -55,12 +55,14 @@ Elderly: A Finite Mixture Approach. \emph{Journal of Applied Econometrics},
 
 Zeileis, A., Kleiber, C., and Jackman, S. (2008). Regression Models
 for Count Data in R. \emph{Journal of Statistical Software}, \bold{27}(8).
-URL \url{http://www.jstatsoft.org/v27/i08/}.
+\doi{10.18637/jss.v027.i08}.
 }
 
 \seealso{\code{\link{CameronTrivedi1998}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("MASS") ||
+              !requireNamespace("pscl")) q() }
 ## packages
 library("MASS")
 library("pscl")

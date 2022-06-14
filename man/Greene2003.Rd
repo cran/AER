@@ -12,7 +12,7 @@ please contact the package maintainer.
 
 \references{
 Greene, W.H. (2003). \emph{Econometric Analysis}, 5th edition. Upper Saddle River, NJ: Prentice Hall.
-URL \url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}.
+URL \url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}.
 }
 
 \seealso{\code{\link{Affairs}}, \code{\link{BondYield}}, \code{\link{CreditCard}},
@@ -26,6 +26,14 @@ URL \url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}.
   \code{\link{USInvest}}, \code{\link{USMacroG}}, \code{\link{USMoney}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("dynlm") ||
+              !requireNamespace("strucchange") ||
+              !requireNamespace("MASS") ||
+              !requireNamespace("plm") ||
+              !requireNamespace("pscl") ||
+              !requireNamespace("tseries") ||
+              !requireNamespace("systemfit") ||
+              !requireNamespace("sampleSelection")) q() }
 \donttest{
 #####################################
 ## US consumption data (1970-1979) ##

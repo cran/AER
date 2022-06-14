@@ -48,6 +48,7 @@ Buchinsky, M. (1998). Recent Advances in Quantile Regression Models: A Practical
 \seealso{\code{\link{CPS1985}}, \code{\link{CPSSW}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("quantreg")) q() }
 ## data and packages
 library("quantreg")
 data("CPS1988")

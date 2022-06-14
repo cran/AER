@@ -16,7 +16,7 @@ A quarterly multiple time series from 1972(1) to 1985(2) with 2 variables.
 \source{
 Online complements to Greene (2003), Table F8.1.
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{

@@ -53,7 +53,7 @@ employment, unemployment, and earnings. Approximately 65,000 randomly
 selected US households are surveyed each month. The sample is chosen by
 randomly selecting addresses from a database. 
 Details can be found in the Handbook of Labor Statistics and is described
-on the Bureau of Labor Statistics website (\url{http://www.bls.gov/}).
+on the Bureau of Labor Statistics website (\url{https://www.bls.gov/}).
 
 The survey conducted each March is more detailed than in other months
 and asks questions about earnings during the previous year. 

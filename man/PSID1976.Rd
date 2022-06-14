@@ -56,7 +56,7 @@ The variable \code{repwage} is the reported wage in a 1976 interview, named RPWG
 \source{
 Online complements to Greene (2003). Table F4.1.
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{
@@ -79,6 +79,7 @@ Cambridge, MA: MIT Press.
 \seealso{\code{\link{Greene2003}}, \code{\link{WinkelmannBoes2009}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("sampleSelection")) q() }
 ## data and transformations
 data("PSID1976")
 PSID1976$kids <- with(PSID1976, factor((youngkids + oldkids) > 0,

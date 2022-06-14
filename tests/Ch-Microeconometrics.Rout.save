@@ -1,6 +1,6 @@
 
-R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
-Copyright (C) 2019 The R Foundation for Statistical Computing
+R version 4.2.0 (2022-04-22) -- "Vigorous Calisthenics"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -15,6 +15,17 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
+> if(!requireNamespace("ROCR") ||
++    !requireNamespace("MASS") ||
++    !requireNamespace("pscl") ||
++    !requireNamespace("np") ||
++    !requireNamespace("nnet")) q()
+Loading required namespace: ROCR
+Loading required namespace: MASS
+Loading required namespace: pscl
+Loading required namespace: np
+Loading required namespace: nnet
+> 
 > ###################################################
 > ### chunk number 1: setup
 > ###################################################
@@ -183,14 +194,6 @@ R> ###################################################
 R> ### chunk number 12: roc-plot1
 R> ###################################################
 R> library("ROCR")
-Loading required package: gplots
-
-Attaching package: 'gplots'
-
-The following object is masked from 'package:stats':
-
-    lowess
-
 R> pred <- prediction(fitted(swiss_probit),
 +    SwissLabor$participation)
 R> plot(performance(pred, "acc"))
@@ -432,25 +435,25 @@ zeroinfl(formula = trips ~ . | quality + income, data = RecreationDemand,
 
 Pearson residuals:
     Min      1Q  Median      3Q     Max 
--1.0889 -0.2004 -0.0570 -0.0451 40.0139 
+-1.0887 -0.2003 -0.0569 -0.0452 39.9575 
 
 Count model coefficients (negbin with log link):
             Estimate Std. Error z value Pr(>|z|)
-(Intercept)  1.09663    0.25668    4.27  1.9e-05
-quality      0.16891    0.05303    3.19   0.0014
-skiyes       0.50069    0.13449    3.72   0.0002
-income      -0.06927    0.04380   -1.58   0.1138
-userfeeyes   0.54279    0.28280    1.92   0.0549
-costC        0.04044    0.01452    2.79   0.0053
-costS       -0.06621    0.00775   -8.55  < 2e-16
-costH        0.02060    0.01023    2.01   0.0441
-Log(theta)   0.19017    0.11299    1.68   0.0924
+(Intercept)  1.09609    0.25708    4.26    2e-05
+quality      0.16902    0.05314    3.18   0.0015
+skiyes       0.50048    0.13450    3.72   0.0002
+income      -0.06920    0.04380   -1.58   0.1141
+userfeeyes   0.54256    0.28282    1.92   0.0551
+costC        0.04043    0.01452    2.78   0.0054
+costS       -0.06620    0.00775   -8.55   <2e-16
+costH        0.02061    0.01024    2.01   0.0441
+Log(theta)   0.18986    0.11313    1.68   0.0933
 
 Zero-inflation model coefficients (binomial with logit link):
             Estimate Std. Error z value Pr(>|z|)
-(Intercept)    5.743      1.556    3.69  0.00022
-quality       -8.307      3.682   -2.26  0.02404
-income        -0.258      0.282   -0.92  0.35950
+(Intercept)    5.718      1.560    3.67  0.00025
+quality       -8.360      3.938   -2.12  0.03377
+income        -0.252      0.285   -0.88  0.37683
 
 Theta = 1.209 
 Number of iterations in BFGS optimization: 26 
@@ -724,4 +727,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  2.316   0.823   2.117 
+  1.474   0.096   1.563 

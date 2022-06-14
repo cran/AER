@@ -1,6 +1,6 @@
 
-R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
-Copyright (C) 2019 The R Foundation for Statistical Computing
+R version 4.2.0 (2022-04-22) -- "Vigorous Calisthenics"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -15,6 +15,16 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
+> if(!requireNamespace("splines") ||
++    !requireNamespace("dynlm") ||
++    !requireNamespace("plm") ||
++    !requireNamespace("systemfit") ||
++    !requireNamespace("nlme")) q()
+Loading required namespace: splines
+Loading required namespace: dynlm
+Loading required namespace: plm
+Loading required namespace: systemfit
+> 
 > ###################################################
 > ### chunk number 1: setup
 > ###################################################
@@ -747,7 +757,6 @@ R> ### chunk number 57: pdata.frame
 R> ###################################################
 R> data("Grunfeld", package = "AER")
 R> library("plm")
-Loading required package: Formula
 R> gr <- subset(Grunfeld, firm %in% c("General Electric",
 +    "General Motors", "IBM"))
 R> pgr <- pdata.frame(gr, index = c("firm", "year"))
@@ -885,7 +894,7 @@ R> ###################################################
 R> ### chunk number 66: plm-AB-summary
 R> ###################################################
 R> summary(empl_ab, robust = FALSE)     
-Twoways effects Two steps model
+Twoways effects Two-steps model Difference GMM 
 
 Call:
 pgmm(formula = log(emp) ~ lag(log(emp), 1:2) + lag(log(wage), 
@@ -896,7 +905,6 @@ pgmm(formula = log(emp) ~ lag(log(emp), 1:2) + lag(log(wage),
 Unbalanced Panel: n = 140, T = 7-9, N = 1031
 
 Number of Observations Used: 611
-
 Residuals:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 -0.6191 -0.0256  0.0000 -0.0001  0.0332  0.6410 
@@ -972,4 +980,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  3.513   0.168   3.668 
+  3.003   0.104   3.099 

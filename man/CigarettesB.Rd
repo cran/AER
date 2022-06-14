@@ -29,6 +29,7 @@ Baltagi, B.H. and Levin, D. (1992). Cigarette Taxation: Raising Revenues and Red
 \seealso{\code{\link{Baltagi2002}}, \code{\link{CigarettesSW}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("tseries")) q() }
 data("CigarettesB")
 
 ## Baltagi (2002)

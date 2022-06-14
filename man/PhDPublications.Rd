@@ -20,8 +20,6 @@ A data frame containing 915 observations on 6 variables.
 
 \source{
 Online complements to Long (1997). 
-
-\url{http://www.indiana.edu/~jslsoc/research_rm4cldvs.htm}
 }
 
 \references{
@@ -34,6 +32,8 @@ Long, J.S. (1997). The Origin of Sex Differences in Science.
 }
 
 \examples{
+\dontshow{ if(!requireNamespace("MASS") ||
+              !requireNamespace("pscl")) q() }
 ## from Long (1997)
 data("PhDPublications")
 

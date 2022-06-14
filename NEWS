@@ -1,4 +1,21 @@
-Changes in Version 1.2-8
+Changes in Version 1.2-10
+
+  o Improvements in coeftest() methods for "multinom" and "polr" objects to be compatible
+    with recent extensions in lmtest >= 0.9-38.
+
+  o Fixed a bug in the tests for weak instruments in ivdiag(): Interactions like x1:x2
+    and x2:x1 were considered to be different variables although they are in fact equivalent.
+    (Reported by Arne Henningsen and Ghislain Dossou.)
+
+  o Use fully-qualified calls to survival::survreg() and survival::Surv() within the
+    tobit() function so that AER::tobit() can be called without attaching the package
+    (reported by Bill Denney).
+
+  o Started replacing examples with repeated with() variable transformations with a
+    single transform().
+
+
+Changes in Version 1.2-9
 
   o Some examples from the AER book lead to small numeric differences across different
     platforms. Hence, these have been excluded now from tests/Ch-*.R with an IGNORE_RDIFF

@@ -21,14 +21,14 @@ eight observations where a slightly different rounding arithmetic was used).
 }
 
 \source{
-Journal of Business \& Economic Statistics Data Archive. 
+Journal of Business & Economic Statistics Data Archive. 
 
 \verb{http://www.amstat.org/publications/jbes/upload/index.cfm?fuseaction=ViewArticles&pub=JBES&issue=96-2-APR}
 }
 
 \references{
 Bollerslev, T., and Ghysels, E. (1996). Periodic Autoregressive Conditional Heteroskedasticity.  
-\emph{Journal of Business \& Economic Statistics},
+\emph{Journal of Business & Economic Statistics},
 \bold{14}, 139--151.
 
 Greene, W.H. (2003). \emph{Econometric Analysis}, 5th edition. Upper Saddle River, NJ: Prentice Hall.
@@ -37,6 +37,8 @@ Greene, W.H. (2003). \emph{Econometric Analysis}, 5th edition. Upper Saddle Rive
 \seealso{\code{\link{Greene2003}}, \code{\link{MarkDollar}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("tseries") ||
+              !requireNamespace("dynlm")) q() }
 ## data as given by Greene (2003)
 data("MarkPound")
 mp <- round(MarkPound, digits = 6)

@@ -25,6 +25,8 @@ Baltagi, B.H. (2002). \emph{Econometrics}, 3rd ed. Berlin, Springer.
 \seealso{\code{\link{Baltagi2002}}, \code{\link{USConsump1950}}, \code{\link{USConsump1979}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("strucchange") ||
+              !requireNamespace("dynlm")) q() }
 ## data from Baltagi (2002)
 data("USConsump1993", package = "AER")
 plot(USConsump1993, plot.type = "single", col = 1:2)

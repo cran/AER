@@ -40,7 +40,7 @@ between the F9.1 and F21.4 version.
 \source{
 Online complements to Greene (2003). Table F21.4.
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{

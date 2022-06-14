@@ -25,7 +25,7 @@ Journal of Applied Econometrics Data Archive.
 
 Online complements to Greene (2003), Table F9.2.
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{

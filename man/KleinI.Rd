@@ -27,7 +27,7 @@ An annual multiple time series from 1920 to 1941 with 9 variables.
 \source{
 Online complements to Greene (2003). Table F15.1.
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{
@@ -41,6 +41,7 @@ Maddala, G.S. (1977). \emph{Econometrics}. New York: McGraw-Hill.
 \seealso{\code{\link{Greene2003}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("dynlm")) q() }
 data("KleinI", package = "AER")
 plot(KleinI)
 

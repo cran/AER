@@ -21,6 +21,11 @@ Baltagi, B.H. (2002). \emph{Econometrics}, 3rd ed., Berlin: Springer-Verlag.
   \code{\link{USGasB}}, \code{\link{USMacroB}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("tseries") ||
+              !requireNamespace("strucchange") ||
+              !requireNamespace("dynlm") ||
+              !requireNamespace("plm") ||
+              !requireNamespace("systemfit")) q() }
 ################################
 ## Cigarette consumption data ##
 ################################

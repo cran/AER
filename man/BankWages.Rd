@@ -21,7 +21,7 @@ A data frame containing 474 observations on 4 variables.
 \source{
 Online complements to Heij, de Boer, Franses, Kloek, and van Dijk (2004). 
 
-\url{http://www.oup.com/uk/booksites/content/0199268010/datasets/ch6/xr614bwa.asc}
+\url{https://global.oup.com/booksites/content/0199268010/datasets/ch6/xr614bwa.asc}
 }
 
 \references{
@@ -31,6 +31,8 @@ Oxford: Oxford University Press.
 }
 
 \examples{
+\dontshow{ if(!requireNamespace("nnet") ||
+              !requireNamespace("mlogit")) q() }
 data("BankWages")
 
 ## exploratory analysis of job ~ education
@@ -51,11 +53,10 @@ summary(fm_mnl)
 confint(fm_mnl)
 
 ## same with mlogit package
-if(require("mlogit")) {
+library("mlogit")
 fm_mlogit <- mlogit(job ~ 1 | education + minority, data = BankWages,
   subset = gender == "male", shape = "wide", reflevel = "custodial")
 summary(fm_mlogit)
-}
 }
 
 \keyword{datasets}

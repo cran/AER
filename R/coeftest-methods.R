@@ -1,4 +1,4 @@
-coeftest.multinom <- function(x, vcov. = NULL, df = NULL, ...)
+coeftest.multinom <- function(x, vcov. = NULL, df = NULL, ..., save = FALSE)
 {
   ## extract coefficients
   est <- coef(x)
@@ -31,10 +31,13 @@ coeftest.multinom <- function(x, vcov. = NULL, df = NULL, ...)
   colnames(rval) <- cnames
   class(rval) <- "coeftest"
   attr(rval, "method") <- paste(mthd, "test of coefficients")
+  attr(rval, "df") <- df
+  attr(rval, "logLik") <- logLik(x)
+  if(save) attr(rval, "object") <- x
   return(rval)
 }
 
-coeftest.polr <- function(x, vcov. = NULL, df = NULL, ...)
+coeftest.polr <- function(x, vcov. = NULL, df = NULL, ..., save = FALSE)
 {
   ## extract coefficients
   est <- c(x$coefficients, x$zeta)
@@ -63,6 +66,10 @@ coeftest.polr <- function(x, vcov. = NULL, df = NULL, ...)
   colnames(rval) <- cnames
   class(rval) <- "coeftest"
   attr(rval, "method") <- paste(mthd, "test of coefficients")
+  attr(rval, "df") <- df
+  attr(rval, "nobs") <- nobs(x)
+  attr(rval, "logLik") <- logLik(x)
+  if(save) attr(rval, "object") <- x
   return(rval)
 }
 

@@ -18,6 +18,8 @@ Cambridge: Cambridge University Press.
 \seealso{\code{\link{DoctorVisits}}, \code{\link{NMES1988}}, \code{\link{RecreationDemand}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("MASS") ||
+              !requireNamespace("pscl")) q() }
 \donttest{
 library("MASS")
 library("pscl")

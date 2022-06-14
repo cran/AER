@@ -1,7 +1,7 @@
 \name{USStocksSW}
 \alias{USStocksSW}
 
-\title{Monthly US Stock Returns (1931--2002, Stock \& Watson)}
+\title{Monthly US Stock Returns (1931--2002, Stock & Watson)}
 
 \description{
 Monthly data from 1931--2002 for US stock prices, measured by the
@@ -38,6 +38,7 @@ Stock, J.H. and Watson, M.W. (2007). \emph{Introduction to Econometrics}, 2nd ed
 \seealso{\code{\link{StockWatson2007}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("dynlm")) q() }
 data("USStocksSW")
 plot(USStocksSW)
 

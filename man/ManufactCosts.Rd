@@ -23,7 +23,7 @@ An annual multiple time series from 1947 to 1971 with 9 variables.
 \source{
 Online complements to Greene (2003).
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{

@@ -23,7 +23,7 @@ is available as \code{\link[datasets]{longley}} in base R.
 \source{
 Online complements to Greene (2003). Table F4.2.
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{
@@ -36,6 +36,7 @@ Longley, J.W. (1967). An Appraisal of Least-Squares Programs from the Point of V
 \seealso{\code{\link[datasets]{longley}}, \code{\link{Greene2003}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("dynlm")) q() }
 data("Longley")
 library("dynlm")
 

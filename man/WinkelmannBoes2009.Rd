@@ -17,6 +17,13 @@ Winkelmann, R., and Boes, S. (2009). \emph{Analysis of Microdata}, 2nd ed. Berli
 \seealso{\code{\link{GSS7402}}, \code{\link{GSOEP9402}}, \code{\link{PSID1976}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("effects") ||
+              !requireNamespace("ROCR") ||
+              !requireNamespace("MASS") ||
+              !requireNamespace("nnet") ||
+              !requireNamespace("mlogit") ||
+              !requireNamespace("sampleSelection") ||
+              !requireNamespace("truncreg")) q() }
 \donttest{
 #########################################
 ## US General Social Survey 1974--2002 ##
@@ -230,11 +237,10 @@ gsoep_mnl <- multinom(
 coeftest(gsoep_mnl)[c(1:6, 1:6 + 14),]
  
 ## alternatively
-if(require("mlogit")) {
+library("mlogit")
 gsoep_mnl2 <- mlogit(school ~ 0 | meducation + memployment + log(income) +
   log(size) + parity + year2, data = gsoep, shape = "wide", reflevel = "Hauptschule")
 coeftest(gsoep_mnl2)[1:12,]
-}
 
 ## Table 5.2
 library("effects")
@@ -342,7 +348,7 @@ wage_mlcoef <- sapply(c(0.5, 1, 1.5, 2), function(censpoint)
 ##################################
 
 ## data
-if(require("mlogit")) {
+library("mlogit")
 data("Cracker", package = "mlogit")
 head(Cracker, 3)
 crack <- mlogit.data(Cracker, varying = 2:13, shape = "wide", choice = "choice")
@@ -361,7 +367,6 @@ crack_mlogit_all <- update(crack_mlogit2, reflevel = "nabisco")
 crack_mlogit_res <- update(crack_mlogit_all,
   alt.subset = c("keebler", "nabisco", "sunshine"))
 hmftest(crack_mlogit_all, crack_mlogit_res)
-}
 }
 }
 

@@ -1,3 +1,9 @@
+if(!requireNamespace("splines") ||
+   !requireNamespace("dynlm") ||
+   !requireNamespace("plm") ||
+   !requireNamespace("systemfit") ||
+   !requireNamespace("nlme")) q()
+
 ###################################################
 ### chunk number 1: setup
 ###################################################

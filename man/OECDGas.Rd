@@ -31,6 +31,7 @@ of Pooling and Testing Procedures. \emph{European Economic Review}, \bold{22}, 1
 \seealso{\code{\link{Baltagi2002}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("lattice")) q() }
 data("OECDGas")
 
 library("lattice")

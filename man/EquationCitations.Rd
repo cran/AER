@@ -44,19 +44,20 @@ A data frame containing 649 observations on 13 variables.
 \source{
 Online supplements to Fawcett and Higginson (2012).
 
-\url{http://www.pnas.org/lookup/suppl/doi:10.1073/pnas.1205259109/-/DCSupplemental}
+\url{https://www.pnas.org/doi/suppl/10.1073/pnas.1205259109/suppl_file/sd01.xlsx}
 }
 
 \references{
 Fawcett, T.W. and Higginson, A.D. (2012). Heavy Use of Equations Impedes
 Communication among Biologists.
 \emph{PNAS -- Proceedings of the National Academy of Sciences of the United States of America},
-\bold{109}, 11735--11739. \url{http://dx.doi.org/10.1073/pnas.1205259109}
+\bold{109}, 11735--11739. \doi{10.1073/pnas.1205259109}
 }
 
 \seealso{\code{\link{PhDPublications}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("MASS")) q() }
 ## load data and MASS package
 data("EquationCitations", package = "AER")
 library("MASS")

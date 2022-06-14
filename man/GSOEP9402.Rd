@@ -61,6 +61,10 @@ Winkelmann, R., and Boes, S. (2009). \emph{Analysis of Microdata}, 2nd ed. Berli
 \seealso{\code{\link{WinkelmannBoes2009}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("nnet") ||
+              !requireNamespace("mlogit") ||
+              !requireNamespace("effects") ||
+              !requireNamespace("MASS")) q() }
 ## data
 data("GSOEP9402", package = "AER")
 
@@ -80,12 +84,11 @@ gsoep_mnl <- multinom(
 coeftest(gsoep_mnl)[c(1:6, 1:6 + 14),]
  
 ## alternatively
-if(require("mlogit")) {
+library("mlogit")
 gsoep_mnl2 <- mlogit(
   school ~ 0 | meducation + memployment + log(income) + log(size) + parity + year2,
   data = gsoep, shape = "wide", reflevel = "Hauptschule")
 coeftest(gsoep_mnl2)[1:12,]
-}
 
 ## Table 5.2
 library("effects")

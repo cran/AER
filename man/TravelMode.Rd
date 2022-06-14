@@ -11,7 +11,7 @@ Data on travel mode choice for travel between Sydney and Melbourne, Australia.
 \format{
 A data frame containing 840 observations on 4 modes for 210 individuals.
  \describe{
-    \item{individual}{Factor indicating individual with levels \code{1} to \code{200}.}
+    \item{individual}{Factor indicating individual with levels \code{1} to \code{210}.}
     \item{mode}{Factor indicating travel mode with levels
       \code{"car"}, \code{"air"}, \code{"train"}, or \code{"bus"}.}
     \item{choice}{Factor indicating choice with levels \code{"no"} and \code{"yes"}.}
@@ -27,7 +27,7 @@ A data frame containing 840 observations on 4 modes for 210 individuals.
 \source{
 Online complements to Greene (2003).
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{
@@ -37,7 +37,9 @@ Greene, W.H. (2003). \emph{Econometric Analysis}, 5th edition. Upper Saddle Rive
 \seealso{\code{\link{Greene2003}}}
 
 \examples{
-data("TravelMode")
+\dontshow{ if(!requireNamespace("lattice") ||
+              !requireNamespace("mlogit")) q() }
+data("TravelMode", package = "AER")
 
 ## overall proportions for chosen mode
 with(TravelMode, prop.table(table(mode[choice == "yes"])))
@@ -47,12 +49,11 @@ library("lattice")
 xyplot(travel ~ wait | mode, data = TravelMode)
 
 ## Greene (2003), Table 21.11, conditional logit model
-if(require("mlogit")) {
+library("mlogit")
 TravelMode$incair <- with(TravelMode, income * (mode == "air"))
 tm_cl <- mlogit(choice ~ gcost + wait + incair, data = TravelMode,
   shape = "long", alt.var = "mode", reflevel = "car")
 summary(tm_cl)
-}
 }
 
 \keyword{datasets}

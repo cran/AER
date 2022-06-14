@@ -73,6 +73,8 @@ tobit <- function(formula, left = 0, right = Inf, dist = "gaussian", subset = NU
     formula[[2]] <- call("Surv", call("ifelse", call(">=", y, substitute(right)), substitute(right), y),
       call("<", y, substitute(right)) , type = "right")
   }
+  ## ensure the the fully-qualified survival::Surv() is used rather than just Surv()
+  formula[[2]][[1]] <- quote(survival::Surv)
   
   ## call survreg
   cl <- ocl <- match.call()
@@ -80,7 +82,7 @@ tobit <- function(formula, left = 0, right = Inf, dist = "gaussian", subset = NU
   cl$left <- NULL
   cl$right <- NULL
   cl$dist <- dist
-  cl[[1]] <- as.name("survreg")
+  cl[[1]] <- quote(survival::survreg)
   rval <- eval(cl, oenv)
 
   ## slightly modify result
@@ -167,7 +169,7 @@ summary.tobit <- function(object, correlation = FALSE, symbolic.cor = FALSE, vco
     
   ## distribution
   dist <- object$dist
-  if(is.character(dist)) sd <- survreg.distributions[[dist]]
+  if(is.character(dist)) sd <- survival::survreg.distributions[[dist]]
     else sd <- dist
   if(length(object$parms)) pprint <- paste(sd$name, "distribution: parmameters =", object$parms)
     else pprint <- paste(sd$name, "distribution")
@@ -260,7 +262,7 @@ formula.tobit <- function(x, ...) x$formula
 model.frame.tobit <- function(formula, ...)
 {
   Call <- formula$call
-  Call[[1]] <- as.name("model.frame")
+  Call[[1]] <- quote(stats::model.frame)
   Call <- Call[match(c("", "formula", "data", "weights", "subset", "na.action"), names(Call), 0)]
   dots <- list(...)
   nargs <- dots[match(c("data", "na.action", "subset"), names(dots), 0)]

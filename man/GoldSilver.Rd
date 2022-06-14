@@ -19,7 +19,7 @@ A daily multiple time series from 1977-12-30 to 2012-12-31 (of class \code{"zoo"
 \source{
 Online complements to Franses, van Dijk and Opschoor (2014).
 
-\url{http://www.cambridge.org/us/academic/subjects/economics/econometrics-statistics-and-mathematical-economics/time-series-models-business-and-economic-forecasting-2nd-edition}
+\url{https://www.cambridge.org/us/academic/subjects/economics/econometrics-statistics-and-mathematical-economics/time-series-models-business-and-economic-forecasting-2nd-edition}
 }
 
 \references{
@@ -28,6 +28,10 @@ Cambridge, UK: Cambridge University Press.
 }
 
 \examples{
+\dontshow{ if(!requireNamespace("longmemo") ||
+              !requireNamespace("forecast") ||
+              !requireNamespace("vars") ||
+              !requireNamespace("tseries")) q() }
 data("GoldSilver", package = "AER")
 
 ## p.31, daily returns

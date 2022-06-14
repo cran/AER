@@ -1,3 +1,5 @@
+if(!requireNamespace("dynlm") || !requireNamespace("MASS") || !requireNamespace("quantreg")) q()
+
 ###################################################
 ### chunk number 1: setup
 ###################################################

@@ -21,7 +21,7 @@ A quarterly multiple time series from 1950 to 1983 with 3 variables.
 \source{
 Online complements to Greene (2003), Table F20.2.
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{

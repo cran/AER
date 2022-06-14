@@ -27,7 +27,7 @@ The original data provided by Kennan (1985) are on a monthly basis, for the peri
 \source{
 Online complements to Greene (2003).
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{
@@ -40,6 +40,7 @@ Kennan, J. (1985). The Duration of Contract Strikes in US Manufacturing.
 \seealso{\code{\link{Greene2003}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("MASS")) q() }
 data("StrikeDuration")
 library("MASS")
 

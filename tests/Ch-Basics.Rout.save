@@ -1,6 +1,6 @@
 
-R version 3.5.2 (2018-12-20) -- "Eggshell Igloo"
-Copyright (C) 2018 The R Foundation for Statistical Computing
+R version 4.2.0 (2022-04-22) -- "Vigorous Calisthenics"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -675,7 +675,7 @@ R> ###################################################
 R> summary
 function (object, ...) 
 UseMethod("summary")
-<bytecode: 0x5566fd9a2d70>
+<bytecode: 0x5601626c9658>
 <environment: namespace:base>
 R> 
 R> 
@@ -991,4 +991,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  1.248   0.070   1.306 
+  1.027   0.048   1.068 

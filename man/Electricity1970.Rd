@@ -32,7 +32,7 @@ Only the first 123 observations are needed to replicate Christensen and Greene (
 \source{
 Online complements to Greene (2003), Table F5.2.
 
-\url{http://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
+\url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}
 }
 
 \references{

@@ -52,6 +52,9 @@ Winkelmann, R., and Boes, S. (2009). \emph{Analysis of Microdata}, 2nd ed. Berli
 \seealso{\code{\link{WinkelmannBoes2009}}}
 
 \examples{
+\dontshow{ if(!requireNamespace("lattice") ||
+              !requireNamespace("effects") ||
+              !requireNamespace("MASS")) q() }
 ## completed fertility subset
 data("GSS7402", package = "AER")
 gss40 <- subset(GSS7402, age >= 40)
