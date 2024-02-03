@@ -32,7 +32,10 @@ Oxford: Oxford University Press.
 
 \examples{
 \dontshow{ if(!requireNamespace("nnet") ||
-              !requireNamespace("mlogit")) q() }
+              !requireNamespace("mlogit")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 data("BankWages")
 
 ## exploratory analysis of job ~ education

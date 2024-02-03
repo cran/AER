@@ -64,7 +64,10 @@ Winkelmann, R., and Boes, S. (2009). \emph{Analysis of Microdata}, 2nd ed. Berli
 \dontshow{ if(!requireNamespace("nnet") ||
               !requireNamespace("mlogit") ||
               !requireNamespace("effects") ||
-              !requireNamespace("MASS")) q() }
+              !requireNamespace("MASS")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 ## data
 data("GSOEP9402", package = "AER")
 

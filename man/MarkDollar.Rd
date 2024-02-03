@@ -29,7 +29,10 @@ Bollerslev, T., and Ghysels, E. (1996). Periodic Autoregressive Conditional Hete
 \seealso{\code{\link{MarkPound}}}
 
 \examples{
-\dontshow{ if(!requireNamespace("tseries")) q() }
+\dontshow{ if(!requireNamespace("tseries")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 library("tseries")
 data("MarkDollar")
 

@@ -33,7 +33,10 @@ Long, J.S. (1997). The Origin of Sex Differences in Science.
 
 \examples{
 \dontshow{ if(!requireNamespace("MASS") ||
-              !requireNamespace("pscl")) q() }
+              !requireNamespace("pscl")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 ## from Long (1997)
 data("PhDPublications")
 

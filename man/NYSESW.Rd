@@ -25,7 +25,10 @@ Stock, J.H. and Watson, M.W. (2007). \emph{Introduction to Econometrics}, 2nd ed
 \seealso{\code{\link{StockWatson2007}}}
 
 \examples{
-\dontshow{ if(!requireNamespace("tseries")) q() }
+\dontshow{ if(!requireNamespace("tseries")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 ## returns
 data("NYSESW")
 ret <- 100 * diff(log(NYSESW))

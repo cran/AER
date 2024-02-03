@@ -28,7 +28,10 @@ Greene, W.H. (2003). \emph{Econometric Analysis}, 5th edition. Upper Saddle Rive
 \seealso{\code{\link{Greene2003}}}
 
 \examples{
-\dontshow{ if(!requireNamespace("scatterplot3d")) q() }
+\dontshow{ if(!requireNamespace("scatterplot3d")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 data("SIC33", package = "AER")
 
 ## Example 6.2 in Greene (2003)
@@ -62,13 +65,11 @@ if(require("rgl")) {
   x <- log(SIC33)[,2]
   y <- log(SIC33)[,3]
   z <- log(SIC33)[,1]
-  rgl.open()
-  rgl.bbox()
-  rgl.spheres(x, y, z, radius = 0.15)
+  plot3d(x, y, z, type = "s", col = "gray", radius = 0.1)
   x <- seq(4.5, 7.5, by = 0.5)
   y <- seq(5.5, 10, by = 0.5)
   z <- outer(x, y, function(x, y) predict(fm_cb, data.frame(labor = x, capital = y)))
-  rgl.surface(x, y, z, color = "blue", alpha = 0.5, shininess = 128)
+  surface3d(x, y, z, color = "blue", alpha = 0.5, shininess = 128)
 }
 }
 }

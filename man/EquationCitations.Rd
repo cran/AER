@@ -57,7 +57,10 @@ Communication among Biologists.
 \seealso{\code{\link{PhDPublications}}}
 
 \examples{
-\dontshow{ if(!requireNamespace("MASS")) q() }
+\dontshow{ if(!requireNamespace("MASS")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 ## load data and MASS package
 data("EquationCitations", package = "AER")
 library("MASS")

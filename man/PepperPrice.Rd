@@ -31,7 +31,10 @@ Cambridge, UK: Cambridge University Press.
 
 \examples{
 \dontshow{ if(!requireNamespace("tseries") ||
-              !requireNamespace("urca")) q() }
+              !requireNamespace("urca")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 ## data
 data("PepperPrice", package = "AER")
 plot(PepperPrice, plot.type = "single", col = 1:2)

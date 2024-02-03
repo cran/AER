@@ -31,7 +31,10 @@ Parade (2005). What People Earn. Issue March 13, 2005.
 }
 
 \examples{
-\dontshow{ if(!requireNamespace("ineq")) q() }
+\dontshow{ if(!requireNamespace("ineq")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 ## data
 data("Parade2005")
 attach(Parade2005)

@@ -31,7 +31,10 @@ of Pooling and Testing Procedures. \emph{European Economic Review}, \bold{22}, 1
 \seealso{\code{\link{Baltagi2002}}}
 
 \examples{
-\dontshow{ if(!requireNamespace("lattice")) q() }
+\dontshow{ if(!requireNamespace("lattice")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 data("OECDGas")
 
 library("lattice")

@@ -38,7 +38,10 @@ Greene, W.H. (2003). \emph{Econometric Analysis}, 5th edition. Upper Saddle Rive
 
 \examples{
 \dontshow{ if(!requireNamespace("tseries") ||
-              !requireNamespace("dynlm")) q() }
+              !requireNamespace("dynlm")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 ## data as given by Greene (2003)
 data("MarkPound")
 mp <- round(MarkPound, digits = 6)

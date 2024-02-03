@@ -34,7 +34,7 @@ As a result, some respondents have negative experience.
 }
 
 \source{
-\url{http://www.personal.psu.edu/hxb11/MEDIAN.HTM}
+Personal web page of Herman J. Bierens.
 }
 
 \references{
@@ -48,7 +48,10 @@ Buchinsky, M. (1998). Recent Advances in Quantile Regression Models: A Practical
 \seealso{\code{\link{CPS1985}}, \code{\link{CPSSW}}}
 
 \examples{
-\dontshow{ if(!requireNamespace("quantreg")) q() }
+\dontshow{ if(!requireNamespace("quantreg")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 ## data and packages
 library("quantreg")
 data("CPS1988")
@@ -63,11 +66,13 @@ buchinsky <- log(wage) ~ ethnicity * (education + experience + parttime) +
 
 ## OLS and LAD fits (for LAD see Bierens and Ginter, Tables 1-3.A.)
 mincer_ols <- lm(mincer, data = CPS1988)
-mincer_lad <- rq(mincer, data = CPS1988)
 quart_ols <- lm(quart, data = CPS1988)
-quart_lad <- rq(quart, data = CPS1988)
 buchinsky_ols <- lm(buchinsky, data = CPS1988)
+\donttest{
+quart_lad <- rq(quart, data = CPS1988)
+mincer_lad <- rq(mincer, data = CPS1988)
 buchinsky_lad <- rq(buchinsky, data = CPS1988)
+}
 }
 
 \keyword{datasets}

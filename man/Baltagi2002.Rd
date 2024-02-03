@@ -25,7 +25,10 @@ Baltagi, B.H. (2002). \emph{Econometrics}, 3rd ed., Berlin: Springer-Verlag.
               !requireNamespace("strucchange") ||
               !requireNamespace("dynlm") ||
               !requireNamespace("plm") ||
-              !requireNamespace("systemfit")) q() }
+              !requireNamespace("systemfit")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 ################################
 ## Cigarette consumption data ##
 ################################

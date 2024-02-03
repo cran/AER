@@ -79,7 +79,10 @@ Cambridge, MA: MIT Press.
 \seealso{\code{\link{Greene2003}}, \code{\link{WinkelmannBoes2009}}}
 
 \examples{
-\dontshow{ if(!requireNamespace("sampleSelection")) q() }
+\dontshow{ if(!requireNamespace("sampleSelection")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 ## data and transformations
 data("PSID1976")
 PSID1976$kids <- with(PSID1976, factor((youngkids + oldkids) > 0,

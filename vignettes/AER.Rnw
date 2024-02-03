@@ -226,6 +226,8 @@ empl_ab <- pgmm(log(emp) ~ lag(log(emp), 1:2) + lag(log(wage), 0:1)
     as claimed on p.~99. Somewhat confusingly the corresponding column in the output of
     \code{influence.measures()} (as shown on p.~100) is called \code{dffit} by \proglang{R}
     (rather than \code{dffits}).
+  \item p.~124: The argument \code{ylevels = 2:1} in the spinogram is no longer needed because
+    the defaul ordering of the $y$-levels changed in \proglang{R}~4.0.0.
   \item p.~141: The log-likelihood for the tobit model lacked a minus sign. The correct version is
 %
 \[

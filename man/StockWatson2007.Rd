@@ -28,7 +28,10 @@ Stock, J.H. and Watson, M.W. (2007). \emph{Introduction to Econometrics}, 2nd ed
 \dontshow{ if(!requireNamespace("plm") ||
               !requireNamespace("dynlm") ||
               !requireNamespace("strucchange") ||
-              !requireNamespace("tseries")) q() }
+              !requireNamespace("tseries")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 ###############################
 ## Current Population Survey ##
 ###############################

@@ -36,7 +36,10 @@ Longley, J.W. (1967). An Appraisal of Least-Squares Programs from the Point of V
 \seealso{\code{\link[datasets]{longley}}, \code{\link{Greene2003}}}
 
 \examples{
-\dontshow{ if(!requireNamespace("dynlm")) q() }
+\dontshow{ if(!requireNamespace("dynlm")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 data("Longley")
 library("dynlm")
 

@@ -33,7 +33,10 @@ Solow, R. (1957). Technical Change and the Aggregate Production Function.
 \seealso{\code{\link{Greene2003}}}
 
 \examples{
-\dontshow{ if(!requireNamespace("strucchange")) q() }
+\dontshow{ if(!requireNamespace("strucchange")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 data("TechChange")
 
 ## Greene (2003)

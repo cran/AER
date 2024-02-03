@@ -81,7 +81,10 @@ Greene, W.H. (2008). \emph{Econometric Analysis}, 6th ed. Upper Saddle River, NJ
 \seealso{\code{\link{PSID1982}}, \code{\link{Baltagi2002}}}
 
 \examples{
-\dontshow{ if(!requireNamespace("plm")) q() }
+\dontshow{ if(!requireNamespace("plm")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 data("PSID7682")
 
 library("plm")

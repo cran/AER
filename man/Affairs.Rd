@@ -55,7 +55,10 @@ Fair, R.C. (1978). A Theory of Extramarital Affairs. \emph{Journal of Political 
 
 \examples{
 \dontshow{ if(!requireNamespace("MASS") ||
-              !requireNamespace("pscl")) q() }
+              !requireNamespace("pscl")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 data("Affairs")
 
 ## Greene (2003)

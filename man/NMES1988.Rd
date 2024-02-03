@@ -62,7 +62,10 @@ for Count Data in R. \emph{Journal of Statistical Software}, \bold{27}(8).
 
 \examples{
 \dontshow{ if(!requireNamespace("MASS") ||
-              !requireNamespace("pscl")) q() }
+              !requireNamespace("pscl")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 ## packages
 library("MASS")
 library("pscl")

@@ -28,7 +28,10 @@ Cambridge, UK: Cambridge University Press.
 \examples{
 \dontshow{ if(!requireNamespace("tseries") ||
               !requireNamespace("fGarch") ||
-              !requireNamespace("rugarch")) q() }
+              !requireNamespace("rugarch")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 data("MSCISwitzerland", package = "AER")
 
 ## p.190, Fig. 7.6
@@ -73,6 +76,7 @@ coef(msci9501_tg11)["alpha1"] * (1 - coef(msci9501_tg11)["gamma1"])^2  ## alpha*
 4 * coef(msci9501_tg11)["alpha1"] * coef(msci9501_tg11)["gamma1"]      ## gamma*
 
 ## GARCH and GJR-GARCH with rugarch
+\donttest{
 library("rugarch")
 spec_g11 <- ugarchspec(variance.model = list(model = "sGARCH"),
   mean.model = list(armaOrder = c(0,0), include.mean = FALSE))
@@ -85,6 +89,7 @@ msci9501_gjrg11 <- ugarchfit(spec_gjrg11, data = dlmsci9501)
 msci9501_gjrg11
 
 round(coef(msci9501_gjrg11), 3)
+}
 }
 
 \keyword{datasets}

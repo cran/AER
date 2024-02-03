@@ -46,7 +46,10 @@ Stock, J.H. and Watson, M.W. (2007). \emph{Introduction to Econometrics}, 2nd ed
 \seealso{\code{\link{StockWatson2007}}}
 
 \examples{
-\dontshow{ if(!requireNamespace("strucchange")) q() }
+\dontshow{ if(!requireNamespace("strucchange")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 ## data and transformed variables
 data("Journals")
 journals <- Journals[, c("subs", "price")]

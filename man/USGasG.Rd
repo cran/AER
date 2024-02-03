@@ -35,7 +35,10 @@ Greene, W.H. (2003). \emph{Econometric Analysis}, 5th edition. Upper Saddle Rive
 \seealso{\code{\link{Greene2003}}, \code{\link{USGasB}}}
 
 \examples{
-\dontshow{ if(!requireNamespace("strucchange")) q() }
+\dontshow{ if(!requireNamespace("strucchange")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 data("USGasG", package = "AER")
 plot(USGasG)
 

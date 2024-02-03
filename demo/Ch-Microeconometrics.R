@@ -28,19 +28,19 @@ summary(swiss_probit)
 ###################################################
 ### chunk number 3: swisslabor-plot eval=FALSE
 ###################################################
-## plot(participation ~ age, data = SwissLabor, ylevels = 2:1)
+## plot(participation ~ age, data = SwissLabor)
 
 
 ###################################################
 ### chunk number 4: swisslabor-plot-refined
 ###################################################
-plot(participation ~ education, data = SwissLabor, ylevels = 2:1)
+plot(participation ~ education, data = SwissLabor)
 fm <- glm(participation ~ education + I(education^2), data = SwissLabor, family = binomial)
 edu <- sort(unique(SwissLabor$education))
 prop <- sapply(edu, function(x) mean(SwissLabor$education <= x))
 lines(predict(fm, newdata = data.frame(education = edu), type = "response") ~ prop, col = 2)
 
-plot(participation ~ age, data = SwissLabor, ylevels = 2:1)
+plot(participation ~ age, data = SwissLabor)
 fm <- glm(participation ~ age + I(age^2), data = SwissLabor, family = binomial)
 ag <- sort(unique(SwissLabor$age))
 prop <- sapply(ag, function(x) mean(SwissLabor$age <= x))

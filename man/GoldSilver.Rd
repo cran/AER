@@ -31,7 +31,10 @@ Cambridge, UK: Cambridge University Press.
 \dontshow{ if(!requireNamespace("longmemo") ||
               !requireNamespace("forecast") ||
               !requireNamespace("vars") ||
-              !requireNamespace("tseries")) q() }
+              !requireNamespace("tseries")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 data("GoldSilver", package = "AER")
 
 ## p.31, daily returns

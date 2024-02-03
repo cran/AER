@@ -33,7 +33,10 @@ URL \url{https://pages.stern.nyu.edu/~wgreene/Text/tables/tablelist5.htm}.
               !requireNamespace("pscl") ||
               !requireNamespace("tseries") ||
               !requireNamespace("systemfit") ||
-              !requireNamespace("sampleSelection")) q() }
+              !requireNamespace("sampleSelection")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 \donttest{
 #####################################
 ## US consumption data (1970-1979) ##

@@ -1,6 +1,6 @@
 
-R version 4.2.0 (2022-04-22) -- "Vigorous Calisthenics"
-Copyright (C) 2022 The R Foundation for Statistical Computing
+R version 4.3.2 (2023-10-31) -- "Eye Holes"
+Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -854,7 +854,7 @@ R> ### chunk number 62: plm-plmtest
 R> ###################################################
 R> plmtest(gr_pool)
 
-	Lagrange Multiplier Test - (Honda) for balanced panels
+	Lagrange Multiplier Test - (Honda)
 
 data:  invest ~ value + capital
 normal = 15, p-value <2e-16
@@ -980,4 +980,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  3.003   0.104   3.099 
+  3.277   0.084   3.360 

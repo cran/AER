@@ -29,7 +29,10 @@ Baltagi, B.H. (2002). \emph{Econometrics}, 3rd ed. Berlin, Springer.
 \seealso{\code{\link{Baltagi2002}}}
 
 \examples{
-\dontshow{ if(!requireNamespace("scatterplot3d")) q() }
+\dontshow{ if(!requireNamespace("scatterplot3d")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 data("USCrudes")
 plot(price ~ gravity, data = USCrudes)
 plot(price ~ sulphur, data = USCrudes)

@@ -73,7 +73,10 @@ Kleiber, C., and Zeileis, A. (2010). \dQuote{The Grunfeld Data at 50.}
 
 \examples{
 \dontshow{ if(!requireNamespace("plm") ||
-              !requireNamespace("systemfit")) q() }
+              !requireNamespace("systemfit")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 data("Grunfeld", package = "AER")
 
 ## Greene (2003)

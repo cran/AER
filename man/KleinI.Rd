@@ -41,7 +41,10 @@ Maddala, G.S. (1977). \emph{Econometrics}. New York: McGraw-Hill.
 \seealso{\code{\link{Greene2003}}}
 
 \examples{
-\dontshow{ if(!requireNamespace("dynlm")) q() }
+\dontshow{ if(!requireNamespace("dynlm")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 data("KleinI", package = "AER")
 plot(KleinI)
 

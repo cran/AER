@@ -1,3 +1,14 @@
+Changes in Version 1.2-12
+
+  o Omitted some examples and updated corresponding output for CRAN checks.
+
+
+Changes in Version 1.2-11
+
+  o Rather than quitting from examples in the manual pages, when the required packages are
+    not available, the examples now stop() in non-check settings.
+
+
 Changes in Version 1.2-10
 
   o Improvements in coeftest() methods for "multinom" and "polr" objects to be compatible

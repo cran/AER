@@ -26,7 +26,10 @@ Baltagi, B.H. (2002). \emph{Econometrics}, 3rd ed. Berlin, Springer.
 
 \examples{
 \dontshow{ if(!requireNamespace("strucchange") ||
-              !requireNamespace("dynlm")) q() }
+              !requireNamespace("dynlm")) {
+  if(interactive() || is.na(Sys.getenv("_R_CHECK_PACKAGE_NAME_", NA))) {
+    stop("not all packages required for the example are installed")
+  } else q() }}
 ## data from Baltagi (2002)
 data("USConsump1993", package = "AER")
 plot(USConsump1993, plot.type = "single", col = 1:2)
