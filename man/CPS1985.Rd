@@ -35,7 +35,7 @@ A data frame containing 534 observations on 11 variables.
 \source{
 StatLib. 
 
-\url{http://lib.stat.cmu.edu/datasets/CPS_85_Wages}
+\url{https://lib.stat.cmu.edu/datasets/CPS_85_Wages}
 }
 
 \references{

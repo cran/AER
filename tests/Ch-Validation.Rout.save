@@ -1,7 +1,7 @@
 
-R version 4.2.0 (2022-04-22) -- "Vigorous Calisthenics"
-Copyright (C) 2022 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
+R version 4.4.1 (2024-06-14) -- "Race for Your Life"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -498,13 +498,6 @@ R> ###################################################
 R> library("quantreg")
 Loading required package: SparseM
 
-Attaching package: 'SparseM'
-
-The following object is masked from 'package:base':
-
-    backsolve
-
-
 Attaching package: 'quantreg'
 
 The following object is masked from 'package:survival':
@@ -618,4 +611,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
- 26.937   0.072  27.005 
+ 42.710   0.083  42.796 

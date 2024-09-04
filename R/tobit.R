@@ -30,7 +30,20 @@ vcov.tobit <- function(object, ...) {
 }
 
 bread.tobit <- function(x, ...) {
-  length(x$linear.predictors) * vcov(x)
+  br <- if (is.null(x$naive.var)) x$var else x$naive.var
+  if(is.null(colnames(br))) {
+    nam <- names(x$coefficients)    
+    nam <- if(length(nam) == ncol(br)) {
+      nam
+    } else if(length(nam) == ncol(br) - 1L) {
+      c(nam, "Log(scale)")
+    } else {
+      c(nam, names(x$scale))
+    }
+    colnames(br) <- rownames(br) <- nam
+  }
+  br <- length(x$linear.predictors) * br
+  return(br)  
 }
 
 
