@@ -1,4 +1,4 @@
-c4da7d906cb0113428929af00f815405 *DESCRIPTION
+efa298fdd68a83240df6b9eaeddbd88f *DESCRIPTION
 2a204f006caa299b52cae788a9d49849 *NAMESPACE
 d1aef53b70aca99163082fe1d633f011 *NEWS.md
 9471c81ab1fee37c18893e82425184a9 *R/coeftest-methods.R
@@ -126,10 +126,10 @@ ce79593f13ea25f8dcea3e8b0e86c6c0 *demo/Ch-LinearRegression.R
 e5e200df9012bb504082497e5bbcc5ee *inst/CITATION
 d320a0b0d4260e95b7f54aa7328e0d1d *inst/doc/AER.R
 b13a8a569732c34ca62f226d55855166 *inst/doc/AER.Rnw
-a0c8d2d560e5e1aa561aa1f3881d9141 *inst/doc/AER.pdf
+59cc958593b1e42eb9e6496f3ca03033 *inst/doc/AER.pdf
 55645a67fdf53c524f1352c9ba6a5910 *inst/doc/Sweave-journals.R
 043acb4ba18e012bfc0c60717156d385 *inst/doc/Sweave-journals.Rnw
-d23d59e00f48050cd5bcee33a19d63ae *inst/doc/Sweave-journals.pdf
+da3ff3a79cce9059d9fec60a5e753894 *inst/doc/Sweave-journals.pdf
 b96c8a347a604768948d9a1392cd27eb *man/Affairs.Rd
 4afb2c56e98ee17f412cb0ad3786167b *man/ArgentinaCPI.Rd
 b911b4a5e5e2f1d060d61592ea50390f *man/Baltagi2002.Rd
@@ -247,9 +247,9 @@ cc34a837cad33dbd00a528de7a7512ab *man/tobit.Rd
 6e54fc4a9ccedc44805499bde5fe566f *tests/Ch-Intro.R
 23a86959f324212bd5b5cba8e3dd9c67 *tests/Ch-Intro.Rout.save
 5bfbc482f4b23a0b3918fd2532f699db *tests/Ch-LinearRegression.R
-c35aab5de044c14e4ed2b3895394368c *tests/Ch-LinearRegression.Rout.save
+ca1e50300a5095246e17829fdccd0c5e *tests/Ch-LinearRegression.Rout.save
 95c914cda22ba3a59e4adf050df0602c *tests/Ch-Microeconometrics.R
-6addaa005aea5a4bc3eb0697fc26da07 *tests/Ch-Microeconometrics.Rout.save
+7a9e25f7422372997e6173cf9551120a *tests/Ch-Microeconometrics.Rout.save
 9612d8a9a789a570fe47bca1b59d5529 *tests/Ch-Programming.R
 49befeb0f42f734db3ceb2c755ebab94 *tests/Ch-Programming.Rout.save
 976c5122fc8e354c5c1ee324919308f0 *tests/Ch-TimeSeries.R

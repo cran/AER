@@ -1,7 +1,7 @@
 
-R version 4.3.2 (2023-10-31) -- "Eye Holes"
-Copyright (C) 2023 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
+R version 4.4.1 (2024-06-14) -- "Race for Your Life"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -236,9 +236,8 @@ R> ###################################################
 R> ### chunk number 18: journal-lht
 R> ###################################################
 R> linearHypothesis(jour_lm, "log(citeprice) = -0.5")
-Linear hypothesis test
 
-Hypothesis:
+Linear hypothesis test:
 log(citeprice) = - 0.5
 
 Model 1: restricted model
@@ -980,4 +979,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  3.277   0.084   3.360 
+  3.030   0.125   3.162 
