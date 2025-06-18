@@ -1,3 +1,8 @@
+# AER 1.2-15
+
+* Updated reference output in some tests for CRAN checks.
+
+
 # AER 1.2-14
 
 * Updated reference output in some tests for CRAN checks.

@@ -1,6 +1,6 @@
 
-R version 4.4.1 (2024-06-14) -- "Race for Your Life"
-Copyright (C) 2024 The R Foundation for Statistical Computing
+R version 4.5.0 (2025-04-11) -- "How About a Twenty-Six"
+Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -63,13 +63,13 @@ R> data("Journals")
 R> journals <- Journals[, c("subs", "price")]
 R> journals$citeprice <- Journals$price/Journals$citations
 R> summary(journals)
-      subs          price        citeprice     
- Min.   :   2   Min.   :  20   Min.   : 0.005  
- 1st Qu.:  52   1st Qu.: 134   1st Qu.: 0.464  
- Median : 122   Median : 282   Median : 1.321  
- Mean   : 197   Mean   : 418   Mean   : 2.548  
- 3rd Qu.: 268   3rd Qu.: 541   3rd Qu.: 3.440  
- Max.   :1098   Max.   :2120   Max.   :24.459  
+      subs          price        citeprice       
+ Min.   :   2   Min.   :  20   Min.   : 0.00522  
+ 1st Qu.:  52   1st Qu.: 134   1st Qu.: 0.46449  
+ Median : 122   Median : 282   Median : 1.32051  
+ Mean   : 197   Mean   : 418   Mean   : 2.54846  
+ 3rd Qu.: 268   3rd Qu.: 541   3rd Qu.: 3.44017  
+ Max.   :1098   Max.   :2120   Max.   :24.45946  
 R> 
 R> 
 R> ###################################################
@@ -905,8 +905,8 @@ Unbalanced Panel: n = 140, T = 7-9, N = 1031
 
 Number of Observations Used: 611
 Residuals:
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
--0.6191 -0.0256  0.0000 -0.0001  0.0332  0.6410 
+     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+-0.619068 -0.025568  0.000000 -0.000134  0.033201  0.641027 
 
 Coefficients:
                        Estimate Std. Error z-value Pr(>|z|)
@@ -979,4 +979,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  3.030   0.125   3.162 
+  3.984   0.171   4.153 

@@ -1,7 +1,7 @@
 
-R version 4.2.0 (2022-04-22) -- "Vigorous Calisthenics"
-Copyright (C) 2022 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
+R version 4.5.0 (2025-04-11) -- "How About a Twenty-Six"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -675,7 +675,7 @@ R> ###################################################
 R> summary
 function (object, ...) 
 UseMethod("summary")
-<bytecode: 0x5601626c9658>
+<bytecode: 0x55da9ae4e7d8>
 <environment: namespace:base>
 R> 
 R> 
@@ -991,4 +991,4 @@ R>
 R> 
 > proc.time()
    user  system elapsed 
-  1.027   0.048   1.068 
+  1.323   0.069   1.388 

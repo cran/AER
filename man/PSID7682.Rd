@@ -53,7 +53,7 @@ version.
 \source{
 Online complements to Baltagi (2005).
 
-\url{http://www.wiley.com/legacy/wileychi/baltagi3e/data_sets.html}
+\url{https://www.wiley.com/legacy/wileychi/baltagi3e/data_sets.html}
 
 Also provided in the online complements to Greene (2008), Table F9.1.
 
